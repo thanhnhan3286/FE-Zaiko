@@ -1,0 +1,13 @@
+<nz-layout class="dashboard" #cdkMonitorSubtreeFocus
+           *ngIf="!loginService.isLoginAsync$.getValue()">
+  <div class="main">
+    <app-side-nav class="nav-bar"></app-side-nav>
+    <app-header-top class="app-header-top"></app-header-top>
+
+    <div class="children">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</nz-layout>
+
+

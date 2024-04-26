@@ -1,0 +1,9 @@
+
+<div class="container-pages">
+  <form-search (formSubmitEvent)="eventEmitForm($event)"></form-search>
+  <results-table 
+    [data]="dataOutputList" 
+    [totalPage]="totalPages"
+    [currentPage]="currentPages"
+    (loadMoreEvent)="loadMore()"
+  ></results-table></div>

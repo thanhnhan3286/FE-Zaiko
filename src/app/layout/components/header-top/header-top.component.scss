@@ -1,0 +1,113 @@
+.header {
+  font-family: Noto Sans JP;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 100%;
+  background-color: #fff;
+  font-size: 14px;
+
+  mat-icon {
+
+    background: #fff;
+    color: #4392BB;
+    font-weight: 700;
+    border: 1px solid #D6D6D6 ;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px 0px 0px 0px;
+
+
+
+  }
+
+  span {
+    color: #9F9F9F;
+
+  }
+
+  .icon {
+    margin-left: 15px;
+  }
+
+  .titel-header {
+    margin-left: 15px;
+    color: #4392BB;
+    font-weight: 600;
+  }
+
+  .parent {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: #9F9F9F;
+    margin: auto 0;
+  }
+
+  .chilren {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: #4392BB;
+    margin: auto 0;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menu-date {
+    display: flex;
+    height: 75%;
+
+  }
+
+  .menu-date p {
+    color: #9F9F9F;
+    padding-left: 4px;
+    font-family: Noto Sans JP;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: 0.014em;
+    text-align: center;
+    margin: 0 !important;
+
+
+  }
+
+  .date-container {
+    padding-right: 8px;
+
+  }
+
+  .date-container .date {
+    font-family: Noto Sans JP;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.014em;
+    text-align: center;
+    color: #4392BB;
+  }
+
+  .menu-date a.ant-dropdown-trigger.ant-dropdown-link {
+    color: black;
+    display: flex;
+    align-items: center;
+  }
+}
+
+::ng-deep ul.list {
+  padding: 0;
+  border: 1px solid #4392BB;
+}
+
+::ng-deep .list li.ant-dropdown-menu-item {
+  gap: 10px;
+}

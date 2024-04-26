@@ -1,0 +1,252 @@
+/* CSS cho form */
+.form-inventory-input {
+    padding: 10px;
+    background: #F9FCFF;
+    border: 0.5px solid #4392BB;
+  
+    .inventory-form {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+  
+      .form-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+  
+        .form-col {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+  
+          .form-group {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+  
+            .label {
+              font-family: Noto Sans JP;
+              font-size: 12px;
+              font-weight: 700;
+              line-height: 18px;
+              letter-spacing: 0.014em;
+              text-align: left;
+              color: #485764;
+              padding-bottom: 5px;
+            }
+  
+            .form-inline {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+  
+              .input-wrapper {
+                position: relative;
+  
+                .icon-input {
+  
+                  position: absolute;
+                  display: flex;
+                  /* Sử dụng Flexbox cho căn chỉnh */
+                  align-items: center;
+                  /* Căn giữa nội dung */
+                  background-color: #4392BB;
+                  top: 50%;
+                  right: 10px;
+                  width: 16px;
+                  height: 16px;
+                  border-radius: 1px 0px 0px 0px;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                  transition: background-color 0.2s;
+                }
+  
+                .icon-input:active {
+                  transform: scale(0.6);
+                  background-color: #ffff;
+                  /* Màu khi nhấp chuột */
+                  transform: translateY(-50%);
+  
+  
+                }
+  
+              }
+  
+              .input-control {
+                width: 100%;
+                height: 30px !important;
+                padding: 5px 10px;
+                border: 1px solid #D6D6D6;
+                border-radius: 2px;
+                box-sizing: border-box;
+                font-family: Noto Sans JP;
+                letter-spacing: 0.014em;
+                text-align: left;
+  
+              }
+  
+              .input-control:hover {
+                border-color: #66afe9;
+                background-color: #FFFFFF;
+              }
+  
+              .input-control:focus {
+                outline: none;
+                border: 0.5px solid #4392BB;
+                /* Chú ý đơn vị "px" cho đúng */
+              }
+  
+  
+              .form-radio {
+                height: 30px !important;
+                padding: 5px 10px;
+                border: 1px solid #D6D6D6;
+                width: 100%;
+  
+                .radio {
+                  text-align: center;
+                  justify-items: center;
+                  padding-right: 20px;
+  
+                  input {
+                    height: 16px;
+                    width: 16px;
+                  }
+                }
+  
+              }
+  
+              .divider {
+                font-weight: bold;
+                color: #485764;
+                text-align: center;
+                /* Căn giữa nội dung */
+                margin-bottom: 0 !important;
+  
+              }
+            }
+  
+          }
+  
+          .input-control::-webkit-calendar-picker-indicator {
+            filter: brightness(0) saturate(100%) invert(51%) sepia(76%) saturate(332%) hue-rotate(155deg) brightness(88%) contrast(94%);
+          
+  
+          }
+  
+  
+  
+        }
+  
+      }
+  
+  
+      .btn-container {
+        display: flex;
+        justify-content: flex-end;
+        /* Các nút sẽ được căn sang góc phải */
+        padding: 5px;
+  
+        .form-btn {
+          justify-self: flex-end;
+          padding-top: 5px;
+  
+          .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            border: none;
+            width: 56px !important;
+            height: 30px !important;
+            border-radius: 3px 0px 0px 0px;
+            opacity: 0px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            /* Thêm hiệu ứng chuyển đổi */
+  
+          }
+  
+          /* Hiệu ứng khi hover */
+          .save:hover {
+            background-color: #5794b5;
+            /* Thay đổi màu nền */
+            transform: scale(1.05);
+          }
+  
+          .save:active {
+            background-color: #5794b5;
+            transform: scale(0.95);
+  
+          }
+          .refresh:hover {
+            background-color: #FFFFFF;
+            /* Thay đổi màu nền */
+            transform: scale(1.05);
+          }
+  
+          .refresh:active {
+            background-color: #FFFFFF;
+            transform: scale(0.95);
+  
+          }
+  
+          .save {
+            background-color: #4392BB;
+            color: #FFFFFF;
+          }
+  
+          .refresh {
+            color: #EB5757;
+            background-color: #FFFFFF;
+            border: 1px solid #D6D6D6;
+          }
+  
+        }
+  
+      }
+  
+  
+  
+  
+    }
+  
+    mat-icon {
+      color: #FFFFFF !important;
+      text-align: center;
+      width: 16px;
+      height: 16px;
+  
+    }
+  
+  
+  
+  }
+  
+  
+  // /* Media queries */
+  // @each $breakpoint, $size in $form-breakpoints {
+  //   @media (max-width: #{$size}) {
+  //     .form-content {
+  //       flex-direction: column;
+  
+  //       .form-col {
+  //         flex-direction: row;
+  //         justify-content: space-between;
+  //         flex-wrap: wrap;
+  
+  //         .form-group {
+  //           flex-direction: column;
+  //           gap: 10px;
+  
+  //           .form-inline {
+  //             flex-direction: row;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
