@@ -1,0 +1,1007 @@
+<div class="container">
+  <form [formGroup]="searchOutputForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Input Row 1 -->
+    <div class="input-cover">
+      <!-- Input wrapper 1 -->
+      <div class="input-wrapper">
+        <!-- Order Date Input -->
+        <div>
+          <div class="input-label">
+            <label for="orderDateFrom">受注日</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="date"
+              id="orderDateFrom"
+              name="orderDateFrom"
+              formControlName="orderDateFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              type="date"
+              id="orderDateTo"
+              name="orderDateTo"
+              formControlName="orderDateTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['orderDateFrom'].valid &&
+              (searchOutputForm.controls['orderDateFrom'].dirty ||
+                searchOutputForm.controls['orderDateFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['orderDateFrom'].errors?.['required']"
+            >
+              Order date from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['orderDateTo'].valid &&
+              (searchOutputForm.controls['orderDateTo'].dirty ||
+                searchOutputForm.controls['orderDateTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['orderDateTo'].errors?.['required']"
+            >
+              Order date to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+      <!-- Input wrapper 2 -->
+      <div class="input-wrapper">
+        <!-- Plan Output Date Input -->
+        <div>
+          <div class="input-label">
+            <label for="planOutputDateFrom">受注日</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="date"
+              id="planOutputDateFrom"
+              name="planOutputDateFrom"
+              formControlName="planOutputDateFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              type="date"
+              id="planOutputDateTo"
+              name="planOutputDateTo"
+              formControlName="planOutputDateTo"
+            />
+          </div>
+        </div>
+        <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['planOutputDateFrom'].valid &&
+              (searchOutputForm.controls['planOutputDateFrom'].dirty ||
+                searchOutputForm.controls['planOutputDateFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['planOutputDateFrom'].errors?.['required']"
+            >
+              Plan output date from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['planOutputDateTo'].valid &&
+              (searchOutputForm.controls['planOutputDateTo'].dirty ||
+                searchOutputForm.controls['planOutputDateTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['planOutputDateTo'].errors?.['required']"
+            >
+              Plan output date to is required
+            </small>
+          </div>
+        </div>
+      </div>
+      <!-- Input wrapper 3 -->
+      <div class="input-wrapper">
+        <!-- Plan Wroking Day Input -->
+        <div>
+          <div class="input-label">
+            <label for="planWorkingDayFrom">作業予定日</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="date"
+              id="planWorkingDayFrom"
+              name="planWorkingDayFrom"
+              formControlName="planWorkingDayFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              type="date"
+              id="planWorkingDayTo"
+              name="planWorkingDayTo"
+              formControlName="planWorkingDayTo"
+            />
+          </div>
+        </div>
+        <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['planWorkingDayFrom'].valid &&
+              (searchOutputForm.controls['planWorkingDayFrom'].dirty ||
+                searchOutputForm.controls['planWorkingDayFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['planWorkingDayFrom'].errors?.['required']"
+            >
+              Plan working date from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['planWorkingDayTo'].valid &&
+              (searchOutputForm.controls['planWorkingDayTo'].dirty ||
+                searchOutputForm.controls['planWorkingDayTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['planWorkingDayTo'].errors?.['required']"
+            >
+              Plan working date to is required
+            </small>
+          </div>
+        </div>
+      </div>
+      <!-- Input wrapper 4 -->
+      <div class="input-wrapper">
+        <!-- Plan Delivery Date Input -->
+        <div>
+          <div class="input-label">
+            <label for="planDeliverDateFrom">納品予定日</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="date"
+              id="planDeliverDateFrom"
+              name="planDeliverDateFrom"
+              formControlName="planDeliverDateFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              type="date"
+              id="planDeliverDateTo"
+              name="planDeliverDateTo"
+              formControlName="planDeliverDateTo"
+            />
+          </div>
+        </div>
+        <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['planDeliverDateFrom'].valid &&
+              (searchOutputForm.controls['planDeliverDateFrom'].dirty ||
+                searchOutputForm.controls['planDeliverDateFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['planDeliverDateFrom'].errors?.['required']"
+            >
+              Plan delivery date from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['planDeliverDateTo'].valid &&
+              (searchOutputForm.controls['planDeliverDateTo'].dirty ||
+                searchOutputForm.controls['planDeliverDateTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['planDeliverDateTo'].errors?.['required']"
+            >
+              Plan delivery date to is required
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Row 2 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Slip No Input -->
+        <div>
+          <div class="input-label">
+            <label for="slipNoFrom">伝票番号</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="slipNoFrom"
+              name="slipNoFrom"
+              formControlName="slipNoFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="slipNoTo"
+              name="slipNoTo"
+              formControlName="slipNoTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['slipNoFrom'].valid &&
+              (searchOutputForm.controls['slipNoFrom'].dirty ||
+                searchOutputForm.controls['slipNoFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['slipNoFrom'].errors?.['required']"
+            >
+              Slip no from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['slipNoTo'].valid &&
+              (searchOutputForm.controls['slipNoTo'].dirty ||
+                searchOutputForm.controls['slipNoTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['slipNoTo'].errors?.['required']"
+            >
+              Slip no to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+      <div class="input-wrapper">
+        <!-- Batch No Input -->
+        <div>
+          <div class="input-label">
+            <label for="batchNo">バッチ番号</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="batchNo"
+              name="batchNo"
+              formControlName="batchNo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['batchNo'].valid &&
+              (searchOutputForm.controls['batchNo'].dirty ||
+                searchOutputForm.controls['batchNo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['batchNo'].errors?.['required']"
+            >
+              Customer name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Customer ID Input -->
+        <div>
+          <div class="input-label">
+            <label for="customerIdFrom">出荷先コード</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="customerIdFrom"
+              name="customerIdFrom"
+              formControlName="customerIdFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="customerIdTo"
+              name="customerIdTo"
+              formControlName="customerIdTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['customerIdFrom'].valid &&
+              (searchOutputForm.controls['customerIdFrom'].dirty ||
+                searchOutputForm.controls['customerIdFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['customerIdFrom'].errors?.['required']"
+            >
+              Customer Id from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['customerIdTo'].valid &&
+              (searchOutputForm.controls['customerIdTo'].dirty ||
+                searchOutputForm.controls['customerIdTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['customerIdTo'].errors?.['required']"
+            >
+              Customer Id to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Customer Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="customerName">作業予定日</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-single"
+              type="text"
+              id="customerName"
+              name="customerName"
+              formControlName="customerName"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['customerName'].valid &&
+              (searchOutputForm.controls['customerName'].dirty ||
+                searchOutputForm.controls['customerName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['customerName'].errors?.['required']"
+            >
+              Customer name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Input Row 3 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Destination Id Input -->
+        <div>
+          <div class="input-label">
+            <label for="destinationIdFrom">納品先コード</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="destinationIdFrom"
+              name="destinationIdFrom"
+              formControlName="destinationIdFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="destinationIdTo"
+              name="destinationIdTo"
+              formControlName="destinationIdTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['destinationIdFrom'].valid &&
+              (searchOutputForm.controls['destinationIdFrom'].dirty ||
+                searchOutputForm.controls['destinationIdFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['destinationIdFrom'].errors?.['required']"
+            >
+              Destination ID from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['destinationIdTo'].valid &&
+              (searchOutputForm.controls['destinationIdTo'].dirty ||
+                searchOutputForm.controls['destinationIdTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['destinationIdTo'].errors?.['required']"
+            >
+              Destination ID to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+      <div class="input-wrapper">
+        <!-- Department Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="departmentName">納品先名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="departmentName"
+              name="departmentName"
+              formControlName="departmentName"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['departmentName'].valid &&
+              (searchOutputForm.controls['departmentName'].dirty ||
+                searchOutputForm.controls['departmentName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['departmentName'].errors?.['required']"
+            >
+              Department name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Supplier ID Input -->
+        <div>
+          <div class="input-label">
+            <label for="customerIdFrom">仕入先コード</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="supplierIdFrom"
+              name="supplierIdFrom"
+              formControlName="supplierIdFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="supplierIdTo"
+              name="supplierIdTo"
+              formControlName="supplierIdTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['supplierIdFrom'].valid &&
+              (searchOutputForm.controls['supplierIdFrom'].dirty ||
+                searchOutputForm.controls['supplierIdFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['supplierIdFrom'].errors?.['required']"
+            >
+              Supplier Id from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['supplierIdTo'].valid &&
+              (searchOutputForm.controls['supplierIdTo'].dirty ||
+                searchOutputForm.controls['supplierIdTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['supplierIdTo'].errors?.['required']"
+            >
+              Supplier Id to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Supplier Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="supplierName">仕入先名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="supplierName"
+              name="supplierName"
+              formControlName="supplierName"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['customerName'].valid &&
+              (searchOutputForm.controls['customerName'].dirty ||
+                searchOutputForm.controls['customerName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['customerName'].errors?.['required']"
+            >
+              Customer name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Input Row 4 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Owner Id Input -->
+        <div>
+          <div class="input-label">
+            <label for="ownerIdFrom">所有者コード</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="ownerIdFrom"
+              name="ownerIdFrom"
+              formControlName="ownerIdFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="ownerIdTo"
+              name="ownerIdTo"
+              formControlName="ownerIdTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerIdFrom'].valid &&
+              (searchOutputForm.controls['ownerIdFrom'].dirty ||
+                searchOutputForm.controls['ownerIdFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerIdFrom'].errors?.['required']"
+            >
+              Owner ID from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerIdTo'].valid &&
+              (searchOutputForm.controls['ownerIdTo'].dirty ||
+                searchOutputForm.controls['ownerIdTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerIdTo'].errors?.['required']"
+            >
+              Owner ID to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+      <div class="input-wrapper">
+        <!-- Owner Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="ownerName">所有者名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="ownerName"
+              name="ownerName"
+              formControlName="ownerName"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerName'].valid &&
+              (searchOutputForm.controls['ownerName'].dirty ||
+                searchOutputForm.controls['ownerName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerName'].errors?.['required']"
+            >
+              Owner name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Product ID Input -->
+        <div>
+          <div class="input-label">
+            <label for="productIdFrom">商品コード</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="productIdFrom"
+              name="productIdFrom"
+              formControlName="productIdFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="productIdTo"
+              name="productIdTo"
+              formControlName="productIdTo"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['productIdFrom'].valid &&
+              (searchOutputForm.controls['productIdFrom'].dirty ||
+                searchOutputForm.controls['productIdFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['productIdFrom'].errors?.['required']"
+            >
+              Product Id from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['productIdTo'].valid &&
+              (searchOutputForm.controls['productIdTo'].dirty ||
+                searchOutputForm.controls['productIdTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['productIdTo'].errors?.['required']"
+            >
+              Product Id to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Product Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="productName">商品名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="productName"
+              name="productName"
+              formControlName="productName"
+            />
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['productName'].valid &&
+              (searchOutputForm.controls['productName'].dirty ||
+                searchOutputForm.controls['productName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['productName'].errors?.['required']"
+            >
+              Product name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Input Row 5 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Repository Input -->
+        <div>
+          <div class="input-label">
+            <label for="repositoryIdFrom">倉庫</label>
+          </div>
+          <div class="input-date">
+            <select
+              id="repositoryIdFrom"
+              name="repositoryIdFrom"
+              formControlName="repositoryIdFrom"
+            >
+              <option *ngFor="let item of datable" [value]="item.repositoryId">{{item.repositoryId}} - {{item.repositoryName}}</option>
+
+            </select>
+            <span class="icon-from-to">~</span>
+            <select
+              id="repositoryIdTo"
+              name="repositoryIdTo"
+              formControlName="repositoryIdTo"
+            >
+              <option *ngFor="let item of datable" [value]="item.repositoryId">{{item.repositoryId}} - {{item.repositoryName}}</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerIdFrom'].valid &&
+              (searchOutputForm.controls['ownerIdFrom'].dirty ||
+                searchOutputForm.controls['ownerIdFrom'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerIdFrom'].errors?.['required']"
+            >
+              Owner ID from is required
+            </small>
+          </div>
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerIdTo'].valid &&
+              (searchOutputForm.controls['ownerIdTo'].dirty ||
+                searchOutputForm.controls['ownerIdTo'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerIdTo'].errors?.['required']"
+            >
+              Owner ID to is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+      <div class="input-wrapper">
+        <!-- Delivery Type Input -->
+        <div class="input-label">
+          <label for="deliveryType">出庫タイプ</label>
+        </div>
+        <div class="input-radio-cover">
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryType"
+              name="deliveryType"
+              formControlName="deliveryType"
+              value="0"
+              checked
+            />
+            <span class="radio-name">全て</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryType"
+              name="deliveryType"
+              formControlName="deliveryType"
+              value="1"
+            />
+            <span class="radio-name">予定あり</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryType"
+              name="deliveryType"
+              formControlName="deliveryType"
+              value="2"
+            />
+            <span class="radio-name">予定あり</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <!-- Delivery Status Input -->
+        <div class="input-label">
+          <label for="deliveryStatus">出庫状態</label>
+        </div>
+        <div class="input-radio-cover">
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryStatus_0"
+              name="deliveryStatus"
+              formControlName="deliveryStatus"
+              value="0"
+              checked
+            />
+            <span class="radio-name">全て</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryStatus_1"
+              name="deliveryStatus"
+              formControlName="deliveryStatus"
+              value="1"
+            />
+            <span class="radio-name">未出庫</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryStatus_2"
+              name="deliveryStatus"
+              formControlName="deliveryStatus"
+              value="2"
+            />
+            <span class="radio-name">出庫残</span>
+          </div>
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="deliveryStatus_3"
+              name="deliveryStatus"
+              formControlName="deliveryStatus"
+              value="3"
+            />
+            <span class="radio-name">出庫済</span>
+          </div>
+        </div>
+
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerName'].valid &&
+              (searchOutputForm.controls['ownerName'].dirty ||
+                searchOutputForm.controls['ownerName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerName'].errors?.['required']"
+            >
+              Owner name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="input-wrapper">
+        <!-- IsClosed Input -->
+        <div class="input-label">
+          <label for="isClosed">クローズ区分</label>
+        </div>
+        <div class="input-radio-cover">
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="isClosed_0"
+              name="isClosed"
+              formControlName="isClosed"
+              value="9"
+              checked
+            />
+            <span class="radio-name">全て</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="isClosed_1"
+              name="isClosed"
+              formControlName="isClosed"
+              value="0"
+            />
+            <span class="radio-name">未クローズ</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="isClosed_2"
+              name="isClosed"
+              formControlName="isClosed"
+              value="1"
+            />
+            <span class="radio-name">クローズ済</span>
+          </div>
+        </div>
+
+        <!-- <div class="message-wrapper">
+          <div
+            class="message-error"
+            *ngIf="
+              !searchOutputForm.controls['ownerName'].valid &&
+              (searchOutputForm.controls['ownerName'].dirty ||
+                searchOutputForm.controls['ownerName'].touched)
+            "
+          >
+            <small
+              [hidden]="!searchOutputForm.controls['ownerName'].errors?.['required']"
+            >
+              Owner name is required
+            </small>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="btn-search">
+      <button class="btn btn-primary"  type="submit" [disabled]="!searchOutputForm.valid">検索</button>
+      <button class="btn btn-secondary" type="button" >クリア</button>
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-content: space-between;
+    .breadcrumb {
+        width: 129px;
+        height: 24px;
+        gap: 16px;
+        font-family: 'Noto Sans JP';
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 1.4%;
+        width: 129px;
+        height: 24px;
+        gap: 16px;
+        align-items: center;
+        .parent-title {
+            color: #9F9F9F;
+        }
+        .child-title {
+            color: #4392BB;
+
+        }
+    }
+}

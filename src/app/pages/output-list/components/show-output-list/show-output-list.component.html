@@ -1,0 +1,107 @@
+<div class="list-data">
+  <div class="list-frame">
+    <div class="title-left">検索結果一覧</div>
+    <div class="title-right">総計 0 / 100 件</div>
+  </div>
+  <div class="data-table">
+    <table *ngIf="dataResult.length>0">
+      <thead class="title-table">
+        <tr>
+          <th></th>
+          <th>No.</th>
+          <th>伝票番号</th>
+          <th>出庫タイプ</th>
+          <th>受注日</th>
+          <th>バッチ</th>
+          <th>
+            <div>出庫予定日</div>
+            <div>出庫実績日</div>
+          </th>
+          <th>
+            <div>作業予定日</div>
+            <div>作業実績日</div>
+          </th>
+          <th>
+            <div>納品予定日</div>
+            <div>納品実績日</div>
+          </th>
+          <th>
+            <div>予定納品先</div>
+            <div>実績納品先</div>
+          </th>
+          <th>
+            <div>予定納品先名称</div>
+            <div>実績納品先名称</div>
+          </th>
+          <th>
+            <div>予定出荷先</div>
+            <div>実績出荷先</div>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="record" *ngFor="let item of dataResult; let i =index">
+          <td class="isClosed-group">
+            <div class="isClosed-cover">
+              <mat-icon svgIcon="icon-lock" class="icon-lock"></mat-icon>
+              <span class="isClosed-status">未</span>
+            </div>
+
+          </td>
+          <td>{{i+1}}</td>
+          <td>{{item.slipNo}}</td>
+          <td>予定あり</td>
+          <td>
+            <div>{{item.orderDate}}</div> 
+            <div>- {{item.orderDate}}</div>
+          </td>
+          <td>処理中</td>
+          <td>
+            <div>{{item.planOutputDate}}</div>
+            <div>- {{item.actualOutputDate}}</div>
+          </td>
+          <td>
+            <div>{{item.planWorkingDate}}</div>
+            <div>- {{item.actualOutputDate}}</div>
+          </td>
+          <td>
+            <div>{{item.planDeliverDate}}</div>
+            <div>- {{item.actualDeliverDate}}</div>
+          </td>
+          <td>
+            <div>{{item.destinationCode}}</div>
+            <div>{{item.destinationCode}}</div>
+          </td>
+          <td>
+            <div>{{item.departmentName}}</div>
+            <div>{{item.departmentName}}</div>
+          </td>
+          <td>
+            <div>{{item.customerCode}}</div>
+            <div>{{item.customerCode}}</div>
+          </td>
+          <td>
+            <button class="btn-action btn-plan">予定</button>
+          </td>
+          <td>
+            <button class="btn-action btn-actual">実績</button>
+          </td>
+          <td>
+            <button class="btn-action btn-correction">訂正</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="show-more">
+    <button type="button" class="btn-show-more">
+      <mat-icon svgIcon="icon-show-more" class="icon-show-more"></mat-icon>
+      <span class="show-more-label">更に表示</span>
+    </button>
+  </div>
+
+
+</div>
