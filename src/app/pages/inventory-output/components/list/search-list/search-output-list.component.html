@@ -1,0 +1,648 @@
+<!-- <form class="form_container" (ngSubmit)="getConditionsSearch()" [formGroup]="searchForm">
+
+    <div class="input_set">
+
+        <div class="input_group">
+            <label>受注日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_orderDate" formControlName="f_orderDate">
+                <span>~</span>
+                <input type="date" name="t_orderDate" formControlName="t_orderDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出庫予定日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_planOutputDate" formControlName="f_planOutputDate">
+                <span>~</span>
+                <input type="date" name="t_planOutputDate" formControlName="t_planOutputDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>作業予定日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_planWokingDate" formControlName="f_planWokingDate">
+                <span>~</span>
+                <input type="date" name="t_planWokingDate" formControlName="t_planWokingDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>納品予定日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_planDeliveDate" formControlName="f_planDeliveDate">
+                <span>~</span>
+                <input type="date" name="t_planDeliveDate" formControlName="t_planDeliveDate">
+            </div>
+        </div>
+    </div>
+    <div class="input_set">
+
+        <div class="input_group">
+            <label>伝票番号</label>
+            <div class="form-input">
+
+                <input type="number" min="1" name="f_slipNo" formControlName="f_slipNo">
+                <span>~</span>
+                <input type="number" min="1" name="t_slipNo" formControlName="t_slipNo">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出荷先コード</label>
+            <div class="form-input">
+
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_cusomerCode" formControlName="f_cusomerCode">
+                </div>
+
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_customerCode" formControlName="t_customerCode">
+                </div>
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出荷先名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="customerName" formControlName="customerName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>納品先コード</label>
+            <div class="form-input">
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_deliveDestCode"
+                        formControlName="f_deliveDestCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_deliveDestCode"
+                        formControlName="t_deliveDestCode">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="input_set">
+
+        <div class="input_group">
+            <label>納品先名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="dileveDestName" formControlName="dileveDestName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>仕入先コード</label>
+            <div class="form-input">
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_supplierCode" formControlName="f_supplierCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_supplierCode" formControlName="t_supplierCode">
+                </div>
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>仕入先名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="supplierName" formControlName="supplierName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>所有者コード</label>
+            <div class="form-input">
+                
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_ownerCode" formControlName="f_ownerCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_ownerCode" formControlName="t_ownerCode">
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div class="input_set">
+
+        <div class="input_group">
+            <label>所有者名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="ownerName" formControlName="ownerName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>商品コード</label>
+            <div class="form-input">
+
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_productCode" formControlName="f_productCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_productCode" formControlName="t_productCode">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input_group">
+            <div class="input_table">
+                <label>商品名称</label>
+            </div>
+            <div class="form-input">
+                <input type="text" style="width: 302px;" name="productName" formControlName="productName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>倉庫</label>
+            <div class="form-input">
+
+                <select name="f_repository" formControlName="f_repository">
+                    <option value="" selected="selected" hidden="hidden"></option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                </select>
+                <span>~</span>
+                <select name="t_repository" formControlName="t_repository">
+                    <option value="" selected="selected" hidden="hidden"></option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="input_set">
+
+        <div class="input_group">
+            <label>バッチ番号</label>
+            <div class="form-input">
+
+                <input type="number" min="1" style="width: 302px;" name="batchNumber" formControlName="batchNumber">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出庫タイプ</label>
+            <div class="form-input block_input_radio">
+                <div class="input_icon input_radio">
+                    <input type="radio" id="type_1" class="radio" name="delive_type" value="1" checked 
+                                formControlName="delive_type">
+                    <label for="type_1">全て</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="type_2" class="radio" name="delive_type" value="2"
+                                formControlName="delive_type">
+                    <label for="type_2">予定あり</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="type_3" class="radio" name="delive_type" value="3"
+                                formControlName="delive_type">
+                    <label for="type_3">実績のみ</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出庫状態</label>
+            <div class="form-input block_input_radio">
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_1" class="radio" name="delive_status" value="1" checked
+                                formControlName="delive_status">
+                    <label for="status_1">全て</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_2" class="radio" name="delive_status" value="2"
+                                formControlName="delive_status">
+                    <label for="status_2">未出庫</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_3" class="radio" name="delive_status" value="3"
+                                formControlName="delive_status">
+                    <label for="status_3">出庫残</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_4" class="radio" name="delive_status" value="4"
+                                formControlName="delive_status">
+                    <label for="status_4">出庫済</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>クローズ区分</label>
+            <div class="form-input block_input_radio">
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="isClose_1" class="radio" name="is_close" value="1" checked
+                                formControlName="is_close">
+                    <label for="isClose_1">全て</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="isClose_2" class="radio" name="is_close" value="2" 
+                                formControlName="is_close">
+                    <label for="isClose_2">未クローズ</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="isClose_3" class="radio" name="is_close" value="3" 
+                                formControlName="is_close">
+                    <label for="isClose_3">クローズ済</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="control_form">
+
+        <div class="btn-from btn-submit">
+            <input type="submit" value="検索">
+        </div>
+
+        <div class="btn-from btn-reset">
+            <input type="reset" value="クリア">
+        </div>
+    </div>
+
+</form> -->
+
+<form class="form_container" (ngSubmit)="getConditionsSearch()" [formGroup]="searchForm">
+
+        <div class="input_group">
+            <label>受注日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_orderDate" formControlName="f_orderDate">
+                <span>~</span>
+                <input type="date" name="t_orderDate" formControlName="t_orderDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出庫予定日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_planOutputDate" formControlName="f_planOutputDate">
+                <span>~</span>
+                <input type="date" name="t_planOutputDate" formControlName="t_planOutputDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>作業予定日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_planWokingDate" formControlName="f_planWokingDate">
+                <span>~</span>
+                <input type="date" name="t_planWokingDate" formControlName="t_planWokingDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>納品予定日</label>
+            <div class="form-input">
+
+                <input type="date" name="f_planDeliveDate" formControlName="f_planDeliveDate">
+                <span>~</span>
+                <input type="date" name="t_planDeliveDate" formControlName="t_planDeliveDate">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>伝票番号</label>
+            <div class="form-input">
+
+                <input type="number" min="1" name="f_slipNo" formControlName="f_slipNo">
+                <span>~</span>
+                <input type="number" min="1" name="t_slipNo" formControlName="t_slipNo">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出荷先コード</label>
+            <div class="form-input">
+
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_cusomerCode" formControlName="f_cusomerCode">
+                </div>
+
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_customerCode" formControlName="t_customerCode">
+                </div>
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出荷先名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="customerName" formControlName="customerName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>納品先コード</label>
+            <div class="form-input">
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_deliveDestCode"
+                        formControlName="f_deliveDestCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_deliveDestCode"
+                        formControlName="t_deliveDestCode">
+                </div>
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>納品先名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="dileveDestName" formControlName="dileveDestName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>仕入先コード</label>
+            <div class="form-input">
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_supplierCode" formControlName="f_supplierCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_supplierCode" formControlName="t_supplierCode">
+                </div>
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>仕入先名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="supplierName" formControlName="supplierName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>所有者コード</label>
+            <div class="form-input">
+                
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_ownerCode" formControlName="f_ownerCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_ownerCode" formControlName="t_ownerCode">
+                
+                </div>
+            
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>所有者名称</label>
+            <div class="form-input">
+
+                <input type="text" style="width: 302px;" name="ownerName" formControlName="ownerName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>商品コード</label>
+            <div class="form-input">
+
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="f_productCode" formControlName="f_productCode">
+                </div>
+                <span>~</span>
+                <div class="input_icon">
+                    <button class="block_icon_search">
+                        <mat-icon class="icon_search" svgIcon="icon-search-input"></mat-icon>
+                    </button>
+                    <input type="text" class="input_text text" name="t_productCode" formControlName="t_productCode">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input_group">
+            <div class="input_table">
+                <label>商品名称</label>
+            </div>
+            <div class="form-input">
+                <input type="text" style="width: 302px;" name="productName" formControlName="productName">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>倉庫</label>
+            <div class="form-input">
+
+                <select name="f_repository" formControlName="f_repository">
+                    <option value="" selected="selected" hidden="hidden"></option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                </select>
+                <span>~</span>
+                <select name="t_repository" formControlName="t_repository">
+                    <option value="" selected="selected" hidden="hidden"></option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>バッチ番号</label>
+            <div class="form-input">
+
+                <input type="number" min="1" style="width: 302px;" name="batchNumber" formControlName="batchNumber">
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出庫タイプ</label>
+            <div class="form-input block_input_radio">
+                <div class="input_icon input_radio">
+                    <input type="radio" id="type_1" class="radio" name="delive_type" value="1" checked 
+                                formControlName="delive_type">
+                    <label for="type_1">全て</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="type_2" class="radio" name="delive_type" value="2"
+                                formControlName="delive_type">
+                    <label for="type_2">予定あり</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="type_3" class="radio" name="delive_type" value="3"
+                                formControlName="delive_type">
+                    <label for="type_3">実績のみ</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>出庫状態</label>
+            <div class="form-input block_input_radio">
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_1" class="radio" name="delive_status" value="1" checked
+                                formControlName="delive_status">
+                    <label for="status_1">全て</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_2" class="radio" name="delive_status" value="2"
+                                formControlName="delive_status">
+                    <label for="status_2">未出庫</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_3" class="radio" name="delive_status" value="3"
+                                formControlName="delive_status">
+                    <label for="status_3">出庫残</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="status_4" class="radio" name="delive_status" value="4"
+                                formControlName="delive_status">
+                    <label for="status_4">出庫済</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input_group">
+            <label>クローズ区分</label>
+            <div class="form-input block_input_radio">
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="isClose_1" class="radio" name="is_closed" value="" checked
+                                formControlName="is_closed">
+                    <label for="isClose_1">全て</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="isClose_2" class="radio" name="is_closed" value="0" 
+                                formControlName="is_closed">
+                    <label for="isClose_2">未クローズ</label>
+                </div>
+
+                <div class="input_icon input_radio">
+                    <input type="radio" id="isClose_3" class="radio" name="is_closed" value="1" 
+                                formControlName="is_closed">
+                    <label for="isClose_3">クローズ済</label>
+                </div>
+
+            </div>
+        </div>
+
+    <div class="control_form">
+
+        <div class="btn-from btn-submit">
+            <input type="submit" value="検索">
+        </div>
+
+        <div class="btn-from btn-reset">
+            <input type="reset" value="クリア">
+        </div>
+    </div>
+
+</form>

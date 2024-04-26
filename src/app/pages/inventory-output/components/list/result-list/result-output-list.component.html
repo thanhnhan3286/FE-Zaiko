@@ -1,0 +1,222 @@
+<div class="list_content">
+    <div class="list_content-header">
+        <div class="list_content-header-left">
+            <span>
+                検索結果一覧
+            </span>
+        </div>
+        <div class="list_content-header-right">
+            <span>総計</span>
+            <div class="">
+                <span class="list_content-header-right-quantity">0</span>
+                <span>/</span>
+                <span class="list_content-header-right-quantity-max">100</span>
+            </div>
+            <span>件</span>
+        </div>
+    </div>
+    <div class="list_content-main">
+        <table class="table_list">
+            <tr class="title_list">
+                <th></th>
+                <th>No.</th>
+                <th>伝票番号</th>
+                <th>出庫タイプ</th>
+                <th>受注日</th>
+                <th>バッチ</th>
+                <th>
+                    <div class="col-5">
+                        <span>出庫予定日</span>
+                        <span>出庫実績日</span>
+
+                    </div>
+                </th>
+                <th>
+                    <div class="col-6">
+                        <span>作業予定日</span>
+                        <span>作業実績日</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-6">
+                        <span>納品予定日</span>
+                        <span>納品実績日</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-8">
+                        <span>予定納品先</span>
+                        <span>実績納品先</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-9">
+                        <span>予定仕入先名称</span>
+                        <span>実績仕入先名称</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-11">
+                        <span>予定出荷先</span>
+                        <span>実績出荷先</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-12">
+                        <span>予定出荷先名称</span>
+                        <span>実績出荷先名称</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-13">
+                        <span>予定倉庫</span>
+                        <span>実績倉庫</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-14">
+                        <span>予定客先伝票番号</span>
+                        <span>実績客先伝票番号</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="col-14">
+                        <span>予定数量合計</span>
+                        <span>実績数量合計</span>
+                    </div>
+                </th>
+                <th></th>
+            </tr>
+            <div *ngIf="dataTable.length <= 0; else listResult">
+                <span style="display: flex; justify-content: center; width: 100%;">No Data</span>
+            </div>
+            <ng-template #listResult>
+                <tr class="data_list" *ngFor="let result of dataTable; index as i">
+
+                    <td>
+                        <div class="col-1-data">
+                            <mat-icon class="icon-lock" *ngIf="result.isClosed === '1'" svgIcon="icon-lock"></mat-icon>
+                            <mat-icon class="icon-lock-open" *ngIf="result.isClosed === '0'"
+                                svgIcon="icon-unlock"></mat-icon>
+                            <span>
+                                {{
+                                result.outputStatus === '0' ? '未':
+                                result.outputStatus === '2' ? '済':
+                                result.outputStatus === '1' ? '残': ''
+                                }}
+                            </span>
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span>{{i+1}}</span>
+                    </td>
+                    <td>
+                        <span>{{ result.slipNumber }}</span>
+                    </td>
+                    <td>
+                        <div class="col-4-data">
+                            <span>{{ result.deliveryType ? '予定あり/':'実績のみ'}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-5-data">
+                            <span>{{ result.orderDate }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-6-data col-6-data_span">
+                            <span>
+                                {{
+                                result.batchStatus === '0' ? '未処理':
+                                result.batchStatus === '2' ? '処理済み':
+                                result.batchStatus === '1' ? '処理中':
+                                result.batchStatus === '3' ? '未あり' : ''
+                                }}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-7-data">
+                            <span>{{ result.planOutputDate }}</span>
+                            <span>{{ result.actualOutputDate ? result.actualOutputDate:'-'}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-8-data">
+                            <span>{{ result.planPackingDay }}</span>
+                            <span>{{ result.actualPackingDay ? result.actualPackingDay:'-' }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-9-data">
+                            <span>{{ result.planDeliverDate }}</span>
+                            <span>{{ result.actualDeliverDate ? result.actualDeliverDate:'-' }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-10-data">
+                            <span>{{ result.planDeliveryDestCode }}</span>
+                            <span>{{ result.actualDeliveryDestCode ? result.actualDeliveryDestCode:'-' }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-11-data">
+                            <span>{{ result.planDeliveryDestName }}</span>
+                            <span>{{ result.actualDeliveryDestName ? result.actualDeliveryDestName:'-' }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-12-data">
+                            <span>{{ result.planShippingDestCode }}</span>
+                            <span>{{ result.actualShippingDestCode ? result.actualShippingDestCode:'-'}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-14-data">
+                            <span>{{ result.planShippingDestName }}</span>
+                            <span>{{ result.actualShippingDestName ? result.actualShippingDestName:'-'}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-14-data">
+                            <span>{{ result.planRepoCode }} {{ result.planRepoName }}</span>
+                            <span>
+                                {{ result.actualRepoCode ? result.actualRepoCode:'-'}}
+                                {{ result.actualRepoName ? result.actualRepoName:'-'}}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-13-data">
+                            <span>{{ result.planSupplierSlipNo }}</span>
+                            <span>{{ result.actualSupplierSlipNo ? result.actualSupplierSlipNo:'-'}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-13-data">
+                            <span>{{ result.sumPlanQuantity }}</span>
+                            <span>{{ result.sumActualQuantity ? result.sumActualQuantity:'-'}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <span class="button-schedule">予定</span>
+                            <span class="button-achievement">実績</span>
+                            <span class="button-edit">訂正</span>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </table>
+
+    </div>
+    <div class="showMore">
+        <span (click)="loadMore()" class="button-showmore">
+            <mat-icon class="icon-showmore" svgIcon="icon-show-more"></mat-icon>
+            更に表示
+        </span>
+    </div>
+</div>
