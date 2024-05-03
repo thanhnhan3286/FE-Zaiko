@@ -1,0 +1,194 @@
+<div class="list-data">
+  <div class="list-frame">
+    <div class="title-left">検索結果一覧</div>
+    <div class="title-right">
+      <span>総計</span>
+      <span *ngIf="!dataResult"></span>
+      <span *ngIf="dataResult">{{ dataResult.length }}</span>
+      <span> / </span>
+      <span class="total-items">{{ totalItems }}</span>
+      <span>件</span>
+    </div>
+  </div>
+  <div class="data-table" [class]="dataResult.length < 21 ? 'height-table-200' : 'height-table-full'">
+    <table *ngIf="dataResult.length > 0">
+      <thead class="title-table">
+        <tr>
+          <th></th>
+          <th>No.</th>
+          <th>伝票番号</th>
+          <th>出庫タイプ</th>
+          <th>受注日</th>
+          <th>バッチ</th>
+          <th>
+            <div>出庫予定日</div>
+            <div>出庫実績日</div>
+          </th>
+          <th>
+            <div>作業予定日</div>
+            <div>作業実績日</div>
+          </th>
+          <th>
+            <div>納品予定日</div>
+            <div>納品実績日</div>
+          </th>
+          <th>
+            <div>予定納品先</div>
+            <div>実績納品先</div>
+          </th>
+          <th>
+            <div>予定納品先名称</div>
+            <div>実績納品先名称</div>
+          </th>
+          <th>
+            <div>予定出荷先</div>
+            <div>実績出荷先</div>
+          </th>
+          <th>
+            <div>予定納品先名称</div>
+            <div>実績納品先名称</div>
+          </th>
+          <th>
+            <div>予定出荷先</div>
+            <div>実績出荷先</div>
+          </th>
+          <th>
+            <div>予定出荷先名称</div>
+            <div>実績出荷先名称</div>
+          </th>
+          <th>
+            <div>予定倉庫</div>
+            <div>実績倉庫</div>
+          </th>
+          <th>
+            <div>予定客先伝票番号</div>
+            <div>実績客先伝票番号</div>
+          </th>
+          <th>
+            <div>予定数量合計</div>
+            <div>実績数量合計</div>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="record" *ngFor="let item of dataResult; let i = index">
+          <td class="isClosed-group"  [class]="item.outputStatus === '1' ? 'td-remain-color' : item.outputStatus === '2' ? 'td-done-color' : 'td-not-yet-color' ">
+            <div class="isClosed-cover">
+              <mat-icon
+                svgIcon="icon-unlock"
+                *ngIf="item.isClosed === '0'"
+                class="icon-lock"
+              ></mat-icon>
+              <mat-icon
+                svgIcon="icon-lock"
+                *ngIf="item.isClosed === '1'"
+                class="icon-lock"
+              ></mat-icon>
+              <span
+                class="isClosed-status"
+                *ngIf="!item.outputStatus || item.outputStatus === '0'"
+                >未</span
+              >
+              <span class="isClosed-status" *ngIf="item.outputStatus === '1'"
+                >残</span
+              >
+              <span class="isClosed-status" *ngIf="item.outputStatus === '2'"
+                >済</span
+              >
+            </div>
+          </td>
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.slipNo }}</td>
+          <td *ngIf="item.planOutputDate == null; else elseBlock">
+            <span class="item-status">実績のみ</span>
+          </td>
+          <ng-template #elseBlock
+            ><td><span class="item-status">予定あり</span></td></ng-template
+          >
+          <td>
+            <div>{{item.orderDate ? item.orderDate : '-'}}</div>
+            <!-- <div>{{item.orderDate ? item.orderDate : '-'}}</div> -->
+          </td>
+          <td>
+            <span class = "batch-status" *ngIf="item.batchStatus === '0'"> 未処理 </span>
+            <span class = "batch-status" *ngIf="item.batchStatus === '1'"> 処理中 </span>
+            <span class = "batch-status" *ngIf="item.batchStatus === '2'"> 処理済み </span>
+            <span class = "batch-status" *ngIf="item.batchStatus === '3'"> 処理中<br />未あり </span>
+          </td>
+          <td>
+            <div>{{item.planOutputDate ? item.planOutputDate : '-'}}</div>
+            <div>{{item.actualOutputDate ? item.actualOutputDate : '-'}}</div>
+          </td>
+          <td>
+            <div>{{item.planWorkingDate ? item.planWorkingDate : '-'}}</div>
+            <div>{{item.actualOutputDate ? item.actualOutputDate : '-'}}</div>
+          </td>
+          <td>
+            <div>{{item.planDeliverDate ? item.planDeliverDate : '-'}}</div>
+            <div>{{item.actualDeliverDate ? item.actualDeliverDate : '-'}}</div>
+          </td>
+          <td>
+            <div>{{ item.destinationCode }}</div>
+            <div>{{ item.destinationCode }}</div>
+          </td>
+          <td>
+            <div>{{ item.departmentName }}</div>
+            <div>{{ item.departmentName }}</div>
+          </td>
+          <td>
+            <div>{{ item.customerCode }}</div>
+            <div>{{ item.customerCode }}</div>
+          </td>
+          <td>
+            <div>{{ item.departmentName }}</div>
+            <div>{{ item.departmentName }}</div>
+          </td>
+          <td>
+            <div>{{ item.customerCode }}</div>
+            <div>{{ item.customerCode }}</div>
+          </td>
+          <td>
+            <div>{{ item.customerName }}</div>
+            <div>{{ item.customerName }}</div>
+          </td>
+          <td>
+            <div>{{ item.repositoryCode }} {{ item.repositoryName }}</div>
+            <div>{{ item.repositoryCode }} {{ item.repositoryName }}</div>
+          </td>
+          <td>
+            <div>{{ item.planSupplierSlipNo }}</div>
+            <div>{{ item.actualSupplierSlipNo }}</div>
+          </td>
+          <td>
+            <div>{{ item.sumPlanQuantity?item.sumPlanQuantity:0 }}</div>
+            <div>{{ item.sumActualQuantity?item.sumActualQuantity:0 }}</div>
+          </td>
+          <td>
+            <button class="btn-action btn-plan">予定</button>
+          </td>
+          <td>
+            <button class="btn-action btn-actual">実績</button>
+          </td>
+          <td>
+            <button class="btn-action btn-correction">訂正</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="dataResult.length == 0">No data result</p>
+  </div>
+  <div class="show-more">
+    <button
+      type="button"
+      class="btn-show-more"
+      [hidden]="dataResult.length == 0"
+      *ngIf="totalPages > currentPage +1" (click)="loadMoreContent()"
+    >
+      <mat-icon svgIcon="icon-show-more" class="icon-show-more"></mat-icon>
+      <span class="show-more-label">更に表示 </span>
+    </button>
+  </div>
+</div>

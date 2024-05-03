@@ -1,4 +1,4 @@
-import { HttpClientResponse } from './../../../core/models/http-response.model';
+import { HttpClientResponse } from '../../../core/models/http-response.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services';

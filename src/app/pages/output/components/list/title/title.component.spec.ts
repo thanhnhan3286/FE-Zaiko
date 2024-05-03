@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TitleSearchListComponent } from './title-search-list.component';
+import { TitleComponent } from './title.component';
 
 describe('TitleSearchListComponent', () => {
-  let component: TitleSearchListComponent;
-  let fixture: ComponentFixture<TitleSearchListComponent>;
+  let component: TitleComponent;
+  let fixture: ComponentFixture<TitleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitleSearchListComponent ]
+      declarations: [ TitleComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TitleSearchListComponent);
+    fixture = TestBed.createComponent(TitleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

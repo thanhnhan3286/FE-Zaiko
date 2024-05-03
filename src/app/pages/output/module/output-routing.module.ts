@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OutputListComponent } from './output-list.component';
-import { InventoryOutputListComponent } from '../components/inventory-output-list/inventory-output-list.component';
+import { OutputListComponent } from './output.component';
+import { ListComponent } from '../components/list/list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'list' },
@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: OutputListComponent,
     children: [
-      { path: 'list', component: InventoryOutputListComponent }
+      { path: 'list', component: ListComponent }
       // {path:'plan',component: },
       // {path: 'actual', component: },
       // {path: 'correction',component: }

@@ -12,7 +12,7 @@ const routes: Routes = [
 
   {
     path: 'output-list',
-    loadChildren:() => import('./pages/output-list/module/output-list.module').then((m) => m.OutputListModule)
+    loadChildren:() => import('./pages/output/module/output.module').then((m) => m.OutputListModule)
   }
 ];
 

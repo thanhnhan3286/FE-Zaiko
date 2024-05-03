@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OutputListComponent } from './output-list.component';
+import { ShowListComponent } from './show-list.component';
 
-describe('OutputListComponent', () => {
-  let component: OutputListComponent;
-  let fixture: ComponentFixture<OutputListComponent>;
+describe('ShowListComponent', () => {
+  let component: ShowListComponent;
+  let fixture: ComponentFixture<ShowListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OutputListComponent ]
+      declarations: [ ShowListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OutputListComponent);
+    fixture = TestBed.createComponent(ShowListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

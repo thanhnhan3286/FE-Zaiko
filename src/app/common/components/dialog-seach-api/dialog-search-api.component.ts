@@ -84,13 +84,20 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
       56
     );
     this.loadingDialog.showSpinner(true);
-    this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption).subscribe((x: HttpClientResponse) => {
+    this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption).subscribe((x: HttpClientResponse|any) => {
     this.loadingDialog.showSpinner(false);
 
-    if (x.data) {
-        this.listData = [...x.data];
-      }
+    if (x) {
+      this.listData = [...x];
+    }
+    
+
+    // if (x.data) {
+    //     this.listData = [...x.data];
+    //   }
     });
+
+
   }
   public handelCancel(): void {
     this.dialogRef.close();
@@ -117,21 +124,33 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
 
   public handelSeach(): void {
     this.loadingDialog.showSpinner(true);
-    this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption, this.dataSeach).subscribe((x: HttpClientResponse) => {
+    this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption, this.dataSeach).subscribe((x: HttpClientResponse|any) => {
     this.loadingDialog.showSpinner(false);
+  
+    // if (x.data) {
+    //     this.listData = [...x.data];
+    //     this.dataChoosse = '';
+    //   }
+    if(x) {
+      this.listData = [...x];
+      this.dataChoosse = '';
+    } else {
+      this.listData = [];
+    }
+    }
+  );
+  
 
-    if (x.data) {
-        this.listData = [...x.data];
-        this.dataChoosse = '';
-      }
-    });
   }
 
   public handelDblclick(data: any): void {
     this.dialogRef.close(JSON.parse(JSON.stringify(data)));
+
+    
   }
 
   public handelButtonOk(): void {
     this.dialogRef.close(JSON.parse(this.dataChoosse));
+    
   }
 }

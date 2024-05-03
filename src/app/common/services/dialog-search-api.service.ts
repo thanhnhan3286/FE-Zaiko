@@ -35,6 +35,8 @@ export class DialogSeachApiService extends HttpService {
     const convert = queryString.stringify(param);
 
     this.loadingDialog.showSpinner(true);
+    console.log(`${url}?${convert}`);
+    
 
     return this.get(`${url}?${convert}`).pipe(map((response: HttpClientResponse) => response),
       finalize(() => this.loadingDialog.showSpinner(false))
