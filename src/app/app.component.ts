@@ -2,11 +2,9 @@ import { AfterViewChecked, Component, HostListener, OnInit } from '@angular/core
 import { LoginService } from '@auth/services/login.service';
 import { IconService } from './core/services/icon/icon.service';
 import { LocalizationService } from './core/services/localization/localization.service';
-import { concat } from 'lodash';
 import { HandelSpaceService } from '@common/services/handel-space.service';
 import { HandelTabindexService } from '@common/services/handel-tabindex.service';
 import { NgSelectConfig } from '@ng-select/ng-select';
-import { Title } from '@angular/platform-browser';
 import { TitleService } from '@common/services/title.service';
 
 @Component({

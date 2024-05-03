@@ -1,4 +1,3 @@
-import { environment } from '@env/environment';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services';

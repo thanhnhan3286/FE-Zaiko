@@ -6,7 +6,6 @@ import {
 } from '../../model/output-list';
 import {
   HttpClient,
-  HttpErrorResponse,
   HttpParams,
 } from '@angular/common/http';
 

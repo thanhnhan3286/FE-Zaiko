@@ -1,7 +1,5 @@
 import {
   OutputListModel,
-  OutputListResponse,
-  SearchCriteriaRequest,
 } from '../../../model/output-list';
 import {
   Component,
