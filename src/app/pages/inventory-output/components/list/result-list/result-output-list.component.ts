@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { OutputListModel } from '../../../models/output-list.model';
-import { SearchOutputListService } from '../../../services/search-outputList.service';
+import { OutputListService } from '../../../services/outputList.service';
 
 @Component({
   selector: 'app-result-output-list',
@@ -20,7 +20,7 @@ export class ResultOutputListComponent implements OnInit, OnChanges{
   totalPages = 0;
   totalElements = 0;
 
-  public constructor(private outPutListService: SearchOutputListService) {}
+  public constructor(private outPutListService: OutputListService) {}
 
   ngOnInit(): void {
     console.log('Init work');

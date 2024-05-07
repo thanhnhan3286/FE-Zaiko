@@ -200,7 +200,7 @@
                             <span>{{ result.sumActualQuantity ? result.sumActualQuantity:'-'}}</span>
                         </div>
                     </td>
-                    <td>
+                    <td class="btn-block">
                         <div>
                             <span class="button-schedule">予定</span>
                             <span class="button-achievement">実績</span>
@@ -213,7 +213,7 @@
         </table>
 
     </div>
-    <div class="showMore">
+    <div class="showMore" *ngIf="pageNumber < totalPages">
         <span (click)="loadMore()" class="button-showmore">
             <mat-icon class="icon-showmore" svgIcon="icon-show-more"></mat-icon>
             更に表示

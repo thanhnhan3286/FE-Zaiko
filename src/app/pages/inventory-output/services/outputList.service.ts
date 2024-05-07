@@ -4,13 +4,14 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services';
 import { HttpClientOutputListResponse } from '../models/output-list.model';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ApiPath } from '@core/config';
+import { HttpClientRepositoryResponse } from '../models/repository.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SearchOutputListService extends HttpService{
+export class OutputListService extends HttpService{
 
     public constructor(
         protected override http: HttpClient
@@ -41,6 +42,14 @@ export class SearchOutputListService extends HttpService{
             map((response: HttpClientOutputListResponse) => response)
         ) as Observable<HttpClientOutputListResponse | HttpErrorResponse>;
 
+    }
+
+    public getAllRepository() : 
+    Observable<HttpClientRepositoryResponse | HttpErrorResponse>{
+
+        return this.get(ApiPath.REPOSITORY).pipe(
+            map((response: HttpClientRepositoryResponse) => response)
+        ) as Observable<HttpClientRepositoryResponse | HttpErrorResponse>;
     }
 
     private buildFilterQuery(formData: any) : string{

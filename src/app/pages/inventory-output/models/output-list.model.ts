@@ -37,7 +37,7 @@ export interface OutputSearchModelRequest{
 
 export interface HttpClientOutputListResponse extends HttpClientResponse {
     data: OutputListModel;
-  }
+}
 
 export interface OutputListModel{
     inventoryOutputId: number;
@@ -69,4 +69,21 @@ export interface OutputListModel{
     actualSupplierSlipNo: string;
     sumPlanQuantity: string;
     sumActualQuantity: string;
+}
+
+export class DisplayFormInputModel{
+    fromCustomerCode: string = '';
+    toCustomerCode: string = '';
+
+    fromDestinationCode: string = '';
+    toDestinationCode: string = '';
+
+    fromSupplierCode: string = '';
+    toSupplierCode: string = '';
+
+    fromOwnerCode: string = '';
+    toOwnerCode: string = '';
+
+    fromProductCode: string = '';
+    toProductCode: string = '';
 }

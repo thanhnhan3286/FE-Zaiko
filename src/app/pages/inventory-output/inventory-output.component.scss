@@ -1,14 +1,13 @@
 .content_container{
     background: #F9FCFF;
     width: auto;
-    gap: 0px;
     border-radius: 2px 0px 0px 0px;
     border: 0.5px solid #4392BB;
     opacity: 0px;
-
     display: flex;
     flex-direction: column;
     gap: 4px; 
+    height: 100vh;
 }
 .content {
     width: auto;
