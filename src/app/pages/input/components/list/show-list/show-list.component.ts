@@ -1,24 +1,16 @@
-import {
-  OutputListModel,
-} from '../../../model/output-list';
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { InputListModel } from 'src/app/pages/input/model/input-list';
+
 
 @Component({
   selector: 'app-show-list',
   templateUrl: './show-list.component.html',
-  styleUrls: ['./show-list.component.scss'],
+  styleUrls: ['./show-list.component.scss']
 })
-export class ShowListComponent implements OnInit, OnChanges {
+export class ShowListComponent implements OnInit {
+
   @Input()
-  dataResult: OutputListModel[] = [];
+  dataResult: InputListModel[] = [];
   @Input()
   totalItems: number = 0;
   @Input() currentPage: number = 0;
@@ -35,8 +27,6 @@ export class ShowListComponent implements OnInit, OnChanges {
   loadMoreContent() {
     this.loadMoreEvent.emit();
   }
-
-
 
 
 }

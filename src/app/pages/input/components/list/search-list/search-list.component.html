@@ -1,0 +1,549 @@
+<div class="container">
+  <form [formGroup]="searchInputForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Input Row 1 -->
+    <div class="input-cover">
+      <!-- Input wrapper 1 -->
+      <div class="input-wrapper">
+        <!-- Plan Input Date  -->
+        <div>
+          <div class="input-label">
+            <label for="inputPlanDateFrom">入庫予定日</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="date"
+              id="inputPlanDateFrom"
+              name="inputPlanDateFrom"
+              formControlName="inputPlanDateFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="date"
+              id="inputPlanDateTo"
+              name="inputPlanDateTo"
+              formControlName="inputPlanDateTo"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Input wrapper 2 -->
+      <div class="input-wrapper">
+        <!-- Actual Input Date  -->
+        <div>
+          <div class="input-label">
+            <label for="inputActualDateFrom">入庫実績日</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="date"
+              id="inputActualDateFrom"
+              name="inputActualDateFrom"
+              formControlName="inputActualDateFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="date"
+              id="inputActualDateTo"
+              name="inputActualDateTo"
+              formControlName="inputActualDateTo"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Input wrapper 3 -->
+      <div class="input-wrapper">
+        <!-- Slip No Input -->
+        <div>
+          <div class="input-label">
+            <label for="slipNoFrom">伝票番号</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="slipNoFrom"
+              name="slipNoFrom"
+              formControlName="slipNoFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="slipNoTo"
+              name="slipNoTo"
+              formControlName="slipNoTo"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Input wrapper 4 -->
+      <div class="input-wrapper">
+        <!-- Customer Number Input -->
+        <div>
+          <div class="input-label">
+            <label for="productOwnerIdFrom">客先伝票番号</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-from-to"
+              type="text"
+              id="productOwnerIdFrom"
+              name="productOwnerIdFrom"
+              formControlName="productOwnerIdFrom"
+            />
+            <span class="icon-from-to">~</span>
+            <input
+              class="input-from-to"
+              type="text"
+              id="productOwnerIdTo"
+              name="productOwnerIdTo"
+              formControlName="productOwnerIdTo"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Row 2 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Destination ID Input -->
+        <div>
+          <div class="input-label">
+            <label for="destinationIdFrom">納品先コード</label>
+          </div>
+          <div class="input-date">
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="destinationIdFrom"
+                name="destinationIdFrom"
+                formControlName="destinationIdFrom"
+              />
+              <mat-icon
+                (click)="openSearchDialog('destinationIdFrom')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+
+            <span class="icon-from-to">~</span>
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="destinationIdTo"
+                name="destinationIdTo"
+                formControlName="destinationIdTo"
+              />
+              <mat-icon
+                (click)="openSearchDialog('destinationIdTo')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Department Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="departmentName">納品先名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-single"
+              type="text"
+              id="departmentName"
+              name="departmentName"
+              formControlName="departmentName"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Supplier ID Input -->
+        <div>
+          <div class="input-label">
+            <label for="supplierIdFrom">仕入先コード</label>
+          </div>
+          <div class="input-date">
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="supplierIdFrom"
+                name="supplierIdFrom"
+                formControlName="supplierIdFrom"
+              />
+              <mat-icon
+                (click)="openSearchDialog('supplierIdFrom')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+
+            <span class="icon-from-to">~</span>
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="supplierIdTo"
+                name="supplierIdTo"
+                formControlName="supplierIdTo"
+              />
+              <mat-icon
+                (click)="openSearchDialog('supplierIdTo')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Supplier Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="supplierName">仕入先名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              class="input-single"
+              type="text"
+              id="supplierName"
+              name="supplierName"
+              formControlName="supplierName"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Row 3 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Customer Id Input -->
+        <div>
+          <div class="input-label">
+            <label for="customerIdFrom">所有者コード</label>
+          </div>
+          <div class="input-date">
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="customerIdFrom"
+                name="customerIdFrom"
+                formControlName="customerIdFrom"
+              />
+              <mat-icon
+                (click)="openSearchDialog('customerIdFrom')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+
+            <span class="icon-from-to">~</span>
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="customerIdTo"
+                name="customerIdTo"
+                formControlName="customerIdTo"
+              />
+              <mat-icon
+                (click)="openSearchDialog('customerIdTo')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <!-- Customer Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="customerName">所有者名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="customerName"
+              name="customerName"
+              formControlName="customerName"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Product ID Input -->
+        <div>
+          <div class="input-label">
+            <label for="productIdFrom">商品コード</label>
+          </div>
+          <div class="input-date">
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="productIdFrom"
+                name="productIdFrom"
+                formControlName="productIdFrom"
+              />
+              <mat-icon
+                (click)="openSearchDialog('productIdFrom')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+
+            <span class="icon-from-to">~</span>
+            <div class="input-dialog">
+              <input
+                class="input-from-to"
+                type="text"
+                id="productIdTo"
+                name="productIdTo"
+                formControlName="productIdTo"
+              />
+              <mat-icon
+                (click)="openSearchDialog('productIdTo')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <!-- Product Name Input -->
+        <div>
+          <div class="input-label">
+            <label for="productName">商品名称</label>
+          </div>
+          <div class="input-date">
+            <input
+              type="text"
+              id="productName"
+              name="productName"
+              formControlName="productName"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Row 4 -->
+    <div class="input-cover">
+      <div class="input-wrapper">
+        <!-- Repository Input -->
+        <div>
+          <div class="input-label">
+            <label for="repositoryIdFrom">倉庫</label>
+          </div>
+          <div class="input-date">
+            <select
+              id="repositoryIdFrom"
+              name="repositoryIdFrom"
+              formControlName="repositoryIdFrom"
+            >
+              <option *ngFor="let item of datable" [value]="item.repositoryId">
+                {{ item.repositoryId }} - {{ item.repositoryName }}
+              </option>
+            </select>
+            <span class="icon-from-to">~</span>
+            <select
+              id="repositoryIdTo"
+              name="repositoryIdTo"
+              formControlName="repositoryIdTo"
+            >
+              <option *ngFor="let item of datable" [value]="item.repositoryId">
+                {{ item.repositoryId }} - {{ item.repositoryName }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <!-- Receipt Type Input -->
+        <div class="input-label">
+          <label for="receiptType">入庫タイプ</label>
+        </div>
+        <div class="input-radio-cover">
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptType"
+              name="receiptType"
+              formControlName="receiptType"
+              value="0"
+              checked
+            />
+            <span class="radio-name">全て</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptType"
+              name="receiptType"
+              formControlName="receiptType"
+              value="1"
+            />
+            <span class="radio-name">予定あり</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptType"
+              name="receiptType"
+              formControlName="receiptType"
+              value="2"
+            />
+            <span class="radio-name">予定あり</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <!-- Receipt Status Input -->
+        <div class="input-label">
+          <label for="receiptStatus">入庫状態</label>
+        </div>
+        <div class="input-radio-cover">
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptStatus_0"
+              name="receiptStatus"
+              formControlName="receiptStatus"
+              value="0"
+              checked
+            />
+            <span class="radio-name">全て</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptStatus_1"
+              name="receiptStatus"
+              formControlName="receiptStatus"
+              value="1"
+            />
+            <span class="radio-name">未出庫</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptStatus_2"
+              name="receiptStatus"
+              formControlName="receiptStatus"
+              value="2"
+            />
+            <span class="radio-name">出庫残</span>
+          </div>
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="receiptStatus_3"
+              name="receiptStatus"
+              formControlName="receiptStatus"
+              value="3"
+            />
+            <span class="radio-name">出庫済</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <!-- IsClosed Input -->
+        <div class="input-label">
+          <label for="isClosed">クローズ区分</label>
+        </div>
+        <div class="input-radio-cover">
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="isClosed_0"
+              name="isClosed"
+              formControlName="isClosed"
+              value="9"
+              checked
+            />
+            <span class="radio-name">全て</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="isClosed_1"
+              name="isClosed"
+              formControlName="isClosed"
+              value="0"
+            />
+            <span class="radio-name">未クローズ</span>
+          </div>
+
+          <div class="radio-item">
+            <input
+              class="radio-btn"
+              type="radio"
+              id="isClosed_2"
+              name="isClosed"
+              formControlName="isClosed"
+              value="1"
+            />
+            <span class="radio-name">クローズ済</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-search">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!searchInputForm.valid"
+      >
+        検索
+      </button>
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="
+          searchInputForm.reset({
+            isClosed: '9',
+            receiptType: '0',
+            receiptStatus: '0'
+          })
+        "
+      >
+        クリア
+      </button>
+    </div>
+  </form>
+</div>

@@ -11,8 +11,13 @@ const routes: Routes = [
   },
 
   {
-    path: 'output-list',
+    path: 'output',
     loadChildren:() => import('./pages/output/module/output.module').then((m) => m.OutputListModule)
+  },
+
+  {
+    path: 'input',
+    loadChildren:() => import('./pages/input/input.module').then((m) => m.InputModule)
   }
 ];
 

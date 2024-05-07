@@ -19,11 +19,7 @@ export class OutputListService extends HttpService {
     ) as Observable<OutputListResponse| HttpErrorResponse>;
   }
 
-  // public getSearchOutputList(): Observable<OutputListResponse | HttpErrorResponse> {
-  //   return this.get(`${ApiPath.INVENTORY_OUTPUT}/search-output-list`).pipe(
-  //     map((response: OutputListResponse | HttpErrorResponse) => response)
-  //   ) as Observable<OutputListResponse| HttpErrorResponse>;
-  // }
+
 
   public getSearchOutputList(params: HttpParams): Observable<OutputListResponse | HttpErrorResponse> {
     console.log(params);

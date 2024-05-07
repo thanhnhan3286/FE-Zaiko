@@ -1,0 +1,10 @@
+<app-title></app-title>
+<app-search-list (search)="onSearch($event)"></app-search-list>
+<app-show-list
+  [dataResult]="dataResult"
+  [totalItems]="totalItems"
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (loadMoreEvent)="loadMore()"
+>
+</app-show-list>
