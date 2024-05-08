@@ -7,6 +7,7 @@ import { DialogOptionApi } from '@common/models/dialog-seach-api/dialog-search-a
 import { RepositoryResponse } from 'src/app/pages/output/model/repositoryDto';
 import { RepositoryService } from 'src/app/pages/output/service/repository.service';
 import { SearchCriteriaRequest } from '../../../model/input-list';
+import { ApiPath } from '@core/config/api-path';
 
 @Component({
   selector: 'app-search-list',
@@ -118,7 +119,7 @@ export class SearchListComponent implements OnInit {
       case 'customerIdFrom':
       case 'customerIdTo':
         dataModel.title = 'Search Customer Dialog';
-        dataModel.url = 'http://localhost:8081/api/customer/get-all';
+        dataModel.url = `${ApiPath.CUSTOMER}/get-all`;
         dataModel.columReturn = 'customerId, customerName';
         dataModel.listHeader[0].titleHeader = 'CustomerID';
         dataModel.listHeader[0].nameColum = 'customerId';
@@ -129,7 +130,7 @@ export class SearchListComponent implements OnInit {
       case 'destinationIdTo':
         dataModel.title = 'Search Destination Dialog';
         dataModel.url =
-          'http://localhost:8081/api/customer-delivery-dest/get-all';
+        `${ApiPath.CUSTOMER_DELIVERY_DEST}/get-all`;
         dataModel.columReturn = 'deliveryDestinationId, departmentName';
         dataModel.listHeader[0].titleHeader = 'DestinationID';
         dataModel.listHeader[0].nameColum = 'deliveryDestinationId';
@@ -139,7 +140,7 @@ export class SearchListComponent implements OnInit {
       case 'supplierIdFrom':
       case 'supplierIdTo':
         dataModel.title = 'Search Supplier Dialog';
-        dataModel.url = 'http://localhost:8081/api/supplier/get-all';
+        dataModel.url = `${ApiPath.SUPPLIER}/get-all`;
         dataModel.columReturn = 'supplierId, supplierName';
         dataModel.listHeader[0].titleHeader = 'SupplierID';
         dataModel.listHeader[0].nameColum = 'supplierId';
@@ -149,7 +150,7 @@ export class SearchListComponent implements OnInit {
       case 'productIdFrom':
       case 'productIdTo':
         dataModel.title = 'Search Product Dialog';
-        dataModel.url = 'http://localhost:8081/api/product/get-all';
+        dataModel.url = `${ApiPath.PRODUCT_MASTER}/get-all`;
         dataModel.columReturn = 'productId, productName';
         dataModel.listHeader[0].titleHeader = 'ProductID';
         dataModel.listHeader[0].nameColum = 'productId';

@@ -66,6 +66,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        gap: 3px;
       }
 
       .icon-lock {
@@ -80,6 +81,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+       
       }
     }
   }
@@ -139,6 +141,7 @@
     background-color: #edf6ff;
     border-radius: 4px;
     color: #4392bb;
+    padding: 4px;
     .item-detail {
       height: 18px;
       width: 49px;
@@ -148,11 +151,7 @@
 .total-items {
   color: #4392bb;
 }
-.batch-status {
-  background-color: #fff5d1;
-  border-radius: 4px;
-  color: #ebb71c;
-}
+
 .height-table-200 {
   max-height: 240px;
 }
@@ -251,6 +250,12 @@ thead tr th:nth-child(3) {
   background-color: #eaf4ff;
 }
 
+thead tr th:nth-child(4) {
+  position: sticky;
+  left: 163.2px;
+  background-color: #EAF4FF;
+}
+
 tbody tr td:nth-child(1) {
   position: sticky;
   left: 0;
@@ -266,5 +271,11 @@ tbody tr td:nth-child(2) {
 tbody tr td:nth-child(3) {
   position: sticky;
   left: 71.5px;
+  background-color: $background-default;
+}
+
+tbody tr td:nth-child(4) {
+  position: sticky;
+  left: 163.2px;
   background-color: $background-default;
 }

@@ -449,3 +449,12 @@ mat-checkbox.checkbox .mat-checkbox-frame {
   outline: none;
   opacity: 0.5;
 }
+
+select:focus {
+  border-color: #D6D6D6;
+  outline: none !important;
+}
+
+input:focus {
+  border: 1px solid #4392BB !important;
+}

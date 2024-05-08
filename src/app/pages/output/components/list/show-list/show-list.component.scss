@@ -64,6 +64,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        gap: 3px;
       }
 
       .icon-lock {
@@ -121,6 +122,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 7px;
   }
   .icon-show-more {
     width: 14px;
@@ -136,6 +138,7 @@
     background-color: #edf6ff;
     border-radius: 4px;
     color: #4392bb;
+    padding: 4px;
     .item-detail {
       height: 18px;
       width: 49px;
@@ -149,6 +152,7 @@
   background-color: #fff5d1;
   border-radius: 4px;
   color: #ebb71c;
+  padding: 4px;
 }
 .height-table-200 {
   max-height: 240px;
@@ -239,7 +243,7 @@ thead tr th:nth-last-child(3) {
 thead tr th:nth-child(1) {
   position: sticky;
   left : 0;
-  // background-color: #EAF4FF;
+  background-color: #EAF4FF;
 
 }
 

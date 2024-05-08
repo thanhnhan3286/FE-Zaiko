@@ -24,7 +24,7 @@ import { LayoutModule } from '@layout/layout.module';
         CommonModule,
         OutputListRoutingModule,
         FormsModule,
-        CommonAppModule,
+        CommonAppModule.forRoot(),
 
     ],
 })
