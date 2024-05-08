@@ -175,13 +175,6 @@ td:first-child {
     border-right: 1px solid #7D63CC;
 }
 
-::-webkit-scrollbar{
-    // height: 6px;
-    width: 4px;
-    background: #F9F9F9;
-    border-radius: 4px;
-}
-
 ::-webkit-scrollbar-thumb {
     height: 6px;
     width: 4px;
@@ -204,4 +197,10 @@ td:first-child {
     .icon-showmore{
         height: 14px;
     }
+}
+
+.nodata{
+    display: flex; 
+    justify-content: center; 
+    width: 100%;
 }

@@ -13,6 +13,10 @@
     flex-direction: column;
 }
 
+input, select:focus {
+    outline: none;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     border-radius: 4px;
@@ -88,11 +92,6 @@ label {
 }
 
 // // position
-.input_text:focus {
-    outline: none;
-}
-
-// // position
 .input_icon {
     position: relative;
     width: 100%;
@@ -153,4 +152,13 @@ select {
 
 .radio:checked {
     accent-color: #4392BB;
+}
+// ============================
+
+.invalidDateAlert{
+    // position:absolute; 
+    width: 100%; 
+    font-size: 13px;
+    background-color:#e19999; 
+    border-radius:5px;
 }

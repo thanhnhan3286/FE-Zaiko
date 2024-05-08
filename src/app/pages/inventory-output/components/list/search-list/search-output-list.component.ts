@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
@@ -5,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RepositoryModel } from '../../../models/repository.model';
 import { OutputListService } from '../../../services/outputList.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +14,7 @@ import { DialogSeachApiComponent } from '@common/components/dialog-seach-api/dia
 import { DisplayFormInputModel } from '../../../models/output-list.model';
 import { DialogOptionApi } from '@common/models/dialog-seach-api/dialog-search-api.model';
 import { DialogConfig } from '@common/utils/dialog-config';
+import { ValidatorService } from '../../../services/validator.service';
 
 @Component({
   selector: 'app-search-output-list',
@@ -21,7 +23,7 @@ import { DialogConfig } from '@common/utils/dialog-config';
 })
 export class SearchOutputListComponent implements OnInit{
 
-  searchForm!: FormGroup;
+  searchForm: FormGroup;
   repositories: RepositoryModel[] = [];
   displayFormInput: DisplayFormInputModel = new DisplayFormInputModel();
 
@@ -29,43 +31,81 @@ export class SearchOutputListComponent implements OnInit{
 
   public constructor(private fb: FormBuilder, 
       private outPutListService: OutputListService, 
-      private dialog: MatDialog) {}
+      private dialog: MatDialog
+    ) {
+
+        this.searchForm = this.fb.group({
+          fromOrderDate: '',
+          toOrderDate: '',
+          fromPlanOutputDate: '',
+          toPlanOutputDate: '',
+          fromPlanWokingDate: '',
+          toPlanWokingDate: '',
+          fromPlanDeliveDate: '',
+          toPlanDeliveDate: '',
+          fromSlipNo: '',
+          toSlipNo: '',
+          fromCustomerCode: '',
+          toCustomerCode: '',
+          customerName: '',
+          fromDeliverDestCode: '',
+          toDeliverDestCode: '',
+          dileveDestName: '',
+          fromSupplierCode: '',
+          toSupplierCode: '',
+          supplierName: '',
+          fromOwnerCode: '',
+          toOwnerCode: '',
+          ownerName: '',
+          fromProductCode: '',
+          toProductCode: '',
+          productName: '',
+          fromRepositoryId: '',
+          toRepositoryId: '',
+          batchNumber: '',
+          deliveType: '1',
+          deliveStatus: '1',
+          isClosed: ''
+        }, { validators: this.validationFromToInput });
+      }
 
   ngOnInit(): void {
     this.getDropdownsRepository();
-    this.searchForm = this.fb.group({
-      fromOrderDate: '',
-      toOrderDate: '',
-      fromPlanOutputDate: '',
-      toPlanOutputDate: '',
-      fromPlanWokingDate: '',
-      toPlanWokingDate: '',
-      fromPlanDeliveDate: '',
-      toPlanDeliveDate: '',
-      fromSlipNo: '',
-      toSlipNo: '',
-      fromCustomerId: '',
-      toCustomerId: '',
-      customerName: '',
-      fromDeliverDestId: '',
-      toDeliverDestId: '',
-      dileveDestName: '',
-      fromSupplierId: '',
-      toSupplierId: '',
-      supplierName: '',
-      fromOwnerId: '',
-      toOwnerId: '',
-      ownerName: '',
-      fromProductId: '',
-      toProductId: '',
-      productName: '',
-      fromRepositoryId: '',
-      toRepositoryId: '',
-      batchNumber: '',
-      deliveType: '1',
-      deliveStatus: '1',
-      isClosed: ''
-    });
+    // this.searchForm = this.fb.group({
+    //   fromOrderDate: '',
+    //   toOrderDate: '',
+    //   fromPlanOutputDate: '',
+    //   toPlanOutputDate: '',
+    //   fromPlanWokingDate: '',
+    //   toPlanWokingDate: '',
+    //   fromPlanDeliveDate: '',
+    //   toPlanDeliveDate: '',
+    //   fromSlipNo: '',
+    //   toSlipNo: '',
+    //   fromCustomerCode: '',
+    //   toCustomerCode: '',
+    //   customerName: '',
+    //   fromDeliverDestCode: '',
+    //   toDeliverDestCode: '',
+    //   dileveDestName: '',
+    //   fromSupplierCode: '',
+    //   toSupplierCode: '',
+    //   supplierName: '',
+    //   fromOwnerCode: '',
+    //   toOwnerCode: '',
+    //   ownerName: '',
+    //   fromProductCode: '',
+    //   toProductCode: '',
+    //   productName: '',
+    //   fromRepositoryId: '',
+    //   toRepositoryId: '',
+    //   batchNumber: '',
+    //   deliveType: '1',
+    //   deliveStatus: '1',
+    //   isClosed: ''
+    // }, {Validators: this.validationFromToInput });
+
+    // this.searchForm.setValidators(this.validationFromToInput.bind(this));
   }
 
   getConditionsSearch(){
@@ -99,8 +139,8 @@ export class SearchOutputListComponent implements OnInit{
           customerDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('fromCustomerId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.fromCustomerCode = result.customerCode;
+              this.searchForm.get('fromCustomerCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.fromCustomerCode = result.customerCode;
               console.log('FormControllNameL ',this.searchForm.get('fromCustomerId'));
             }
           });
@@ -110,8 +150,8 @@ export class SearchOutputListComponent implements OnInit{
           customerDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('toCustomerId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.toCustomerCode = result.customerCode;
+              this.searchForm.get('toCustomerCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.toCustomerCode = result.customerCode;
             }
           });
         }
@@ -127,8 +167,8 @@ export class SearchOutputListComponent implements OnInit{
           destinationDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('fromDeliverDestId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.fromDestinationCode = result.destinationCode;
+              this.searchForm.get('fromDeliverDestCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.fromDestinationCode = result.destinationCode;
             }
           });
         }
@@ -137,8 +177,8 @@ export class SearchOutputListComponent implements OnInit{
           destinationDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('toDeliverDestId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.toDestinationCode = result.destinationCode;
+              this.searchForm.get('toDeliverDestCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.toDestinationCode = result.destinationCode;
             }
           });
         }
@@ -154,8 +194,8 @@ export class SearchOutputListComponent implements OnInit{
           supplierDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('fromSupplierId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.fromSupplierCode = result.supplierCode;
+              this.searchForm.get('fromSupplierCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.fromSupplierCode = result.supplierCode;
               console.log('FromSupplier result:',result);
             }
           });
@@ -165,8 +205,8 @@ export class SearchOutputListComponent implements OnInit{
           supplierDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('toSupplierId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.toSupplierCode = result.supplierCode;
+              this.searchForm.get('toSupplierCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.toSupplierCode = result.supplierCode;
               console.log('ToSupplier result:',result);
             }
           });
@@ -183,8 +223,8 @@ export class SearchOutputListComponent implements OnInit{
           ownerDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('fromOwnerId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.fromOwnerCode = result.customerCode;
+              this.searchForm.get('fromOwnerCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.fromOwnerCode = result.customerCode;
             }
           });
         }
@@ -193,8 +233,8 @@ export class SearchOutputListComponent implements OnInit{
           ownerDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('toOwnerId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.toOwnerCode = result.customerCode;
+              this.searchForm.get('toOwnerCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.toOwnerCode = result.customerCode;
             }
           });
         }
@@ -211,8 +251,8 @@ export class SearchOutputListComponent implements OnInit{
           productDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('fromProductId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.fromProductCode = result.productCode;
+              this.searchForm.get('fromProductCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.fromProductCode = result.productCode;
               console.log('From Product: ',result);
             }
           });
@@ -222,8 +262,8 @@ export class SearchOutputListComponent implements OnInit{
           productDialog.afterClosed().subscribe(result => {
             if(result !== undefined){
 
-              this.searchForm.get('toProductId')?.setValue(result[data.columReturn]);
-              this.displayFormInput.toProductCode = result.productCode;
+              this.searchForm.get('toProductCode')?.setValue(result[data.columReturn]);
+              // this.displayFormInput.toProductCode = result.productCode;
               console.log('To Product: ',result);
 
             }
@@ -249,4 +289,42 @@ export class SearchOutputListComponent implements OnInit{
     return date.replace(/-/g, '/');
   }
 
-}
+  validationFromToInput(searchForm: AbstractControl) : ValidationErrors | null{
+    const fromOrderDate = searchForm.get('fromOrderDate');
+    const toOrderDate = searchForm.get('toOrderDate');
+    const fromPlanOutputDate = searchForm.get('fromPlanOutputDate');
+    const toPlanOutputDate = searchForm.get('toPlanOutputDate');
+    const fromPlanWokingDate = searchForm.get('fromPlanWokingDate');
+    const toPlanWokingDate = searchForm.get('toPlanWokingDate');
+    const fromPlanDeliveDate = searchForm.get('fromPlanDeliveDate');
+    const toPlanDeliveDate = searchForm.get('toPlanDeliveDate');
+
+    if(ValidatorService.dateValidator(fromOrderDate?.value, toOrderDate?.value)){
+      return {'invalidDateRange' : true};
+    }
+
+    if(ValidatorService.dateValidator(fromPlanOutputDate?.value, toPlanOutputDate?.value)){
+      return {'invalidDateRange' : true};
+    }
+
+    if(ValidatorService.dateValidator(fromPlanWokingDate?.value, toPlanWokingDate?.value)){
+      return {'invalidDateRange' : true};
+    }
+
+    if(ValidatorService.dateValidator(fromPlanDeliveDate?.value, toPlanDeliveDate?.value)){
+      return {'invalidDateRange' : true};
+    }
+    
+    return null;
+  }
+
+  // export const validationFromToInput: ValidatorFn = (
+  //   control: AbstractControl,
+  // ): ValidationErrors | null => {
+  //   const fromOrderDate = control.get('fromOrderDate');
+  //   const toOrderDate = control.get('toOrderDate');
+  //   return (ValidatorService.dateValidator(fromOrderDate?.value, toOrderDate?.value))
+  //     ? { invalidDateRange: true }
+  //     : null;
+  // };
+  }

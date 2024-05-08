@@ -87,8 +87,8 @@
                 </th>
                 <th></th>
             </tr>
-            <div *ngIf="dataTable.length <= 0; else listResult">
-                <span style="display: flex; justify-content: center; width: 100%;">No Data</span>
+            <div class="nodata" *ngIf="dataTable.length <= 0; else listResult">
+                表示するデータがありません。
             </div>
             <ng-template #listResult>
                 <tr class="data_list" *ngFor="let result of dataTable; index as i">
