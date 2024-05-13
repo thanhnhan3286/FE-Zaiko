@@ -32,6 +32,15 @@ export interface HttpClientResponse {
   data: DataSearchModel | any;
   errors: object[];
   meta: MetaModel;
+  
+}
+
+export interface HttpClientResponseR {
+  content: any;
+  pageNumber: number;
+  pageSize: number;
+  totalElements: number;
+  totalPages: number;
 }
 
 export class DataSearchModel implements DataModel {

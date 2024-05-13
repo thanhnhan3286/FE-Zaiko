@@ -1,2 +1,10 @@
-<app-search-output-list (conditionsSearch)="onSearch($event)"></app-search-output-list>
-<app-result-output-list [searchParams]="searchParam"></app-result-output-list>
+<app-header class="app-header" (headerEmitter)=" headerUp($event)"></app-header>
+<div class="content_container">
+<app-search-output-list (conditionsSearch)="onSearch($event)"
+    *ngIf="!isHeaderUp"
+>
+</app-search-output-list>
+
+<app-result-output-list [searchParams]="searchParam">
+</app-result-output-list>
+</div>

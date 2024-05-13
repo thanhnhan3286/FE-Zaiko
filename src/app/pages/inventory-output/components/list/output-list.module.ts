@@ -4,7 +4,7 @@ import { ResultOutputListComponent } from './result-list/result-output-list.comp
 import { OutputListComponent } from './output-list.component';
 import { CommonAppModule } from '@common/common.module';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { LayoutModule } from '../../../../layout/layout.module';
 
 @NgModule({
     declarations: [
@@ -13,8 +13,9 @@ import { BrowserModule } from '@angular/platform-browser';
         ResultOutputListComponent
     ],
     imports: [
-      CommonAppModule.forRoot(),
-      CommonModule
+        CommonAppModule.forRoot(),
+        CommonModule,
+        LayoutModule
     ]
-  })
+})
   export class OutputListModule { }

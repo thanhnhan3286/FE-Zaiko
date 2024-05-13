@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { Component } from '@angular/core';
+import { OutputListSearchModel } from '../../models/output-list.model';
 
 @Component({
     selector: 'app-output-list',
@@ -10,9 +9,14 @@ import { Component } from '@angular/core';
 })
 
 export class OutputListComponent  {
-    searchParam: any;
+    public searchParam!: OutputListSearchModel;
+    public isHeaderUp!: boolean;
     
-    onSearch(param: any){
+    public onSearch(param: OutputListSearchModel){
         this.searchParam = param;
+    }
+
+    public headerUp(key: boolean){
+        this.isHeaderUp = key;
     }
 }

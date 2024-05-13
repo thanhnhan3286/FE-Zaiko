@@ -5,16 +5,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RepositoryModel } from '../../../models/repository.model';
 import { OutputListService } from '../../../services/outputList.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSeachApiComponent } from '@common/components/dialog-seach-api/dialog-search-api.component';
-import { DisplayFormInputModel } from '../../../models/output-list.model';
 import { DialogOptionApi } from '@common/models/dialog-seach-api/dialog-search-api.model';
-import { DialogConfig } from '@common/utils/dialog-config';
+import { dialogConfig } from '@common/utils/dialog-config';
 import { ValidatorService } from '../../../services/validator.service';
+import { OutputListSearchModel } from '../../../models/output-list.model';
 
 @Component({
   selector: 'app-search-output-list',
@@ -23,89 +23,55 @@ import { ValidatorService } from '../../../services/validator.service';
 })
 export class SearchOutputListComponent implements OnInit{
 
-  searchForm: FormGroup;
+  searchForm: FormGroup = new FormGroup({});
   repositories: RepositoryModel[] = [];
-  displayFormInput: DisplayFormInputModel = new DisplayFormInputModel();
-
   @Output() conditionsSearch = new EventEmitter<any>();
 
   public constructor(private fb: FormBuilder, 
       private outPutListService: OutputListService, 
       private dialog: MatDialog
-    ) {
-
-        this.searchForm = this.fb.group({
-          fromOrderDate: '',
-          toOrderDate: '',
-          fromPlanOutputDate: '',
-          toPlanOutputDate: '',
-          fromPlanWokingDate: '',
-          toPlanWokingDate: '',
-          fromPlanDeliveDate: '',
-          toPlanDeliveDate: '',
-          fromSlipNo: '',
-          toSlipNo: '',
-          fromCustomerCode: '',
-          toCustomerCode: '',
-          customerName: '',
-          fromDeliverDestCode: '',
-          toDeliverDestCode: '',
-          dileveDestName: '',
-          fromSupplierCode: '',
-          toSupplierCode: '',
-          supplierName: '',
-          fromOwnerCode: '',
-          toOwnerCode: '',
-          ownerName: '',
-          fromProductCode: '',
-          toProductCode: '',
-          productName: '',
-          fromRepositoryId: '',
-          toRepositoryId: '',
-          batchNumber: '',
-          deliveType: '1',
-          deliveStatus: '1',
-          isClosed: ''
-        }, { validators: this.validationFromToInput });
-      }
+    ) {}
 
   ngOnInit(): void {
     this.getDropdownsRepository();
-    // this.searchForm = this.fb.group({
-    //   fromOrderDate: '',
-    //   toOrderDate: '',
-    //   fromPlanOutputDate: '',
-    //   toPlanOutputDate: '',
-    //   fromPlanWokingDate: '',
-    //   toPlanWokingDate: '',
-    //   fromPlanDeliveDate: '',
-    //   toPlanDeliveDate: '',
-    //   fromSlipNo: '',
-    //   toSlipNo: '',
-    //   fromCustomerCode: '',
-    //   toCustomerCode: '',
-    //   customerName: '',
-    //   fromDeliverDestCode: '',
-    //   toDeliverDestCode: '',
-    //   dileveDestName: '',
-    //   fromSupplierCode: '',
-    //   toSupplierCode: '',
-    //   supplierName: '',
-    //   fromOwnerCode: '',
-    //   toOwnerCode: '',
-    //   ownerName: '',
-    //   fromProductCode: '',
-    //   toProductCode: '',
-    //   productName: '',
-    //   fromRepositoryId: '',
-    //   toRepositoryId: '',
-    //   batchNumber: '',
-    //   deliveType: '1',
-    //   deliveStatus: '1',
-    //   isClosed: ''
-    // }, {Validators: this.validationFromToInput });
+    this.initialForm();
+  }
 
-    // this.searchForm.setValidators(this.validationFromToInput.bind(this));
+  initialForm(){
+    this.searchForm = this.fb.group({
+      fromOrderDate: new FormControl(null),
+      toOrderDate: new FormControl(null),
+      fromPlanOutputDate: new FormControl(null),
+      toPlanOutputDate: new FormControl(null),
+      fromPlanWokingDate: new FormControl(null),
+      toPlanWokingDate: new FormControl(null),
+      fromPlanDeliveDate: new FormControl(null),
+      toPlanDeliveDate: new FormControl(null),
+      fromSlipNo: new FormControl(null),
+      toSlipNo: new FormControl(null),
+      fromCustomerCode: new FormControl(null),
+      toCustomerCode: new FormControl(null),
+      customerName: new FormControl(null),
+      fromDeliverDestCode: new FormControl(null),
+      toDeliverDestCode: new FormControl(null),
+      dileveDestName: new FormControl(null),
+      fromSupplierCode: new FormControl(null),
+      toSupplierCode: new FormControl(null),
+      supplierName: new FormControl(null),
+      fromOwnerCode: new FormControl(null),
+      toOwnerCode: new FormControl(null),
+      ownerName: new FormControl(null),
+      fromProductCode: new FormControl(null),
+      toProductCode: new FormControl(null),
+      productName: new FormControl(null),
+      fromRepositoryId: new FormControl(null),
+      toRepositoryId: new FormControl(null),
+      batchNumber: new FormControl(null),
+      deliveType: new FormControl('1'),
+      deliveStatus: new FormControl('1'),
+      isClosed: new FormControl(''),
+      page: new FormControl(0)
+    });
   }
 
   getConditionsSearch(){
@@ -117,7 +83,7 @@ export class SearchOutputListComponent implements OnInit{
       }
     });
 
-    this.conditionsSearch.emit(conditions);
+    this.conditionsSearch.emit(conditions as OutputListSearchModel);
   }
 
   getDropdownsRepository(){
@@ -127,149 +93,42 @@ export class SearchOutputListComponent implements OnInit{
   }
 
   openDialog(key: string): void{
-    let data: DialogOptionApi;
+    let data: DialogOptionApi = new DialogOptionApi();
 
-    switch (true) {
-      case key.includes('customerCode') :
-        data = DialogConfig.customer;
-        const customerDialog = this.dialog.open(DialogSeachApiComponent, { data });
+    switch (key) {
+      case 'fromCustomerCode':
 
-        if(key.includes('From')){
+      case 'toCustomerCode':
+        data = dialogConfig.customer;
 
-          customerDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
+      break;
 
-              this.searchForm.get('fromCustomerCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.fromCustomerCode = result.customerCode;
-              console.log('FormControllNameL ',this.searchForm.get('fromCustomerId'));
-            }
-          });
-        }
-        else{
+      case 'fromDeliverDestCode' :
 
-          customerDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('toCustomerCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.toCustomerCode = result.customerCode;
-            }
-          });
-        }
+      case 'toDeliverDestCode' :
+        data = dialogConfig.deliveryDestination;
 
         break;
 
-      case key.includes('destinationCode') :
-        data = DialogConfig.deliveryDestination;
-        const destinationDialog = this.dialog.open(DialogSeachApiComponent, { data });
+      case 'fromSupplierCode' :
 
-        if(key.includes('From')){
+      case 'toSupplierCode' :
+        data = dialogConfig.supplier;
+        
+        break;
 
-          destinationDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
+      case 'fromOwnerCode' :
 
-              this.searchForm.get('fromDeliverDestCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.fromDestinationCode = result.destinationCode;
-            }
-          });
-        }
-        else{
-
-          destinationDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('toDeliverDestCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.toDestinationCode = result.destinationCode;
-            }
-          });
-        }
+      case 'toOwnerCode' :
+        data = dialogConfig.owner;
 
         break;
 
-      case key.includes('supplierCode') :
-        data = DialogConfig.supplier;
-        const supplierDialog = this.dialog.open(DialogSeachApiComponent, { data });
+      case 'fromProductCode' :
 
-        if(key.includes('From')){
-
-          supplierDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('fromSupplierCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.fromSupplierCode = result.supplierCode;
-              console.log('FromSupplier result:',result);
-            }
-          });
-        }
-        else{
-
-          supplierDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('toSupplierCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.toSupplierCode = result.supplierCode;
-              console.log('ToSupplier result:',result);
-            }
-          });
-        }
-
-        break;
-
-      case key.includes('ownerCode') :
-        data = DialogConfig.owner;
-        const ownerDialog = this.dialog.open(DialogSeachApiComponent, { data });
-
-        if(key.includes('From')){
-
-          ownerDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('fromOwnerCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.fromOwnerCode = result.customerCode;
-            }
-          });
-        }
-        else{
-
-          ownerDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('toOwnerCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.toOwnerCode = result.customerCode;
-            }
-          });
-        }
-
-
-        break;
-
-      case key.includes('productCode') :
-        data = DialogConfig.product;
-        const productDialog = this.dialog.open(DialogSeachApiComponent, { data });
-
-        if(key.includes('From')){
-
-          productDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('fromProductCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.fromProductCode = result.productCode;
-              console.log('From Product: ',result);
-            }
-          });
-        }
-        else{
-
-          productDialog.afterClosed().subscribe(result => {
-            if(result !== undefined){
-
-              this.searchForm.get('toProductCode')?.setValue(result[data.columReturn]);
-              // this.displayFormInput.toProductCode = result.productCode;
-              console.log('To Product: ',result);
-
-            }
-          });
-        }
-
+      case 'toProductCode' :
+        data = dialogConfig.product;
+        
         break;
 
         default:
@@ -278,7 +137,20 @@ export class SearchOutputListComponent implements OnInit{
           return;
     }
 
+        const dialogRef = this.dialog.open(DialogSeachApiComponent, { data });
 
+        dialogRef.afterClosed().subscribe(result => {
+            if(result !== undefined){
+
+              this.searchForm.get(key)?.setValue(result[data.columReturn]);
+              console.log('FormControllNameL ',this.searchForm.get(key));
+            }
+          });
+  }
+
+  resetForm(){
+    this.initialForm();
+    this.getConditionsSearch();
   }
 
   formatDate(date: string): string{

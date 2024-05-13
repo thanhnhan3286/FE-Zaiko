@@ -3,7 +3,7 @@
     border-radius: 2px;
     border: 0.5px solid #9F9F9F;
     padding: 10px;
-    height: 350px;
+    height: 660px;
 }
 
 .list_content-header {
@@ -35,7 +35,7 @@
 .list_content-main {
     overflow: auto;
     white-space: nowrap;
-    height: 75%;
+    height: 85%;
 }
 
 .list_content-main-title {
@@ -55,40 +55,109 @@
     height: 60px;
 }
 
+tr:nth-child(1) > th:nth-child(1), 
+td:nth-child(1){
+    position: sticky;
+    left: 0;
+    background-color: #EAF4FF;
+}
+tr:nth-child(1) > th:nth-child(2),
+td:nth-child(2){
+    position: sticky;
+    left: 61px;
+    background-color: #EAF4FF;
+}
+tr:nth-child(1) > th:nth-child(3),
+td:nth-child(3){
+    position: sticky;
+    left: 103px;
+    background-color: #EAF4FF;
+}
+tr:nth-child(1) > th:nth-child(4),
+td:nth-child(4){
+    position: sticky;
+    left: 200px;
+    background-color: #EAF4FF;
+}
+tr:nth-child(1) > th:nth-child(5),
+td:nth-child(5){
+    position: sticky;
+    left: 297px;
+    background-color: #EAF4FF;
+}
+tr:nth-child(1) > th:nth-child(6),
+td:nth-child(6){
+ position: sticky;
+ left: 390px;
+ background-color: #EAF4FF;
+}
+
+tr:nth-child(1) > th:nth-child(17),
+tr:nth-child(2) > th:nth-child(11){
+    position: sticky;
+    right: 0;
+    background-color: #EAF4FF;
+}
+
 .btn-block{
     position: sticky;
     right: 0;
     z-index: 100;
+    background-color: white;
+    padding: 15px;
+}
+
+.btn-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-schedule, .button-achievement, .button-edit {
-    margin: 2px;
-    width: 100%;
+    align-self: center;
+    margin: 0 2px;
     color: #fff;
     border-radius: 3px;
-    text-align: center;
     cursor: pointer;
 }
+.disable-achievement,
+.disable-schedule,
+.disable-edit{
+    align-self: center;
+    margin: 0 2px;
+    border-radius: 3px;
+    color: #c0c0c0;
+    padding: 10px 20px;
+    // background-color:  #cccccc;
+    cursor: not-allowed;
+ }
 
-.button-achievement, .button-edit, .button-schedule, .btton-showmore {
+.button-achievement, 
+.button-edit, 
+.button-schedule, 
+.btton-showmore {
     padding: 10px 20px;
 }
 
-.button-schedule {
+.button-schedule,
+.disable-schedule {
     background-color: #00AEC8;
 }
 
-.button-achievement {
+.button-achievement,
+.disable-achievement {
     background-color: #00B5AD;
 }
 
-.button-edit {
+.button-edit,
+.disable-edit {
     background-color: #6B77B6;
 }
 
 .table_list {
     border-collapse: collapse;
     font-size: 14px;
+    width: 100%;
 }
 
 .title_list {
@@ -203,4 +272,6 @@ td:first-child {
     display: flex; 
     justify-content: center; 
     width: 100%;
+    font-size: xx-large;
+    background-color: #EAF4FF;
 }

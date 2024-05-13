@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClientResponse } from '@core/models/http-response.model';
+import { HttpClientResponse, HttpClientResponseR } from '@core/models/http-response.model';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 

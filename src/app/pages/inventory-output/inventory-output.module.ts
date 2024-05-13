@@ -9,9 +9,7 @@ import { LayoutModule } from '@layout/layout.module';
 @NgModule({
     declarations: [
       InventoryOutputComponent
-      // OutputListComponent,
-      // SearchOutputListComponent,
-      // ResultOutputListComponent
+      
     ],
     imports: [
       LayoutModule,

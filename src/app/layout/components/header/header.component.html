@@ -1,4 +1,4 @@
-<div class="header">
+<!-- <div class="header">
   <div class="flex-center">
     <mat-icon svgIcon="iconLogomenu"></mat-icon>
     <span>出庫</span>
@@ -6,13 +6,13 @@
   </div>
   <div class="menu-center"></div>
 
-  <!-- <div class="menu-user">
-    <a nz-dropdown [nzDropdownMenu]="menu">
-      <span class="username">{{userName}}</span>
-      <mat-icon svgIcon="iconUser"></mat-icon>
-    </a>
-  </div> -->
-</div>
+</div> -->
+<!-- <div class="menu-user">
+  <a nz-dropdown [nzDropdownMenu]="menu">
+    <span class="username">{{userName}}</span>
+    <mat-icon svgIcon="iconUser"></mat-icon>
+  </a>
+</div> -->
 
 
 
@@ -31,3 +31,25 @@
     </li>
   </ul>
 </nz-dropdown-menu> -->
+
+<div class="header">
+  <div class="frame_356">
+      <div class="title_screen">
+          <span class="header_title">出庫</span>
+          <div class="middle_screen">
+            <mat-icon class="header_icon" svgIcon="icon-right"></mat-icon>
+              <!-- <i class="fa-solid fa-angle-right header_icon"></i> -->
+              <span class="header_title header_title_name">出庫一覧</span>
+          </div>
+      </div>
+  </div>
+  <div class="right">
+      <div class="right_1">
+          <span class="right_title">業務日付</span>
+          <span class="right_datetime">2022/04/14</span>
+      </div>
+      <span class="header_button" (click)="headerUp()">
+        <img src="../../../../assets/images/icon/angle-up.svg">
+      </span>
+  </div>
+</div>

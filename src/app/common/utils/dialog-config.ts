@@ -1,6 +1,6 @@
 import { ApiPath } from '@core/config';
 
-export const DialogConfig = {
+export const dialogConfig = {
     customer: {
         title: '顧客との対話',
           url: ApiPath.CUSTOMER,

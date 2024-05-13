@@ -1,45 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { HttpClientResponse } from '@core/models';
 
 
-export interface OutputSearchModelRequest{
-    f_orderDate: string;
-    t_orderDate: string;
-    f_planOutputDate: string;
-    t_planOutputDate: string;
-    f_planWorkingDate: string;
-    t_planWorkingDate: string;
-    f_planDeliverDate: string;
-    t_planDeliverDate: string;
-    f_slipNo: string;
-    t_slipNo: string;
-    f_customerId: number;
-    t_customerId: number;
-    customerName: string;
-    f_deliverDestId: number;
-    t_deliverDestId: number;
-    deliveryDestName: string;
-    f_supplierId: number;
-    t_supplierId: number;
-    supplierName: string;
-    f_productId: number;
-    t_productId: number;
-    productName: string;
-    f_repositoryId: string;
-    t_repositoryId: string;
-    batchNo: string;
-    deliveryType: number;
-    deliveryStatus: string;
-    is_closed: string;
-}
-
-export interface HttpClientOutputListResponse extends HttpClientResponse {
-    data: OutputListModel;
-}
-
 export interface OutputListModel{
+    [key: string] : any;
     inventoryOutputId: number;
     isClosed: string;
     outputStatus: string;
@@ -69,21 +36,62 @@ export interface OutputListModel{
     actualSupplierSlipNo: string;
     sumPlanQuantity: string;
     sumActualQuantity: string;
+
+
 }
 
-export class DisplayFormInputModel{
-    fromCustomerCode: string = '';
-    toCustomerCode: string = '';
-
-    fromDestinationCode: string = '';
-    toDestinationCode: string = '';
-
-    fromSupplierCode: string = '';
-    toSupplierCode: string = '';
-
-    fromOwnerCode: string = '';
-    toOwnerCode: string = '';
-
-    fromProductCode: string = '';
-    toProductCode: string = '';
+export interface HttpClientOutputListResponse extends HttpClientResponse {
+    data: OutputListModel[];
 }
+
+export interface OutputListSearchModel{
+        fromOrderDate: string;
+        toOrderDate: string;
+        fromPlanOutputDate: string;
+        toPlanOutputDate: string;
+        fromPlanWokingDate: string;
+        toPlanWokingDate: string;
+        fromPlanDeliveDate: string;
+        toPlanDeliveDate: string;
+        fromSlipNo: string;
+        toSlipNo: string;
+        fromCustomerCode: string;
+        toCustomerCode: string;
+        customerName: string;
+        fromDeliverDestCode: string;
+        toDeliverDestCode: string;
+        dileveDestName: string;
+        fromSupplierCode: string;
+        toSupplierCode: string;
+        supplierName: string;
+        fromOwnerCode: string;
+        toOwnerCode: string;
+        ownerName: string;
+        fromProductCode: string;
+        toProductCode: string;
+        productName: string;
+        fromRepositoryId: string;
+        toRepositoryId: string;
+        batchNumber: string;
+        deliveType: string;
+        deliveStatus: string;
+        isClosed: string;
+        page:number
+}
+
+// export class DisplayFormInputModel{
+//     fromCustomerCode: string = '';
+//     toCustomerCode: string = '';
+
+//     fromDestinationCode: string = '';
+//     toDestinationCode: string = '';
+
+//     fromSupplierCode: string = '';
+//     toSupplierCode: string = '';
+
+//     fromOwnerCode: string = '';
+//     toOwnerCode: string = '';
+
+//     fromProductCode: string = '';
+//     toProductCode: string = '';
+// }

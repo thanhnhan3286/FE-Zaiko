@@ -60,7 +60,7 @@
 
                 <div class="input_icon">
                     <span class="block_icon_search" >
-                        <mat-icon class="icon_search" (click)="openDialog('customerCodeFrom')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('fromCustomerCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" 
                         formControlName="fromCustomerCode" value="{{ searchForm.get('fromCustomerCode')?.value }}">
@@ -69,7 +69,7 @@
                 <span>~</span>
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('customerCodeTo')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('toCustomerCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" 
                         formControlName="toCustomerCode" value="{{ searchForm.get('toCustomerCode')?.value }}">
@@ -90,7 +90,7 @@
             <div class="form-input">
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('destinationCodeFrom')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('fromDeliverDestCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="fromDeliverDestId"
                         formControlName="fromDeliverDestCode" value="{{ searchForm.get('fromDeliverDestCode')?.value }}">
@@ -98,7 +98,7 @@
                 <span>~</span>
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('destinationCodeTo')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('toDeliverDestCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="toDeliverDestId"
                         formControlName="toDeliverDestCode" value="{{ searchForm.get('toDeliverDestCode')?.value }}">
@@ -120,7 +120,7 @@
             <div class="form-input">
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('supplierCodeFrom')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('fromSupplierCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="fromSupplierId" 
                         formControlName="fromSupplierCode" value="{{ searchForm.get('fromSupplierCode')?.value }}">
@@ -128,7 +128,7 @@
                 <span>~</span>
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('supplierCodeTo')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('toSupplierCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="toSupplierId" 
                         formControlName="toSupplierCode" value="{{ searchForm.get('toSupplierCode')?.value }}">
@@ -150,7 +150,7 @@
                 
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('ownerCodeFrom')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('fromOwnerCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="fromOwnerCode" 
                         formControlName="fromOwnerCode" value="{{ searchForm.get('fromOwnerCode')?.value }}">
@@ -159,7 +159,7 @@
                 <div class="input_icon">
 
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('ownerCodeTo')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('toOwnerCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="toOwnerCode" 
                         formControlName="toOwnerCode" value="{{ searchForm.get('toOwnerCode')?.value }}">
@@ -183,7 +183,7 @@
 
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('productCodeFrom')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('fromProductCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="fromProductCode" 
                         formControlName="fromProductCode" value="{{ searchForm.get('fromProductCode')?.value }}">
@@ -191,7 +191,7 @@
                 <span>~</span>
                 <div class="input_icon">
                     <span class="block_icon_search">
-                        <mat-icon class="icon_search" (click)="openDialog('productCodeTo')" svgIcon="icon-search-input"></mat-icon>
+                        <mat-icon class="icon_search" (click)="openDialog('toProductCode')" svgIcon="icon-search-input"></mat-icon>
                     </span>
                     <input type="text" class="input_text text" name="toProductCode" 
                         formControlName="toProductCode" value="{{ searchForm.get('toProductCode')?.value }}">
@@ -325,7 +325,7 @@
         </div>
 
         <div class="btn-from btn-reset">
-            <input type="reset" value="クリア">
+            <input type="reset" (click)="resetForm()" value="クリア">
         </div>
     </div>
 

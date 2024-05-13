@@ -19,16 +19,13 @@ export class OutputListService extends HttpService{
         super(http);
       }
 
-    public searchOutputListByCondition(formData: any, page: any): 
+    public searchOutputListByCondition(formData: any): 
         Observable<HttpClientOutputListResponse | HttpErrorResponse>{
         
             let params = new HttpParams();
-            // const data = JSON.parse(formData);
-
-            if(page === 0 || page){
-                params = params.set('page', page);
-            }
-
+            // if(page === 0 || page){
+            //     params = params.set('page', page);
+            // }
 
             Object.keys(formData).forEach(key =>{
                 if(formData[key]){
@@ -38,9 +35,11 @@ export class OutputListService extends HttpService{
 
         console.log('queryString ',params);
 
+     
         return this.getWithParams(ApiPath.INVENTORY_OUTPUT, params).pipe(
-            map((response: HttpClientOutputListResponse) => response)
+            map((response: HttpClientOutputListResponse) => response )         
         ) as Observable<HttpClientOutputListResponse | HttpErrorResponse>;
+        
 
     }
 
