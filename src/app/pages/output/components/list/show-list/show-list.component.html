@@ -10,7 +10,7 @@
       <span>件</span>
     </div>
   </div>
-  <div class="data-table" [class]="dataResult.length < 21 ? 'height-table-200' : 'height-table-full'">
+  <div class="data-table" [class]="!isHiddenSearch ? 'height-table-250' : 'height-table-full'">
     <table *ngIf="dataResult.length > 0">
       <thead class="title-table">
         <tr>
@@ -68,9 +68,7 @@
             <div>予定数量合計</div>
             <div>実績数量合計</div>
           </th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th colSpan="3"></th>
         </tr>
       </thead>
       <tbody>
@@ -112,10 +110,11 @@
             <div>{{item.orderDate ? item.orderDate : '-'}}</div>
           </td>
           <td>
-            <div class = "batch-status" *ngIf="item.batchStatus === '0'"> 未処理 </div>
-            <div class = "batch-status" *ngIf="item.batchStatus === '1'"> 処理中 </div>
+            <div class = "batch-status" [innerHTML]="statusBatch(item.batchStatus)"></div>
+            <!-- <div class = "batch-status"> {{statusBatch(item.batchStatus)}} </div> -->
+            <!-- <div class = "batch-status" *ngIf="item.batchStatus === '1'"> 処理中 </div>
             <div class = "batch-status" *ngIf="item.batchStatus === '2'"> 処理済み </div>
-            <div class = "batch-status" *ngIf="item.batchStatus === '3'"> 処理中<br />未あり </div>
+            <div class = "batch-status" *ngIf="item.batchStatus === '3'"> 処理中<br />未あり </div> -->
           </td>
           <td>
             <div>{{item.planOutputDate ? item.planOutputDate : '-'}}</div>
@@ -166,7 +165,7 @@
             <div>{{ item.sumActualQuantity?item.sumActualQuantity:0 }}</div>
           </td>
           <td>
-            <button class="btn-action btn-plan">予定</button>
+            <button class="btn-action btn-plan" > <a class="navigate-page" [routerLink]="['plan',item.inventoryOutputId]">予定</a></button>
           </td>
           <td>
             <button class="btn-action btn-actual">実績</button>

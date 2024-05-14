@@ -1,0 +1,126 @@
+.container {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    border: 0.5px solid #4392bb;
+    background-color: #f9fcff;
+    margin-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.info-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 46px;
+    
+}
+
+.left-title {
+
+}
+
+.icon-angle-left {
+    width: 9px;
+    height: 21px;
+}
+
+.right-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.receipt-status {
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: #EFEDFF;
+
+}
+
+
+
+.delete-icon {
+    width: 21px !important;
+    height: 21px ;
+}
+
+.btn{
+    width: 91px;
+    height: 35px;
+    font-size: 13px;
+    transition: background-color .2s;
+    font-family: 'Noto Sans JP';
+    font-weight: 500;
+    outline: none;
+    border: 1px solid;
+    border-radius: 3px;
+  }
+  
+  .btn mat-icon{
+    // width: 21px;
+    // height: 21px;
+    line-height: 0;
+    margin-right: 10px;
+    transform: translateY(-1px);
+    
+  }
+  .save-icon {
+    width: 13px !important;
+}
+
+.btn.btn-primary{
+    background-color: #4392BB;
+    color: white;
+    border-color:  #D6D6D6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  
+  }
+  .btn.btn-primary:hover{
+    background-color: #29759C;
+  }
+  
+  .btn.btn-secondary{
+    background-color: white;
+    border-color:  #D6D6D6;
+    color: #4392BB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .isClosed {
+    color: #EF4949 !important;
+  }
+
+  .btn.btn-secondary:hover{
+    background-color: white;
+    border: 1px solid #4392BB;
+
+  }
+  
+  .btn.btn-warning{
+    background: #EB5757;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn.btn-warning:hover{
+    background: #CA1C1C;
+  }
+
+  .info-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(145px, 1fr));
+    column-gap: 12px;
+  }
+
+  

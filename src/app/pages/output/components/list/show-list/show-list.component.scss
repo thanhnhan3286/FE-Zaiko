@@ -8,6 +8,7 @@
   padding-right: 10px;
   margin-top: 7px;
   .list-frame {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding-top: 7px;
@@ -28,10 +29,14 @@
     }
   }
   table {
+    width: 100%;
     width: auto;
+    border-spacing: 0px;
+    border-collapse: separate;
   }
 
-  td, th {
+  td,
+  th {
     padding: 0px 7px;
   }
   .data-table {
@@ -39,7 +44,7 @@
     letter-spacing: 0.014em;
     width: 100%;
     overflow: auto;
-    white-space: nowrap; 
+    white-space: nowrap;
     .title-table {
       border-bottom: 1px solid #d6d6d6;
       border-color: #d6d6d6;
@@ -82,6 +87,10 @@
       }
     }
   }
+  button {
+    outline: none;
+    cursor: pointer;
+  }
   .btn-action {
     width: 56px;
     height: 30px;
@@ -96,6 +105,11 @@
   }
   .btn-plan {
     background-color: #00aec8;
+  }
+  .btn-plan:hover,
+  .btn-actual:hover,
+  .btn-correction:hover {
+    opacity: 0.7;
   }
   .btn-actual {
     background-color: #00b5ad;
@@ -153,15 +167,15 @@
   border-radius: 4px;
   color: #ebb71c;
   padding: 4px;
+  text-align: center;
 }
-.height-table-200 {
-  max-height: 240px;
+.height-table-250 {
+  max-height: 250px;
 }
 
 .height-table-full {
-  max-height: 700px;
+  max-height: 600px;
 }
-
 
 ::-webkit-scrollbar-track {
   background-color: #f9f9f9;
@@ -174,7 +188,7 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: #4392BB;
+  background-color: #4392bb;
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
@@ -184,36 +198,32 @@
 }
 
 .td-not-yet-color {
-  background-color: #EFEDFF;
-  border-color: #7D63CC;
-  color: #7D63CC;
+  background-color: #efedff;
+  border-color: #7d63cc;
+  color: #7d63cc;
 }
 
 .td-remain-color {
-  background-color: #FFFAE5;
-  border-color: #EBB71C;
-  color: #EBB71C;
+  background-color: #fffae5;
+  border-color: #ebb71c;
+  color: #ebb71c;
 }
 
 .td-done-color {
-  background-color: #EDF6FF;
+  background-color: #edf6ff;
 }
 
 tbody tr td:nth-last-child(1) {
   position: sticky;
   right: 0;
   background-color: $background-default;
-
 }
-
-
 
 tbody tr td:nth-last-child(2) {
   position: sticky;
   right: 70px;
   background-color: $background-default;
 }
-
 
 tbody tr td:nth-last-child(3) {
   position: sticky;
@@ -224,93 +234,92 @@ tbody tr td:nth-last-child(3) {
 thead tr th:nth-last-child(1) {
   position: sticky;
   right: 0;
-  background-color: #EAF4FF;
-
+  background-color: #eaf4ff;
 }
 
-thead tr th:nth-last-child(2) {
-  position: sticky;
-  right: 70px;
-  background-color: #EAF4FF;
-}
+// thead tr th:nth-last-child(2) {
+//   position: sticky;
+//   right: 70px;
+//   background-color: #EAF4FF;
+// }
 
-thead tr th:nth-last-child(3) {
-  position: sticky;
-  right: 140px;
-  background-color: #EAF4FF;
-}
+// thead tr th:nth-last-child(3) {
+//   position: sticky;
+//   right: 140px;
+//   background-color: #EAF4FF;
+// }
 
 thead tr th:nth-child(1) {
   position: sticky;
-  left : 0;
-  background-color: #EAF4FF;
-
+  left: 0;
+  background-color: #eaf4ff;
 }
 
 thead tr th:nth-child(2) {
   position: sticky;
-  left: 38.4px;
-  background-color: #EAF4FF;
+  left: 42.5px;
+  background-color: #eaf4ff;
 }
 
 thead tr th:nth-child(3) {
   position: sticky;
-  left: 71.5px;
-  background-color: #EAF4FF;
+  left: 76.21px;
+  background-color: #eaf4ff;
 }
 
 thead tr th:nth-child(4) {
   position: sticky;
-  left: 163.2px;
-  background-color: #EAF4FF;
+  left: 169.87px;
+  background-color: #eaf4ff;
 }
 
 thead tr th:nth-child(5) {
   position: sticky;
-  left: 237.2px;
-  background-color: #EAF4FF;
+  left: 248.66px;
+  background-color: #eaf4ff;
 }
 
 thead tr th:nth-child(6) {
   position: sticky;
-  left: 324.3px;
-  background-color: #EAF4FF;
+  left: 337.76px;
+  background-color: #eaf4ff;
 }
-
 
 tbody tr td:nth-child(1) {
   position: sticky;
-  left:  0;
+  left: 0;
   // background-color: $background-default;
 }
 
-
-
 tbody tr td:nth-child(2) {
   position: sticky;
-  left: 38.4px;
+  left: 42.5px;
   background-color: $background-default;
 }
 
-
 tbody tr td:nth-child(3) {
   position: sticky;
-  left: 71.5px;
+  left: 76.21px;
   background-color: $background-default;
 }
 
 tbody tr td:nth-child(4) {
   position: sticky;
-  left: 163.2px;
+  left: 169.87px;
   background-color: $background-default;
 }
 tbody tr td:nth-child(5) {
   position: sticky;
-  left: 237.2px;
+  left: 248.66px;
   background-color: $background-default;
 }
 tbody tr td:nth-child(6) {
   position: sticky;
-  left: 324.3px;
+  left: 337.76px;
   background-color: $background-default;
+}
+
+.navigate-page {
+  text-decoration: none;
+  color: #ffffff;
 }

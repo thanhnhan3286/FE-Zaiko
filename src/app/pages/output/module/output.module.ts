@@ -9,7 +9,7 @@ import { CommonAppModule } from "../../../common/common.module";
 import { SearchListComponent } from '../components/list/search/search-list.component';
 import { ShowListComponent } from '../components/list/show-list/show-list.component';
 import { TitleComponent } from '../components/list/title/title.component';
-import { LayoutModule } from '@layout/layout.module';
+
 
 
 @NgModule({

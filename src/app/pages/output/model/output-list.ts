@@ -46,8 +46,8 @@ export interface SearchCriteriaModel {
   customerIdFrom: number;
   customerIdTo: number;
   customerName: string;
-  destinationIdFrom: number;
-  destinationIdTo: number;
+  destinationCodeFrom: number;
+  destinationCodeTo: number;
   departmentName: string;
   supplierIdFrom: number;
   supplierIdTo: number;

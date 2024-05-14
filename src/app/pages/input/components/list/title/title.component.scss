@@ -10,6 +10,9 @@
   border-radius: 2px;
   background-color: #fcfcfc;
   margin-top: 5px;
+  position: fixed;
+  z-index: 1020;
+
   .breadcrumb {
     width: 129px;
     height: 24px;

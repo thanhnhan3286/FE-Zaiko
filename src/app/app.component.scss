@@ -3,7 +3,7 @@ $width-nav-bar: 70px;
 
 .main {
   display: flex;
-  // overflow: hidden;
+  overflow: hidden;
   width: 100%;
   // height: 100%;
   background-color: $backGroundMain;
@@ -273,3 +273,4 @@ nz-content {
   background-color: #f2f2f2;
   border: 1px solid #D6D6D6;
 }
+

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [hidden]="isHiddenSearch">
   <form [formGroup]="searchOutputForm" (ngSubmit)="onSubmit()" novalidate>
     <!-- Input Row 1 -->
     <div class="input-cover">
@@ -18,6 +18,7 @@
               formControlName="orderDateFrom"
             />
             <span class="icon-from-to">~</span>
+
             <input
               class="input-from-to"
               type="date"
@@ -25,6 +26,21 @@
               name="orderDateTo"
               formControlName="orderDateTo"
             />
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !orderDateFrom?.valid &&
+              (orderDateFrom?.dirty || orderDateFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!orderDateFrom?.errors?.['dateInvalidFrom'] && !orderDateTo?.errors?.['dateInvalidTo'] "
+            >
+              <small class="error-message">
+                The end date must be after the start date</small
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -52,6 +68,21 @@
               formControlName="planOutputDateTo"
             />
           </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !planOutputDateFrom?.valid &&
+              (planOutputDateFrom?.dirty || planOutputDateFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!planOutputDateFrom?.errors?.['dateInvalidFrom'] && !planOutputDateTo?.errors?.['dateInvalidTo'] "
+            >
+              <small class="error-message">
+                End date must after before date</small
+              >
+            </div>
+          </div>
         </div>
       </div>
       <!-- Input wrapper 3 -->
@@ -78,6 +109,21 @@
               formControlName="planWorkingDayTo"
             />
           </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !planWorkingDayFrom?.valid &&
+              (planWorkingDayFrom?.dirty || planWorkingDayFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!planWorkingDayFrom?.errors?.['dateInvalidFrom'] && !planWorkingDayTo?.errors?.['dateInvalidTo'] "
+            >
+              <small class="error-message">
+                The end date must be after the start date</small
+              >
+            </div>
+          </div>
         </div>
       </div>
       <!-- Input wrapper 4 -->
@@ -103,6 +149,21 @@
               name="planDeliverDateTo"
               formControlName="planDeliverDateTo"
             />
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !planDeliverDateFrom?.valid &&
+              (planDeliverDateFrom?.dirty || planDeliverDateFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!planDeliverDateFrom?.errors?.['dateInvalidFrom'] && !planDeliverDateTo?.errors?.['dateInvalidTo'] "
+            >
+              <small class="error-message">
+                The end date must be after the start date</small
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -133,6 +194,20 @@
               formControlName="slipNoTo"
             />
           </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !slipNoFrom?.valid && (slipNoFrom?.dirty || slipNoFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!slipNoFrom?.errors?.['valueInvalidFrom'] && !slipNoTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Slip No must be greater than the start Slip No</small
+              >
+            </div>
+          </div>
         </div>
       </div>
       <div class="input-wrapper">
@@ -156,19 +231,19 @@
         <!-- Customer ID Input -->
         <div>
           <div class="input-label">
-            <label for="customerIdFrom">出荷先コード</label>
+            <label for="customerCodeFrom">出荷先コード</label>
           </div>
           <div class="input-date">
             <div class="input-dialog">
               <input
                 class="input-from-to"
                 type="text"
-                id="customerIdFrom"
-                name="customerIdFrom"
-                formControlName="customerIdFrom"
+                id="customerCodeFrom"
+                name="customerCodeFrom"
+                formControlName="customerCodeFrom"
               />
               <mat-icon
-                (click)="openSearchDialog('customerIdFrom')"
+                (click)="openSearchDialog('customerCodeFrom')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
@@ -179,15 +254,30 @@
               <input
                 class="input-from-to"
                 type="text"
-                id="customerIdTo"
-                name="customerIdTo"
-                formControlName="customerIdTo"
+                id="customerCodeTo"
+                name="customerCodeTo"
+                formControlName="customerCodeTo"
               />
               <mat-icon
-                (click)="openSearchDialog('customerIdTo')"
+                (click)="openSearchDialog('customerCodeTo')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
+            </div>
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !customerCodeFrom?.valid &&
+              (customerCodeFrom?.dirty || customerCodeFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!customerCodeFrom?.errors?.['valueInvalidFrom'] && !customerCodeTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Code must be greater than the start Code</small
+              >
             </div>
           </div>
         </div>
@@ -218,19 +308,19 @@
         <!-- Destination Id Input -->
         <div>
           <div class="input-label">
-            <label for="destinationIdFrom">納品先コード</label>
+            <label for="destinationCodeFrom">納品先コード</label>
           </div>
           <div class="input-date">
             <div class="input-dialog">
               <input
                 class="input-from-to"
                 type="text"
-                id="destinationIdFrom"
-                name="destinationIdFrom"
-                formControlName="destinationIdFrom"
+                id="destinationCodeFrom"
+                name="destinationCodeFrom"
+                formControlName="destinationCodeFrom"
               />
               <mat-icon
-                (click)="openSearchDialog('destinationIdFrom')"
+                (click)="openSearchDialog('destinationCodeFrom')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
@@ -241,15 +331,30 @@
               <input
                 class="input-from-to"
                 type="text"
-                id="destinationIdTo"
-                name="destinationIdTo"
-                formControlName="destinationIdTo"
+                id="destinationCodeTo"
+                name="destinationCodeTo"
+                formControlName="destinationCodeTo"
               />
               <mat-icon
-                (click)="openSearchDialog('destinationIdTo')"
+                (click)="openSearchDialog('destinationCodeTo')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
+            </div>
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !destinationCodeFrom?.valid &&
+              (destinationCodeFrom?.dirty || destinationCodeFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!destinationCodeFrom?.errors?.['valueInvalidFrom'] && !destinationCodeTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Code must be greater than the start Code</small
+              >
             </div>
           </div>
         </div>
@@ -275,19 +380,19 @@
         <!-- Supplier ID Input -->
         <div>
           <div class="input-label">
-            <label for="supplierIdFrom">仕入先コード</label>
+            <label for="supplierCodeFrom">仕入先コード</label>
           </div>
           <div class="input-date">
             <div class="input-dialog">
               <input
                 class="input-from-to"
                 type="text"
-                id="supplierIdFrom"
-                name="supplierIdFrom"
-                formControlName="supplierIdFrom"
+                id="supplierCodeFrom"
+                name="supplierCodeFrom"
+                formControlName="supplierCodeFrom"
               />
               <mat-icon
-                (click)="openSearchDialog('supplierIdFrom')"
+                (click)="openSearchDialog('supplierCodeFrom')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
@@ -298,15 +403,30 @@
               <input
                 class="input-from-to"
                 type="text"
-                id="supplierIdTo"
-                name="supplierIdTo"
-                formControlName="supplierIdTo"
+                id="supplierCodeTo"
+                name="supplierCodeTo"
+                formControlName="supplierCodeTo"
               />
               <mat-icon
-                (click)="openSearchDialog('supplierIdTo')"
+                (click)="openSearchDialog('supplierCodeTo')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
+            </div>
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !supplierCodeFrom?.valid &&
+              (supplierCodeFrom?.dirty || supplierCodeFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!supplierCodeFrom?.errors?.['valueInvalidFrom'] && !supplierCodeTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Code must be greater than the start Code</small
+              >
             </div>
           </div>
         </div>
@@ -370,6 +490,21 @@
               ></mat-icon>
             </div>
           </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !ownerIdFrom?.valid &&
+              (ownerIdFrom?.dirty || ownerIdFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!ownerIdFrom?.errors?.['valueInvalidFrom'] && !ownerIdTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Code must be greater than the start Code</small
+              >
+            </div>
+          </div>
         </div>
       </div>
       <div class="input-wrapper">
@@ -393,19 +528,19 @@
         <!-- Product ID Input -->
         <div>
           <div class="input-label">
-            <label for="productIdFrom">商品コード</label>
+            <label for="productCodeFrom">商品コード</label>
           </div>
           <div class="input-date">
             <div class="input-dialog">
               <input
                 class="input-from-to"
                 type="text"
-                id="productIdFrom"
-                name="productIdFrom"
-                formControlName="productIdFrom"
+                id="productCodeFrom"
+                name="productCodeFrom"
+                formControlName="productCodeFrom"
               />
               <mat-icon
-                (click)="openSearchDialog('productIdFrom')"
+                (click)="openSearchDialog('productCodeFrom')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
@@ -416,15 +551,30 @@
               <input
                 class="input-from-to"
                 type="text"
-                id="productIdTo"
-                name="productIdTo"
-                formControlName="productIdTo"
+                id="productCodeTo"
+                name="productCodeTo"
+                formControlName="productCodeTo"
               />
               <mat-icon
-                (click)="openSearchDialog('productIdTo')"
+                (click)="openSearchDialog('productCodeTo')"
                 class="icon-dialog"
                 svgIcon="icon-search-input"
               ></mat-icon>
+            </div>
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !productCodeFrom?.valid &&
+              (productCodeFrom?.dirty || productCodeFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!productCodeFrom?.errors?.['valueInvalidFrom'] && !productCodeTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Code must be greater than the start Code</small
+              >
             </div>
           </div>
         </div>
@@ -463,7 +613,7 @@
               formControlName="repositoryIdFrom"
             >
               <option *ngFor="let item of datable" [value]="item.repositoryId">
-                {{ item.repositoryId }} - {{ item.repositoryName }}
+                {{ item.repositoryCode }} - {{ item.repositoryName }}
               </option>
             </select>
             <span class="icon-from-to">~</span>
@@ -473,9 +623,24 @@
               formControlName="repositoryIdTo"
             >
               <option *ngFor="let item of datable" [value]="item.repositoryId">
-                {{ item.repositoryId }} - {{ item.repositoryName }}
+                {{ item.repositoryCode }} - {{ item.repositoryName }}
               </option>
             </select>
+          </div>
+          <div
+            class="error-input"
+            *ngIf="
+              !repositoryIdFrom?.valid &&
+              (repositoryIdFrom?.dirty || repositoryIdFrom?.touched)
+            "
+          >
+            <div
+              [hidden]="!repositoryIdFrom?.errors?.['valueInvalidFrom'] && !repositoryIdTo?.errors?.['valueInvalidTo'] "
+            >
+              <small class="error-message">
+                The end Code must be greater than the start Code</small
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -632,17 +797,7 @@
       >
         検索
       </button>
-      <button
-        class="btn btn-secondary"
-        type="button"
-        (click)="
-          searchOutputForm.reset({
-            isClosed: '9',
-            deliveryType: '0',
-            deliveryStatus: '0'
-          })
-        "
-      >
+      <button class="btn btn-secondary" type="button" (click)="resetForm()">
         クリア
       </button>
     </div>

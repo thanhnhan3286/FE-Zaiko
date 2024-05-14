@@ -10,11 +10,12 @@
         業務日付
       </div>
       <div class="show-date">
-        2022/04/14
+        2024/05/10
       </div>
     </div>
-    <button class="btn-chevron">
-      <mat-icon svgIcon="icon-chervon-up" class="btn-chervon-up"></mat-icon>
+    <button class="btn-chevron" type="button">
+      <mat-icon *ngIf="!isHidden" svgIcon="icon-chervon-up" class="btn-chervon-up" (click) = "displaySearchForm()"></mat-icon>
+      <mat-icon *ngIf="isHidden" svgIcon="icon-chervon-down" class="btn-chervon-up" (click) = "displaySearchForm()"></mat-icon>
     </button>
   </div>
 </div>
