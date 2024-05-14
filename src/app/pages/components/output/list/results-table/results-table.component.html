@@ -4,57 +4,50 @@
       <span>検索結果一覧</span>
     </div>
     <div class="total-list">
-      <p>検索結果一覧 総計 <span>0 / 100</span> 件</p>
+      <p>検索結果一覧 総計 <span>{{data.results.length}} / {{data.totalRecords}}</span> 件</p>
     </div>
   </div>
-  <div class="list-data" [ngStyle]="{ 'height': isHeightLimited ? '240px' : 'auto' }">
-    <table class="table align-middle" *ngIf="data.length > 0; else emptyInventory">
+  <div class="list-data" [ngStyle]="{ 'height': isHeightLimited ? '180px' : '800px' }">
+    <table class="table align-middle" *ngIf="data.results.length > 0; else emptyInventory">
       <thead class="bg-light sticky-top">
         <tr>
-          <th>&nbsp;</th>
-          <th>No</th>
-          <th>伝票番号</th>
-          <th>出庫タイプ</th>
-          <th>受注日</th>
-          <th>バッチ</th>
-          <th class="pt-2">
-            <p>出庫予定日</p>
-            <p>出庫実績日</p>
-          </th>
-          <th class="pt-2">
-            <p>作業予定日</p>
-            <p>作業実績日</p>
-          </th>
-          <th class="pt-2">
-            <p>納品予定日</p>
-            <p>納品実績日</p>
-          </th>
-          <th class="pt-2">
-            <p>予定納品先名称</p>
-            <p>実績納品先名称</p>
-          </th>
-          <th class="pt-2">
-            <p>予定出荷先</p>
-            <p>実績出荷先</p>
-          </th>
-          <th class="pt-2">
-            <p>予定倉庫</p>
-            <p>実績倉庫</p>
-          </th>
-          <th class="pt-2">
-            <p>予定客先伝票番号</p>
-            <p>実績客先伝票番号</p>
-          </th>
-          <th class="pt-2">
-            <p>予定数量合計</p>
-            <p>実績数量合計</p>
-          </th>
-          <th>&nbsp;</th>
+          <th rowspan="2" class="sticky-col" scope="col">&nbsp;</th>
+          <th rowspan="2" class="sticky-col-2 " scope="col">No</th>
+          <th rowspan="2" class="sticky-col-3 " scope="col">伝票番号</th>
+          <th rowspan="2" class="sticky-col-4 " scope="col">出庫タイプ</th>
+          <th rowspan="2" class="sticky-col-5 " scope="col">受注日</th>
+          <th rowspan="2" class="sticky-col-6" scope="col">バッチ</th>
+          <th scope="col">出庫予定日</th>
+          <th scope="col">実績出荷先</th>
+
+          <th scope="col">作業予定日</th>
+          <th scope="col">予定倉庫</th>
+
+          <th scope="col">納品予定日</th>
+          <th scope="col">実績客先伝票番号</th>
+
+          <th scope="col">予定納品先名称</th>
+          <th scope="col">実績数量合計</th>
+          <th rowspan="2" class="sticky" scope="col">&nbsp;</th>
+        </tr>
+        <tr>
+          <th scope="col">出庫実績日</th>
+          <th scope="col">予定出荷先</th>
+
+          <th scope="col">作業実績日</th>
+          <th scope="col">実績倉庫</th>
+
+          <th scope="col">納品実績日</th>
+          <th scope="col">実績客先伝票番号</th>
+
+          <th scope="col">予定数量合計</th>
+          <th scope="col">予定納品先名称</th>
+
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of content ; let i = index">
-          <td class="alert-info">
+        <tr *ngFor="let item of data.results ; let i = index">
+          <td class="alert-info sticky-td">
             <mat-icon class="icon-lock" svgIcon="icon-lock" *ngIf="item.closed === '1'"></mat-icon>
             <mat-icon class="icon-unlock" svgIcon="icon-unlock" *ngIf="item.closed === '0'"></mat-icon>
             {{
@@ -64,14 +57,14 @@
             ''
             }}
           </td>
-          <td>{{ i + 1 }}</td>
-          <td>{{ item.slipNo }}</td>
-          <td>
+          <td class="sticky-td-2">{{ i + 1 }}</td>
+          <td class="sticky-td-3">{{ item.slipNo }}</td>
+          <td class="sticky-td-4">
             <p class="alert alert-primary" *ngIf="item.planOutputDate">予定あり</p>
             <p class="alert alert-primary" *ngIf="!item.planOutputDate">実績のみ</p>
           </td>
-          <td>{{ item.orderDate }}</td>
-          <td>
+          <td class="sticky-td-5">{{ item.orderDate }}</td>
+          <td class="sticky-td-6">
             <p *ngIf="item.batchStatus === '0'" class="alert alert-warning">未処理</p>
 
             <p *ngIf="item.batchStatus === '1'" class="alert alert-warning">処理中</p>
@@ -81,6 +74,7 @@
             <p *ngIf="item.batchStatus === '3'" class="alert alert-warning">処理中 <br> 　未あり</p>
 
           </td>
+          <!--  sửa dung swc và ngtemlp hoặc tao 1 hàm  -->
 
           <td>
             <p>{{ item.actualOutputDate || '--' }}</p>
@@ -116,20 +110,20 @@
             <p>{{item.sumActualQuantity || '--' }}</p>
           </td>
           <td class="group-btn sticky">
-            <!-- Button "予定" is disabled if planOutputDate is null -->
-            <button type="button" class="btn" style="color:#FFFFFF !important; background-color: #00AEC8;"
-              [disabled]="!item.planOutputDate">
+
+            <button type="button" class="btn btnPlan" [disabled]="!item.planOutputDate"
+              (click)="Plan(item.inventoryOutputId!)">
+              <span></span>
               予定
             </button>
-            <button type="button" class="btn" style="color:#FFFFFF !important; background-color: #00B5AD;" [disabled]="
-                    (item.planOutputDate && !item.actualOutputDate && item.closed == '1') || 
-                    (item.planOutputDate && item.actualOutputDate && item.closed == '1') ||   
-                    (!item.planOutputDate && item.actualOutputDate && item.closed == '0') ||  
-                    (!item.planOutputDate && item.actualOutputDate && item.closed == '1') ||
-                    (item.slipNo != null) 
-                  ">
+
+            <button type="button" class="btn" [ngClass]="{
+              'enabled-button': !isButtonDisabled(item),
+              'disabled-button': isButtonDisabled(item)
+            }" [disabled]="isButtonDisabled(item)">
               実績
             </button>
+
             <button type="button" class="btn" style="color:#FFFFFF !important; background-color: #6B77B6;"
               [disabled]="!item.actualOutputDate">
               訂正
@@ -141,13 +135,16 @@
       </tbody>
     </table>
     <ng-template #emptyInventory>
-      <p style="text-align: center;">No content available</p>
+      <p style="text-align: center;">表示するデータがありません</p>
     </ng-template>
 
   </div>
-  <div class="scroll-down">
-    <button class="btn-down" *ngIf="totalPage > (currentPage+1)" (click)="triggerLoadMore()"> <mat-icon
-        svgIcon="icon-show-more"></mat-icon> 更に表示</button>
+  <div class="loadMore">
+    <div class="scroll-down">
+      <button class="btn-down" *ngIf="data.totalPage > (data.currentPage+1)" (click)="triggerLoadMore()"> <mat-icon
+          svgIcon="icon-show-more"></mat-icon> 更に表示</button>
+    </div>
+
   </div>
 
 

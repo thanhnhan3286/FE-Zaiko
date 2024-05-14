@@ -1,4 +1,4 @@
-import { HttpClienRequest, HttpClientResponse } from "@core/models";
+import { HttpClienRequest, HttpClientResponse, HttpClientResponseList } from "@core/models";
 
 
 export interface DataOutputListputModel {
@@ -52,13 +52,29 @@ export interface RepositoryModel {
   freeItem2?: string;
   freeItem3?: string; 
 }
-
-
-
- 
+export interface DataModel {
+  length: number,
+  currentPage: number,
+  noRecordInPage: number,
+  results: DataOutputListputModel[],
+  totalPage: number,
+  totalRecords: number,
+  countRecords: number,
+}
+export class DataSearchModel implements DataModel {
+  public constructor(
+    public length: number = 0,
+    public currentPage: number = 0,
+    public noRecordInPage: number = 0,
+    public results: DataOutputListputModel[] = [],
+    public totalPage: number = 0,
+    public totalRecords: number = 0,
+    public countRecords: number = 0
+  ) { }
+}
 
 export interface SearchParams {
-  [key: string]: any;  // Chữ ký chỉ mục cho phép truy cập bằng chuỗi
+  [key: string]: any;  
   // keyWord: string;
   page: number ;
   size: number;
@@ -74,18 +90,18 @@ export interface SearchParams {
   planDeliverDateTo?: string;
   slipNoFrom?: string;//
   slipNoTo?: string;
-  productIdFrom?: string;//
-  productIdTo?: string;
+  productCodeFrom?: string;//
+  productCodeTo?: string;
   batchNo?: string;//
   productName?: string;
-  deliveryDestinationIdForm?: number;//
-  deliveryDestinationIdTo?: number;
+  destinationCodeFrom?: number;//
+  destinationCodeTo?: number;
   departmentName?: string;//
-  supplierIdFrom?: number;//
-  supplierIdTo?: number;
+  supplierCodeFrom?: number;//
+  supplierCodeTo?: number;
   supplierName?: string;
-  customerIdFrom?: number;///
-  customerIdTo?: number;
+  customerCodeFrom?: number;///
+  customerCodeTo?: number;
   customerName?: string;///
   DeliveryType?: string;
   DeliveryStatus?: string;
@@ -98,9 +114,18 @@ export interface SearchParamRequest extends HttpClienRequest {
 }
 
 
- export interface  HttpClienOutputListputResponse extends HttpClientResponse {
-   data: DataOutputListputModel;
+ export interface  HttpClienOutputListputResponse extends HttpClientResponseList {
+  content: DataOutputListputModel[];
+  pageNumber:number;
+  pageSize:number;
+  totalElements:number;
+  totalPages:number;
  }
+ 
  export interface HttpClienRepositorytResponse extends HttpClientResponse {
-  data: RepositoryModel;
+  data: RepositoryModel[];
+}
+export interface TableEvent {
+  action: 'loadMore' | 'plan' | 'actual' | 'correction'; 
+  payload?: number; 
 }

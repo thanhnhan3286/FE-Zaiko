@@ -7,7 +7,7 @@ import { FormSearchComponent } from './form-search/form-search.component';
 @NgModule({
   declarations: [
     FormSearchComponent,
-    ResultsTableComponent
+    ResultsTableComponent,
   ],
   imports: [
     CommonModule,

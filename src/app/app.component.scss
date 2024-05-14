@@ -16,9 +16,9 @@ $width-nav-bar: 70px;
 
 .children {
   width: calc(100% - $width-nav-bar);
-  // height: 100%;
+  height: 100%;
   padding: 0 4px 4px 4px;
-  margin-top: 48px;
+  // margin-top: 48px;
   background-color: $backGroundMain;
 
   // overflow-x: hidden;

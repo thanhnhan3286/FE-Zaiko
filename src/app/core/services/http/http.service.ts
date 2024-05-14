@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClientResponse } from '@core/models/http-response.model';
 import { Observable, of } from 'rxjs';
@@ -15,7 +15,7 @@ export abstract class HttpService {
     return this.http.get<HttpClientResponse>(url).pipe(
       tap((response) => response),
       catchError((err) => of(err))
-    );
+    ); 
   }
 
   public post(url: string, payload: object, header?: HttpHeaders): Observable<HttpClientResponse> {
@@ -24,6 +24,14 @@ export abstract class HttpService {
       catchError((err) => of(err))
     );
   }
+
+  public getWithParams<T>(url: string, params: HttpParams): Observable<T> {
+    return this.http.get<T>(url, { params }).pipe(
+      tap((response) => response),
+      catchError((err) => of(err))
+    );
+  }
+
 
   public put(url: string, payload: object): Observable<HttpClientResponse> {
     return this.http.put<HttpClientResponse>(url, payload).pipe(

@@ -1,9 +1,5 @@
+<app-header-top (toggleSearchForm)="onToggleSearchForm($event)"></app-header-top>
 
 <div class="container-pages">
-  <form-search (formSubmitEvent)="eventEmitForm($event)"></form-search>
-  <results-table 
-    [data]="dataOutputList" 
-    [totalPage]="totalPages"
-    [currentPage]="currentPages"
-    (loadMoreEvent)="loadMore()"
-  ></results-table></div>
+  <form-search *ngIf="isSearchFormVisible" (formSubmitEvent)="eventEmitForm($event)"></form-search>
+  <results-table class="results-table" [data]="dataSearchModel" (tableEvent)="handleTableEvent($event)"></results-table></div>

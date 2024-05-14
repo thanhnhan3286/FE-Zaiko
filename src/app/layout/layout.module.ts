@@ -15,13 +15,12 @@ import { CommonService } from './services/common.service';
 import { LoadingSpinnerDialogService } from './services/loading-spinner-dialog.service';
 import { OutputModule } from '../pages/components/output/output.module';
 import { InputModule } from '../pages/components/input/input.module';
-import { HeaderTopComponent } from './components/header-top/header-top.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    HeaderTopComponent,
+  
     FooterComponent,
     SideNavComponent,
     ChangePasswordComponent,
@@ -41,7 +40,6 @@ import { HeaderTopComponent } from './components/header-top/header-top.component
   exports: [
     FooterComponent,
     SideNavComponent,
-    HeaderTopComponent,
     NzLayoutModule,
     FormsModule
   ],

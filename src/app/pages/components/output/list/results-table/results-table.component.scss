@@ -42,6 +42,8 @@
 
     .table thead th {
       border: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
     .table tbody td {
@@ -86,7 +88,91 @@
     td.group-btn {
       white-space: nowrap;
     }
-    th.sticky,
+    .sticky-col {
+      width: 50px;
+      position: sticky;
+      left: 0;
+      background-color: #EAF4FF
+    }
+    .sticky-col-2 {
+      width: 100px;
+      position: sticky;
+      left: 50px;
+      background-color: #EAF4FF
+    }
+    .sticky-col-3 {
+      width: 100px;
+      position: sticky;
+      left: 150px;
+      background-color: #EAF4FF
+    }
+    .sticky-col-4 {
+      width: 100px;
+      position: sticky;
+      left: 250px;
+      background-color: #EAF4FF
+    }
+    .sticky-col-5 {
+      width: 100px;
+      position: sticky;
+      left: 350px;
+      background-color: #EAF4FF
+    }
+    .sticky-col-6 {
+      width: 100px;
+      position: sticky;
+      left: 450px;
+      background-color: #EAF4FF
+    }
+    .sticky-td {
+      width: 50px;
+      position: sticky;
+      left: 0;
+      background-color: #EFEDFF;
+      border-right: 1px solid #7D63CC;
+      
+    }
+    .sticky-td-2 {
+      width: 100px;
+      position: sticky;
+      left: 50px;
+      background-color: #F9FCFF;
+
+
+    }
+    .sticky-td-3 {
+      width: 100px;
+      position: sticky;
+      left: 150px;
+      background-color: #F9FCFF
+    }
+    .sticky-td-4 {
+      width: 100px;
+      position: sticky;
+      left: 250px;
+      background-color: #F9FCFF
+    }
+    .sticky-td-5 {
+      width: 100px;
+      position: sticky;
+      left: 350px;
+      background-color: #F9FCFF
+    }
+    .sticky-td-6 {
+      width: 100px;
+      position: sticky;
+      left: 450px;
+      background-color: #F9FCFF
+    }
+
+
+    th.sticky
+    {
+      position: sticky;
+      background: #EAF4FF;
+      right: 0;
+
+    }
     td.sticky {
         position: sticky;
         background: #F9FCFF; 
@@ -124,6 +210,17 @@
     border-right: 1px solid #7D63CC;
 
   }
+  .enabled-button {
+    color: #FFFFFF !important;
+    background-color: #00B5AD;
+  }
+  
+  .disabled-button {
+    background-color: #00B5AD;
+    opacity: 0.8; 
+    cursor: not-allowed; 
+  }
+  
 
   .btn {
     display: inline-block;
@@ -135,18 +232,36 @@
     border-radius: 3px 0px 0px 0px;
     opacity: 0px;
     margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
 
   }
+  .btn:disabled{
+    opacity: 0.6 !important; 
+    cursor: not-allowed !important; 
+
+  }
+  .btnPlan{
+    color:#FFFFFF !important; 
+    background-color: #00AEC8;
+ 
+  }
+
+  
 
   .list-data {
+    
     overflow-x: auto;
     overflow-y: auto;
     white-space: nowrap;
   }
 
   .table {
-    /* Đặt chiều rộng cố định cho bảng */
     min-width: 2000px;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0;
     mat-icon{
       width: 10.5px;
       height: 12px;
@@ -156,30 +271,45 @@
       
     }
   }
+  .loadMore{
+    position: sticky;
+    bottom: 0px;
+    background: #FFFFFF;
+  }
   .scroll-down {
     padding: 10px;
     justify-content: space-around;
     display: flex;
     align-items: center; 
+    text-align: center;
+    border-collapse: separate; 
+    border-spacing: 0;
     justify-content: center; 
 
     .btn-down {
-          display: flex;
+      display: flex;
       align-items: center; 
       justify-content: center; 
       width: 150px;
       height: 35px;
-      top: 297px; /* Adjust if needed for vertical alignment */
+      top: 297px; 
       gap: 12px;
       border-radius: 3px 0px 0px 0px;
       border: 1px 0px 0px 0px;
       background: #FFFFFF;
       border: 1px solid #D6D6D6;
       color: #4392BB;
+
   }
+
+} 
+button:hover {
+  transform: scale(1.05);
 }
 
- 
- 
-  }
+button:active {
+  transform: scale(0.95);
+
+}
+}
 

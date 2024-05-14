@@ -31,3 +31,11 @@ export interface CommonResponse {
     value4?: string;
     value5?: string;
   }
+
+  export interface Pageable {
+    totalPages:number;
+    totalElements:number;
+    pageSize:number;
+    currentPage:number;
+    
+  }

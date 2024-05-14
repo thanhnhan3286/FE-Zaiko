@@ -16,7 +16,8 @@ import { ListModule } from './list/list.module';
     InputComponent,
     ListComponent,
     ActualComponent,
-    PlanComponent
+    PlanComponent,
+    
    
   ],
   imports: [

@@ -24,14 +24,11 @@ export class OutputListService extends HttpService  {
       httpParams = httpParams.set(key, params[key]);
     });
 
-    return this.http.get<HttpClienOutputListputResponse>(ApiPath.INVENTORY_OUTPUT, { params: httpParams }).pipe(
-      map((response: HttpClienOutputListputResponse) => response), 
-      catchError((error: HttpErrorResponse) => {
-        // Xử lý và trả về Observable của lỗi
-        console.error("HTTP error occurred:", error);
-        return throwError(error);
-      })
-    );
+    return this.getWithParams<HttpClienOutputListputResponse>(ApiPath.INVENTORY_OUTPUT, httpParams).pipe(
+      map((response: HttpClienOutputListputResponse) => response)
+    )as Observable<HttpClienOutputListputResponse | HttpErrorResponse>;
+
+    
   }
   public getAllRepository(): Observable<HttpClienRepositorytResponse> {
     return this.get(ApiPath.REPOSITORY).pipe(

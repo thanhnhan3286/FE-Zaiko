@@ -24,14 +24,14 @@ export class DialogSeachApiService extends HttpService {
 
     let param:any = {
       keyWord: keySearch ? keySearch : ''
-    };
+    }; 
 
     if(dataOption.listParam.length > 0){
       dataOption.listParam.map((x:ParamModel)=>{
         param[x.key] = x.value;
       });
     }
-
+    console.log("Search : ",param);
     const convert = queryString.stringify(param);
 
     this.loadingDialog.showSpinner(true);

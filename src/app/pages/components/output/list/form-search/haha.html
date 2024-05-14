@@ -1,0 +1,331 @@
+<div class="form-inventory-output"> 
+    <form class="inventory-form" [formGroup]="searchForm" (ngSubmit)="onFormSubmit()">
+        <!--  sửa lại from input (min-with,label) -->
+        <div class="form-content flex-gap">
+            <div class="form-col">
+                <div class="form-group">
+                    <div class="label">
+                        <label>受注日</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="date" class="input-control" formControlName="orderDateFrom">
+                        <p class="divider">~</p>
+                        <input type="date" class="input-control" formControlName="orderDateTo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label >伝票番号</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="slipNoFrom">
+                        <p class="divider">~</p>
+                        <input type="text" class="input-control" formControlName="slipNoTo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>所有者コード</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="customerCodeFrom">
+                            <div class="icon-input" (click)="openDialog('customerCodeFrom')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                        <p class="divider">~</p>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="customerCodeTo">
+                            <div class="icon-input" (click)="openDialog('customerCodeTo')">
+                                <mat-icon class="search-input special-icon" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>納品先コード</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="destinationCodeFrom">
+                            <div class="icon-input" (click)="openDialog('destinationCodeFrom')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                        <p class="divider">~</p>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="destinationCodeTo">
+                            <div class="icon-input" (click)="openDialog('destinationCodeTo')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>倉庫</label>
+                    </div>
+                    <div class="form-inline">
+                        <select class="input-control" formControlName="repositoryIdFrom">
+                            <!-- Hiển thị các repository -->
+                            <option *ngFor="let repo of repositories" [value]="repo.repositoryId">
+                                {{ repo.repositoryName }}
+                            </option>
+                        </select>
+                        <p class="divider">~</p>
+                        <select class="input-control" formControlName="repositoryIdTo">
+                            <!-- Hiển thị các repository -->
+                            <option *ngFor="let repo of repositories" [value]="repo.repositoryId">
+                                {{ repo.repositoryName }}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-col">
+                <div class="form-group">
+                    <div class="label">
+                        <label>出庫予定日</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="date" class="input-control" formControlName="planOutputDateFrom">
+
+                        <p class="divider">~</p>
+                        <input type="date" class="input-control" formControlName="planOutputDateTo">
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="label">
+                        <label>納品先名称</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="departmentName">
+
+                    </div>
+                </div>
+                <!-- error -->
+                <div class="form-group ">
+                    <div class="label">
+                        <label>所有者名称</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="customerName">
+                    </div>
+                </div>
+                <!--  -->
+
+                <div class="form-group ">
+                    <div class="label">
+                        <label>バッチ番号</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="batchNo">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="label">
+                        <label>クローズ区分</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-radio">
+                            <label class="radio">
+                                <input type="radio" formControlName="isClosed" value='2'> 全て
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="isClosed" value=0> 未クローズ
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="isClosed" value=1> クローズ済
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-col">
+                <div class="form-group">
+                    <div class="label">
+                        <label>作業予定日</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="date" class="input-control" formControlName="planWorkingDateFrom">
+                        <p class="divider">~</p>
+                        <input type="date" class="input-control" formControlName="planWorkingDateTo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>出荷先コード</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="supplierCodeFrom">
+                            <div class="icon-input" (click)="openDialog('supplierCodeFrom')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                        <p class="divider">~</p>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="supplierCodeTo">
+                            <div class="icon-input" (click)="openDialog('supplierCodeTo')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>仕入先コード</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="ownerCodeForm">
+                            <div class="icon-input" (click)="openDialog('ownerCodeForm')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                        <p class="divider">~</p>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="ownerCodeTo" >
+                            <div class="icon-input" (click)="openDialog('ownerCodeTo')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-inline">
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control">
+                            <div class="icon-input">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                        <p class="divider">~</p>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control">
+                            <div class="icon-input">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>商品コード</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="productCodeFrom">
+                            <div class="icon-input" (click)="openDialog('productCodeFrom')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                        <p class="divider">~</p>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-control" formControlName="productCodeTo">
+                            <div class="icon-input" (click)="openDialog('productCodeTo')">
+                                <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>出庫状態</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-radio">
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryStatus" value="0"> 全て
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryStatus" value="1"> 未出庫
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryStatus" value="2"> 出庫残
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryStatus" value="3"> 出庫済
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-col">
+                <div class="form-group">
+                    <div class="label">
+                        <label>納品予定日</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="date" class="input-control" formControlName="planDeliverDateFrom">
+                        <p class="divider">~</p>
+                        <input type="date" class="input-control" formControlName="planDeliverDateTo">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="label">
+                        <label>商品名称</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="productName">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>仕入先名称</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="supplierName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>商品名称</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="input-control" formControlName="productName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>出庫タイプ</label>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-radio">
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryType" value="0"> 全て
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryType" value="1"> 未クローズ
+                            </label>
+                            <label class="radio">
+                                <input type="radio" formControlName="DeliveryType" value="2"> クローズ済
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="btn-container">
+            <div class="form-btn">
+                <button type="submit" class="btn save">検索</button>
+                <button type="button" class="btn refresh" (click)="reset()">クリア</button> <!-- Reset form -->
+            </div>
+
+        </div>
+    </form>
+
+</div>

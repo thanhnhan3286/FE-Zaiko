@@ -33,6 +33,15 @@ export interface HttpClientResponse {
   errors: object[];
   meta: MetaModel;
 }
+export interface HttpClientResponseList {
+  content: any;
+  pageNumber:number;
+  pageSize:number;
+  totalElements:number;
+  totalPages:number;
+}
+
+
 
 export class DataSearchModel implements DataModel {
   public constructor(
