@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services';
 import { map, Observable } from 'rxjs';
 import { ApiPath } from '@core/config';
-import { OutputListResponse } from '../model/output-list';
+import { CourseResponse, OutputListResponse, OutputResponse, RouteResponse } from '../model/output-list';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,12 @@ export class OutputListService extends HttpService {
     ) as Observable<OutputListResponse| HttpErrorResponse>;
   }
 
+  public getOutputById(id: number): Observable<OutputResponse | HttpErrorResponse> {
+    return this.get(`${ApiPath.INVENTORY_OUTPUT_PLAN}/detail?id=${id}`).pipe(
+      map((res: OutputResponse| HttpErrorResponse) => res)
+    )
+  }
+
 
 
   public getSearchOutputList(params: HttpParams): Observable<OutputListResponse | HttpErrorResponse> {
@@ -27,5 +33,17 @@ export class OutputListService extends HttpService {
     return this.http.get<OutputListResponse>(`${ApiPath.INVENTORY_OUTPUT}/search-output-list`, {params}).pipe(
       map((response: OutputListResponse | HttpErrorResponse) => response)
     ) as Observable<OutputListResponse| HttpErrorResponse>;
+  }
+
+  public getAllRoute(): Observable<RouteResponse | HttpErrorResponse> {
+    return this.get(`${ApiPath.ROUTE}/get-all`).pipe(
+      map((res: RouteResponse ) => res)
+    ) as Observable<RouteResponse | HttpErrorResponse>;
+  }
+
+  public getAllCourse(): Observable<CourseResponse | HttpErrorResponse> {
+    return this.get(`${ApiPath.COURSE}/get-all`).pipe(
+      map((res: CourseResponse ) => res)
+    ) as Observable<CourseResponse | HttpErrorResponse>;
   }
 }

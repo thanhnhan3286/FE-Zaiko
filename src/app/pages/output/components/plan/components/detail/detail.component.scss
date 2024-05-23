@@ -1,0 +1,360 @@
+.container {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  border: 0.5px solid #4392bb;
+  background-color: #f9fcff;
+  margin-top: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 7px;
+}
+
+.item {
+  padding: 0px 5px 0px 5px;
+}
+
+.w-5 {
+  width: 5%;
+}
+.w-10 {
+  width: 10%;
+}
+
+.w-15 {
+  width: 15%;
+}
+
+.w-20 {
+  width: 20%;
+}
+.w-30 {
+  width: 30%;
+}
+
+input,
+select {
+  height: 30px;
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+select {
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5em top 50%;
+  background-size: 0.6em auto;
+}
+
+.input-radio-cover {
+  outline: none;
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  padding: 7.5px 8px;
+  height: 30px;
+  color: #485764;
+  letter-spacing: 0.014em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // margin-top: 3px;
+  .radio-item {
+    gap: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .radio-btn {
+      border: 1px;
+      border-color: #4392bb;
+      width: 16px;
+      height: 16px;
+    }
+    .radio-name {
+      font-family: "Noto Sans JP";
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 19.5px;
+      letter-spacing: 0.014em;
+      color: #485764;
+      padding-left: 3px;
+    }
+  }
+}
+.no-edit {
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  height: 30px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+}
+.input-item {
+  position: relative;
+  width: 40%;
+}
+
+.product-code {
+  width: 100%;
+}
+
+.icon-dialog {
+  position: absolute;
+  top: 50%;
+  left: 81%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  background-color: #4392bb;
+}
+
+.standard {
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  height: 30px;
+  background-color: #f2f2f2;
+  padding-top: 4px;
+  padding-left: 7px;
+  padding-right: 2px;
+  margin-left: 5px;
+  width: 60%;
+}
+
+.title-detail {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  .title-name {
+    font-family: Noto Sans JP;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    letter-spacing: 1.4%;
+    color: #4392bb;
+  }
+  .create {
+    font-size: 13px;
+    // color: #FFFFFF;
+  }
+}
+.detail-content {
+  margin-top: 5px;
+}
+
+.detail-cover {
+  width: 100%;
+}
+
+tr {
+  border-bottom: 1px solid #ccc;
+  height: 40px;
+}
+
+td,
+th {
+  border-left: 1px solid #ccc;
+}
+
+th {
+  text-align: left;
+}
+table {
+  border: 0;
+  border-collapse: collapse;
+}
+
+.header-data {
+  font-family: Noto Sans JP;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19.5px;
+  background-color: #eff7ff;
+}
+.record {
+  font-family: Noto Sans JP;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+  color: #485764;
+}
+
+.batch-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-notification {
+  width: 16px;
+  height: 24px;
+}
+
+.input-cover {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.group-date {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .mng-type {
+    width: 29px;
+    height: 30px;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+    background-color: #f2f2f2;
+  }
+  .date-from-to {
+    margin-left: 5px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .input-date {
+      width: 47%;
+    }
+    .icon-from-to {
+      text-align: center;
+    }
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  padding-right: 3px;
+  padding-left: 3px;
+  color: #4392bb;
+  filter: invert(48%) sepia(99%) saturate(274%) hue-rotate(156deg)
+    brightness(89%) contrast(92%);
+}
+
+.batch-indicate {
+  width: 53px;
+  height: 20px;
+  padding: 3px 8px 3px 8px;
+  border-radius: 4px;
+  font-family: Noto Sans JP;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  background-color: #e8e8e8;
+  color: #9f9f9f;
+  display: flex;
+  align-items: center;
+}
+
+.input-w100 {
+  background-color: #f2f2f2;
+  width: 100%;
+}
+
+.data-from-to {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .input-data {
+    width: 47%;
+  }
+}
+
+.input-quantity-cover {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .quantity-item {
+    width: 33%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    .quantity {
+      width: 60%;
+      height: 30px;
+      border: 1px solid #d6d6d6;
+      background-color: #f2f2f2;
+    }
+    .quantity-label {
+      width: 40%;
+      font-size: 8px;
+      line-height: 12px;
+      font-weight: 400;
+      padding-left: 5px;
+    }
+  }
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  .btn-delete,
+  .btn-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 3px;
+  }
+
+  .btn-delete {
+    background-color: #eb5757;
+    .icon-delete {
+      height: 18px;
+    }
+  }
+
+  .btn-copy {
+    background-color: #4392bb;
+    .icon-copy {
+      width: 13px;
+    }
+  }
+
+  
+}
+
+.btn {
+  width: 91px;
+  height: 35px;
+  font-size: 13px;
+  transition: background-color 0.2s;
+  font-family: "Noto Sans JP";
+  font-weight: 500;
+  outline: none;
+  //   border: 1px solid;
+  border-radius: 3px;
+}
+
+.btn mat-icon {
+  width: 12px;
+  height: 12px;
+  line-height: 0;
+  margin-right: 10px;
+  transform: translateY(-1px);
+}
+.btn.btn-primary {
+  background-color: #4392bb;
+  color: white;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn.btn-primary:hover {
+  background-color: #a6d1e7;
+}

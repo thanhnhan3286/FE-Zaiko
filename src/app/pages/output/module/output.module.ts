@@ -18,14 +18,14 @@ import { TitleComponent } from '../components/list/title/title.component';
         ListComponent,
         ShowListComponent,
         SearchListComponent,
-        TitleComponent
+        TitleComponent,
+        
     ],
     imports: [
         CommonModule,
         OutputListRoutingModule,
         FormsModule,
-        CommonAppModule.forRoot(),
-
+        CommonAppModule.forRoot()
     ],
 })
 export class OutputListModule { }

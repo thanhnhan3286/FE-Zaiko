@@ -1,1 +1,214 @@
-<p>detail works!</p>
+<div class="container">
+  <div class="title-detail">
+    <span class="title-name">出庫明細一覧</span>
+    <button class="btn btn-primary">
+      <mat-icon svgIcon="icon-plus" class="icon-plus"></mat-icon>
+      <span class="create">追加</span>
+    </button>
+  </div>
+  <div class="detail-content">
+    <table class="detail-cover">
+      <thead class="header-data">
+        <tr class="header-row">
+          <th class="item w-10">No.</th>
+          <th class="item w-20">商品</th>
+          <th class="item w-20">管理日付</th>
+          <th class="item w-15">倉庫</th>
+          <th class="item w-20">請求荷姿</th>
+          <th class="item w-10">未出庫</th>
+          <th class="item w-5" rowSpan="3"></th>
+        </tr>
+        <tr>
+          <th class="item w-10">バッチ番号</th>
+          <th class="item w-20">支払先</th>
+          <th class="item w-20">所有者</th>
+          <th class="item w-15">在庫状態</th>
+          <th class="item w-20">合計</th>
+          <th class="item w-10"></th>
+        </tr>
+        <tr>
+          <th class="item w-10">バッチ状態</th>
+          <th class="item w-20">規格</th>
+          <th class="item w-20">管理番号</th>
+          <th class="item w-15">ロケーション</th>
+          <th class="item w-20">出庫数量</th>
+          <th class="item w-10">出庫済</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="record">
+          <td class="item w-10">
+            <div class="batch-status">
+              <span class="batch-no">0001</span>
+              <mat-icon
+                svgIcon="icon-notification"
+                class="icon-notification"
+              ></mat-icon>
+            </div>
+          </td>
+          <td class="item w-20">
+            <div class="input-cover">
+              <div class="input-item">
+                <input class="product-code" />
+                <mat-icon
+                  svgIcon="icon-search-input"
+                  class="icon-dialog"
+                ></mat-icon>
+              </div>
+              <div class="standard">受注発注商品</div>
+            </div>
+          </td>
+          <td class="item w-20">
+            <div class="group-date">
+              <div class="mng-type"></div>
+              <div class="date-from-to">
+                <input type="date" class="input-date" />
+                <span class="icon-from-to">~</span>
+                <input type="date" class="input-date" />
+              </div>
+            </div>
+          </td>
+          <td class="item w-15">
+            <select name="" id="">
+              <option value="1">aaa</option>
+            </select>
+          </td>
+          <td class="item w-20">
+            <div class="input-radio-cover">
+              <div class="radio-item">
+                <input
+                  class="radio-btn"
+                  type="radio"
+                  id="deliveryType1"
+                  name="deliveryType1"
+                  formControlName="deliveryType"
+                  value="0"
+                  checked
+                />
+                <span class="radio-name">ｹｰｽ</span>
+              </div>
+
+              <div class="radio-item">
+                <input
+                  class="radio-btn"
+                  type="radio"
+                  id="deliveryType2"
+                  name="deliveryType2"
+                  formControlName="deliveryType"
+                  value="1"
+                />
+                <span class="radio-name">ﾎﾞｰﾙ</span>
+              </div>
+
+              <div class="radio-item">
+                <input
+                  class="radio-btn"
+                  type="radio"
+                  id="deliveryType3"
+                  name="deliveryType3"
+                  formControlName="deliveryType"
+                  value="2"
+                />
+                <span class="radio-name">枚</span>
+              </div>
+            </div>
+          </td>
+          <td class="item w-10">
+            <div class="no-edit">58400</div>
+          </td>
+          <td class="item w-5" rowspan="3">
+            <div class="action">
+              <button class="btn-delete">
+                <mat-icon
+                  class="icon-delete"
+                  svgIcon="icon-delete-red"
+                ></mat-icon>
+              </button>
+              <button class="btn-copy">
+                <mat-icon class="icon-copy" svgIcon="icon-copy"></mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr class="record">
+          <td class="item w-10">
+            <div class="batch-indicate">未処理</div>
+          </td>
+          <td class="item w-20">
+            <input type="text" class="input-w100" />
+          </td>
+          <td class="item w-20">
+            <div class="data-from-to">
+              <input type="text" class="input-data" />
+              <span class="icon-from-to">~</span>
+              <input type="text" class="input-data" />
+            </div>
+          </td>
+          <td class="item w-15">
+            <select class="no-edit" id="">
+              <option value="1">aaa</option>
+            </select>
+          </td>
+          <td class="item w-20">
+            <div class="input-quantity-cover">
+              <div class="quantity-item">
+                <div class="quantity"></div>
+                <span class="quantity-label">ﾎﾞｰﾙ</span>
+              </div>
+
+              <div class="quantity-item">
+                <div class="quantity"></div>
+                <span class="quantity-label">ﾎﾞｰﾙ</span>
+              </div>
+
+              <div class="quantity-item">
+                <div class="quantity"></div>
+                <span class="quantity-label">ﾎﾞｰﾙ</span>
+              </div>
+            </div>
+          </td>
+          <td class="item w-10">
+            <div class="no-edit">58400</div>
+          </td>
+        </tr>
+        <tr class="record">
+          <td class="item w-10">
+            <div class="batch-status">
+              <span class="batch-no">0001</span>
+            </div>
+          </td>
+          <td class="item w-20">
+            <div class="input-cover">
+              <div class="input-item">
+                <input class="product-code no-edit" />
+              </div>
+              <div class="standard">受注発注商品</div>
+            </div>
+          </td>
+
+          <td class="item w-20">
+            <div class="input-cover">
+              <div class="input-item">
+                <input class="product-code" />
+                <mat-icon
+                  svgIcon="icon-search-input"
+                  class="icon-dialog"
+                ></mat-icon>
+              </div>
+              <div class="standard">受注発注商品</div>
+            </div>
+          </td>
+          <td class="item w-15">
+            <select name="" id="">
+              <option value="1">aaa</option>
+            </select>
+          </td>
+          <td class="item w-20">
+            <div class="w-30 no-edit">58400</div>
+          </td>
+          <td class="item w-10"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

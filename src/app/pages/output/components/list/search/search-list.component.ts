@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { RepositoryService } from '../../../service/repository.service';
@@ -9,7 +17,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogSeachApiComponent } from '@common/components/dialog-seach-api/dialog-search-api.component';
 import { DialogOptionApi } from '@common/models/dialog-seach-api/dialog-search-api.model';
 import { DialogConfig } from '@core/config/dialog.config';
-import { checkFromDate, checkFromValue, checkToDate, checkToValue} from '../../../validate/custom-validator'
+import {
+  checkFromDate,
+  checkFromValue,
+  checkToDate,
+  checkToValue,
+} from '../../../validate/custom-validator';
+import { Utils } from '@common/utils/utils';
 
 @Component({
   selector: 'app-search-list',
@@ -17,7 +31,6 @@ import { checkFromDate, checkFromValue, checkToDate, checkToValue} from '../../.
   styleUrls: ['./search-list.component.scss'],
 })
 export class SearchListComponent implements OnInit, OnChanges {
-
   repositoryList!: RepositoryResponse;
   @Input() isHiddenSearch: boolean = false;
   @Output() public search: EventEmitter<SearchCriteriaRequest> =
@@ -25,6 +38,7 @@ export class SearchListComponent implements OnInit, OnChanges {
   data: DialogOptionApi = new DialogOptionApi();
 
   searchOutputForm = new FormGroup({});
+  public util = Utils;
 
   constructor(
     private repositoryService: RepositoryService,
@@ -32,51 +46,78 @@ export class SearchListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes) {
+    if (changes) {
       this.searchOutputForm = this.initForm();
-    } 
+    }
   }
 
   ngOnInit(): void {
     this.getAll();
     this.searchOutputForm = this.initForm();
   }
-  
-  initForm():FormGroup{
+
+  initForm(): FormGroup {
     return new FormGroup({
-      orderDateFrom: new FormControl('',[checkFromDate('orderDateTo')]),
-      orderDateTo: new FormControl('',[checkToDate('orderDateFrom')]),
-      planOutputDateFrom: new FormControl('',[checkFromDate('planOutputDateTo')]),
-      planOutputDateTo: new FormControl('',[checkToDate('planOutputDateFrom')]),
-      planWorkingDayFrom: new FormControl('',[checkFromDate('planWorkingDayTo')]),
-      planWorkingDayTo: new FormControl('',[checkToDate('planWorkingDayFrom')]),
-      planDeliverDateFrom: new FormControl('',[checkFromDate('planDeliverDateTo')]),
-      planDeliverDateTo: new FormControl('',[checkToDate('planDeliverDateFrom')]),
-      slipNoFrom: new FormControl('',[checkFromValue('slipNoTo')]),
-      slipNoTo: new FormControl('',[checkToValue('slipNoFrom')]),
-      customerCodeFrom: new FormControl('',[checkFromValue('customerCodeTo')]),
-      customerCodeTo: new FormControl('',[checkToValue('customerCodeFrom')]),
+      orderDateFrom: new FormControl('', [
+        this.util.checkFromDate('orderDateTo'),
+      ]),
+      orderDateTo: new FormControl('', [
+        this.util.checkToDate('orderDateFrom'),
+      ]),
+      planOutputDateFrom: new FormControl('', [
+        this.util.checkFromDate('planOutputDateTo'),
+      ]),
+      planOutputDateTo: new FormControl('', [
+        this.util.checkToDate('planOutputDateFrom'),
+      ]),
+      planWorkingDayFrom: new FormControl('', [
+        this.util.checkFromDate('planWorkingDayTo'),
+      ]),
+      planWorkingDayTo: new FormControl('', [
+        this.util.checkToDate('planWorkingDayFrom'),
+      ]),
+      planDeliverDateFrom: new FormControl('', [
+        this.util.checkFromDate('planDeliverDateTo'),
+      ]),
+      planDeliverDateTo: new FormControl('', [
+        this.util.checkToDate('planDeliverDateFrom'),
+      ]),
+      slipNoFrom: new FormControl('', [this.util.checkFromValue('slipNoTo')]),
+      slipNoTo: new FormControl('', [this.util.checkToValue('slipNoFrom')]),
+      customerCodeFrom: new FormControl('', [
+        this.util.checkFromValue('customerCodeTo'),
+      ]),
+      customerCodeTo: new FormControl('', [
+        this.util.checkToValue('customerCodeFrom'),
+      ]),
       customerName: new FormControl(''),
-      destinationCodeFrom: new FormControl('',[checkFromValue('destinationCodeTo')]),
-      destinationCodeTo: new FormControl('',[checkToValue('destinationCodeFrom')]),
+      destinationCodeFrom: new FormControl('', [
+        this.util.checkFromValue('destinationCodeTo'),
+      ]),
+      destinationCodeTo: new FormControl('', [
+        this.util.checkToValue('destinationCodeFrom'),
+      ]),
       departmentName: new FormControl(''),
-      supplierCodeFrom: new FormControl('',[checkFromValue('supplierCodeTo')]),
-      supplierCodeTo: new FormControl('',[checkToValue('supplierCodeFrom')]),
+      supplierCodeFrom: new FormControl('', [
+        this.util.checkFromValue('supplierCodeTo'),
+      ]),
+      supplierCodeTo: new FormControl('', [
+        this.util.checkToValue('supplierCodeFrom'),
+      ]),
       supplierName: new FormControl(''),
-      ownerIdFrom: new FormControl('',[checkFromValue('ownerIdTo')]),
-      ownerIdTo: new FormControl('',[checkToValue('ownerIdFrom')]),
+      ownerIdFrom: new FormControl('', [this.util.checkFromValue('ownerIdTo')]),
+      ownerIdTo: new FormControl('', [this.util.checkToValue('ownerIdFrom')]),
       ownerName: new FormControl(''),
-      productCodeFrom: new FormControl('',[checkFromValue('productCodeTo')]),
-      productCodeTo: new FormControl('',[checkToValue('productCodeFrom')]),
+      productCodeFrom: new FormControl('', [this.util.checkFromValue('productCodeTo')]),
+      productCodeTo: new FormControl('', [this.util.checkToValue('productCodeFrom')]),
       productName: new FormControl(''),
-      repositoryIdFrom: new FormControl('',[checkFromValue('repositoryIdTo')]),
-      repositoryIdTo: new FormControl('',[checkToValue('repositoryIdFrom')]),
+      repositoryIdFrom: new FormControl('', [this.util.checkFromValue('repositoryIdTo')]),
+      repositoryIdTo: new FormControl('', [this.util.checkToValue('repositoryIdFrom')]),
       batchNo: new FormControl(''),
       deliveryType: new FormControl('0'),
       deliveryStatus: new FormControl('0'),
       isClosed: new FormControl('9'),
-      
-    })
+    });
   }
   onSubmit() {
     const searchCriteria = this.searchOutputForm.value;
@@ -87,7 +128,7 @@ export class SearchListComponent implements OnInit, OnChanges {
     this.searchOutputForm = this.initForm();
     this.onSubmit();
   }
-  
+
   get datable(): any {
     if (this.repositoryList) {
       return this.repositoryList;
@@ -99,7 +140,6 @@ export class SearchListComponent implements OnInit, OnChanges {
     this.repositoryService
       .getAllRepository()
       .subscribe((res: RepositoryResponse | HttpErrorResponse) => {
-
         if (
           (res as HttpErrorResponse).status &&
           (res as HttpErrorResponse).status !== 200
@@ -113,7 +153,7 @@ export class SearchListComponent implements OnInit, OnChanges {
 
   openSearchDialog(fieldName: string = '') {
     let resultField: string = '';
-    let dataModel= DialogConfig.customer;
+    let dataModel = DialogConfig.customer;
     switch (fieldName) {
       case 'customerCodeFrom':
       case 'customerCodeTo':
@@ -153,33 +193,33 @@ export class SearchListComponent implements OnInit, OnChanges {
 
   get orderDateFrom() {
     return this.searchOutputForm.get('orderDateFrom');
-  } 
+  }
 
   get orderDateTo() {
     return this.searchOutputForm.get('orderDateTo');
-  } 
+  }
 
   get planOutputDateFrom() {
     return this.searchOutputForm.get('planOutputDateFrom');
-  } 
+  }
 
   get planOutputDateTo() {
     return this.searchOutputForm.get('planOutputDateTo');
-  } 
+  }
   get planWorkingDayFrom() {
     return this.searchOutputForm.get('planWorkingDayFrom');
-  } 
+  }
   get planWorkingDayTo() {
     return this.searchOutputForm.get('planWorkingDayTo');
-  } 
+  }
 
   get planDeliverDateFrom() {
     return this.searchOutputForm.get('planDeliverDateFrom');
-  } 
-  
+  }
+
   get planDeliverDateTo() {
     return this.searchOutputForm.get('planDeliverDateTo');
-  } 
+  }
 
   get slipNoFrom() {
     return this.searchOutputForm.get('slipNoFrom');
@@ -188,7 +228,7 @@ export class SearchListComponent implements OnInit, OnChanges {
   get slipNoTo() {
     return this.searchOutputForm.get('slipNoTo');
   }
-  
+
   get destinationCodeFrom() {
     return this.searchOutputForm.get('destinationCodeFrom');
   }
@@ -220,7 +260,7 @@ export class SearchListComponent implements OnInit, OnChanges {
   get ownerIdTo() {
     return this.searchOutputForm.get('ownerIdTo');
   }
-  
+
   get productCodeFrom() {
     return this.searchOutputForm.get('productCodeFrom');
   }
@@ -237,6 +277,4 @@ export class SearchListComponent implements OnInit, OnChanges {
     return this.searchOutputForm.get('repositoryIdTo');
   }
   
-
-
 }

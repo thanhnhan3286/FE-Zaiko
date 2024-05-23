@@ -1,32 +1,392 @@
 <div class="container">
+  <form [formGroup]="generalForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="info-title">
-        <div class="left-title">
-            <button class="btn btn-secondary">
-                <mat-icon svgIcon="icon-left" class="icon-angle-left"></mat-icon>
-                <span class="back-label">戻る</span>
-            </button>
-        </div>
-        <div class="right-title">
-            <span class="status-label">出庫状態</span>
-            <span class="receipt-status">未出庫</span>
-            <button class="btn btn-secondary isClosed">クローズ</button>
-            <button class="btn btn-warning">
-                <mat-icon svgIcon="icon-delete-red" class="delete-icon"></mat-icon>
-                <span class="delete-label">削除</span>
-            </button>
+      <div class="left-title">
+        <button class="btn btn-secondary">
+          <mat-icon svgIcon="icon-left" class="icon-angle-left"></mat-icon>
+          <span class="back-label">戻る</span>
+        </button>
+      </div>
+      <div class="right-title">
+        <span class="status-label">出庫状態</span>
+        <span class="receipt-status">未出庫</span>
+        <button class="btn btn-secondary isClosed">クローズ</button>
+        <button class="btn btn-warning">
+          <mat-icon svgIcon="icon-delete-red" class="delete-icon"></mat-icon>
+          <span class="delete-label">削除</span>
+        </button>
 
-            <button class="btn btn-primary">
-                <mat-icon svgIcon="icon-save" class="save-icon"></mat-icon>
-                <span class="save-label">保存</span>
-            </button>
-        </div>
+        <button class="btn btn-primary" type="submit">
+          <mat-icon svgIcon="icon-save" class="save-icon"></mat-icon>
+          <span class="save-label">保存</span>
+        </button>
+      </div>
     </div>
     <div class="info-content">
-        <div>11</div>
-        <div>22</div>
-        <div>33</div>
-        <div>44</div>
-        <div>55</div>
+      <div class="row-12">
+        <div class="group-6">
+          <div class="group-4fr">
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="orderDate">受注日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="orderDate"
+                  formControlName="orderDate"
+                />
+              </div>
+            </div>
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="planOutputDate">出庫予定日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="planOutputDate"
+                  formControlName="planOutputDate"
+                />
+              </div>
+            </div>
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="planWorkingDate">作業予定日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="planWorkingDate"
+                  formControlName="planWorkingDate"
+                />
+              </div>
+            </div>
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="planDeliverDate">納品予定日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="planDeliverDate"
+                  formControlName="planDeliverDate"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="group-6">
+          <div class="group-3fr">
+            <div class="info-wrapper-1">
+              <div class="input-label">
+                <label for="createSlipType">伝票区分</label>
+              </div>
+              <div>
+                <select
+                  class="no-edit"
+                  id="createSlipType"
+                  name="createSlipType"
+                  formControlName="createSlipType"
+                >
+                  <option value="1">通常入庫（自動採番）</option>
+                  <option value="2">通常入庫</option>
 
+                  <!-- <option *ngFor="let item of datable" [value]="item.repositoryId">
+                  {{ item.repositoryCode }} - {{ item.repositoryName }}
+                </option> -->
+                </select>
+              </div>
+            </div>
+            <div class="info-wrapper-2">
+              <div class="input-label">
+                <label for="slipNo">伝票番号</label>
+              </div>
+              <div>
+                <input
+                  class="input-data no-edit"
+                  type="text"
+                  id="slipNo"
+                  formControlName="slipNo"
+                />
+              </div>
+            </div>
+            <div class="info-wrapper-3">
+              <div class="input-label">
+                <label for="planSupplierSlipNo">客先伝票番号</label>
+              </div>
+              <div>
+                <input
+                  class="input-data"
+                  type="text"
+                  id="planSupplierSlipNo"
+                  formControlName="planSupplierSlipNo"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-8">
+        <div class="group-1fr">
+          <div class="info-wrapper-1">
+            <div class="label-cover">
+              <div class="input-label">
+                <label for="destinationCode">納品先コード</label>
+              </div>
+              <div class="dest-option">
+                <small class="label-checkbox">マスタ登録外出荷先指定</small>
+                <input
+                  type="checkbox"
+                  class="dest-checkbox"
+                  id="destinationOption"
+                  formControlName="destinationOption"
+                />
+              </div>
+            </div>
+
+            <div class="input-dialog">
+              <input
+                class="input-data"
+                type="text"
+                id="destinationCode"
+                name="destinationCode"
+                formControlName="destinationCode"
+              />
+              <mat-icon
+                (click)="openSearchDialog('destinationCode')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="group-7fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="departmentName">出荷先名称</label>
+            </div>
+            <div>
+              <input
+                class="input-data no-edit"
+                type="text"
+                id="departmentName"
+                formControlName="departmentName"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-8">
+        <div class="group-1fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="customerCode">請求先コード</label>
+            </div>
+            <div class="input-dialog">
+              <input
+                class="input-data no-edit"
+                type="text"
+                id="customerCode"
+                formControlName="customerCode"
+              />
+              <mat-icon
+                (click)="openSearchDialog('customerCode')"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="group-7fr">
+          <div class="group-21fr">
+            <div class="group-13fr">
+              <div class="info-wrapper-1">
+                <div class="input-label">
+                  <label for="customerName">出荷先名称</label>
+                </div>
+                <div>
+                  <input
+                    class="input-data no-edit"
+                    type="text"
+                    id="customerName"
+                    formControlName="customerName"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="group-8fr">
+              <div class="info-wrapper-1">
+                <div class="input-label">
+                  <label for="slipNote">伝票備考</label>
+                </div>
+                <div>
+                  <input
+                    class="input-data"
+                    type="text"
+                    id="slipNote"
+                    formControlName="slipNote"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-6">
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="repositoryId">倉庫</label>
+          </div>
+          <div>
+            <select
+              class="input-data"
+              type="text"
+              id="repositoryId"
+              formControlName="repositoryId"
+            >
+              <option *ngFor="let item of listRepository" [value]="item.repositoryId">
+                {{item.repositoryCode}} - {{item.repositoryName}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="routeCode">ルート</label>
+          </div>
+          <div>
+            <select
+              class="input-data"
+              type="text"
+              id="routeCode"
+              formControlName="routeCode"
+            >
+            <option *ngFor="let item of listRoute" [value]="item.routeCode">
+              {{item.routeCode}} - {{item.routeName}}
+            </option>
+            </select>
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="courseCode">コース</label>
+          </div>
+          <div>
+            <select
+              class="input-data"
+              type="text"
+              id="courseCode"
+              formControlName="courseCode"
+            >
+            <option *ngFor="let item of listCourse" [value]="item.courseCode">
+              {{item.courseCode}} - {{item.courseName}}
+            </option>
+            </select>
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="phoneNumber">納品先TEL</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+            />
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="faxNumber">出荷先FAX</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="faxNumber"
+              formControlName="faxNumber"
+            />
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="postCode">出荷先郵便番号</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="postCode"
+              formControlName="postCode"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row-6">
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="address1">納品先住所</label>
+          </div>
+          <div>
+            <input
+              class="input-data no-edit"
+              type="text"
+              id="address1"
+              formControlName="address1"
+            />
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="address2"></label>
+          </div>
+          <div>
+            <input
+              class="input-data no-edit"
+              type="text"
+              id="address2"
+              formControlName="address2"
+            />
+          </div>
+        </div>
+        <div class="group-2fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="address3"></label>
+            </div>
+            <div>
+              <input
+                class="input-data"
+                type="text"
+                id="address3"
+                formControlName="address3"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="group-2fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="address4"></label>
+            </div>
+            <div>
+              <input
+                class="input-data"
+                type="text"
+                id="address4"
+                formControlName="address4"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </form>
 </div>

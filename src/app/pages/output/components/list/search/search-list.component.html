@@ -16,6 +16,21 @@
               id="orderDateFrom"
               name="orderDateFrom"
               formControlName="orderDateFrom"
+              matTooltip="{{
+                searchOutputForm.get('orderDateFrom')?.status !== 'VALID' &&
+                searchOutputForm.get('orderDateFrom')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('orderDateFrom')?.errors,
+                      searchOutputForm.get('orderDateFrom')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('orderDateFrom')?.status !== 'VALID' &&
+                searchOutputForm.get('orderDateFrom')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
             <span class="icon-from-to">~</span>
 
@@ -25,9 +40,24 @@
               id="orderDateTo"
               name="orderDateTo"
               formControlName="orderDateTo"
+              matTooltip="{{
+                searchOutputForm.get('orderDateTo')?.status !== 'VALID' &&
+                searchOutputForm.get('orderDateTo')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('orderDateTo')?.errors,
+                      searchOutputForm.get('orderDateTo')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('orderDateTo')?.status !== 'VALID' &&
+                searchOutputForm.get('orderDateTo')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !orderDateFrom?.valid &&
@@ -41,7 +71,7 @@
                 The end date must be after the start date</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- Input wrapper 2 -->
@@ -58,6 +88,21 @@
               id="planOutputDateFrom"
               name="planOutputDateFrom"
               formControlName="planOutputDateFrom"
+              matTooltip="{{
+                searchOutputForm.get('planOutputDateFrom')?.status !==
+                  'VALID' && searchOutputForm.get('planOutputDateFrom')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('planOutputDateFrom')?.errors,
+                      searchOutputForm.get('planOutputDateFrom')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('planOutputDateFrom')?.status !==
+                  'VALID' && searchOutputForm.get('planOutputDateFrom')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
             <span class="icon-from-to">~</span>
             <input
@@ -66,9 +111,24 @@
               id="planOutputDateTo"
               name="planOutputDateTo"
               formControlName="planOutputDateTo"
+              matTooltip="{{
+                searchOutputForm.get('planOutputDateTo')?.status !== 'VALID' &&
+                searchOutputForm.get('planOutputDateTo')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('planOutputDateTo')?.errors,
+                      searchOutputForm.get('planOutputDateTo')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('planOutputDateTo')?.status !== 'VALID' &&
+                searchOutputForm.get('planOutputDateTo')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !planOutputDateFrom?.valid &&
@@ -82,12 +142,12 @@
                 End date must after before date</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- Input wrapper 3 -->
       <div class="input-wrapper">
-        <!-- Plan Wroking Day Input -->
+        <!-- Plan Working Day Input -->
         <div>
           <div class="input-label">
             <label for="planWorkingDayFrom">作業予定日</label>
@@ -99,6 +159,21 @@
               id="planWorkingDayFrom"
               name="planWorkingDayFrom"
               formControlName="planWorkingDayFrom"
+              matTooltip="{{
+                searchOutputForm.get('planWorkingDayFrom')?.status !==
+                  'VALID' && searchOutputForm.get('planWorkingDayFrom')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('planWorkingDayFrom')?.errors,
+                      searchOutputForm.get('planWorkingDayFrom')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('planWorkingDayFrom')?.status !==
+                  'VALID' && searchOutputForm.get('planWorkingDayFrom')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
             <span class="icon-from-to">~</span>
             <input
@@ -107,9 +182,24 @@
               id="planWorkingDayTo"
               name="planWorkingDayTo"
               formControlName="planWorkingDayTo"
+              matTooltip="{{
+                searchOutputForm.get('planWorkingDayTo')?.status !== 'VALID' &&
+                searchOutputForm.get('planWorkingDayTo')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('planWorkingDayTo')?.errors,
+                      searchOutputForm.get('planWorkingDayTo')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('planWorkingDayTo')?.status !== 'VALID' &&
+                searchOutputForm.get('planWorkingDayTo')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !planWorkingDayFrom?.valid &&
@@ -123,7 +213,7 @@
                 The end date must be after the start date</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- Input wrapper 4 -->
@@ -140,6 +230,23 @@
               id="planDeliverDateFrom"
               name="planDeliverDateFrom"
               formControlName="planDeliverDateFrom"
+              matTooltip="{{
+                searchOutputForm.get('planDeliverDateFrom')?.status !==
+                  'VALID' &&
+                searchOutputForm.get('planDeliverDateFrom')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('planDeliverDateFrom')?.errors,
+                      searchOutputForm.get('planDeliverDateFrom')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('planDeliverDateFrom')?.status !==
+                  'VALID' &&
+                searchOutputForm.get('planDeliverDateFrom')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
             <span class="icon-from-to">~</span>
             <input
@@ -148,9 +255,24 @@
               id="planDeliverDateTo"
               name="planDeliverDateTo"
               formControlName="planDeliverDateTo"
+              matTooltip="{{
+                searchOutputForm.get('planDeliverDateTo')?.status !== 'VALID' &&
+                searchOutputForm.get('planDeliverDateTo')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('planDeliverDateTo')?.errors,
+                      searchOutputForm.get('planDeliverDateTo')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('planDeliverDateTo')?.status !== 'VALID' &&
+                searchOutputForm.get('planDeliverDateTo')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !planDeliverDateFrom?.valid &&
@@ -164,7 +286,7 @@
                 The end date must be after the start date</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -184,6 +306,21 @@
               id="slipNoFrom"
               name="slipNoFrom"
               formControlName="slipNoFrom"
+              matTooltip="{{
+                searchOutputForm.get('slipNoFrom')?.status !== 'VALID' &&
+                searchOutputForm.get('slipNoFrom')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('slipNoFrom')?.errors,
+                      searchOutputForm.get('slipNoFrom')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('slipNoFrom')?.status !== 'VALID' &&
+                searchOutputForm.get('slipNoFrom')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
             <span class="icon-from-to">~</span>
             <input
@@ -192,9 +329,24 @@
               id="slipNoTo"
               name="slipNoTo"
               formControlName="slipNoTo"
+              matTooltip="{{
+                searchOutputForm.get('slipNoTo')?.status !== 'VALID' &&
+                searchOutputForm.get('slipNoTo')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('slipNoTo')?.errors,
+                      searchOutputForm.get('slipNoTo')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('slipNoTo')?.status !== 'VALID' &&
+                searchOutputForm.get('slipNoTo')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             />
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !slipNoFrom?.valid && (slipNoFrom?.dirty || slipNoFrom?.touched)
@@ -207,7 +359,7 @@
                 The end Slip No must be greater than the start Slip No</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="input-wrapper">
@@ -241,6 +393,21 @@
                 id="customerCodeFrom"
                 name="customerCodeFrom"
                 formControlName="customerCodeFrom"
+                matTooltip="{{
+                  searchOutputForm.get('customerCodeFrom')?.status !==
+                    'VALID' && searchOutputForm.get('customerCodeFrom')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('customerCodeFrom')?.errors,
+                        searchOutputForm.get('customerCodeFrom')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('customerCodeFrom')?.status !==
+                    'VALID' && searchOutputForm.get('customerCodeFrom')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('customerCodeFrom')"
@@ -257,6 +424,21 @@
                 id="customerCodeTo"
                 name="customerCodeTo"
                 formControlName="customerCodeTo"
+                matTooltip="{{
+                  searchOutputForm.get('customerCodeTo')?.status !== 'VALID' &&
+                  searchOutputForm.get('customerCodeTo')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('customerCodeTo')?.errors,
+                        searchOutputForm.get('customerCodeTo')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('customerCodeTo')?.status !== 'VALID' &&
+                  searchOutputForm.get('customerCodeTo')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('customerCodeTo')"
@@ -265,7 +447,7 @@
               ></mat-icon>
             </div>
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !customerCodeFrom?.valid &&
@@ -279,7 +461,7 @@
                 The end Code must be greater than the start Code</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -318,6 +500,23 @@
                 id="destinationCodeFrom"
                 name="destinationCodeFrom"
                 formControlName="destinationCodeFrom"
+                matTooltip="{{
+                  searchOutputForm.get('destinationCodeFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('destinationCodeFrom')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('destinationCodeFrom')?.errors,
+                        searchOutputForm.get('destinationCodeFrom')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('destinationCodeFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('destinationCodeFrom')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('destinationCodeFrom')"
@@ -334,6 +533,23 @@
                 id="destinationCodeTo"
                 name="destinationCodeTo"
                 formControlName="destinationCodeTo"
+                matTooltip="{{
+                  searchOutputForm.get('destinationCodeTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('destinationCodeTo')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('destinationCodeTo')?.errors,
+                        searchOutputForm.get('destinationCodeTo')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('destinationCodeTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('destinationCodeTo')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('destinationCodeTo')"
@@ -342,7 +558,7 @@
               ></mat-icon>
             </div>
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !destinationCodeFrom?.valid &&
@@ -356,7 +572,7 @@
                 The end Code must be greater than the start Code</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="input-wrapper">
@@ -390,6 +606,23 @@
                 id="supplierCodeFrom"
                 name="supplierCodeFrom"
                 formControlName="supplierCodeFrom"
+                matTooltip="{{
+                  searchOutputForm.get('supplierCodeFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('supplierCodeFrom')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('supplierCodeFrom')?.errors,
+                        searchOutputForm.get('supplierCodeFrom')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('supplierCodeFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('supplierCodeFrom')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('supplierCodeFrom')"
@@ -406,6 +639,23 @@
                 id="supplierCodeTo"
                 name="supplierCodeTo"
                 formControlName="supplierCodeTo"
+                matTooltip="{{
+                  searchOutputForm.get('supplierCodeTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('supplierCodeTo')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('supplierCodeTo')?.errors,
+                        searchOutputForm.get('supplierCodeTo')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('supplierCodeTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('supplierCodeTo')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('supplierCodeTo')"
@@ -414,7 +664,7 @@
               ></mat-icon>
             </div>
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !supplierCodeFrom?.valid &&
@@ -428,7 +678,7 @@
                 The end Code must be greater than the start Code</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -466,6 +716,23 @@
                 id="ownerIdFrom"
                 name="ownerIdFrom"
                 formControlName="ownerIdFrom"
+                matTooltip="{{
+                  searchOutputForm.get('ownerIdFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('ownerIdFrom')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('ownerIdFrom')?.errors,
+                        searchOutputForm.get('ownerIdFrom')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('ownerIdFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('ownerIdFrom')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('ownerIdFrom')"
@@ -482,6 +749,23 @@
                 id="ownerIdTo"
                 name="ownerIdTo"
                 formControlName="ownerIdTo"
+                matTooltip="{{
+                  searchOutputForm.get('ownerIdTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('ownerIdTo')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('ownerIdTo')?.errors,
+                        searchOutputForm.get('ownerIdTo')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('ownerIdTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('ownerIdTo')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('ownerIdTo')"
@@ -490,7 +774,7 @@
               ></mat-icon>
             </div>
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !ownerIdFrom?.valid &&
@@ -504,7 +788,7 @@
                 The end Code must be greater than the start Code</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="input-wrapper">
@@ -538,6 +822,23 @@
                 id="productCodeFrom"
                 name="productCodeFrom"
                 formControlName="productCodeFrom"
+                matTooltip="{{
+                  searchOutputForm.get('productCodeFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('productCodeFrom')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('productCodeFrom')?.errors,
+                        searchOutputForm.get('productCodeFrom')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('productCodeFrom')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('productCodeFrom')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('productCodeFrom')"
@@ -554,6 +855,23 @@
                 id="productCodeTo"
                 name="productCodeTo"
                 formControlName="productCodeTo"
+                matTooltip="{{
+                  searchOutputForm.get('productCodeTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('productCodeTo')?.touched
+                    ? util.getMessError(
+                        searchOutputForm.get('productCodeTo')?.errors,
+                        searchOutputForm.get('productCodeTo')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  searchOutputForm.get('productCodeTo')?.status !==
+                    'VALID' &&
+                  searchOutputForm.get('productCodeTo')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
               />
               <mat-icon
                 (click)="openSearchDialog('productCodeTo')"
@@ -562,7 +880,7 @@
               ></mat-icon>
             </div>
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !productCodeFrom?.valid &&
@@ -576,7 +894,7 @@
                 The end Code must be greater than the start Code</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -611,9 +929,26 @@
               id="repositoryIdFrom"
               name="repositoryIdFrom"
               formControlName="repositoryIdFrom"
+              matTooltip="{{
+                searchOutputForm.get('repositoryIdFrom')?.status !==
+                  'VALID' &&
+                searchOutputForm.get('repositoryIdFrom')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('repositoryIdFrom')?.errors,
+                      searchOutputForm.get('repositoryIdFrom')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('repositoryIdFrom')?.status !==
+                  'VALID' &&
+                searchOutputForm.get('repositoryIdFrom')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             >
               <option *ngFor="let item of datable" [value]="item.repositoryId">
-                {{ item.repositoryCode }} - {{ item.repositoryName }}
+                {{item.repositoryId}} - {{ item.repositoryCode }} - {{ item.repositoryName }}
               </option>
             </select>
             <span class="icon-from-to">~</span>
@@ -621,13 +956,30 @@
               id="repositoryIdTo"
               name="repositoryIdTo"
               formControlName="repositoryIdTo"
+              matTooltip="{{
+                searchOutputForm.get('repositoryIdTo')?.status !==
+                  'VALID' &&
+                searchOutputForm.get('repositoryIdTo')?.touched
+                  ? util.getMessError(
+                      searchOutputForm.get('repositoryIdTo')?.errors,
+                      searchOutputForm.get('repositoryIdTo')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                searchOutputForm.get('repositoryIdTo')?.status !==
+                  'VALID' &&
+                searchOutputForm.get('repositoryIdTo')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
             >
               <option *ngFor="let item of datable" [value]="item.repositoryId">
-                {{ item.repositoryCode }} - {{ item.repositoryName }}
+                {{item.repositoryId}} - {{ item.repositoryCode }} - {{ item.repositoryName }}
               </option>
             </select>
           </div>
-          <div
+          <!-- <div
             class="error-input"
             *ngIf="
               !repositoryIdFrom?.valid &&
@@ -641,7 +993,7 @@
                 The end Code must be greater than the start Code</small
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="input-wrapper">

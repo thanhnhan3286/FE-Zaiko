@@ -30,6 +30,7 @@ import { GeneralInfoComponent } from './pages/output/components/plan/components/
     AppRoutingModule,
     MatIconModule,
 
+
     // App core, common & dependency modules
     CoreModule.forRoot(),
     CommonAppModule.forRoot(),

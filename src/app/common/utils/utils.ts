@@ -310,18 +310,18 @@ export class Utils {
   }
   public static checkFromValue(formControlName: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      let val = control.value;
+      let val = +control.value;
 
       if (!control.parent?.get(formControlName)?.errors?.['required']) {
         control.parent?.get(formControlName)?.setErrors(null);
       }
 
-      if (val === null || val === '') return null;
+      if (val === null ) return null;
 
 
       if (control.parent?.get(formControlName)?.getRawValue() === null || control.parent?.get(formControlName)?.getRawValue() === '') return null;
 
-      if (val > control.parent?.get(formControlName)?.getRawValue()) {
+      if (val > +control.parent?.get(formControlName)?.getRawValue()) {
         control.parent?.get(formControlName)?.setErrors({ 'dateInvalidTo': true });
 
         return { 'dateInvalidFrom': true };
@@ -332,18 +332,18 @@ export class Utils {
   }
   public static checkToValue(formControlName: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      let val = control.value;
+      let val = +control.value;
 
       if (!control.parent?.get(formControlName)?.errors?.['required']) {
         control.parent?.get(formControlName)?.setErrors(null);
       }
 
-      if (val === null || val === '') return null;
+      if (val === null ) return null;
 
 
       if (control.parent?.get(formControlName)?.getRawValue() === null || control.parent?.get(formControlName)?.getRawValue() === '') return null;
 
-      if (control.parent?.get(formControlName)?.getRawValue() > val) {
+      if (+control.parent?.get(formControlName)?.getRawValue() > val) {
         control.parent?.get(formControlName)?.setErrors({ 'dateInvalidFrom': true });
 
         return { 'dateInvalidTo': true };
@@ -413,8 +413,7 @@ export class Utils {
   public static getMessError(error: ValidationErrors | null | undefined, fieldName?: string): string {
 
     if (!error) return '';
-
-
+    
     let key = Object.keys(error).toString().split(',');
     let keyError = key[key.length - 1];
     let mess = '';
@@ -491,10 +490,14 @@ export class Utils {
 
       case 'dateInvalidFrom':
         mess = `${fieldName}Fromは${fieldName}To以下の値を指定してください。`;
+        console.log(mess);
+        
         break;
 
       case 'dateInvalidTo':
         mess = `${fieldName}Toは${fieldName}From以上の値を指定してください。`;
+        console.log(mess);
+        
         break;
 
       case 'notFound':
