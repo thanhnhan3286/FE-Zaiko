@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services';
 import { map, Observable } from 'rxjs';
 import { ApiPath } from '@core/config';
-import { CourseResponse, OutputListResponse, OutputResponse, RouteResponse } from '../model/output-list';
+import { CourseResponse, OutputListResponse, OutputResponse, PlanOutputDetailListResponse, RouteResponse } from '../model/output-list';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,12 @@ export class OutputListService extends HttpService {
     return this.get(`${ApiPath.INVENTORY_OUTPUT_PLAN}/detail?id=${id}`).pipe(
       map((res: OutputResponse| HttpErrorResponse) => res)
     )
+  }
+
+  public getPlanOutputDetailList(id: number): Observable<PlanOutputDetailListResponse | HttpErrorResponse> {
+    return this.get(`${ApiPath.INVENTORY_OUTPUT_PLAN}/get-plan-detail?id=${id}`).pipe(
+      map((response: PlanOutputDetailListResponse | HttpErrorResponse) => response)
+    ) as Observable<PlanOutputDetailListResponse| HttpErrorResponse>;
   }
 
 

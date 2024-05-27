@@ -38,7 +38,11 @@ select {
   border: 1px solid #d6d6d6;
   border-radius: 2px;
   background-color: #ffffff;
+  outline: none;
+  font-size: 12px;
 }
+
+
 select {
   width: 100%;
   appearance: none;
@@ -121,6 +125,8 @@ select {
   padding-right: 2px;
   margin-left: 5px;
   width: 60%;
+  white-space: nowrap;
+
 }
 
 .title-detail {

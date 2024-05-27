@@ -42,7 +42,6 @@ export class GeneralInfoComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['dataResult'] && this.dataResult) {
       this.generalForm = this.initialForm();
-      console.log(this.generalForm);
     }
   }
 
@@ -51,12 +50,10 @@ export class GeneralInfoComponent implements OnInit, OnChanges {
     this.getAllRepository();
     this.getAllRoute();
     this.getAllCourse();
-    console.log(this.generalForm);
   }
 
   onSubmit() {
     const formValue = this.generalForm.value;
-    console.log(formValue);
   }
 
   initialForm(): FormGroup {
@@ -115,9 +112,11 @@ export class GeneralInfoComponent implements OnInit, OnChanges {
     switch (fieldName) {
       case 'customerCode':
         dataModel = DialogConfig.customer;
+
         break;
       case 'destinationCode':
         dataModel = DialogConfig.destination;
+
         break;
       default:
         break;
@@ -151,10 +150,7 @@ export class GeneralInfoComponent implements OnInit, OnChanges {
         ) {
           return;
         } else {
-          console.log(res);
-
           this.repositoryList = res as RepositoryResponse;
-          console.log(this.repositoryList);
         }
       });
   }
@@ -175,10 +171,7 @@ export class GeneralInfoComponent implements OnInit, OnChanges {
         ) {
           return;
         } else {
-          console.log(res);
-
           this.routeList = res as RouteResponse;
-          console.log(this.routeList);
         }
       });
   }
@@ -199,10 +192,7 @@ export class GeneralInfoComponent implements OnInit, OnChanges {
         ) {
           return;
         } else {
-          console.log(res);
-
           this.courseList = res as CourseResponse;
-          console.log(this.courseList);
         }
       });
   }

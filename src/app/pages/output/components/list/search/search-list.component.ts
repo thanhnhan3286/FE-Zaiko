@@ -15,14 +15,7 @@ import { SearchCriteriaRequest } from '../../../model/output-list';
 import { RepositoryResponse } from '../../../model/repositoryDto';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSeachApiComponent } from '@common/components/dialog-seach-api/dialog-search-api.component';
-import { DialogOptionApi } from '@common/models/dialog-seach-api/dialog-search-api.model';
 import { DialogConfig } from '@core/config/dialog.config';
-import {
-  checkFromDate,
-  checkFromValue,
-  checkToDate,
-  checkToValue,
-} from '../../../validate/custom-validator';
 import { Utils } from '@common/utils/utils';
 
 @Component({
@@ -35,7 +28,7 @@ export class SearchListComponent implements OnInit, OnChanges {
   @Input() isHiddenSearch: boolean = false;
   @Output() public search: EventEmitter<SearchCriteriaRequest> =
     new EventEmitter<SearchCriteriaRequest>();
-  data: DialogOptionApi = new DialogOptionApi();
+  // data: DialogOptionApi = new DialogOptionApi();
 
   searchOutputForm = new FormGroup({});
   public util = Utils;

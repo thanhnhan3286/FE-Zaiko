@@ -6,6 +6,9 @@
       <span class="create">追加</span>
     </button>
   </div>
+  <form >
+
+  </form>
   <div class="detail-content">
     <table class="detail-cover">
       <thead class="header-data">
@@ -35,11 +38,11 @@
           <th class="item w-10">出庫済</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngFor="let item of detailForm.controls; let i = index">
         <tr class="record">
           <td class="item w-10">
             <div class="batch-status">
-              <span class="batch-no">0001</span>
+              <span class="batch-no">{{ i + 1 }}</span>
               <mat-icon
                 svgIcon="icon-notification"
                 class="icon-notification"
@@ -49,22 +52,30 @@
           <td class="item w-20">
             <div class="input-cover">
               <div class="input-item">
-                <input class="product-code" />
+                <input class="product-code" formControlName="productCode" [value]="item.get('productCode')?.value" />
                 <mat-icon
                   svgIcon="icon-search-input"
                   class="icon-dialog"
                 ></mat-icon>
               </div>
-              <div class="standard">受注発注商品</div>
+              <div class="standard" formControlName = "standardInfo">{{item.get("standardInfo")?.value}}</div>
             </div>
           </td>
           <td class="item w-20">
             <div class="group-date">
               <div class="mng-type"></div>
               <div class="date-from-to">
-                <input type="date" class="input-date" />
+                <input
+                  type="date"
+                  class="input-date"
+                  [value]="item.get('datetimeMngFrom')?.value"
+                />
                 <span class="icon-from-to">~</span>
-                <input type="date" class="input-date" />
+                <input
+                  type="date"
+                  class="input-date"
+                  [value]="item.get('datetimeMngTo')?.value"
+                />
               </div>
             </div>
           </td>
@@ -79,11 +90,10 @@
                 <input
                   class="radio-btn"
                   type="radio"
-                  id="deliveryType1"
-                  name="deliveryType1"
-                  formControlName="deliveryType"
-                  value="0"
-                  checked
+                  id="deliveryType1_{{i}}"
+                  name="billingPackType"
+                  formControlName="billingPackType"
+                  value="1"
                 />
                 <span class="radio-name">ｹｰｽ</span>
               </div>
@@ -92,10 +102,10 @@
                 <input
                   class="radio-btn"
                   type="radio"
-                  id="deliveryType2"
-                  name="deliveryType2"
-                  formControlName="deliveryType"
-                  value="1"
+                  id="deliveryType2_{{i}}"
+                  name="billingPackType"
+                  formControlName="billingPackType"
+                  value="2"
                 />
                 <span class="radio-name">ﾎﾞｰﾙ</span>
               </div>
@@ -104,10 +114,10 @@
                 <input
                   class="radio-btn"
                   type="radio"
-                  id="deliveryType3"
-                  name="deliveryType3"
-                  formControlName="deliveryType"
-                  value="2"
+                  id="deliveryType3_{{i}}"
+                  name="billingPackType"
+                  formControlName="billingPackType"
+                  value="3"
                 />
                 <span class="radio-name">枚</span>
               </div>
@@ -139,9 +149,9 @@
           </td>
           <td class="item w-20">
             <div class="data-from-to">
-              <input type="text" class="input-data" />
+              <input type="text" class="input-data" [value]="item.get('numberMngFrom')?.value"/>
               <span class="icon-from-to">~</span>
-              <input type="text" class="input-data" />
+              <input type="text" class="input-data" [value]="item.get('numberMngTo')?.value"/>
             </div>
           </td>
           <td class="item w-15">
@@ -174,28 +184,28 @@
         <tr class="record">
           <td class="item w-10">
             <div class="batch-status">
-              <span class="batch-no">0001</span>
+              <span class="batch-no">{{item.get('batchNo')?.value}}</span>
             </div>
           </td>
           <td class="item w-20">
             <div class="input-cover">
               <div class="input-item">
-                <input class="product-code no-edit" />
+                <input class="product-code no-edit " [value]="item.get('customerCode')?.value"/>
               </div>
-              <div class="standard">受注発注商品</div>
+              <div class="standard">{{item.get('customerName')?.value}} {{item.get('department')?.value}}</div>
             </div>
           </td>
 
           <td class="item w-20">
             <div class="input-cover">
               <div class="input-item">
-                <input class="product-code" />
+                <input class="product-code" [value]="item.get('customerCode')?.value" />
                 <mat-icon
                   svgIcon="icon-search-input"
                   class="icon-dialog"
                 ></mat-icon>
               </div>
-              <div class="standard">受注発注商品</div>
+              <div class="standard">{{item.get('customerName')?.value}} {{item.get('department')?.value}}</div>
             </div>
           </td>
           <td class="item w-15">

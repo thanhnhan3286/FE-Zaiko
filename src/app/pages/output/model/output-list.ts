@@ -36,7 +36,6 @@ export class OutputModel {
   address2!: string;
   address3!: string;
   address4!: string;
-
 }
 export class OutputListModel {
   inventoryOutputId!: number;
@@ -70,7 +69,6 @@ export interface OutputResponse extends HttpClientResponse {
   data: OutputModel;
 }
 export interface SearchCriteriaModel {
-  
   page: number;
   orderDateFrom: string;
   orderDateTo: string;
@@ -126,4 +124,35 @@ export interface CourseModel {
 
 export interface CourseResponse extends HttpClientResponse {
   data: CourseModel[];
+}
+
+export class PlanOutputDetailListModel {
+  inventoryOutputId!: number;
+  planDetailId!: number;
+  batchStatus!: string;
+  batchNo!: string;
+  productId!: number;
+  productCode!: string;
+  standardInfo!: string;
+  datetimeMngFrom!: string;
+  datetimeMngTo!: string;
+  numberMngFrom!: string;
+  numberMngTo!: string;
+  customerCode!: string;
+  customerName!: string;
+  departmentName!: string;
+  repositoryId!: number;
+  repositoryCode!: string;
+  repositoryName!: string;
+  locationId!: number;
+  locationCode!: string;
+  locationName!: string;
+  inventoryProductType!: string;
+  billingPackType!: string;
+  totalPlanQuantity!: number;
+  planAmountTotal!: number;
+}
+
+export interface PlanOutputDetailListResponse extends HttpClientResponse {
+  data: PlanOutputDetailListModel[];
 }
