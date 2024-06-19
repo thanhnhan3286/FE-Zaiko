@@ -5,23 +5,19 @@ $width-nav-bar: 70px;
   display: flex;
   // overflow: hidden;
   width: 100%;
-  // height: 100%;
   background-color: $backGroundMain;
 }
 
 .nav-bar {
   width: $width-nav-bar;
   height: 100%;
+  z-index: 1000;
 }
 
 .children {
   width: calc(100% - $width-nav-bar);
-  // height: 100%;
   padding: 0 4px 4px 4px;
-  // margin-top: 48px;
   background-color: $backGroundMain;
-
-  // overflow-x: hidden;
 }
 
 nz-content {
@@ -75,7 +71,7 @@ nz-content {
 
 ::ng-deep .toast-success {
   background-image: url(../assets/icon-svg/check-circle.svg);
-  background-color: #26963F;
+  background-color: #26963f;
   color: $white;
 }
 
@@ -83,7 +79,7 @@ nz-content {
   box-shadow: none !important;
 }
 ::ng-deep .mat-checkbox-frame {
-  border-width: 1px!important;
+  border-width: 1px !important;
 }
 
 ::ng-deep .mat-datepicker-content {
@@ -93,7 +89,7 @@ nz-content {
 
     .mat-calendar-header {
       padding: 0;
-      .mat-calendar-controls{
+      .mat-calendar-controls {
         margin: 0% calc(9.7142857143% - 16px);
       }
     }
@@ -101,7 +97,6 @@ nz-content {
 }
 
 ::ng-deep .mat-checkbox-disabled {
-
   &:not(.mat-checkbox-checked) {
     .mat-checkbox-frame {
       background-color: $color-netural;
@@ -187,8 +182,8 @@ nz-content {
 }
 
 ::ng-deep .ng-select {
- // position: initial !important;
-  border: 1px solid #D6D6D6;
+  // position: initial !important;
+  border: 1px solid #d6d6d6;
   border-radius: 2px;
   height: 30px;
   background: white;
@@ -196,8 +191,8 @@ nz-content {
 
   .ng-input {
     height: 100%;
-    padding-left: .75em;
-    padding-right: .75em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
     cursor: pointer !important;
 
     input {
@@ -220,8 +215,8 @@ nz-content {
   .ng-value {
     display: flex;
     align-items: center;
-    padding-left: .75em;
-    margin-right: .75em;
+    padding-left: 0.75em;
+    margin-right: 0.75em;
   }
 
   .ng-option {
@@ -241,7 +236,6 @@ nz-content {
     background: rgba(0, 0, 0, 0.04);
     color: rgba(0, 0, 0, 0.87);
   }
-
 }
 
 ::ng-deep .ng-dropdown-panel {
@@ -259,18 +253,18 @@ nz-content {
   z-index: 989;
 }
 
-::ng-deep ng-dropdown-panel{
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+::ng-deep ng-dropdown-panel {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-::ng-deep ng-select.ng-invalid.ng-touched  {
+::ng-deep ng-select.ng-invalid.ng-touched {
   border-color: #dc3545;
   // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
 }
 
-::ng-deep .ng-select.ng-select-disabled{
+::ng-deep .ng-select.ng-select-disabled {
   cursor: none;
   background-color: #f2f2f2;
-  border: 1px solid #D6D6D6;
+  border: 1px solid #d6d6d6;
 }
-

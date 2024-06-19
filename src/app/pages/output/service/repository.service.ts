@@ -13,9 +13,11 @@ export class RepositoryService extends HttpService {
     super(http);
   }
 
-  public getAllRepository(): Observable<RepositoryResponse | HttpErrorResponse> {
+  public getAllRepository(): Observable<
+    RepositoryResponse | HttpErrorResponse
+  > {
     return this.get(`${ApiPath.REPOSITORY}/get-all`).pipe(
-      map((res: RepositoryResponse ) => res)
+      map((res: RepositoryResponse) => res)
     ) as Observable<RepositoryResponse | HttpErrorResponse>;
   }
 }

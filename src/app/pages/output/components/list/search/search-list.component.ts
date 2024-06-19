@@ -101,11 +101,19 @@ export class SearchListComponent implements OnInit, OnChanges {
       ownerIdFrom: new FormControl('', [this.util.checkFromValue('ownerIdTo')]),
       ownerIdTo: new FormControl('', [this.util.checkToValue('ownerIdFrom')]),
       ownerName: new FormControl(''),
-      productCodeFrom: new FormControl('', [this.util.checkFromValue('productCodeTo')]),
-      productCodeTo: new FormControl('', [this.util.checkToValue('productCodeFrom')]),
+      productCodeFrom: new FormControl('', [
+        this.util.checkFromValue('productCodeTo'),
+      ]),
+      productCodeTo: new FormControl('', [
+        this.util.checkToValue('productCodeFrom'),
+      ]),
       productName: new FormControl(''),
-      repositoryIdFrom: new FormControl('', [this.util.checkFromValue('repositoryIdTo')]),
-      repositoryIdTo: new FormControl('', [this.util.checkToValue('repositoryIdFrom')]),
+      repositoryIdFrom: new FormControl('', [
+        this.util.checkFromValue('repositoryIdTo'),
+      ]),
+      repositoryIdTo: new FormControl('', [
+        this.util.checkToValue('repositoryIdFrom'),
+      ]),
       batchNo: new FormControl(''),
       deliveryType: new FormControl('0'),
       deliveryStatus: new FormControl('0'),
@@ -269,5 +277,4 @@ export class SearchListComponent implements OnInit, OnChanges {
   get repositoryIdTo() {
     return this.searchOutputForm.get('repositoryIdTo');
   }
-  
 }

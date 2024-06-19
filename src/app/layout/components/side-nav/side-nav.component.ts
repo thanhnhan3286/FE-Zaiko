@@ -75,7 +75,7 @@ export class SideNavComponent implements OnInit, AfterViewChecked {
     // this.name = userLogin.userName;
 
     this.role ='ADMIN';
-    this.name = "A";
+    this.name = "DuyTV";
 
     router.events.forEach((event) => {
 

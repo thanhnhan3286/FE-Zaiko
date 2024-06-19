@@ -1,6 +1,6 @@
 import { ApiPath } from './api-path';
 
-export const DialogConfig : any= {
+export const DialogConfig: any = {
   customer: {
     title: 'Search Customer Dialog',
     url: `${ApiPath.CUSTOMER}/get-all`,
@@ -25,7 +25,7 @@ export const DialogConfig : any= {
         isHidden: false,
       },
     ],
-    listParam: []
+    listParam: [],
   },
   destination: {
     title: 'Search Destination Dialog',
@@ -51,7 +51,7 @@ export const DialogConfig : any= {
         isHidden: false,
       },
     ],
-    listParam: []
+    listParam: [],
   },
 
   suppplier: {
@@ -78,7 +78,7 @@ export const DialogConfig : any= {
         isHidden: false,
       },
     ],
-    listParam: []
+    listParam: [],
   },
 
   product: {
@@ -105,7 +105,7 @@ export const DialogConfig : any= {
         isHidden: false,
       },
     ],
-    listParam: []
+    listParam: [],
   },
 
   owner: {
@@ -132,6 +132,90 @@ export const DialogConfig : any= {
         isHidden: false,
       },
     ],
-    listParam: []
+    listParam: [],
+  },
+
+  inventoryProduct: {
+    title: 'Search Inventory Product Dialog',
+    url: `${ApiPath.PRODUCT_INVENTORY}/get-inventory-product`,
+    columReturn:
+      'inventoryId, customerCode, customerName, locationId, datetimeMngTo, numberMngTo, inventoryProductType, productCode, repositoryId',
+    width: 1200,
+    height: 2200,
+    listHeader: [
+      {
+        titleHeader: 'InventoryId',
+        nameColum: 'inventoryId',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'CustomerCode',
+        nameColum: 'customerCode',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'CustomerName',
+        nameColum: 'customerName',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'LocationId',
+        nameColum: 'locationId',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'DatetimeMngTo',
+        nameColum: 'datetimeMngTo',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'NumberMngTo',
+        nameColum: 'numberMngTo',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'InventoryProductType',
+        nameColum: 'inventoryProductType',
+        width: 150,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'ProductCode',
+        nameColum: 'productCode',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+      {
+        titleHeader: 'RepositoryId',
+        nameColum: 'repositoryId',
+        width: 100,
+        align: 'center',
+        sticky: false,
+        isHidden: false,
+      },
+    ],
+    listParam: [],
   },
 };

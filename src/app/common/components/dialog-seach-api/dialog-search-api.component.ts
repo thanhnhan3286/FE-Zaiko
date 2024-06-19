@@ -1,8 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogOptionApi, ListHeaderApi } from '@common/models/dialog-seach-api/dialog-search-api.model';
+import {
+  DialogOptionApi,
+  ListHeaderApi,
+} from '@common/models/dialog-seach-api/dialog-search-api.model';
 import { DialogSeachApiService } from '@common/services/dialog-search-api.service';
 import { HttpClientResponse } from '@core/models';
 import { LoadingSpinnerDialogService } from '@layout/services';
@@ -10,7 +21,7 @@ import { LoadingSpinnerDialogService } from '@layout/services';
 @Component({
   selector: 'app-dialog-seach-api',
   templateUrl: './dialog-search-api.component.html',
-  styleUrls: ['./dialog-search-api.component.scss']
+  styleUrls: ['./dialog-search-api.component.scss'],
 })
 export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
   @ViewChild('inputSearch') inputSearch: ElementRef | undefined;
@@ -22,12 +33,11 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
     height: 0,
     columReturn: '',
     listHeader: [],
-    listParam: []
+    listParam: [],
   };
   public dataChoosse: string = '';
   public listData: Array<any> = [];
   public dataSeach: string = '';
-
 
   public constructor(
     private dialogRef: MatDialogRef<DialogSeachApiComponent>,
@@ -41,14 +51,15 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
     this.dialogRef.disableClose = true;
   }
 
-
   public handelSetInitData(data: DialogOptionApi): void {
     let option = new DialogOptionApi();
 
     this.dataOption = { ...option, ...data };
+    console.log(this.dataOption);
+    
     const list: ListHeaderApi[] = [];
 
-    data.listHeader.map(x => {
+    data.listHeader.map((x) => {
       const listHeader = new ListHeaderApi();
       let a = new ListHeaderApi();
 
@@ -61,43 +72,35 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
   public ngOnInit(): void {
     this.handelGetdataInit();
 
-    setTimeout(()=>{
-    this.inputSearch?.nativeElement.focus();
-    },1000);
-
-
+    setTimeout(() => {
+      this.inputSearch?.nativeElement.focus();
+    }, 1000);
   }
 
   public ngAfterViewChecked(): void {
-
-
     this.cdr.detectChanges();
   }
 
-
-
-
   public handelGetdataInit(): void {
-
     this.widthTable = this.dataOption.listHeader.reduce(
-      (total, thing) => total + (thing.width && !thing.isHidden ? thing.width : 0),
+      (total, thing) =>
+        total + (thing.width && !thing.isHidden ? thing.width : 0),
       56
     );
     this.loadingDialog.showSpinner(true);
-    this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption).subscribe((x: HttpClientResponse|any) => {
-    this.loadingDialog.showSpinner(false);
+    this.dialogService
+      .getDataDialogCommon(this.dataOption.url, this.dataOption)
+      .subscribe((x: HttpClientResponse | any) => {
+        this.loadingDialog.showSpinner(false);
 
-    if (x) {
-      this.listData = [...x];
-    }
-    
+        if (x) {
+          this.listData = [...x];
+        }
 
-    // if (x.data) {
-    //     this.listData = [...x.data];
-    //   }
-    });
-
-
+        // if (x.data) {
+        //     this.listData = [...x.data];
+        //   }
+      });
   }
   public handelCancel(): void {
     this.dialogRef.close();
@@ -124,33 +127,29 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
 
   public handelSeach(): void {
     this.loadingDialog.showSpinner(true);
-    this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption, this.dataSeach).subscribe((x: HttpClientResponse|any) => {
-    this.loadingDialog.showSpinner(false);
-  
-    // if (x.data) {
-    //     this.listData = [...x.data];
-    //     this.dataChoosse = '';
-    //   }
-    if(x) {
-      this.listData = [...x];
-      this.dataChoosse = '';
-    } else {
-      this.listData = [];
-    }
-    }
-  );
-  
+    this.dialogService
+      .getDataDialogCommon(this.dataOption.url, this.dataOption, this.dataSeach)
+      .subscribe((x: HttpClientResponse | any) => {
+        this.loadingDialog.showSpinner(false);
 
+        // if (x.data) {
+        //     this.listData = [...x.data];
+        //     this.dataChoosse = '';
+        //   }
+        if (x) {
+          this.listData = [...x];
+          this.dataChoosse = '';
+        } else {
+          this.listData = [];
+        }
+      });
   }
 
   public handelDblclick(data: any): void {
     this.dialogRef.close(JSON.parse(JSON.stringify(data)));
-
-    
   }
 
   public handelButtonOk(): void {
     this.dialogRef.close(JSON.parse(this.dataChoosse));
-    
   }
 }

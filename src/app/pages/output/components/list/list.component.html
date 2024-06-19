@@ -1,18 +1,13 @@
-
-    <app-title (displaySearchArea)="displaySearchForm($event)"></app-title>
-    <app-search-list 
-        (search)="onSearch($event)"
-        [isHiddenSearch]="isHiddenSearch"
-    >
-    </app-search-list>
-    <app-show-list 
-        [dataResult]=dataResult
-        [totalItems]=totalItems
-        [currentPage]=currentPage
-        [totalPages]=totalPages
-        (loadMoreEvent)="loadMore()"
-        [isHiddenSearch] = "isHiddenSearch"
-        >
-    </app-show-list>
-   
-
+<div class="cover"></div>
+<app-title (displaySearchArea)="displaySearchForm($event)"></app-title>
+<app-search-list (search)="onSearch($event)" [isHiddenSearch]="isHiddenSearch">
+</app-search-list>
+<app-show-list
+  [dataResult]="dataResult"
+  [totalItems]="totalItems"
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (loadMoreEvent)="loadMore()"
+  [isHiddenSearch]="isHiddenSearch"
+>
+</app-show-list>

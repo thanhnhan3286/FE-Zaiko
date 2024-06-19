@@ -25,7 +25,7 @@
     border: 1px solid #d6d6d6;
     border-radius: 2px;
     padding: 7.5px 8px;
-    // font-size: 16px;
+
     height: 35px;
     color: #485764;
     letter-spacing: 0.014em;
@@ -36,7 +36,7 @@
     border: 1px solid #d6d6d6;
     border-radius: 2px;
     padding: 7.5px 2px;
-    // font-size: 16px;
+
     height: 35px;
     color: #485764;
     letter-spacing: 0.014em;
@@ -208,17 +208,3 @@
   position: relative;
   width: 100%;
 }
-.error-input {
-  text-align: center;
-  min-height: 2px;
-}
-
-.error-message {
-  color: red;
-}
-
-// .example-tooltip-red {
-//   color: #eb5757 !important;
-//   outline: #eb5757;
-//   font-size: 12px;
-// }

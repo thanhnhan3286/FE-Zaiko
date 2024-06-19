@@ -13,7 +13,6 @@ import { LoadingSpinnerDialogService } from '@layout/services/loading-spinner-di
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-
   searchCriteria!: SearchCriteriaRequest;
   dataResult: OutputListModel[] = [];
   totalItems: number = 0;
@@ -32,7 +31,6 @@ export class ListComponent implements OnInit {
   displaySearchForm(isHidden: boolean) {
     this.isHiddenSearch = isHidden;
     console.log(this.isHiddenSearch);
-    
   }
 
   onSearch(searchCondition: SearchCriteriaRequest) {

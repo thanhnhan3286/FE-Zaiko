@@ -342,7 +342,8 @@ export const MENU_DATA: Array<ISideMenuNode> = [
         icon: 'icon-list',
         category: 'delivery',
         name: 'common.menu.delivery.entering-the-delivery-schedule',
-        route: '/delivery/inventory-output-list',
+        route: '/output/list',
+        // route: '/delivery/inventory-output-list',
         order: 1,
         children: []
       },
@@ -352,7 +353,8 @@ export const MENU_DATA: Array<ISideMenuNode> = [
         icon: 'icon-product',
         category: 'delivery',
         name: 'common.menu.delivery.scheduled-to-be-delivered-closed',
-        route: '/delivery/inventory-output-plan',
+        route: '/output/list/plan',
+        // route: '/delivery/inventory-output-plan',
         order: 2,
         children: []
       },

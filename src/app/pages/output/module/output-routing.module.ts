@@ -12,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'list', component: ListComponent },
       {path:'list/plan/:id',component: PlanComponent},
+      {path:'list/plan',component: PlanComponent},
       // {path: 'actual', component: },
       // {path: 'correction',component: }
     ]

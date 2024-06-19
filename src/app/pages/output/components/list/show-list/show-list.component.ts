@@ -24,7 +24,6 @@ export class ShowListComponent implements OnInit, OnChanges {
   @Input() isHiddenSearch: boolean = false;
   @Output() loadMoreEvent = new EventEmitter<void>();
 
-
   constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes) console.log(this.dataResult);

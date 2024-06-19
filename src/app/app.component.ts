@@ -1,4 +1,9 @@
-import { AfterViewChecked, Component, HostListener, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  HostListener,
+  OnInit,
+} from '@angular/core';
 import { LoginService } from '@auth/services/login.service';
 import { IconService } from './core/services/icon/icon.service';
 import { LocalizationService } from './core/services/localization/localization.service';
@@ -10,7 +15,7 @@ import { TitleService } from '@common/services/title.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewChecked {
   public title = 'Zaiko';
@@ -19,22 +24,20 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private icon: IconService,
     private localizationService: LocalizationService,
     public loginService: LoginService,
-    public handelSpaceService : HandelSpaceService,
-    public handelTabindexService : HandelTabindexService,
+    public handelSpaceService: HandelSpaceService,
+    public handelTabindexService: HandelTabindexService,
     private config: NgSelectConfig,
     private titleService: TitleService
   ) {
     this.config.bindValue = 'value';
     this.config.bindLabel = 'label';
-    this.config.notFoundText= 'データがありません。';
+    this.config.notFoundText = 'データがありません。';
   }
 
   @HostListener('document:keydown.Space', ['$event'])
   public escape(event: KeyboardEvent): void {
     this.handelSpaceService.handelSpace(event);
-
   }
-
 
   public ngOnInit(): void {
     this.icon.init();
@@ -45,6 +48,4 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.handelTabindexService.handelTabindex();
     this.titleService.updateTitle();
   }
-
-
 }

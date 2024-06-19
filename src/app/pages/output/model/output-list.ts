@@ -68,6 +68,7 @@ export interface OutputListResponse extends HttpClientResponse {
 export interface OutputResponse extends HttpClientResponse {
   data: OutputModel;
 }
+
 export interface SearchCriteriaModel {
   page: number;
   orderDateFrom: string;
@@ -133,6 +134,7 @@ export class PlanOutputDetailListModel {
   batchNo!: string;
   productId!: number;
   productCode!: string;
+  productName!: string;
   standardInfo!: string;
   datetimeMngFrom!: string;
   datetimeMngTo!: string;
@@ -149,10 +151,152 @@ export class PlanOutputDetailListModel {
   locationName!: string;
   inventoryProductType!: string;
   billingPackType!: string;
+  csPlanQuantity!: number;
+  blPlanQuantity!: number;
+  psPlanQuantity!: number;
   totalPlanQuantity!: number;
   planAmountTotal!: number;
+  planCsPrice!: number;
+  planBlPrice!: number;
+  planPiecePrice!: number;
 }
 
 export interface PlanOutputDetailListResponse extends HttpClientResponse {
   data: PlanOutputDetailListModel[];
+}
+
+export class CustomerInfoModel {
+  destinationCode!: string;
+  departmentName!: string;
+  customerCode!: string;
+  customerName!: string;
+  leadTime!: string;
+  routeCode!: string;
+  courseCode!: string;
+  phoneNumber!: string;
+  faxNumber!: string;
+  postCode!: string;
+  address1!: string;
+  address2!: string;
+  address3!: string;
+  address4!: string;
+}
+
+export interface CustomerInfoResponse extends HttpClientResponse {
+  data: CustomerInfoModel;
+}
+
+export class CustomerDestModel {
+  postCode!: string;
+  address1!: string;
+  address2!: string;
+  address3!: string;
+  address4!: string;
+}
+
+export interface CustomerDestResponse extends HttpClientResponse {
+  data: CustomerDestModel;
+}
+
+export class ProductInfoModel {
+  productCode!: string;
+  productName!: string;
+  standardInfo!: string;
+  datetimeMngType!: string;
+  isDatetimeMng!: string;
+  isNumberMng!: string;
+  isPackCsOutput!: string;
+  isPackBlOutput!: string;
+  isPieceOutput!: string;
+  packCsAmount!: number;
+  packBlAmount!: number;
+  packCsPrice!: number;
+  packBlPrice!: number;
+  piecePrice!: number;
+}
+
+export interface ProductInfoResponse extends HttpClientResponse {
+  data: ProductInfoModel;
+}
+
+export interface LocationModel {
+  locationId: number;
+  locationCode: string;
+}
+
+export interface LocationResponse extends HttpClientResponse {
+  data: LocationModel[];
+}
+
+export interface CommonSettingModel {
+  value1: string;
+  value2: string;
+}
+
+export interface CommonSettingResponse extends HttpClientResponse {
+  data: CommonSettingModel[];
+}
+
+export class OutputPlanModel {
+  orderDate!: string;
+  planOutputDate!: string;
+  planWorkingDate!: string;
+  planDeliverDate!: string;
+  createSlipType!: string;
+  slipNo!: string;
+  planSupplierSlipNo!: string;
+  slipNote!: string;
+  destinationCode!: string;
+  departmentName!: string;
+  destinationOption!: boolean;
+  customerCode!: string;
+  customerName!: string;
+  repositoryId!: number;
+  routeCode!: string;
+  courseCode!: string;
+  postCode!: string;
+  faxNumber!: string;
+  phoneNumber!: string;
+  address1!: string;
+  address2!: string;
+  address3!: string;
+  address4!: string;
+}
+
+export interface OutputPlanResponse extends HttpClientResponse {
+  data: OutputPlanModel;
+}
+
+export class OutputDetailModel {
+  productCode!: string;
+  productName!: string;
+  datetimeMngType!: string;
+  datetimeMngFrom!: string;
+  datetimeMngTo!: string;
+  repositoryId!: number;
+  billingPackType!: string;
+  standardInfo!: string;
+  numberMngFrom!: string;
+  numberMngTo!: string;
+  locationId!: number;
+  csPlanQuantity!: number;
+  blPlanQuantity!: number;
+  psPlanQuantity!: number;
+  customerCode!: string;
+  customerName!: string;
+  inventoryProductType!: string;
+  totalPlanQuantity!: number;
+}
+
+export interface OutputDetailResponse extends HttpClientResponse {
+  data: OutputDetailModel[];
+}
+
+export class InventoryOutputData {
+  outputPlan!: OutputPlanModel;
+  detailList!: OutputDetailModel[];
+}
+
+export class InventoryOutput {
+  inventoryOutputId!: number;
 }

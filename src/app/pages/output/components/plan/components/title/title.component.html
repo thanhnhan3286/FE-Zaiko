@@ -1,24 +1,17 @@
 <div class="header">
-    <div class="breadcrumb">
-      <span class="parent-title"> 出庫 </span>
-      <mat-icon svgIcon="icon-right" class="icon-angle-right"></mat-icon>
-      <span class="child-title">出庫一覧</span>
-      <mat-icon svgIcon="icon-right" class="icon-angle-right"></mat-icon>
-      <span class="child-title">出庫予定入力</span>
-    </div>
-    <div class="right-side">
-      <div class="working-date">
-        <div class="lable-date">
-          業務日付
-        </div>
-        <div class="show-date">
-          2024/05/14
-        </div>
+  <div class="breadcrumb">
+    <span class="parent-title"> 出庫 </span>
+    <mat-icon svgIcon="icon-right" class="icon-angle-right"></mat-icon>
+    <span class="child-title">出庫一覧</span>
+    <mat-icon svgIcon="icon-right" class="icon-angle-right"></mat-icon>
+    <span class="child-title">出庫予定入力</span>
+  </div>
+  <div class="right-side">
+    <div class="working-date">
+      <div class="lable-date">業務日付</div>
+      <div class="show-date">
+        {{currentDate}}
       </div>
-      <button class="btn-chevron" type="button">
-        <!-- <mat-icon *ngIf="!isHidden" svgIcon="icon-chervon-up" class="btn-chervon-up" (click) = "displaySearchForm()"></mat-icon>
-        <mat-icon *ngIf="isHidden" svgIcon="icon-chervon-down" class="btn-chervon-up" (click) = "displaySearchForm()"></mat-icon> -->
-      </button>
     </div>
   </div>
-  
+</div>

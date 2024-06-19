@@ -1,224 +1,1161 @@
 <div class="container">
-  <div class="title-detail">
-    <span class="title-name">出庫明細一覧</span>
-    <button class="btn btn-primary">
-      <mat-icon svgIcon="icon-plus" class="icon-plus"></mat-icon>
-      <span class="create">追加</span>
-    </button>
-  </div>
-  <form >
+  <form [formGroup]="detailForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="info-title">
+      <div class="left-title">
+        <button class="btn btn-secondary">
+          <a class="back-output" [routerLink]="['/output/list']">
+            <mat-icon svgIcon="icon-left" class="icon-angle-left"></mat-icon>
+            <span class="back-label">戻る</span>
+          </a>
+        </button>
+      </div>
+      <div class="right-title">
+        <span class="status-label">出庫状態</span>
+        <span class="receipt-status">未出庫</span>
+        <button
+          class="btn btn-secondary isClosed"
+          type="button"
+          (click)="toggleState()"
+        >
+          {{ buttonState ? "クローズ解除" : "クローズ" }}
+        </button>
+        <button class="btn btn-warning" [disabled]="!detailForm.valid" type="button" (click)="deleteOutputAndDetail()">
+          <mat-icon svgIcon="icon-delete-red" class="delete-icon"></mat-icon>
+          <span class="delete-label">削除</span>
+        </button>
 
-  </form>
-  <div class="detail-content">
-    <table class="detail-cover">
-      <thead class="header-data">
-        <tr class="header-row">
-          <th class="item w-10">No.</th>
-          <th class="item w-20">商品</th>
-          <th class="item w-20">管理日付</th>
-          <th class="item w-15">倉庫</th>
-          <th class="item w-20">請求荷姿</th>
-          <th class="item w-10">未出庫</th>
-          <th class="item w-5" rowSpan="3"></th>
-        </tr>
-        <tr>
-          <th class="item w-10">バッチ番号</th>
-          <th class="item w-20">支払先</th>
-          <th class="item w-20">所有者</th>
-          <th class="item w-15">在庫状態</th>
-          <th class="item w-20">合計</th>
-          <th class="item w-10"></th>
-        </tr>
-        <tr>
-          <th class="item w-10">バッチ状態</th>
-          <th class="item w-20">規格</th>
-          <th class="item w-20">管理番号</th>
-          <th class="item w-15">ロケーション</th>
-          <th class="item w-20">出庫数量</th>
-          <th class="item w-10">出庫済</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let item of detailForm.controls; let i = index">
-        <tr class="record">
-          <td class="item w-10">
-            <div class="batch-status">
-              <span class="batch-no">{{ i + 1 }}</span>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!detailForm.valid"
+        >
+          <mat-icon svgIcon="icon-save" class="save-icon"></mat-icon>
+          <span class="save-label">保存</span>
+        </button>
+      </div>
+    </div>
+    <div class="info-content" formGroupName="outputPlan">
+      <div class="row-12">
+        <div class="group-6">
+          <div class="group-4fr">
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="orderDate">受注日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="orderDate"
+                  formControlName="orderDate"
+                  matTooltip="{{
+                    detailForm.get('outputPlan.orderDate')?.status !==
+                      'VALID' && detailForm.get('outputPlan.orderDate')?.touched
+                      ? util.getMessError(
+                          detailForm.get('outputPlan.orderDate')?.errors,
+                          detailForm.get('outputPlan.orderDate')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailForm.get('outputPlan.orderDate')?.status !==
+                      'VALID' && detailForm.get('outputPlan.orderDate')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                />
+              </div>
+            </div>
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="planOutputDate">出庫予定日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="planOutputDate"
+                  formControlName="planOutputDate"
+                  matTooltip="{{
+                    detailForm.get('outputPlan.planOutputDate')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planOutputDate')?.touched
+                      ? util.getMessError(
+                          detailForm.get('outputPlan.planOutputDate')?.errors,
+                          detailForm.get('outputPlan.planOutputDate')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailForm.get('outputPlan.planOutputDate')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planOutputDate')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                />
+              </div>
+            </div>
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="planWorkingDate">作業予定日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="planWorkingDate"
+                  formControlName="planWorkingDate"
+                  matTooltip="{{
+                    detailForm.get('outputPlan.planWorkingDate')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planWorkingDate')?.touched
+                      ? util.getMessError(
+                          detailForm.get('outputPlan.planWorkingDate')?.errors,
+                          detailForm.get('outputPlan.planWorkingDate')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailForm.get('outputPlan.planWorkingDate')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planWorkingDate')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                />
+              </div>
+            </div>
+            <div class="date-wrapper">
+              <div class="input-label">
+                <label for="planDeliverDate">納品予定日</label>
+              </div>
+              <div>
+                <input
+                  class="input-date"
+                  type="date"
+                  id="planDeliverDate"
+                  formControlName="planDeliverDate"
+                  matTooltip="{{
+                    detailForm.get('outputPlan.planDeliverDate')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planDeliverDate')?.touched
+                      ? util.getMessError(
+                          detailForm.get('outputPlan.planDeliverDate')?.errors,
+                          detailForm.get('outputPlan.planDeliverDate')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailForm.get('outputPlan.planDeliverDate')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planDeliverDate')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="group-6">
+          <div class="group-3fr">
+            <div class="info-wrapper-1">
+              <div class="input-label">
+                <label for="createSlipType">伝票区分</label>
+              </div>
+              <div>
+                <select
+                  id="createSlipType"
+                  name="createSlipType"
+                  formControlName="createSlipType"
+                >
+                  <option value="0">通常入庫（自動採番）</option>
+                  <option value="1">通常入庫</option>
+                </select>
+              </div>
+            </div>
+            <div class="info-wrapper-1">
+              <div class="input-label">
+                <label for="slipNo">伝票番号</label>
+              </div>
+              <div>
+                <input
+                  class="input-data"
+                  type="text"
+                  id="slipNo"
+                  formControlName="slipNo"
+                  matTooltip="{{
+                    detailForm.get('outputPlan.slipNo')?.status !== 'VALID' &&
+                    detailForm.get('outputPlan.slipNo')?.touched
+                      ? util.getMessError(
+                          detailForm.get('outputPlan.slipNo')?.errors,
+                          detailForm.get('outputPlan.slipNo')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailForm.get('outputPlan.slipNo')?.status !== 'VALID' &&
+                    detailForm.get('outputPlan.slipNo')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                  (blur)="checkSlipNoExist()"
+                />
+              </div>
+            </div>
+            <div class="info-wrapper-1">
+              <div class="input-label">
+                <label for="planSupplierSlipNo">客先伝票番号</label>
+              </div>
+              <div>
+                <input
+                  class="input-data"
+                  type="text"
+                  id="planSupplierSlipNo"
+                  formControlName="planSupplierSlipNo"
+                  matTooltip="{{
+                    detailForm.get('outputPlan.planSupplierSlipNo')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planSupplierSlipNo')?.touched
+                      ? util.getMessError(
+                          detailForm.get('outputPlan.planSupplierSlipNo')
+                            ?.errors,
+                          detailForm.get('outputPlan.planSupplierSlipNo')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailForm.get('outputPlan.planSupplierSlipNo')?.status !==
+                      'VALID' &&
+                    detailForm.get('outputPlan.planSupplierSlipNo')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-8">
+        <div class="group-1fr">
+          <div class="info-wrapper-1">
+            <div class="label-cover">
+              <div class="input-label">
+                <label for="destinationCode">納品先コード</label>
+              </div>
+              <div class="dest-option">
+                <small class="label-checkbox">マスタ登録外出荷先指定</small>
+                <input
+                  type="checkbox"
+                  class="dest-checkbox"
+                  id="destinationOption"
+                  formControlName="destinationOption"
+                />
+              </div>
+            </div>
+
+            <div class="input-dialog">
+              <input
+                class="input-data"
+                type="text"
+                id="destinationCode"
+                name="destinationCode"
+                formControlName="destinationCode"
+                matTooltip="{{
+                  detailForm.get('outputPlan.destinationCode')?.status !==
+                    'VALID' &&
+                  detailForm.get('outputPlan.destinationCode')?.touched
+                    ? util.getMessError(
+                        detailForm.get('outputPlan.destinationCode')?.errors,
+                        detailForm.get('outputPlan.destinationCode')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  detailForm.get('outputPlan.destinationCode')?.status !==
+                    'VALID' &&
+                  detailForm.get('outputPlan.destinationCode')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
+              />
               <mat-icon
-                svgIcon="icon-notification"
-                class="icon-notification"
+                [class.disabled]="
+                  detailForm.get('outputPlan.destinationCode')?.disabled
+                "
+                [hidden]="buttonState"
+                (click)="openSearchDialog('destinationCode', -1)"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
               ></mat-icon>
             </div>
-          </td>
-          <td class="item w-20">
-            <div class="input-cover">
-              <div class="input-item">
-                <input class="product-code" formControlName="productCode" [value]="item.get('productCode')?.value" />
-                <mat-icon
-                  svgIcon="icon-search-input"
-                  class="icon-dialog"
-                ></mat-icon>
-              </div>
-              <div class="standard" formControlName = "standardInfo">{{item.get("standardInfo")?.value}}</div>
+          </div>
+        </div>
+        <div class="group-7fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="departmentName">納品先名称</label>
             </div>
-          </td>
-          <td class="item w-20">
-            <div class="group-date">
-              <div class="mng-type"></div>
-              <div class="date-from-to">
-                <input
-                  type="date"
-                  class="input-date"
-                  [value]="item.get('datetimeMngFrom')?.value"
-                />
-                <span class="icon-from-to">~</span>
-                <input
-                  type="date"
-                  class="input-date"
-                  [value]="item.get('datetimeMngTo')?.value"
-                />
+            <div>
+              <input
+                class="input-data"
+                type="text"
+                id="departmentName"
+                formControlName="departmentName"
+                matTooltip="{{
+                  detailForm.get('outputPlan.departmentName')?.status !==
+                    'VALID' &&
+                  detailForm.get('outputPlan.departmentName')?.touched
+                    ? util.getMessError(
+                        detailForm.get('outputPlan.departmentName')?.errors,
+                        detailForm.get('outputPlan.departmentName')?.value
+                      )
+                    : ''
+                }}"
+                matTooltipClass="{{
+                  detailForm.get('outputPlan.departmentName')?.status !==
+                    'VALID' &&
+                  detailForm.get('outputPlan.departmentName')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-8">
+        <div class="group-1fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="customerCode">請求先コード</label>
+            </div>
+            <div class="input-dialog">
+              <input
+                class="input-data"
+                type="text"
+                id="customerCode"
+                formControlName="customerCode"
+              />
+
+              <mat-icon
+                [class.disabled]="
+                  detailForm.get('outputPlan')?.get('customerCode')?.disabled
+                "
+                (click)="openSearchDialog('customerCode', -1)"
+                class="icon-dialog"
+                svgIcon="icon-search-input"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="group-7fr">
+          <div class="group-21fr">
+            <div class="group-13fr">
+              <div class="info-wrapper-1">
+                <div class="input-label">
+                  <label for="customerName">出荷先名称</label>
+                </div>
+                <div>
+                  <input
+                    class="input-data"
+                    type="text"
+                    id="customerName"
+                    formControlName="customerName"
+                    matTooltip="{{
+                      detailForm.get('outputPlan.customerName')?.status !==
+                        'VALID' &&
+                      detailForm.get('outputPlan.customerName')?.touched
+                        ? util.getMessError(
+                            detailForm.get('outputPlan.customerName')?.errors,
+                            detailForm.get('outputPlan.customerName')?.value
+                          )
+                        : ''
+                    }}"
+                    matTooltipClass="{{
+                      detailForm.get('outputPlan.customerName')?.status !==
+                        'VALID' &&
+                      detailForm.get('outputPlan.customerName')?.touched
+                        ? 'example-tooltip-red'
+                        : ''
+                    }}"
+                  />
+                </div>
               </div>
             </div>
-          </td>
-          <td class="item w-15">
-            <select name="" id="">
-              <option value="1">aaa</option>
+            <div class="group-8fr">
+              <div class="info-wrapper-1">
+                <div class="input-label">
+                  <label for="slipNote">伝票備考</label>
+                </div>
+                <div>
+                  <input
+                    class="input-data"
+                    type="text"
+                    id="slipNote"
+                    formControlName="slipNote"
+                    matTooltip="{{
+                      detailForm.get('outputPlan.slipNote')?.status !==
+                        'VALID' &&
+                      detailForm.get('outputPlan.slipNote')?.touched
+                        ? util.getMessError(
+                            detailForm.get('outputPlan.slipNote')?.errors,
+                            detailForm.get('outputPlan.slipNote')?.value
+                          )
+                        : ''
+                    }}"
+                    matTooltipClass="{{
+                      detailForm.get('outputPlan.slipNote')?.status !==
+                        'VALID' &&
+                      detailForm.get('outputPlan.slipNote')?.touched
+                        ? 'example-tooltip-red'
+                        : ''
+                    }}"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-6">
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="repositoryIdOutput">倉庫</label>
+          </div>
+          <div>
+            <select
+              class="input-data"
+              type="text"
+              id="repositoryIdOutput"
+              formControlName="repositoryId"
+              matTooltip="{{
+                detailForm.get('outputPlan.repositoryId')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.repositoryId')?.touched
+                  ? util.getMessError(
+                      detailForm.get('outputPlan.repositoryId')?.errors,
+                      detailForm.get('outputPlan.repositoryId')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                detailForm.get('outputPlan.repositoryId')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.repositoryId')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
+            >
+              <option
+                *ngFor="let item of listRepository"
+                [value]="item.repositoryId"
+              >
+                {{ item.repositoryCode }} - {{ item.repositoryName }}
+              </option>
             </select>
-          </td>
-          <td class="item w-20">
-            <div class="input-radio-cover">
-              <div class="radio-item">
-                <input
-                  class="radio-btn"
-                  type="radio"
-                  id="deliveryType1_{{i}}"
-                  name="billingPackType"
-                  formControlName="billingPackType"
-                  value="1"
-                />
-                <span class="radio-name">ｹｰｽ</span>
-              </div>
-
-              <div class="radio-item">
-                <input
-                  class="radio-btn"
-                  type="radio"
-                  id="deliveryType2_{{i}}"
-                  name="billingPackType"
-                  formControlName="billingPackType"
-                  value="2"
-                />
-                <span class="radio-name">ﾎﾞｰﾙ</span>
-              </div>
-
-              <div class="radio-item">
-                <input
-                  class="radio-btn"
-                  type="radio"
-                  id="deliveryType3_{{i}}"
-                  name="billingPackType"
-                  formControlName="billingPackType"
-                  value="3"
-                />
-                <span class="radio-name">枚</span>
-              </div>
-            </div>
-          </td>
-          <td class="item w-10">
-            <div class="no-edit">58400</div>
-          </td>
-          <td class="item w-5" rowspan="3">
-            <div class="action">
-              <button class="btn-delete">
-                <mat-icon
-                  class="icon-delete"
-                  svgIcon="icon-delete-red"
-                ></mat-icon>
-              </button>
-              <button class="btn-copy">
-                <mat-icon class="icon-copy" svgIcon="icon-copy"></mat-icon>
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr class="record">
-          <td class="item w-10">
-            <div class="batch-indicate">未処理</div>
-          </td>
-          <td class="item w-20">
-            <input type="text" class="input-w100" />
-          </td>
-          <td class="item w-20">
-            <div class="data-from-to">
-              <input type="text" class="input-data" [value]="item.get('numberMngFrom')?.value"/>
-              <span class="icon-from-to">~</span>
-              <input type="text" class="input-data" [value]="item.get('numberMngTo')?.value"/>
-            </div>
-          </td>
-          <td class="item w-15">
-            <select class="no-edit" id="">
-              <option value="1">aaa</option>
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="routeCode">ルート</label>
+          </div>
+          <div>
+            <select
+              class="input-data"
+              type="text"
+              id="routeCode"
+              formControlName="routeCode"
+            >
+              <option *ngFor="let item of listRoute" [value]="item.routeCode">
+                {{ item.routeCode }} - {{ item.routeName }}
+              </option>
             </select>
-          </td>
-          <td class="item w-20">
-            <div class="input-quantity-cover">
-              <div class="quantity-item">
-                <div class="quantity"></div>
-                <span class="quantity-label">ﾎﾞｰﾙ</span>
-              </div>
-
-              <div class="quantity-item">
-                <div class="quantity"></div>
-                <span class="quantity-label">ﾎﾞｰﾙ</span>
-              </div>
-
-              <div class="quantity-item">
-                <div class="quantity"></div>
-                <span class="quantity-label">ﾎﾞｰﾙ</span>
-              </div>
-            </div>
-          </td>
-          <td class="item w-10">
-            <div class="no-edit">58400</div>
-          </td>
-        </tr>
-        <tr class="record">
-          <td class="item w-10">
-            <div class="batch-status">
-              <span class="batch-no">{{item.get('batchNo')?.value}}</span>
-            </div>
-          </td>
-          <td class="item w-20">
-            <div class="input-cover">
-              <div class="input-item">
-                <input class="product-code no-edit " [value]="item.get('customerCode')?.value"/>
-              </div>
-              <div class="standard">{{item.get('customerName')?.value}} {{item.get('department')?.value}}</div>
-            </div>
-          </td>
-
-          <td class="item w-20">
-            <div class="input-cover">
-              <div class="input-item">
-                <input class="product-code" [value]="item.get('customerCode')?.value" />
-                <mat-icon
-                  svgIcon="icon-search-input"
-                  class="icon-dialog"
-                ></mat-icon>
-              </div>
-              <div class="standard">{{item.get('customerName')?.value}} {{item.get('department')?.value}}</div>
-            </div>
-          </td>
-          <td class="item w-15">
-            <select name="" id="">
-              <option value="1">aaa</option>
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="courseCode">コース</label>
+          </div>
+          <div>
+            <select
+              class="input-data"
+              type="text"
+              id="courseCode"
+              formControlName="courseCode"
+            >
+              <option *ngFor="let item of listCourse" [value]="item.courseCode">
+                {{ item.courseCode }} - {{ item.courseName }}
+              </option>
             </select>
-          </td>
-          <td class="item w-20">
-            <div class="w-30 no-edit">58400</div>
-          </td>
-          <td class="item w-10"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="phoneNumber">納品先TEL</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              matTooltip="{{
+                detailForm.get('outputPlan.phoneNumber')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.phoneNumber')?.touched
+                  ? util.getMessError(
+                      detailForm.get('outputPlan.phoneNumber')?.errors,
+                      detailForm.get('outputPlan.phoneNumber')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                detailForm.get('outputPlan.phoneNumber')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.phoneNumber')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
+            />
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="faxNumber">出荷先FAX</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="faxNumber"
+              formControlName="faxNumber"
+              matTooltip="{{
+                detailForm.get('outputPlan.faxNumber')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.faxNumber')?.touched
+                  ? util.getMessError(
+                      detailForm.get('outputPlan.faxNumber')?.errors,
+                      detailForm.get('outputPlan.faxNumber')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                detailForm.get('outputPlan.faxNumber')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.faxNumber')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
+            />
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="postCode">出荷先郵便番号</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="postCode"
+              formControlName="postCode"
+              (blur)="getCustomerDestAddress($event)"
+              matTooltip="{{
+                detailForm.get('outputPlan.postCode')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.postCode')?.touched
+                  ? util.getMessError(
+                      detailForm.get('outputPlan.postCode')?.errors,
+                      detailForm.get('outputPlan.postCode')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                detailForm.get('outputPlan.postCode')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.postCode')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row-6">
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="address1">納品先住所</label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="address1"
+              formControlName="address1"
+              matTooltip="{{
+                detailForm.get('outputPlan.address1')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.address1')?.touched
+                  ? util.getMessError(
+                      detailForm.get('outputPlan.address1')?.errors,
+                      detailForm.get('outputPlan.address1')?.value
+                    )
+                  : ''
+              }}"
+              matTooltipClass="{{
+                detailForm.get('outputPlan.address1')?.status !== 'VALID' &&
+                detailForm.get('outputPlan.address1')?.touched
+                  ? 'example-tooltip-red'
+                  : ''
+              }}"
+            />
+          </div>
+        </div>
+        <div class="info-wrapper-1">
+          <div class="input-label">
+            <label for="address2"></label>
+          </div>
+          <div>
+            <input
+              class="input-data"
+              type="text"
+              id="address2"
+              formControlName="address2"
+            />
+          </div>
+        </div>
+        <div class="group-2fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="address3"></label>
+            </div>
+            <div>
+              <input
+                class="input-data"
+                type="text"
+                id="address3"
+                formControlName="address3"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="group-2fr">
+          <div class="info-wrapper-1">
+            <div class="input-label">
+              <label for="address4"></label>
+            </div>
+            <div>
+              <input
+                class="input-data"
+                type="text"
+                id="address4"
+                formControlName="address4"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plan Detail Info -->
+
+    <div class="title-detail">
+      <span class="title-name">出庫明細一覧</span>
+      <button class="btn btn-primary" type="button" (click)="addDetail()">
+        <mat-icon svgIcon="icon-plus" class="icon-plus"></mat-icon>
+        <span class="create">追加</span>
+      </button>
+    </div>
+    <div class="detail-content" formArrayName="detailList">
+      <table class="detail-cover">
+        <thead class="header-data">
+          <tr class="header-row">
+            <th class="item w-10">No.</th>
+            <th class="item w-20">商品</th>
+            <th class="item w-20">管理日付</th>
+            <th class="item w-15">倉庫</th>
+            <th class="item w-20">請求荷姿</th>
+            <th class="item w-10">未出庫</th>
+            <th class="item w-5" rowSpan="3"></th>
+          </tr>
+          <tr>
+            <th class="item w-10">バッチ番号</th>
+            <th class="item w-20">支払先</th>
+            <th class="item w-20">所有者</th>
+            <th class="item w-15">ロケーション</th>
+            <th class="item w-20">出庫数量</th>
+            <th class="item w-10">出庫済</th>
+          </tr>
+          <tr>
+            <th class="item w-10">バッチ状態</th>
+            <th class="item w-20">規格</th>
+            <th class="item w-20">管理番号</th>
+            <th class="item w-15">在庫状態</th>
+            <th class="item w-20">合計</th>
+            <th class="item w-10"></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of detailList.controls; let i = index">
+          <ng-container [formGroupName]="i">
+            <tr class="record">
+              <td class="item w-10">
+                <div class="batch-status">
+                  <!-- <span class="batch-no">0001</span> -->
+                  <span class="batch-no">{{ i + 1 }}</span>
+                  <mat-icon
+                    [class.disabled]="
+                      detailList.at(i).get('repositoryId')?.status !==
+                        'VALID' ||
+                      detailList.at(i).get('productCode')?.status !== 'VALID'
+                    "
+                    svgIcon="icon-notification"
+                    class="icon-notification"
+                    (click)="openSearchDialog('inventoryProduct', i)"
+                  ></mat-icon>
+                </div>
+              </td>
+              <td class="item w-20">
+                <div class="input-cover">
+                  <div class="input-item">
+                    <input
+                      class="product-code"
+                      type="text"
+                      id="productCode_{{ i }}"
+                      name="productCode"
+                      formControlName="productCode"
+                      (change)="updateProductInfo(i)"
+                      matTooltip="{{
+                        detailList.at(i).get('productCode')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('productCode')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('productCode')?.errors,
+                              detailList.at(i).get('productCode')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('productCode')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('productCode')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <mat-icon
+                      (click)="openSearchDialog('productCode', i)"
+                      svgIcon="icon-search-input"
+                      class="icon-dialog"
+                    ></mat-icon>
+                  </div>
+                  <!-- <div class="standard" formControlName = "standardInfo"></div> -->
+                  <input class="standard" formControlName="productName" />
+                </div>
+              </td>
+              <td class="item w-20">
+                <div class="group-date">
+                  <div class="mng-type">
+                    {{ getProductMngType(item.get("datetimeMngType")?.value) }}
+                  </div>
+                  <div class="date-from-to">
+                    <input
+                      type="date"
+                      class="input-date"
+                      formControlName="datetimeMngFrom"
+                      matTooltip="{{
+                        detailList.at(i).get('datetimeMngFrom')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('datetimeMngFrom')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('datetimeMngFrom')?.errors,
+                              detailList.at(i).get('datetimeMngFrom')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('datetimeMngFrom')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('datetimeMngFrom')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="icon-from-to">~</span>
+                    <input
+                      type="date"
+                      class="input-date"
+                      formControlName="datetimeMngTo"
+                      matTooltip="{{
+                        detailList.at(i).get('datetimeMngTo')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('datetimeMngTo')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('datetimeMngTo')?.errors,
+                              detailList.at(i).get('datetimeMngTo')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('datetimeMngTo')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('datetimeMngTo')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                  </div>
+                </div>
+              </td>
+              <td class="item w-15">
+                <select
+                  type="text"
+                  id="repositoryIdPlan_{{ i }}"
+                  formControlName="repositoryId"
+                  (change)="getLocationByRepo($event, i)"
+                  matTooltip="{{
+                    detailList.at(i).get('repositoryId')?.status !== 'VALID' &&
+                    detailList.at(i).get('repositoryId')?.touched
+                      ? util.getMessError(
+                          detailList.at(i).get('repositoryId')?.errors,
+                          detailList.at(i).get('repositoryId')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailList.at(i).get('repositoryId')?.status !== 'VALID' &&
+                    detailList.at(i).get('repositoryId')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                >
+                  <option
+                    *ngFor="let item of listRepository"
+                    [value]="item.repositoryId"
+                  >
+                    {{ item.repositoryCode }} - {{ item.repositoryName }}
+                  </option>
+                </select>
+              </td>
+              <td class="item w-20">
+                <div class="input-radio-cover">
+                  <div class="radio-item">
+                    <input
+                      class="radio-btn"
+                      type="radio"
+                      value="1"
+                      id="cs_{{ i }}"
+                      formControlName="billingPackType"
+                      (click)="updatePackType('1', i)"
+                      matTooltip="{{
+                        detailList.at(i).get('billingPackType')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('billingPackType')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('billingPackType')?.errors,
+                              detailList.at(i).get('billingPackType')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('billingPackType')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('billingPackType')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="radio-name">ｹｰｽ</span>
+                  </div>
+
+                  <div class="radio-item">
+                    <input
+                      class="radio-btn"
+                      type="radio"
+                      value="2"
+                      id="bl_{{ i }}"
+                      formControlName="billingPackType"
+                      (click)="updatePackType('2', i)"
+                      matTooltip="{{
+                        detailList.at(i).get('billingPackType')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('billingPackType')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('billingPackType')?.errors,
+                              detailList.at(i).get('billingPackType')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('billingPackType')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('billingPackType')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="radio-name">ﾎﾞｰﾙ</span>
+                  </div>
+
+                  <div class="radio-item">
+                    <input
+                      class="radio-btn"
+                      type="radio"
+                      value="3"
+                      id="ps_{{ i }}"
+                      formControlName="billingPackType"
+                      (click)="updatePackType('3', i)"
+                      matTooltip="{{
+                        detailList.at(i).get('billingPackType')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('billingPackType')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('billingPackType')?.errors,
+                              detailList.at(i).get('billingPackType')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('billingPackType')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('billingPackType')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="radio-name">枚</span>
+                  </div>
+                </div>
+              </td>
+              <td class="item w-10">
+                <div class="no-edit">
+                  {{
+                    item.get("totalPlanQuantity")?.value -
+                      item.get("totalActualQuantity")?.value
+                  }}
+                </div>
+              </td>
+              <td class="item w-5" rowspan="3">
+                <div class="action">
+                  <button
+                    class="btn-delete"
+                    type="button"
+                    (click)="deleteDetail(i)"
+                  >
+                    <mat-icon
+                      class="icon-delete"
+                      svgIcon="icon-delete-red"
+                    ></mat-icon>
+                  </button>
+                  <button
+                    [disabled]="item.status !== 'VALID'"
+                    class="btn-copy"
+                    type="button"
+                    (click)="doubleDetailAtIndex(i)"
+                  >
+                    <mat-icon class="icon-copy" svgIcon="icon-copy"></mat-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr class="record">
+              <td class="item w-10">
+                <div class="batch-indicate">未処理</div>
+              </td>
+              <td class="item w-20">
+                <div class="no-edit">
+                  {{
+                    item.get("standardInfo")?.value
+                      ? item.get("standardInfo")?.value
+                      : ""
+                  }}
+                </div>
+              </td>
+              <td class="item w-20">
+                <div class="data-from-to">
+                  <input
+                    type="text"
+                    class="input-data"
+                    formControlName="numberMngFrom"
+                  />
+                  <span class="icon-from-to">~</span>
+                  <input
+                    type="text"
+                    class="input-data"
+                    formControlName="numberMngTo"
+                  />
+                </div>
+              </td>
+              <td class="item w-15">
+                <select
+                  type="text"
+                  id="locationId_{{ i }}"
+                  formControlName="locationId"
+                  matTooltip="{{
+                    detailList.at(i).get('locationId')?.status !== 'VALID' &&
+                    detailList.at(i).get('locationId')?.touched
+                      ? util.getMessError(
+                          detailList.at(i).get('locationId')?.errors,
+                          detailList.at(i).get('locationId')?.value
+                        )
+                      : ''
+                  }}"
+                  matTooltipClass="{{
+                    detailList.at(i).get('locationId')?.status !== 'VALID' &&
+                    detailList.at(i).get('locationId')?.touched
+                      ? 'example-tooltip-red'
+                      : ''
+                  }}"
+                >
+                  <option
+                    *ngFor="
+                      let item of detailList.at(i).get('locations')?.value
+                    "
+                    [value]="item.locationId"
+                  >
+                    {{ item.locationCode }}
+                  </option>
+                </select>
+              </td>
+              <td class="item w-20">
+                <div class="input-quantity-cover">
+                  <div class="quantity-item">
+                    <input
+                      class="quantity"
+                      formControlName="csPlanQuantity"
+                      (blur)="calculateTotalPlanQuantity(i)"
+                      matTooltip="{{
+                        detailList.at(i).get('csPlanQuantity')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('csPlanQuantity')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('csPlanQuantity')?.errors,
+                              detailList.at(i).get('csPlanQuantity')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('csPlanQuantity')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('csPlanQuantity')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="quantity-label">ﾎﾞｰﾙ</span>
+                  </div>
+
+                  <div class="quantity-item">
+                    <input
+                      class="quantity"
+                      formControlName="blPlanQuantity"
+                      (blur)="calculateTotalPlanQuantity(i)"
+                      matTooltip="{{
+                        detailList.at(i).get('blPlanQuantity')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('blPlanQuantity')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('blPlanQuantity')?.errors,
+                              detailList.at(i).get('blPlanQuantity')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('blPlanQuantity')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('blPlanQuantity')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="quantity-label">ﾎﾞｰﾙ</span>
+                  </div>
+
+                  <div class="quantity-item">
+                    <input
+                      class="quantity"
+                      formControlName="psPlanQuantity"
+                      (blur)="calculateTotalPlanQuantity(i)"
+                      matTooltip="{{
+                        detailList.at(i).get('psPlanQuantity')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('psPlanQuantity')?.touched
+                          ? util.getMessError(
+                              detailList.at(i).get('psPlanQuantity')?.errors,
+                              detailList.at(i).get('psPlanQuantity')?.value
+                            )
+                          : ''
+                      }}"
+                      matTooltipClass="{{
+                        detailList.at(i).get('psPlanQuantity')?.status !==
+                          'VALID' &&
+                        detailList.at(i).get('psPlanQuantity')?.touched
+                          ? 'example-tooltip-red'
+                          : ''
+                      }}"
+                    />
+                    <span class="quantity-label">ﾎﾞｰﾙ</span>
+                  </div>
+                </div>
+              </td>
+              <td class="item w-10">
+                <input class="no-edit" formControlName="totalActualQuantity" />
+              </td>
+            </tr>
+            <tr class="record">
+              <td class="item w-10">
+                <div class="batch-status">
+                  <input class="batch-no" formControlName="batchNo" />
+                </div>
+              </td>
+              <td class="item w-20">
+                <div class="input-cover">
+                  <div class="input-item">
+                    <input class="product-code" />
+                  </div>
+                  <div class="standard"></div>
+                </div>
+              </td>
+
+              <td class="item w-20">
+                <div class="input-cover">
+                  <div class="input-item">
+                    <input
+                      class="product-code"
+                      name="customerCode"
+                      formControlName="customerCode"
+                    />
+                    <mat-icon
+                      svgIcon="icon-search-input"
+                      class="icon-dialog"
+                      (click)="openSearchDialog('customerCode', i)"
+                    ></mat-icon>
+                  </div>
+                  <input
+                    class="standard"
+                    name="customerName"
+                    formControlName="customerName"
+                  />
+                </div>
+              </td>
+              <td class="item w-15">
+                <select
+                  type="text"
+                  id="inventoryProductType_{{ i }}"
+                  formControlName="inventoryProductType"
+                >
+                  <option
+                    *ngFor="let item of listCommonSetting"
+                    [value]="item.value1"
+                  >
+                    {{ item.value1 }} - {{ item.value2 }}
+                  </option>
+                </select>
+              </td>
+              <td class="item w-20">
+                <input
+                  class="w-30 no-edit"
+                  formControlName="totalPlanQuantity"
+                />
+              </td>
+              <td class="item w-10"></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </form>
 </div>

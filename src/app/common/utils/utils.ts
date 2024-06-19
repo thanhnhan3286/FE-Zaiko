@@ -1,4 +1,5 @@
-import { async } from '@angular/core/testing';
+
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpResponse } from '@angular/common/http';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
@@ -8,12 +9,18 @@ import * as Encoding from 'encoding-japanese';
 import { isNull, isNumber, isString, isUndefined } from 'lodash';
 import * as moment from 'moment';
 import { environment } from '@env/environment';
+import { OutputListService } from 'src/app/pages/output/service/output-list.service';
 
 
 export class Utils {
 
   public static endTimeISO = 'T23:59:59.999Z';
   public static userLoginLocalStore = 'user_login';
+
+  public constructor(private outputListService: OutputListService ) {
+
+  }
+  
 
   public static getStatusString(status: any, type: string): any {
 
@@ -409,6 +416,10 @@ export class Utils {
   public static coverStringToInt(value: string): number {
     return typeof (value) === 'number' ? parseInt(value) : 0;
   }
+
+  //Check slip_no existing in database:
+
+
 
   public static getMessError(error: ValidationErrors | null | undefined, fieldName?: string): string {
 
