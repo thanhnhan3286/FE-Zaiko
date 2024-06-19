@@ -116,6 +116,8 @@ export class IconService {
     this.iconRegistry.addSvgIcon('chevron-up', this.sanitizer.bypassSecurityTrustResourceUrl(domain + '/assets/icon-svg/chevron-up.svg'));
     this.iconRegistry.addSvgIcon('chevron-down', this.sanitizer.bypassSecurityTrustResourceUrl(domain + '/assets/icon-svg/chevron-down.svg'));
     this.iconRegistry.addSvgIcon('icon-before', this.sanitizer.bypassSecurityTrustResourceUrl(domain + '/assets/icon-svg/before.svg'));
+    this.iconRegistry.addSvgIcon('angle-right', this.sanitizer.bypassSecurityTrustResourceUrl(domain + '/assets/icon-svg/angle-right.svg'));
+
 
   }
 }

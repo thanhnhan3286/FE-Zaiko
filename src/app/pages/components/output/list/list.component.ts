@@ -13,17 +13,17 @@ import { OutputPlanService } from 'src/app/pages/services/output-plan.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  dataSearchModel: DataSearchModel= new DataSearchModel;
+  dataSearchModel: DataSearchModel = new DataSearchModel;
   search!: SearchParams;
-  public isSearchFormVisible: boolean = true; 
+  public isSearchFormVisible: boolean = true;
 
-  constructor(private router: Router ,private outputListService: OutputListService,private outputPlanService: OutputPlanService,  private loadingDialog: LoadingSpinnerDialogService) { }
+  constructor(private router: Router, private outputListService: OutputListService, private outputPlanService: OutputPlanService, private loadingDialog: LoadingSpinnerDialogService) { }
   ngOnInit() {
 
   }
 
   eventEmitForm(request: SearchParams) {
-    this.search=request;
+    this.search = request;
     this.loadingDialog.showSpinner(true);
     this.outputListService.getOuputListWithFilters(request).subscribe(
       (res) => {
@@ -34,49 +34,47 @@ export class ListComponent implements OnInit {
           console.log('Data:', res.content);
           this.dataSearchModel.results = res.content;
           this.dataSearchModel.totalPage = res.totalPages;
-          this.dataSearchModel.totalRecords=res.totalElements;
+          this.dataSearchModel.totalRecords = res.totalElements;
         }
-        console.log('dataSearchModel:',this.dataSearchModel);
+        console.log('dataSearchModel:', this.dataSearchModel);
 
         this.loadingDialog.showSpinner(false);
       },
-    );}
-    
+    );
+  }
 
+  handleTableEvent(event: TableEvent) {
+    console.log("Event received:", event); // Kiểm tra sự kiện nhận được
+    switch (event.action) {
+      case 'loadMore':
+        this.handleLoadNextPage();
+        break;
 
+      case 'plan':
+        this.handlePlanButton(event.payload!);
+        break;
 
-    handleTableEvent(event: TableEvent) {
-      console.log("Event received:", event); // Kiểm tra sự kiện nhận được
-      switch (event.action) {
-        case 'loadMore':
-          this.handleLoadNextPage(); 
-          break;
-  
-        case 'plan':
-           this.handlePlanButton(event.payload!);
-          break;
-  
-        case 'actual':
-          break;
-  
-        case 'correction':
-          break;
-  
-        default:
-          console.warn("Unknown action:", event.action); 
-      }
+      case 'actual':
+        break;
+
+      case 'correction':
+        break;
+
+      default:
+        console.warn("Unknown action:", event.action);
     }
+  }
 
-    handleLoadNextPage() {
-    console.log("search",this.search)
-    this.search.page=0;
-    this.dataSearchModel.currentPage+=1;
+  handleLoadNextPage() {
+    console.log("search", this.search)
+    this.search.page = 0;
+    this.dataSearchModel.currentPage += 1;
     this.search.page = this.dataSearchModel.currentPage; // Cập nhật trang trong request
     this.loadingDialog.showSpinner(true);
     this.outputListService.getOuputListWithFilters(this.search)
       .subscribe(
         (res) => {
-          if(res instanceof HttpErrorResponse){
+          if (res instanceof HttpErrorResponse) {
             this.handleFetchError(res);
           }
           else {
@@ -84,12 +82,12 @@ export class ListComponent implements OnInit {
           }
         }
       );
-      this.loadingDialog.showSpinner(false);
-    }
-    handlePlanButton(id: number) {
-      this.outputPlanService.setPlanId(id);
-      this.router.navigate(['/plan']); 
-    }
+    this.loadingDialog.showSpinner(false);
+  }
+  handlePlanButton(id: number) {
+    sessionStorage.setItem('inventoryOutputId', id.toString());
+    this.router.navigate(['/delivery/inventory-output-plan']);
+  }
 
 
   private handleFetchError(error: HttpErrorResponse) {
@@ -104,6 +102,8 @@ export class ListComponent implements OnInit {
   onToggleSearchForm(isFormVisible: boolean) {
     this.isSearchFormVisible = isFormVisible;
   }
+  screenTitles: string[] = ['出庫', '出庫一覧'];
+
 }
 
 

@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/components/input/input.module').then((m) => m.InputModule), 
   },
   {
-    path: 'output',
+    path: 'delivery',
     loadChildren: () => import('./pages/components/output/output.module').then((m) => m.OutputModule), 
   },
 ];

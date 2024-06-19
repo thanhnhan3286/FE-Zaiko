@@ -31,7 +31,6 @@ export class DialogSeachApiService extends HttpService {
         param[x.key] = x.value;
       });
     }
-    console.log("Search : ",param);
     const convert = queryString.stringify(param);
 
     this.loadingDialog.showSpinner(true);

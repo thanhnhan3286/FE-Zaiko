@@ -7,61 +7,45 @@ import { DataOutputListputModel, DataSearchModel, TableEvent } from 'src/app/pag
   styleUrls: ['./results-table.component.scss']
 })
 export class ResultsTableComponent implements OnChanges {
-  @Input() data: DataSearchModel = new DataSearchModel(); 
-  @Output() tableEvent = new EventEmitter<TableEvent>(); 
-  isHeightLimited = true; 
+  @Input() data: DataSearchModel = new DataSearchModel();
+  @Output() tableEvent = new EventEmitter<TableEvent>();
+  isHeightLimited = true;
 
   ngOnChanges(changes: SimpleChanges) {
-      if (changes) {
-        console.log("changes",changes)
-      this.data.results = [...this.data.results]; 
+    if (changes) {
+      console.log("changes", changes)
+      this.data.results = [...this.data.results];
     }
-  } 
-  isButtonDisabled(item: any): boolean {
-    let isDisabled: boolean=true;
-
-    // if (item.slipNo !== null) {
-    //     isDisabled = true;
-    // }
+  }
+  isActualButtonDisabled(item: any): boolean {
+    // if (item.batchStatus !== null) {
+    //   return true;
+    // } else 
     if (item.planOutputDate !== null) {
-        if (item.actualOutputDate !== null) {
-            if (item.closed === 1) {
-                isDisabled = true;
-            } else {
-                isDisabled = false;
-            }
-        }
-        else if (item.closed === 0) {
-            isDisabled = false;
-        }
+      if (item.closed === '1') {
+        return true;
+      } else if (item.actualOutputDate !== null) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
     }
-    else {
-        if (item.actualOutputDate !== null) {
-            isDisabled = true;
-        }
-    }
-    return isDisabled;
-}
+  }
 
 
-  
+
+
 
   triggerLoadMore() {
     this.isHeightLimited = false;
-    this.tableEvent.emit({ action: 'loadMore' }); 
+    this.tableEvent.emit({ action: 'loadMore' });
   }
-  Plan(id :number){
-    this.tableEvent.emit({ action: 'plan', payload: id }); 
-
-
+  Plan(id: number) {
+    this.tableEvent.emit({ action: 'plan', payload: id });
   }
 
-  // Actual(id :String){
-  // this.Event.emit(id); 
 
-  // }
-  // Correction(id :String){
-  //   this.Event.emit(id); 
-  // }
-  
+
 }

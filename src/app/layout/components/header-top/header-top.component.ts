@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router ,NavigationEnd } from '@angular/router';
 import { format } from 'date-fns';
-
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-header-top',
   templateUrl: './header-top.component.html',
@@ -9,19 +10,26 @@ import { format } from 'date-fns';
 export class HeaderTopComponent implements OnInit {
   public currentDate: string; // Ngày hiện tại
   public isFormVisible: boolean = true;
-
+  public isDropdown: boolean = true;
   @Output() toggleSearchForm = new EventEmitter<boolean>(); 
 
-  constructor() {  const today = new Date();
+  constructor(private router: Router) {  const today = new Date();
     this.currentDate = format(today, 'yyyy/MM/dd');
   }
-  public titelHeader: string = '出庫一覧';
-  public ReceiptList: String ="";
+  @Input() pageTitles: string[]=[];
   public userName: string = 'VanHai';
 
 
   ngOnInit() {
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      if(event.url === '.../output/plan'){
+        this.isDropdown=false;
+      }
+    });
   }
+
 onToggleForm() {
     this.isFormVisible = !this.isFormVisible; 
     this.toggleSearchForm.emit(this.isFormVisible); 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-form-input',
+  selector: 'app-form-input-correction',
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.scss']
 })

@@ -19,4 +19,4 @@ import { TableListComponent } from './table-list/table-list.component';
     TableListComponent
   ]
 })
-export class PlanModule { }
+export class ActualModule { }

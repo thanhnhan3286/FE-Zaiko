@@ -114,6 +114,8 @@ export class ApiPath {
   public static GET_CHILD_NAME_BY_CODE = environment.API_SERVICE.concat(ApiPathConfig.master.getProductChildNameByCode);
   public static GET_PARENT_NAME_BY_CODE = environment.API_SERVICE.concat(ApiPathConfig.master.getProductParentNameByCode);
   public static GET_PRODUCT_BY_CODE = environment.API_SERVICE.concat(ApiPathConfig.master.getProductByCode);
+  public static GET_PRODUCT_BY_ID = environment.API_SERVICE.concat(ApiPathConfig.master.getProductById);
+
 
   //DELIVERY INVENTORY OUTPUT
   public static INVENTORY_OUTPUT = environment.API_SERVICE.concat(ApiPathConfig.delivery.inventoryOutput);
@@ -123,6 +125,7 @@ export class ApiPath {
   public static INVENTORY_OUTPUT_PLAN = environment.API_SERVICE.concat(ApiPathConfig.delivery.inventoryOutputPlan);
   public static GET_DESTINATION_CUSTOMER = environment.API_SERVICE.concat(ApiPathConfig.delivery.getDestinationCustomer);
   public static CHECK_SLIP_NO = environment.API_SERVICE.concat(ApiPathConfig.delivery.checkSlipNo);
+  public static GET_AUTOMATIC_SLIP_NO=environment.API_SERVICE.concat(ApiPathConfig.delivery.getNextAutomaticSlipNo);
   public static CLOSE_INVENTORY_OUTPUT = environment.API_SERVICE.concat(ApiPathConfig.delivery.closeInventoryOutputPlan);
   public static INVENTORY_OUTPUT_CORRECTION = environment.API_SERVICE.concat(ApiPathConfig.delivery.inventoryOutputCorrection);
 

@@ -29,28 +29,18 @@ export interface DataOutputListputModel {
     createBy: string;
 }  
 export interface RepositoryModel {
-  repositoryId: number;
-  companyId: number; 
+  repository_id: number;
+  company_id: number; 
   repositoryCode?: string; 
   repositoryName?: string; 
-  phoneNumber1?: string; 
-  faxNumber1?: string; 
-  postCode1?: string; 
+  phone_number1?: string; 
+  fax_number1?: string; 
+  post_code1?: string; 
   address1_1?: string; 
   address1_2?: string;
   address1_3?: string; 
   address1_4?: string; 
-  phoneNumber2?: string;
-  faxNumber2?: string; 
-  postCode2?: string; 
-  address2_1?: string; 
-  address2_2?: string; 
-  address2_3?: string; 
-  address2_4?: string; 
-  notes?: string; 
-  freeItem1?: string; 
-  freeItem2?: string;
-  freeItem3?: string; 
+  phone_number2?: string;
 }
 export interface DataModel {
   length: number,
@@ -125,6 +115,7 @@ export interface SearchParamRequest extends HttpClienRequest {
  export interface HttpClienRepositorytResponse extends HttpClientResponse {
   data: RepositoryModel[];
 }
+
 export interface TableEvent {
   action: 'loadMore' | 'plan' | 'actual' | 'correction'; 
   payload?: number; 

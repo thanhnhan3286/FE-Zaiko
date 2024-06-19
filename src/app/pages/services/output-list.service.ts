@@ -2,8 +2,8 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { ApiPath } from '@core/config';
 import { HttpService } from '@core/services';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClienOutputListputResponse, HttpClienRepositorytResponse } from 'src/app/pages/models/output/list.model';
 
 

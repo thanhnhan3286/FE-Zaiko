@@ -3,17 +3,17 @@ $width-nav-bar: 70px;
 
 .main {
   display: flex;
-  // overflow: hidden;
   width: 100%;
-  // height: 100%;
+  height: 100%;
+  min-width: 760px !important;
   background-color: $backGroundMain;
 }
 
 .nav-bar {
   width: $width-nav-bar;
   height: 100%;
+  z-index: 10;
 }
-
 .children {
   width: calc(100% - $width-nav-bar);
   height: 100%;
@@ -23,7 +23,6 @@ $width-nav-bar: 70px;
 
   // overflow-x: hidden;
 }
-
 nz-content {
   margin: 0 16px;
   min-height: 84vh;
@@ -43,6 +42,14 @@ nz-content {
   z-index: 1020;
   right: 5px; /* Đẩy phần tử về phía bến phải */
 }
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  pointer-events: none !important;
+}
 
 .header-top {
   border-bottom: 1px solid #009cc3;
@@ -57,6 +64,13 @@ nz-content {
   border-radius: 3px;
   color: $white;
   font-size: 10px;
+}
+::ng-deep .border-red {
+  outline: none;
+  border: 0.5px solid red !important;
+}
+::ng-deep .border-red:hover {
+  border: 0.5px solid red !important;
 }
 ::ng-deep .example-tooltip-info {
   background: $color-primary;

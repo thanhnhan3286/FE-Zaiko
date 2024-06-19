@@ -32,7 +32,7 @@ export const ApiPathConfig = {
     dailyProcess: '/api/daily-process',
     dailyProcessPdf: '/api/daily-process-pdf',
     checkBatch: '/api/check-batch',
-    checkDateDaily: '/api/check-date-daily'
+    checkDateDaily: '/api/check-date-daily' 
   },
   receipt: {
     inventoryInput: '/api/inventory-input',
@@ -115,7 +115,8 @@ export const ApiPathConfig = {
     getProductByCode: '/api/product-by-product-code',
     getRepositoryByCode: '/api/repository/find-one-repository-by-code',
     holiday: '/api/holiday',
-    checkHoliday: '/api/check-holiday'
+    checkHoliday: '/api/check-holiday',
+    getProductById:'/api/product-by-product-id'
   },
   system: {
     user: '/api/user/system',
@@ -193,8 +194,11 @@ export const ApiPathConfig = {
     // END TANDX NO68 v1
 
     // START TANDX NO70 v1
-    exportAllListReturnOutputPdf: '/api/export-all-list-return-output-pdf'
+    exportAllListReturnOutputPdf: '/api/export-all-list-return-output-pdf',
     // END TANDX NO70 v1
+
+    //HAIHV V1
+    getNextAutomaticSlipNo :'/api/get-automatic-slip-no'
   },
   dashboard: {
     supplement: '/api/get-list-supplement',

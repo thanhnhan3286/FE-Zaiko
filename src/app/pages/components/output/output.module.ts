@@ -8,7 +8,9 @@ import { PlanComponent } from './plan/plan.component';
 import { OutputComponent } from './output.component';
 import { ListModule } from './list/list.module';
 import { OutputRoutingModule } from './output-routing.module';
-import { PlanModule } from './plan/plan.module';
+import { ActualModule } from './actual/actual.module';
+import { CorrectionModule } from './correction/correction.module';
+import { CorrectionComponent } from './correction/correction.component';
 
 
 @NgModule({
@@ -16,13 +18,15 @@ import { PlanModule } from './plan/plan.module';
     OutputComponent,
     ListComponent,
     ActualComponent,
+    CorrectionComponent,
     PlanComponent
    
   ],
   imports: [
     ListModule,
-    PlanModule,
+    ActualModule,
     CommonModule,
+    CorrectionModule,
     OutputRoutingModule ,
     CommonAppModule.forRoot()
   ]

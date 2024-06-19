@@ -1,4 +1,654 @@
-<div class="container-pages">
-  <app-form-input></app-form-input>
-  <app-table-list></app-table-list>
+<app-header-top [pageTitles]="['出庫', '出庫一覧  ', '出庫予定入力']"></app-header-top>
+<div class="inventory-output-plan">
+<form  [formGroup]="mainForm" >
+  <div class="form-output-plan">
+    <div class="list-frame-title">
+      <div class="chevron-left ">
+        <button class="chevron" (click)="handleBackNavigation()" > <mat-icon svgIcon="icon-before"></mat-icon> 戻る</button>
+      </div>
+      <div class="group-btn display-flex">
+        <div class="box-label" [ngClass]="{'display-none': isInitData}">
+          <h6>出庫状態</h6>
+        </div>
+        <div class="box-label2 alert-purple" [ngClass]="{'display-none': isInitData}">
+          <h6>未出庫</h6>
+          <h6>出庫残</h6>
+          <h6 >出庫済</h6>
+        </div>
+        <button type="button" class="btn-status close " [ngClass]="{'display-none': isInitData}">
+         クローズ解除
+        </button>      
+        <button type="" [ngClass]="{'display-none': isInitData}" class="btn-status delete "><mat-icon svgIcon="icon-delete"></mat-icon> 削除</button>
+        <button type="submit" class="btn-status save" [disabled]="mainForm.invalid" (click)="onSubmit()"> <mat-icon svgIcon="icon-save" ></mat-icon> 保存</button>
+      </div>
+    </div>
+    <div class="plan-form">
+      <div class="form-content" formGroupName="planForm">
+        <div class="form-row">
+          <div class="form-6">
+            <div class="form-part-1">
+              <div class="form-group">
+                <div class="label">
+                  <label>受注日</label>
+                </div>
+                <div class="form-inline">
+                  <input type="date" class="input-control" formControlName="orderDate">
+                </div>
+  
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>出庫予定日</label>
+                </div>
+                <div class="form-inline">
+                  <input type="date" class="input-control" formControlName="planOutputDate">
+                </div>
+  
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>作業予定日</label>
+                </div>
+                <div class="form-inline">
+                  <input type="date" class="input-control"  formControlName="planWorkingDate">
+                </div>
+  
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>納品予定日</label>
+                </div>
+                <div class="form-inline">
+                  <input type="date" class="input-control" formControlName="planDeliverDate">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-6">
+            <div class="form-part-2">
+              <div class="form-group">
+                <div class="label">
+                  <label>伝票区分</label>
+                </div>
+                <div class="form-inline">
+                  <select class="input-control" formControlName="createSlipType" (change)="onDeliveryTypeChange($event)">
+                    <option value="0">通常入庫（自動採番）</option>
+                    <option value="1">通常入庫（手入力）</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>伝票番号</label>
+                </div>
+                <div class="form-inline">
+                  <input matInput 
+                  type="text" 
+                  class="{{
+                    mainForm.get('planForm.slipNo')?.status !== 'VALID' &&
+                    mainForm.get('planForm.slipNo')?.touched &&
+                    !mainForm.get('planForm.slipNo')?.disabled
+                        ? 'border-red input-control'
+                        : 'input-control'
+                }}"
+                  formControlName="slipNo" 
+                  matTooltip="{{
+                      (mainForm.get('planForm.slipNo')?.status !== 'VALID'
+                          ? utils.getMessError(mainForm.get('planForm.slipNo')?.errors)
+                          : '') | translate
+                  }}"
+                  matTooltipClass="{{
+                      mainForm.get('planForm.slipNo')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''
+                  }}" 
+                  (blur)="checkSlipNumber()"> 
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>客先伝票番号</label>
+                </div>
+                <div class="form-inline">
+                  <input type="text" class="input-control" formControlName="planSupplierSlipNo">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row-8">
+          <div class="form-1">
+            <div class="form-group">
+              <div class="title-radio">
+                <div class="label">
+                  <label>納品先コード</label>
+                </div>
+                <div class="checkbox">
+                  <label for="">マスタ登録外納品先指定</label>
+                  <input type="checkbox" class="checkbox-input" type="checkbox" formControlName="checked" (change)="onCheckboxChange($event)">
+                </div>
+              </div>
+  
+              <div class="form-inline">
+                <div class="input-wrapper">
+                  <input matInput 
+                  type="text" 
+                  class="{{
+                    mainForm.get('planForm.planCustomerDeliveryDestinationId')?.status !== 'VALID' &&
+                    mainForm.get('planForm.planCustomerDeliveryDestinationId')?.touched &&
+                    !mainForm.get('planForm.planCustomerDeliveryDestinationId')?.disabled
+                        ? 'border-red input-control'
+                        : 'input-control'
+                }}"
+                  formControlName="planCustomerDeliveryDestinationId" 
+                  matTooltip="{{
+                      (mainForm.get('planForm.planCustomerDeliveryDestinationId')?.status !== 'VALID' &&
+                      mainForm.get('planForm.planCustomerDeliveryDestinationId')?.touched
+                          ? utils.getMessError(mainForm.get('planForm.planCustomerDeliveryDestinationId')?.errors)
+                          : '') | translate
+                  }}"
+                  matTooltipClass="{{
+                      mainForm.get('planForm.planCustomerDeliveryDestinationId')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''
+                  }}" 
+                  (blur)="getCustomerDestByCode()"> 
+
+                  <div class="icon-input" [class.disabled]="!isCheckBox">
+                    <mat-icon 
+                      class="search-input" 
+                      svgIcon="icon-search-input" 
+                      (click)="openDialog('planForm.planCustomerDeliveryDestinationId')" >
+                    </mat-icon>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-7">
+            <div class="form-group">
+              <div class="label">
+                <label>出荷先名称</label>
+              </div>
+              <div class="form-inline">
+                <input type="text" class="input-control" formControlName="departmentName">
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+        <div class="form-row-16">
+          <div class="form-2">
+            <div class="form-part-1">
+              <div class="form-group">
+                <div class="label">
+                  <label>出荷先コード</label>
+                </div>
+                <div class="form-inline">
+                  <div class="input-wrapper">
+                    <input matInput 
+                    type="text" 
+                    class="{{
+                      mainForm.get('planForm.planCustomerId')?.status !== 'VALID' &&
+                      mainForm.get('planForm.planCustomerId')?.touched &&
+                      !mainForm.get('planForm.planCustomerId')?.disabled
+                          ? 'border-red input-control'
+                          : 'input-control'
+                  }}"
+                    formControlName="planCustomerId" 
+                    matTooltip="{{
+                        (mainForm.get('planForm.planCustomerId')?.status !== 'VALID' &&
+                        mainForm.get('planForm.planCustomerId')?.touched
+                            ? utils.getMessError(mainForm.get('planForm.planCustomerId')?.errors)
+                            : '') | translate
+                    }}"
+                    matTooltipClass="{{
+                        mainForm.get('planForm.planCustomerId')?.status !== 'VALID'
+                            ? 'example-tooltip-red'
+                            : ''
+                    }}" 
+                    (blur)="getCustomerByCode()"> 
+                    <div class="icon-input"  [class.disabled]="mainForm.get('planForm.planCustomerId')?.disabled">
+                      <mat-icon class="search-input"  svgIcon="icon-search-input"  (click)="openDialog('planForm.planCustomerId')"></mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-14">
+            <div class="form-row-21">
+                <div class="form-group form-part-1">
+                  <div class="label">
+                    <label>請求先名称</label>
+                  </div>
+                  <div class="form-inline">
+                    <input type="text" class="input-control" formControlName ="customerName">
+                  </div>
+                </div>
+  
+              <div class="form-group form-part-2">
+                <div class="label">
+                  <label>伝票備考</label>
+                </div>
+                <div class="form-inline">
+                  <input type="text" class="input-control" formControlName="planSlipNote">
+                </div>
+  
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-6">
+            <div class="form-col">
+              <div class="form-group">
+                <div class="label">
+                  <label>倉庫</label>
+                </div>
+                <div class="form-inline">
+                  <select class="input-control" formControlName="planRepositoryId">
+                    <option *ngFor="let r of repository" [value]="r.repository_id">{{ r.repositoryCode}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>ルート</label>
+                </div>
+                <div class="form-inline">
+                  <select class="input-control" formControlName="routeCode">
+                    <option *ngFor="let r of route" [value]="r.route_code">{{ r.route_code}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>伝票番号</label>
+                </div>
+                <div class="form-inline">
+                  <select class="input-control" formControlName="courseCode">
+                    <option *ngFor="let c of course" [value]="c.course_code">{{ c.course_code}}_{{ c.course_name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <div class="form-6">
+            <div class="form-col">
+              <div class="form-group">
+                <div class="label">
+                  <label>納品先TEL</label>
+                </div>
+                <div class="form-inline">
+                  <input type="text" class="input-control" formControlName="phoneNumber" >
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>納品先FAX</label>
+                </div>
+                <div class="form-inline">
+                  <input type="text" class="input-control" formControlName="faxNumber">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="label">
+                  <label>納品先郵便番号</label>
+                </div>
+                <div class="form-inline">
+                  <input type="text" class="input-control" formControlName="postCode">
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-4">
+            <div class="form-group">
+              <div class="label">
+                <label>納品先住所</label>
+              </div>
+              <div class="form-inline">
+                <input type="text" class="input-control" formControlName="address1">
+                <input type="text" class="input-control" formControlName="address2">
+              </div>
+            </div>
+          </div>
+        
+         <div class="form-8">
+          <div class="form-group">
+            <div class="label">
+              <label>所有者コード</label>
+            </div>
+            <div class="form-inline">
+              <input type="text" class="input-control" formControlName="address3">
+              <input type="text" class="input-control" formControlName="address4">
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="datatable-output-plan" formArrayName="tableForm">
+    <div class="list-frame-title">
+      <div class="flex-center">
+        <span>検索結果一覧</span>
+        <button class="plus" (click)="addFormArray()"> <mat-icon svgIcon="icon-plus"></mat-icon> 追加</button>
+      </div> 
+      <div class="total-list">
+        <p>検索結果一覧 総計 <span>0 / {{tableForm.length}}</span> 件</p>
+      </div>
+    </div>
+    <div class="list-data">
+      <table>
+        <thead class="colgroup">
+          <tr>
+            <th scope="col" class="col-1"> No.</th>
+            <th scope="col" class="col-2"> 商品</th>
+            <th scope="col" class="col-3"> 管理日付</th>
+            <th scope="col" class="col-4"> 倉庫</th>
+            <th scope="col" class="col-5"> 請求荷姿</th>
+            <th scope="col" class="col-6"> 未出庫</th>
+            <th scope="col" class="col-7" rowSpan="3">&nbsp;</th>
+          </tr>
+          <tr>
+            <th scope="col" class="col-1"> バッチ状態</th>
+            <th scope="col" class="col-2"> 規格</th>
+            <th scope="col" class="col-3"> 管理番号</th>
+            <th scope="col" class="col-4"> ロケーション</th>
+            <th scope="col" class="col-5"> 出庫数量</th>
+            <th scope="col" class="col-6"> 出庫済</th>
+          </tr>
+          <tr>
+            <th scope="col" class="col-1"> バッチ番号</th>
+            <th scope="col" class="col-2"> 支払先</th>
+            <th scope="col" class="col-3"> 所有者</th>
+            <th scope="col" class="col-4"> 在庫状態</th>
+            <th scope="col" class="col-5"> 合計</th>
+            <th scope="col" class="col-6"> &nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of tableForm.controls; let i=index" [formGroupName]="i">
+            <tr>
+              <td colspan="1" >
+                <div class="col-info">
+                  <div class="">
+                  </div>
+                  <button mat-icon-button (click)="onHelpIconClick('productInventoryId',i)" [disabled]="!isProductCodeAndRepo(i)">
+                    <mat-icon svgIcon="info"></mat-icon>
+                  </button>
+                  </div>
+              </td>
+              <td colspan="1">
+                <div class="form-row">
+                  <div class="input-wrapper form-4">
+                    <input type="text" class="{{
+                      mainForm.get('tableForm')?.get([i, 'productCode'])?.status !== 'VALID'
+                          ? 'border-red input-control'
+                          : ' input-control '
+                    }}"
+                    formControlName="productCode" 
+                    matTooltip="{{
+                      (mainForm.get('tableForm')?.get([i, 'productCode'])?.status !== 'VALID'
+                          ? utils.getMessError(mainForm.get('tableForm')?.get([i, 'productCode'])?.errors)
+                          : '') | translate
+                    }}"
+                    matTooltipClass="{{
+                      mainForm.get('tableForm')?.get([i, 'productCode'])?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''
+                    }}" 
+                    (blur)="getProductByCode(i)">
+                    <div class="icon-input">
+                      <mat-icon class="search-input" svgIcon="icon-search-input" (click)="openDialog('productCode',i)"></mat-icon>
+                    </div>
+                  </div>
+                  <div class="input-wrapper form-8">
+                    <input type="text" class="input-control" formControlName="productName">
+                  </div>
+                </div>
+              </td>
+              <td colspan="1">
+                <div class="form-row">
+                  <div class="input-wrapper col-2">
+                    <input type="text" class="input-control text-red" formControlName="datetimeMngTypeText">
+                  </div>
+                  <div class="input-wrapper col-5">
+                    <input type="date" class="input-control date" formControlName="datetimeMngFrom">
+                  </div>
+                  <div class="input-wrapper col-5">
+                    <input type="date" class="input-control date" formControlName="datetimeMngTo">
+                  </div>
+                </div>
+              </td>
+              <td colspan="1">
+                <select class="input-control" formControlName="repositoryId" (change)="handleSelectLocationChange($event, i)">
+                  <option *ngFor="let r of repository" [value]="r.repository_id">{{ r.repositoryCode}}</option>
+                </select>
+              </td>
+              <td colspan="1">
+                <div class="radio-btn">
+                  <label class="radio">
+                    <input type="radio" id="radio1{{i}}"   value="1" formControlName="billingPackType"> ｹｰｽ
+                  </label>
+                  <label class="radio">
+                    <input type="radio" id="radio2{{i}}"   value="2" formControlName="billingPackType"> ﾎﾞｰﾙ
+                  </label>
+                  <label class="radio">
+                    <input type="radio" id="radio3{{i}}"   value="3" formControlName="billingPackType"> 枚
+                  </label>
+                </div>
+                
+              </td>
+              <td colspan="1">
+                <div class="input-wrapper">
+                  <input type="text" class="input-control" formControlName="tax" > 
+                </div>
+              </td>
+              <td rowspan="3">
+                <button class="btn-delete" (click)="removeFormArrayIndex(i)"> <mat-icon svgIcon="icon-delete-red" ></mat-icon></button> 
+                
+                <button class="btn-copy"   [disabled]="!isFormGroupValid(i)" (click)="copyFormArrayIndex(i)"><mat-icon svgIcon="icon-copy"></mat-icon></button>
+              </td>
+            </tr>
+            <tr class="boder-top">
+              <td colspan="1">
+                <div class="col-info">
+                  <div class="alert-secondary">
+                    未処理
+                  </div>
+                </div>
+              </td>
+              <td colspan="1">
+                <div class="input-wrapper ">
+                  <input type="text" class="input-control" formControlName="standardInfo">
+                </div>
+              </td>
+              <td colspan="1">
+                <div class="form-inline">
+                  <div class="input-wrapper">
+                    <input type="text" class="input-control" formControlName="numberMngFrom">
+                  </div>
+                  <p class="divider">~</p>
+                  <div class="input-wrapper">
+                    <input type="text" class="input-control" formControlName="numberMngTo">
+                  </div>
+                </div>
+              </td>
+              <td colspan="1">
+                <select class="input-control" formControlName="locationId">
+                  <option *ngFor="let l of mainForm.get('tableForm')?.get([i, 'locations'])?.value" [value]="l.locationId">{{ l.locationCode }}</option>
+              </select>
+              </td>
+              <td colspan="1">
+                <div class="form-row">
+                  <div class="input-wrapper form-4 flex center">
+                    <div class="w-6">
+                      <input matInput 
+                      type="text" 
+                      class="{{
+                          mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.touched &&
+                          !mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.disabled
+                              ? 'border-red input-control'
+                              : 'input-control'
+                      }}"
+                      formControlName="csPlanQuantity" 
+                      matTooltip="{{
+                          (mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.touched 
+                              ? utils.getMessError(mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.errors)
+                              : '') | translate
+                      }}"
+                      matTooltipClass="{{
+                          mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'csPlanQuantity'])?.touched
+                              ? 'example-tooltip-red'
+                              : ''
+                      }}" (blur)="tolTalQuantityChange(i)">
+                    </div>
+                    <div class="w-4">
+                      <table>ｹｰｽ</table>
+                    </div>
+                  </div>
+                  <div class="input-wrapper form-4 flex center">
+                    <div class="w-6">
+                      <input matInput 
+                      type="text" 
+                      class="{{
+                          mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.touched &&
+                          !mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.disabled
+                              ? 'border-red input-control'
+                              : 'input-control'
+                      }}"
+                      formControlName="blPlanQuantity" 
+                      matTooltip="{{
+                          (mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.touched 
+                              ? utils.getMessError(mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.errors)
+                              : '') | translate
+                      }}"
+                      matTooltipClass="{{
+                          mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'blPlanQuantity'])?.touched
+                              ? 'example-tooltip-red'
+                              : ''
+                      }}" (blur)="tolTalQuantityChange(i)">
+                       </div>
+                    <div class="w-4">
+                      <table>ｹｰｽ</table>
+                    </div>
+                  </div>
+                  <div class="input-wrapper form-4 flex center">
+                    <div class="w-6">
+                      <input matInput 
+                      type="text" 
+                      class="{{
+                          mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.touched 
+                              ? 'border-red input-control'
+                              : 'input-control'
+                      }}"
+                      formControlName="psPlanQuantity" 
+                      matTooltip="{{
+                          (mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.touched 
+                              ? utils.getMessError(mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.errors)
+                              : '') | translate
+                      }}"
+                      matTooltipClass="{{
+                          mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.status !== 'VALID' &&
+                          mainForm.get('tableForm')?.get([i, 'psPlanQuantity'])?.touched 
+                              ? 'example-tooltip-red'
+                              : ''
+                      }}" (blur)="tolTalQuantityChange(i)" > 
+                       </div>
+                    <div class="w-4">
+                      <table>ｹｰｽ</table>
+                    </div>
+                  </div>
+                </div>
+              </td>  
+              <td colspan="1">
+                <div class="input-wrapper">
+                  <input type="text" class="input-control" formControlName="totalActualQuantity">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <div class="">
+                  <p></p>
+                </div>
+              </td>
+              <td colspan="1">
+              </td>
+              <td colspan="1">
+                <div class="form-row">
+                  <div class="input-wrapper form-4">
+                    <input type="text" class="{{
+                      mainForm.get('tableForm')?.get([i, 'customerCode'])?.status !== 'VALID'
+                          ? 'border-red input-control'
+                          : ' input-control '
+                    }}"
+                    formControlName="customerCode" 
+                    matTooltip="{{
+                      (mainForm.get('tableForm')?.get([i, 'customerCode'])?.status !== 'VALID'
+                          ? utils.getMessError(mainForm.get('tableForm')?.get([i, 'customerCode'])?.errors)
+                          : '') | translate
+                    }}"
+                    matTooltipClass="{{
+                      mainForm.get('tableForm')?.get([i, 'customerCode'])?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''
+                    }}" 
+                    (blur)="getCustomerByCodeIndex(i)" >
+                    <div class="icon-input">
+                      <mat-icon class="search-input" svgIcon="icon-search-input" (click)="openDialog('customerCode',i)"></mat-icon>
+                    </div>
+                  </div>
+                  <div class="input-wrapper form-8">
+                    <input type="text" class="input-control" formControlName="productOwnerName" >
+                  </div>
+                </div>
+              </td>
+              <td colspan="1">
+                <select class="input-control" formControlName="inventoryProductType">
+                  <option value="0">良品</option>
+                  <option value="1">預り予定</option>
+                  <option value="2">MTとりおき</option>
+                  <option value="3">MTとりおき</option>
+                  <option value="7">廃棄・処分品</option>
+                  <option value="8">破損</option>
+                  <option value="9">不良品 </option>
+                  <option value="10">サンプル </option>
+                  <option value="11">予備</option>
+                </select>
+              </td>
+              <td colspan="1">
+                <div class="form-row">
+                  <div class="input-wrapper form-4">
+                    <input type="text" class="input-control" formControlName="totalPlanQuantity">
+                  </div>
+                </div>
+              </td>
+              <td colspan="1">
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+</form>
 </div>

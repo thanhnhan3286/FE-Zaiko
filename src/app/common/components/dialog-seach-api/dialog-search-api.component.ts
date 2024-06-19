@@ -86,7 +86,6 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
     this.loadingDialog.showSpinner(true);
     this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption).subscribe((x: HttpClientResponse) => {
     this.loadingDialog.showSpinner(false);
-    console.log("URL",this.dataOption.url);
 
 
 
@@ -94,7 +93,6 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
     if (x.data) {
         this.listData = [...x.data];
       }
-      console.log("Data", this.listData);
     });
   }
   public handelCancel(): void {
@@ -122,10 +120,8 @@ export class DialogSeachApiComponent implements OnInit, AfterViewChecked {
 
   public handelSeach(): void {
     this.loadingDialog.showSpinner(true);
-    console.log("this.dataSeach",this.dataSeach)
     this.dialogService.getDataDialogCommon(this.dataOption.url, this.dataOption, this.dataSeach).subscribe((x: HttpClientResponse) => {
     this.loadingDialog.showSpinner(false);
-    console.log("search-",x.data)
     if (x.data) {
         this.listData = [...x.data];
         this.dataChoosse = '';

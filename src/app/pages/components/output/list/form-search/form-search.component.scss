@@ -1,3 +1,4 @@
+@import "../../../../../../styles/styles-variables.scss";
 /* CSS cho form */
 .form-inventory-output {
   padding: 10px;
@@ -14,7 +15,7 @@
       gap: 10px;
 
       .form-row {
-        gap: 5px;
+        gap: 20px;
         display: grid;
         grid-template-columns: repeat(4, 1fr); 
         align-items: center;
@@ -41,11 +42,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
-
+         
             .input-wrapper {
               width: 100%;
               position: relative;
-              
               .icon-input {
                 position: absolute;
                 display: flex;
@@ -74,6 +74,13 @@
               text-align: left;
               min-width: 150px !important;
             }
+            .border-red {
+              outline: none;
+              border: 0.5px solid red !important;
+            }
+            .border-red:hover {
+              border: 0.5px solid red !important;
+            }
 
             .input-control:hover {
               border-color: #66afe9;
@@ -94,7 +101,7 @@
               .radio {
                 text-align: center;
                 justify-items: center;
-                padding-right: 20px;
+                padding-right: 15px;
 
                 input {
                   height: 16px;
@@ -110,6 +117,8 @@
               text-align: center;
               margin-bottom: 0;
             }
+          
+          
           }
         }
       }
@@ -139,8 +148,8 @@
         }
 
         .save:hover {
-          background-color: #5794b5;
-          transform: scale(1.05);
+          opacity: 0.8; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .save:active {
@@ -149,8 +158,8 @@
         }
 
         .refresh:hover {
-          background-color: #ffffff;
-          transform: scale(1.05);
+          opacity: 0.8; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .refresh:active {
@@ -172,12 +181,25 @@
     }
   }
 
+  .input-control::-webkit-calendar-picker-indicator {
+    filter: brightness(0) saturate(100%) invert(51%) sepia(76%) saturate(332%) hue-rotate(155deg) brightness(88%) contrast(94%);
+  
+
+  }
+
+  
+
   mat-icon {
     color: #ffffff !important;
     text-align: center;
     width: 16px;
     height: 16px;
   }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed; 
+  }
+  
   
   @media (max-width: 1444px) {
     .form-row {
@@ -191,4 +213,8 @@
       grid-template-columns: repeat(1, 1fr) !important; 
     }
   }
+ 
+  
 }
+
+

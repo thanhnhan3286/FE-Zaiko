@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClientResponse } from '@core/models/http-response.model';
 import { Observable, of } from 'rxjs';
@@ -17,6 +17,14 @@ export abstract class HttpService {
       catchError((err) => of(err))
     ); 
   }
+  public getById<T>(url: string, id: number): Observable<T | HttpErrorResponse> {
+    const fullUrl = `${url}/${id}`;
+    return this.http.get<T>(fullUrl).pipe(
+      tap((response: T) => response),
+      catchError((err: HttpErrorResponse) => of(err))
+    );
+  }
+  
 
   public post(url: string, payload: object, header?: HttpHeaders): Observable<HttpClientResponse> {
     return this.http.post<HttpClientResponse>(url, payload, { headers: header }).pipe(

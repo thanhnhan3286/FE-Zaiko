@@ -1,22 +1,19 @@
-<div class="form-output-plan">
-  <form class="plan-form">
-    <div class="list-frame-title">
-      <div class="chevron-left">
-        <button class="chevron"> <mat-icon svgIcon="icon-before"></mat-icon> 戻る</button>
-      </div>
-      <div class="group-btn display-flex">
-        <div class="box-label ">
-          <h6>出庫状態</h6>
-        </div>
-        <div class="box-label2 alert-purple">
-          <h6 >未出庫</h6>
-        </div>
-        <button type="submit" class="btn-status close">クローズ</button>
-        <button type="submit" class="btn-status delete"><mat-icon svgIcon="icon-delete"></mat-icon> 削除</button>
-        <button type="submit" class="btn-status save"> <mat-icon svgIcon="icon-save"></mat-icon> 保存</button>
-      </div>
+<div class="form-output-actual">
+  <div class="list-frame-title">
+    <div class="chevron-left">
+      <button class="chevron"> <mat-icon svgIcon="icon-before"></mat-icon> 戻る</button>
     </div>
-
+    <div class="group-btn display-flex">
+      <div class="box-label ">
+        <h6>出庫状態</h6>
+      </div>
+      <div class="box-label2 alert-purple">
+        <h6 >未出庫</h6>
+      </div>
+      <button type="submit" class="btn-status save"> <mat-icon svgIcon="icon-save"></mat-icon> 保存</button>
+    </div>
+  </div>
+  <div class="actual-form">
     <div class="form-content">
       <div class="form-row">
         <div class="form-6">
@@ -101,32 +98,51 @@
         </div>
       </div>
       <div class="form-row-8">
-        <div class="form-1">
-          <div class="form-group">
-            <div class="title-radio">
+        <div class="col-3">
+          <div class="grid-3">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
-              <div class="checkbox">
-                <label for="">マスタ登録外納品先指定</label>
-                <input type="checkbox" class="checkbox-input" name="" id="">
-              </div>
-            </div>
-
-            <div class="form-inline">
-              <div class="input-wrapper">
+              <div class="form-inline">
                 <input type="text" class="input-control">
-                <div class="icon-input">
-                  <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+              </div>
+  
+            </div>
+            <div class="form-group">
+              <div class="label">
+                <table>伝票番号</table>
+              </div>
+              <div class="form-inline">
+                <input type="text" class="input-control">
+              </div>
+  
+            </div>
+            <div class="form-group">
+              <div class="title-radio">
+                <div class="label">
+                  <table>伝票番号</table>
+                </div>
+                <div class="checkbox">
+                  <label for="">マスタ登録外納品先指定</label>
+                  <input type="checkbox" class="checkbox-input" name="" id="">
                 </div>
               </div>
-
+  
+              <div class="form-inline">
+                <div class="input-wrapper">
+                  <input type="text" class="input-control">
+                  <div class="icon-input">
+                    <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
+                  </div>
+                </div>
+  
+              </div>
+  
             </div>
-
           </div>
         </div>
-
-        <div class="form-7">
+        <div class="col-5">
           <div class="form-group">
             <div class="label">
               <table>伝票番号</table>
@@ -137,10 +153,9 @@
 
           </div>
         </div>
-
       </div>
       <div class="form-row-16">
-        <div class="form-2">
+        <div class="form-col-2">
           <div class="form-part-1">
             <div class="form-group">
               <div class="label">
@@ -153,24 +168,17 @@
             </div>
           </div>
         </div>
-        <div class="form-14">
-          <div class="form-row-14">
-            <div class="form-group form-part-1">
-              <div class="label">
-                <table>伝票番号</table>
-              </div>
-              <div class="form-inline">
-                <select class="input-control" disabled>
-                  <option value="1">通常入庫（自動採番）</option>
-                  <option value="2">通常入庫 2</option>
-                  <option value="3">通常入庫 3</option>
-                  <option value="4">通常入庫 4</option>
-                  <option value="5">通常入庫 5</option>
-                  <option value="6">通常入庫 6</option>
-                </select>
+        <div class="form-col-14">
+          <div class="form-row-21">
+              <div class="form-group form-part-1">
+                <div class="label">
+                  <table>伝票番号</table>
+                </div>
+                <div class="form-inline">
+                  <input type="text" class="input-control" disabled [defaultValue]="2208080167">
+                </div>
               </div>
 
-            </div>
             <div class="form-group form-part-2">
               <div class="label">
                 <table>伝票番号</table>
@@ -187,7 +195,7 @@
       <div class="form-row">
         <div class="form-6">
           <div class="form-col">
-            <div class="form-group w-100">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
@@ -204,7 +212,7 @@
                 </select>
               </div>
             </div>
-            <div class="form-group w-100">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
@@ -221,7 +229,7 @@
                 </select>
               </div>
             </div>
-            <div class="form-group w-100">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
@@ -243,55 +251,28 @@
         </div>
         <div class="form-6">
           <div class="form-col">
-            <div class="form-group w-100">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
               <div class="form-inline">
-                <select class="input-control">
-                  <option value="1">S_</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                  <option value="4">Four</option>
-                  <option value="5">Five</option>
-                  <option value="6">Six</option>
-                  <option value="7">Seven</option>
-                  <option value="8">Eight</option>
-                </select>
+                <input type="text" class="input-control" disabled [defaultValue]="2208080167">
               </div>
             </div>
-            <div class="form-group w-100">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
               <div class="form-inline">
-                <select class="input-control">
-                  <option value="1">001_</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                  <option value="4">Four</option>
-                  <option value="5">Five</option>
-                  <option value="6">Six</option>
-                  <option value="7">Seven</option>
-                  <option value="8">Eight</option>
-                </select>
+                <input type="text" class="input-control" disabled [defaultValue]="2208080167">
               </div>
             </div>
-            <div class="form-group w-100">
+            <div class="form-group">
               <div class="label">
                 <table>伝票番号</table>
               </div>
               <div class="form-inline">
-                <select class="input-control">
-                  <option value="1">0_</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                  <option value="4">Four</option>
-                  <option value="5">Five</option>
-                  <option value="6">Six</option>
-                  <option value="7">Seven</option>
-                  <option value="8">Eight</option>
-                </select>
+                <input type="text" class="input-control" disabled [defaultValue]="2208080167">
               </div>
             </div>
           </div>
@@ -324,10 +305,8 @@
        </div>
       </div>
 
-
-
     </div>
+  </div>
 
-  </form>
-
+  
 </div>

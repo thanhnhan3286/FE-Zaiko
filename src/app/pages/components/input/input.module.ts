@@ -14,7 +14,7 @@ import { ListModule } from './list/list.module';
 @NgModule({
   declarations: [
     InputComponent,
-    ListComponent,
+    ListComponent, 
     ActualComponent,
     PlanComponent,
     

@@ -1,17 +1,21 @@
 <div class="header">
   <div class="flex-center">
-    <span>出庫</span>
-    <span class="icon">&gt;</span>
-    <span class="titel-header">{{ titelHeader }}</span>
+    <ng-container *ngFor="let title of pageTitles; let last = last">
+      <span [ngClass]="{ 'titel-header': last }">
+        {{ title }}
+      </span>
+      <mat-icon *ngIf="!last" svgIcon="angle-right"></mat-icon>
+    </ng-container>
   </div>
-
+  
+  
   <div class="menu-center"></div>
   <div class="menu-date">
     <div class="date-container">
       <p>業務日付</p>
       <h4 class="date">{{ currentDate }}</h4> <!-- Hiển thị ngày hiện tại -->
     </div>
-    <div class="dropdown-menu" (click)="onToggleForm()"> 
+    <div class="dropdown-menu" *ngIf="isDropdown" (click)="onToggleForm()"> 
       <mat-icon class="icon-plus" svgIcon="chevron-up" *ngIf="isFormVisible"></mat-icon> 
       <mat-icon class="icon-plus" svgIcon="chevron-down" *ngIf="!isFormVisible"></mat-icon> 
     </div>

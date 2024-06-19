@@ -326,7 +326,6 @@ export class Utils {
 
         return { 'dateInvalidFrom': true };
       }
-
       return null;
     };
   }
@@ -345,6 +344,49 @@ export class Utils {
 
       if (control.parent?.get(formControlName)?.getRawValue() > val) {
         control.parent?.get(formControlName)?.setErrors({ 'dateInvalidFrom': true });
+        console.log("dateInvalidTo :",Number.isInteger(val));
+        console.log("control.parent?.get(formControlName)?.getRawValue(): ",control.parent?.get(formControlName)?.getRawValue());
+
+        return { 'dateInvalidTo': true };
+      }
+      console.log("dateInvalidTo",false);
+
+      return null;
+    };
+  }
+
+  public static checkFromValueNumber(formControlName: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      let val = control.value;
+
+      if (!control.parent?.get(formControlName)?.errors?.['required']) {
+        control.parent?.get(formControlName)?.setErrors(null);
+      }
+
+      if ((val) === null || val === '') return null;
+
+
+      if (control.parent?.get(formControlName)?.getRawValue() === null || control.parent?.get(formControlName)?.getRawValue() === '') return null;
+
+      if (Number(val) > Number(control.parent?.get(formControlName)?.getRawValue())) {
+        control.parent?.get(formControlName)?.setErrors({ 'dateInvalidTo': true });
+        return { 'dateInvalidFrom': true };
+      }
+      return null;
+    };
+  }
+  public static checkToValueNumber(formControlName: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      let val = control.value;
+      if (!control.parent?.get(formControlName)?.errors?.['required']) {
+        control.parent?.get(formControlName)?.setErrors(null);
+      }
+
+      if (val === null || val === '') return null;
+      if (control.parent?.get(formControlName)?.getRawValue() === null || control.parent?.get(formControlName)?.getRawValue() === '') return null;
+
+      if (Number(control.parent?.get(formControlName)?.getRawValue()) > Number(val)) {
+        control.parent?.get(formControlName)?.setErrors({ 'dateInvalidFrom': true });
 
         return { 'dateInvalidTo': true };
       }
@@ -352,10 +394,10 @@ export class Utils {
       return null;
     };
   }
+
   public static checkFromDate(formControlName: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       let val = control.value;
-
       if (!control.parent?.get(formControlName)?.errors?.['matDatepickerParse'] &&
         !control.parent?.get(formControlName)?.errors?.['required'] &&
         !control.parent?.get(formControlName)?.errors?.['errorEnterPastDate'] &&
@@ -372,17 +414,14 @@ export class Utils {
         !control.parent?.get(formControlName)?.errors?.['errorEnterPastDate'] &&
         !control.parent?.get(formControlName)?.errors?.['matDatepickerMin']) {
         control.parent?.get(formControlName)?.setErrors({ 'dateInvalidTo': true });
-
         return { 'dateInvalidFrom': true };
       }
-
       return null;
     };
   }
   public static checkToDate(formControlName: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       let val = control.value;
-
       if (!control.parent?.get(formControlName)?.errors?.['matDatepickerParse'] &&
         !control.parent?.get(formControlName)?.errors?.['required'] &&
         !control.parent?.get(formControlName)?.errors?.['errorEnterPastDate'] &&
@@ -398,10 +437,8 @@ export class Utils {
       if ((new Date(control.parent?.get(formControlName)?.getRawValue())) > (new Date(val)) && !control.parent?.get(formControlName)?.errors?.['errorEnterPastDate']
         && !control.parent?.get(formControlName)?.errors?.['matDatepickerMin']) {
         control.parent?.get(formControlName)?.setErrors({ 'dateInvalidFrom': true });
-
         return { 'dateInvalidTo': true };
       }
-
       return null;
     };
   }
@@ -410,7 +447,7 @@ export class Utils {
     return typeof (value) === 'number' ? parseInt(value) : 0;
   }
 
-  public static getMessError(error: ValidationErrors | null | undefined, fieldName?: string): string {
+  public static getMessError(error: ValidationErrors | null | undefined, fieldName?: string ,fieldName2?: string): string {
 
     if (!error) return '';
 
@@ -490,11 +527,11 @@ export class Utils {
         break;
 
       case 'dateInvalidFrom':
-        mess = `${fieldName}Fromは${fieldName}To以下の値を指定してください。`;
+        mess = `${fieldName} From は ${fieldName2}To以下の値を指定してください。`;
         break;
 
       case 'dateInvalidTo':
-        mess = `${fieldName}Toは${fieldName}From以上の値を指定してください。`;
+        mess = `${fieldName2} To は ${fieldName}From以上の値を指定してください。`;
         break;
 
       case 'notFound':
@@ -1483,4 +1520,27 @@ export class Utils {
 
     return str0;
   };
+
+  public static formatDate(dateString: string): string {
+    const dateParts = dateString.split('/');
+    if (dateParts.length === 3) {
+      const [year, month, day] = dateParts;
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+    return dateString; 
+  }
+  public static maxLength(max: string): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const value: string = control.value;
+      if (value && value.length > parseInt(max, 10)) {
+        return { 'maxLength': {max} };
+      }
+      return null;
+    };
+  }
+  public static dateFormat (dateStr: string){
+    let dateObj = new Date(dateStr);
+    return dateObj.toISOString().split('T')[0];
+  }
+  
 }

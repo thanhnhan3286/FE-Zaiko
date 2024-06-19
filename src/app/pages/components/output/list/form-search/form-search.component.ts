@@ -9,7 +9,7 @@ import { formOutputList } from '@core/config/form-config';
 import { dialogOptions, fieldMappings } from '@core/config/dialog-config';
 import { IDialogInformation } from '@common/models';
 import { DialogInformationComponent } from '@common/components/dialog-information/dialog-information.component';
-// sửa lại call API 
+import { Utils } from '@common/utils/utils';
 @Component({
   selector: 'form-search',
   templateUrl: './form-search.component.html',
@@ -21,6 +21,7 @@ export class FormSearchComponent implements OnInit {
   public searchForm: FormGroup = new FormGroup({});
   public repositories: RepositoryModel[] = [];
 
+  public utils = Utils;
   constructor(private fb: FormBuilder, private outputListService: OutputListService, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -100,11 +101,13 @@ export class FormSearchComponent implements OnInit {
 
   }
   reset() {
-    this.searchForm.reset();
+
+    this.searchForm.reset("searchForm");
     this.searchForm = this.fb.group(formOutputList);
     const criteria = this.searchForm.value;
     const params = this.filterValidCriteria(criteria);
     this.formSubmitEvent.emit(params);
+    
   }
   getAllRepositories() {
     this.outputListService.getAllRepository().subscribe((res) => {
@@ -118,37 +121,40 @@ export class FormSearchComponent implements OnInit {
   }
 
 
+
+
+
   private initialForm(): void {
     this.searchForm = this.fb.group({
       page: new FormControl(null),
       size: new FormControl(null),
-      repositoryIdFrom: new FormControl(null),
-      repositoryIdTo: new FormControl(null),
-      orderDateFrom: new FormControl(null, [this.dateValidator("orderDateFrom")]),
-      orderDateTo: new FormControl(null, [this.dateValidator("orderDateTo")]),
-      planOutputDateFrom: new FormControl(null, [this.dateValidator("planOutputDateFrom")]),
-      planOutputDateTo: new FormControl(null, [this.dateValidator("planOutputDateTo")]),
-      planWorkingDateFrom: new FormControl(null, [this.dateValidator("planWorkingDateFrom")]),
-      planWorkingDateTo: new FormControl(null, [this.dateValidator("planWorkingDateTo")]),
+      repositoryIdFrom: new FormControl(null, [Utils.checkFromValueNumber('repositoryIdTo')]),
+      repositoryIdTo: new FormControl(null, [Utils.checkToValueNumber('repositoryIdFrom')]),
+      orderDateFrom: new FormControl(null, [Utils.checkFromDate('orderDateTo')]),
+      orderDateTo: new FormControl(null, [Utils.checkToDate('orderDateFrom')]),
+      planOutputDateFrom: new FormControl(null, [Utils.checkFromDate("planOutputDateTo")]),
+      planOutputDateTo: new FormControl(null, [Utils.checkToDate("planOutputDateFrom")]),
+      planWorkingDateFrom: new FormControl(null, [Utils.checkFromDate("planWorkingDateTo")]),
+      planWorkingDateTo: new FormControl(null, [Utils.checkToDate("planWorkingDateFrom")]),
       planDeliverDateFrom: new FormControl(null, [this.dateValidator("planDeliverDateFrom")]),
       planDeliverDateTo: new FormControl(null, [this.dateValidator("planDeliverDateTo")]),
-      slipNoFrom: new FormControl(null, [this.codeValidator("slipNoFrom")]),
-      slipNoTo: new FormControl(null, this.codeValidator("slipNoTo")),
-      productCodeFrom: new FormControl(null, [this.codeValidator("productCodeFrom")]),
-      productCodeTo: new FormControl(null, [this.codeValidator("productCodeTo")]),
+      slipNoFrom: new FormControl(null, [Utils.checkFromValueNumber('slipNoTo')]),
+      slipNoTo: new FormControl(null, [Utils.checkToValueNumber('slipNoFrom')]),
+      productCodeFrom: new FormControl(null, [Utils.checkFromValue('supplierCodeTo')]),
+      productCodeTo: new FormControl(null, [Utils.checkToValue('productCodeFrom')]),
       batchNo: new FormControl(null),
       productName: new FormControl(null),
-      destinationCodeFrom: new FormControl(null),
-      destinationCodeTo: new FormControl(null),
+      destinationCodeFrom: new FormControl(null, [Utils.checkFromValue('destinationCodeTo')]),
+      destinationCodeTo: new FormControl(null, [Utils.checkToValue('destinationCodeFrom')]),
       departmentName: new FormControl(null),
-      supplierCodeFrom: new FormControl(null),
-      supplierCodeTo: new FormControl(null),
+      supplierCodeFrom: new FormControl(null, [Utils.checkFromValue('supplierCodeTo')]),
+      supplierCodeTo: new FormControl(null, [Utils.checkToValue('supplierCodeFrom')]),
       supplierName: new FormControl(null),
-      customerCodeFrom: new FormControl(null),
-      customerCodeTo: new FormControl(null),
+      customerCodeFrom: new FormControl(null, [Utils.checkFromValue('customerCodeTo')]),
+      customerCodeTo: new FormControl(null, [Utils.checkToValue('customerCodeFrom')]),
       customerName: new FormControl(null),
-      ownerCodeForm: new FormControl(null),
-      ownerCodeTo: new FormControl(null),
+      ownerCodeForm: new FormControl(null, [this.codeValidator("ownerCodeForm")]),
+      ownerCodeTo: new FormControl(null, [this.codeValidator("ownerCodeTo")]),
       DeliveryType: new FormControl("0"),
       DeliveryStatus: new FormControl("0"),
       isClosed: new FormControl("2")
@@ -188,8 +194,8 @@ export class FormSearchComponent implements OnInit {
 
   dateValidator(fieldName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const isFromDate = fieldName.includes('From');
-      const compareTo = isFromDate ? fieldName.replace('From', 'To') : fieldName.replace('To', 'From');
+      const isFromDate = fieldName.includes('From'); // nếu có thf true
+      const compareTo = isFromDate ? fieldName.replace('From', 'To') : fieldName.replace('To', 'From');//
       const fromDate = isFromDate ? control.value as Date : this.searchForm.get(compareTo)?.value as Date;
       const toDate = isFromDate ? this.searchForm.get(compareTo)?.value as Date : control.value as Date;
 

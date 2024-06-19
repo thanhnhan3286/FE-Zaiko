@@ -7,7 +7,7 @@
       <p>検索結果一覧 総計 <span>{{data.results.length}} / {{data.totalRecords}}</span> 件</p>
     </div>
   </div>
-  <div class="list-data" [ngStyle]="{ 'height': isHeightLimited ? '180px' : '800px' }">
+  <div class="list-data" [ngStyle]="{ 'height': isHeightLimited ? '180px' : '500px' }">
     <table class="table align-middle" *ngIf="data.results.length > 0; else emptyInventory">
       <thead class="bg-light sticky-top">
         <tr>
@@ -112,15 +112,11 @@
           <td class="group-btn sticky">
 
             <button type="button" class="btn btnPlan" [disabled]="!item.planOutputDate"
-              (click)="Plan(item.inventoryOutputId!)">
-              <span></span>
+              (click)="Plan(item.inventoryOutputId!)"> 
               予定
             </button>
 
-            <button type="button" class="btn" [ngClass]="{
-              'enabled-button': !isButtonDisabled(item),
-              'disabled-button': isButtonDisabled(item)
-            }" [disabled]="isButtonDisabled(item)">
+            <button type="button" class="btn enabled-button" [disabled]="isActualButtonDisabled(item)">
               実績
             </button>
 

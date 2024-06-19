@@ -62,6 +62,19 @@ export const dialogOptions: any = {
     ],
     listParam: [],
   },
+  productInventory: {
+    title: '商品',
+    url: ApiPath.PRODUCT_INVENTORY,
+    columReturn: 'inventoryId',
+    listHeader: [
+      { titleHeader: '商品ID', nameColum: 'productId', width: 100 },
+      { titleHeader: '管理日付', nameColum: 'datetimeMng', width: 150 },
+      { titleHeader: '管理番号', nameColum: 'numberMng', width: 150 },
+      { titleHeader: '数量', nameColum: 'customerCode', width: 150 },
+    ],
+    listParam: [],
+  },
+
 };
 export const fieldMappings = {
   supplierCodeFrom: 'supplierCodeFrom',
@@ -73,6 +86,10 @@ export const fieldMappings = {
   destinationCodeFrom: 'destinationCodeFrom',
   destinationCodeTo: 'destinationCodeTo',
   ownerCodeTo:'ownerCodeTo',
-  ownerCodeForm:'ownerCodeForm'
-
+  ownerCodeForm:'ownerCodeForm',
+  customerDeliveryDest:'planForm.planCustomerDeliveryDestinationId',
+  customer: 'planForm.planCustomerId',
+  product:'productCode',
+  customerCode:'customerCode',
+  productInventory:'productInventoryId'
 }

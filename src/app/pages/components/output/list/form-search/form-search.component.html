@@ -1,4 +1,4 @@
-<div class="form-inventory-output"> 
+<div class="form-inventory-output">
     <form class="inventory-form" [formGroup]="searchForm" (ngSubmit)="onFormSubmit()">
         <div class="form-content flex-gap">
             <div class="form-row">
@@ -7,9 +7,49 @@
                         <label>受注日</label>
                     </div>
                     <div class="form-inline">
-                        <input type="date" class="input-control" formControlName="orderDateFrom">
+                        <input matInput 
+                            type="date" 
+                            class="{{
+                                searchForm.get('orderDateFrom')?.status !== 'VALID' &&
+                                searchForm.get('orderDateFrom')?.touched
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="orderDateFrom" 
+                            matTooltip="{{
+                                (searchForm.get('orderDateFrom')?.status !== 'VALID' &&
+                                searchForm.get('orderDateFrom')?.touched
+                                    ? utils.getMessError(searchForm.get('orderDateFrom')?.errors,searchForm.get('orderDateFrom')?.value,searchForm.get('orderDateTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('orderDateFrom')?.status !== 'VALID' &&
+                                searchForm.get('orderDateFrom')?.touched
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}">
                         <p class="divider">~</p>
-                        <input type="date" class="input-control" formControlName="orderDateTo">
+                        <input matInput 
+                        type="date" 
+                        class="{{
+                            searchForm.get('orderDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('orderDateFrom')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                         formControlName="orderDateTo"
+                         matTooltip="{{
+                                (searchForm.get('orderDateTo')?.status !== 'VALID' &&
+                                searchForm.get('orderDateTo')?.touched
+                                    ? utils.getMessError(searchForm.get('orderDateTo')?.errors ,searchForm.get('orderDateFrom')?.value,searchForm.get('orderDateTo')?.value)
+                                    : '') | translate
+                            }}"
+                         matTooltipClass="{{
+                                searchForm.get('orderDateTo')?.status !== 'VALID' &&
+                                searchForm.get('orderDateTo')?.touched
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -17,10 +57,50 @@
                         <label>出庫予定日</label>
                     </div>
                     <div class="form-inline">
-                        <input type="date" class="input-control" formControlName="planOutputDateFrom">
+                        <input matInput 
+                        type="date" 
+                        class="{{
+                            searchForm.get('planOutputDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planOutputDateFrom')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                        formControlName="planOutputDateFrom" 
+                        matTooltip="{{
+                            (searchForm.get('planOutputDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planOutputDateFrom')?.touched
+                                ? utils.getMessError(searchForm.get('planOutputDateFrom')?.errors,searchForm.get('planOutputDateFrom')?.value,searchForm.get('planOutputDateTo')?.value)
+                                : '') | translate
+                        }}"
+                        matTooltipClass="{{
+                            searchForm.get('planOutputDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planOutputDateFrom')?.touched
+                                ? 'example-tooltip-red'
+                                : ''
+                        }}">
 
                         <p class="divider">~</p>
-                        <input type="date" class="input-control" formControlName="planOutputDateTo">
+                        <input matInput 
+                        type="date" 
+                        class="{{
+                            searchForm.get('planOutputDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planOutputDateFrom')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                        formControlName="planOutputDateTo" 
+                        matTooltip="{{
+                            (searchForm.get('planOutputDateTo')?.status !== 'VALID' &&
+                            searchForm.get('planOutputDateTo')?.touched
+                                ? utils.getMessError(searchForm.get('planOutputDateTo')?.errors,searchForm.get('planOutputDateFrom')?.value,searchForm.get('planOutputDateTo')?.value)
+                                : '') | translate
+                        }}"
+                        matTooltipClass="{{
+                            searchForm.get('planOutputDateTo')?.status !== 'VALID' &&
+                            searchForm.get('planOutputDateTo')?.touched
+                                ? 'example-tooltip-red'
+                                : ''
+                        }}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -28,10 +108,50 @@
                         <label>作業予定日</label>
                     </div>
                     <div class="form-inline">
-                        <input type="date" class="input-control" formControlName="planWorkingDateFrom">
+                        <input matInput 
+                        type="date" 
+                        class="{{
+                            searchForm.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planWorkingDateFrom')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                        formControlName="planWorkingDateFrom" 
+                        matTooltip="{{
+                            (searchForm.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planWorkingDateFrom')?.touched
+                                ? utils.getMessError(searchForm.get('planWorkingDateFrom')?.errors,searchForm.get('planWorkingDateFrom')?.value,searchForm.get('planWorkingDateTo')?.value)
+                                : '') | translate
+                        }}"
+                        matTooltipClass="{{
+                            searchForm.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planWorkingDateFrom')?.touched
+                                ? 'example-tooltip-red'
+                                : ''
+                        }}">  
                         <p class="divider">~</p>
-                        <input type="date" class="input-control" formControlName="planWorkingDateTo">
-                    </div>
+                        <input matInput 
+                        type="date" 
+                        class="{{
+                            searchForm.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                            searchForm.get('planWorkingDateFrom')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                        formControlName="planWorkingDateTo" 
+                        matTooltip="{{
+                            (searchForm.get('planWorkingDateTo')?.status !== 'VALID' &&
+                            searchForm.get('planWorkingDateTo')?.touched
+                                ? utils.getMessError(searchForm.get('planWorkingDateTo')?.errors,searchForm.get('planWorkingDateFrom')?.value,searchForm.get('planWorkingDateTo')?.value)
+                                : '') | translate
+                        }}"
+                        matTooltipClass="{{
+                            searchForm.get('planWorkingDateTo')?.status !== 'VALID' &&
+                            searchForm.get('planWorkingDateTo')?.touched
+                                ? 'example-tooltip-red'
+                                : ''
+                        }}"> 
+                     </div>
                 </div>
                 <div class="form-group">
                     <div class="label">
@@ -43,19 +163,59 @@
                         <input type="date" class="input-control" formControlName="planDeliverDateTo">
                     </div>
                 </div>
-             
+
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <div class="label">
-                        <label >伝票番号</label>
+                        <label>伝票番号</label>
                     </div>
                     <div class="form-inline">
-                        <input type="text" class="input-control" formControlName="slipNoFrom">
+                        <input matInput 
+                        type="text" 
+                        class="{{
+                            searchForm.get('slipNoFrom')?.status !== 'VALID' &&
+                            searchForm.get('slipNoFrom')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                        formControlName="slipNoFrom" 
+                        matTooltip="{{
+                            (searchForm.get('slipNoFrom')?.status !== 'VALID' &&
+                            searchForm.get('slipNoFrom')?.touched
+                                ? utils.getMessError(searchForm.get('slipNoFrom')?.errors,searchForm.get('slipNoFrom')?.value,searchForm.get('slipNoTo')?.value)
+                                : '') | translate
+                        }}"
+                        matTooltipClass="{{
+                            searchForm.get('slipNoFrom')?.status !== 'VALID' &&
+                            searchForm.get('slipNoFrom')?.touched
+                                ? 'example-tooltip-red'
+                                : ''
+                        }}">
                         <p class="divider">~</p>
-                        <input type="text" class="input-control" formControlName="slipNoTo">
-                    </div>
+                        <input matInput 
+                        type="text" 
+                        class="{{
+                            searchForm.get('slipNoTo')?.status !== 'VALID' &&
+                            searchForm.get('slipNoTo')?.touched
+                                ? 'border-red input-control'
+                                : ' input-control '
+                        }}"
+                        formControlName="slipNoTo" 
+                        matTooltip="{{
+                            (searchForm.get('slipNoTo')?.status !== 'VALID' &&
+                            searchForm.get('slipNoTo')?.touched
+                                ? utils.getMessError(searchForm.get('slipNoTo')?.errors,searchForm.get('slipNoFrom')?.value,searchForm.get('slipNoTo')?.value)
+                                : '') | translate
+                        }}"
+                        matTooltipClass="{{
+                            searchForm.get('slipNoTo')?.status !== 'VALID' &&
+                            searchForm.get('slipNoTo')?.touched
+                                ? 'example-tooltip-red'
+                                : ''
+                        }}">
+                        </div>
                 </div>
                 <div class="form-group ">
                     <div class="label">
@@ -72,14 +232,48 @@
                     </div>
                     <div class="form-inline">
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="supplierCodeFrom">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('supplierCodeFrom')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="supplierCodeFrom" 
+                            matTooltip="{{
+                                (searchForm.get('supplierCodeFrom')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('supplierCodeFrom')?.errors,searchForm.get('supplierCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('supplierCodeFrom')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
                             <div class="icon-input" (click)="openDialog('supplierCodeFrom')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
                         </div>
                         <p class="divider">~</p>
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="supplierCodeTo">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('supplierCodeTo')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="supplierCodeTo" 
+                            matTooltip="{{
+                                (searchForm.get('supplierCodeTo')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('supplierCodeFrom')?.errors,searchForm.get('supplierCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('supplierCodeTo')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
                             <div class="icon-input" (click)="openDialog('supplierCodeTo')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
@@ -97,7 +291,7 @@
                     </div>
                 </div>
 
-             
+
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -106,15 +300,49 @@
                     </div>
                     <div class="form-inline">
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="customerCodeFrom">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('customerCodeFrom')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="customerCodeFrom" 
+                            matTooltip="{{
+                                (searchForm.get('customerCodeFrom')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('customerCodeFrom')?.errors,searchForm.get('customerCodeFrom')?.value,searchForm.get('customerCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('customerCodeFrom')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
                             <div class="icon-input" (click)="openDialog('customerCodeFrom')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
                         </div>
-                        <p class="divider">~</p>
+                        <p class="divider">~</p> 
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="customerCodeTo">
-                            <div class="icon-input" (click)="openDialog('customerCodeTo')">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('customerCodeTo')?.status !== 'VALID' 
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="customerCodeTo" 
+                            matTooltip="{{
+                                (searchForm.get('customerCodeTo')?.status !== 'VALID' 
+                                    ? utils.getMessError(searchForm.get('customerCodeTo')?.errors,searchForm.get('customerCodeFrom')?.value,searchForm.get('customerCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('customerCodeTo')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
+                             <div class="icon-input" (click)="openDialog('customerCodeTo')">
                                 <mat-icon class="search-input special-icon" svgIcon="icon-search-input"></mat-icon>
                             </div>
                         </div>
@@ -141,7 +369,7 @@
                         </div>
                         <p class="divider">~</p>
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="ownerCodeTo" >
+                            <input type="text" class="input-control" formControlName="ownerCodeTo">
                             <div class="icon-input" (click)="openDialog('ownerCodeTo')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
@@ -157,7 +385,7 @@
                         <input type="text" class="input-control" formControlName="customerName">
                     </div>
                 </div>
-             
+
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -166,14 +394,48 @@
                     </div>
                     <div class="form-inline">
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="destinationCodeFrom">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('destinationCodeFrom')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="destinationCodeFrom" 
+                            matTooltip="{{
+                                (searchForm.get('destinationCodeFrom')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('destinationCodeFrom')?.errors,searchForm.get('destinationCodeFrom')?.value,searchForm.get('destinationCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('destinationCodeFrom')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
                             <div class="icon-input" (click)="openDialog('destinationCodeFrom')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
                         </div>
                         <p class="divider">~</p>
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="destinationCodeTo">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('destinationCodeTo')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="destinationCodeTo" 
+                            matTooltip="{{
+                                (searchForm.get('destinationCodeTo')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('destinationCodeTo')?.errors,searchForm.get('customerCodeFrom')?.value,searchForm.get('customerCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('destinationCodeTo')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
                             <div class="icon-input" (click)="openDialog('destinationCodeTo')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
@@ -194,15 +456,49 @@
                     </div>
                     <div class="form-inline">
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="productCodeFrom">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('productCodeFrom')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="productCodeFrom" 
+                            matTooltip="{{
+                                (searchForm.get('productCodeFrom')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('productCodeFrom')?.errors,searchForm.get('productCodeFrom')?.value,searchForm.get('productCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('productCodeFrom')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
                             <div class="icon-input" (click)="openDialog('productCodeFrom')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
                         </div>
                         <p class="divider">~</p>
                         <div class="input-wrapper">
-                            <input type="text" class="input-control" formControlName="productCodeTo">
-                            <div class="icon-input" (click)="openDialog('productCodeTo')">
+                            <input matInput 
+                            type="text" 
+                            class="{{
+                                searchForm.get('productCodeTo')?.status !== 'VALID'
+                                    ? 'border-red input-control'
+                                    : ' input-control '
+                            }}"
+                            formControlName="productCodeTo" 
+                            matTooltip="{{
+                                (searchForm.get('productCodeTo')?.status !== 'VALID'
+                                    ? utils.getMessError(searchForm.get('productCodeTo')?.errors,searchForm.get('productCodeFrom')?.value,searchForm.get('productCodeTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('productCodeTo')?.status !== 'VALID'
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"> 
+                              <div class="icon-input" (click)="openDialog('productCodeTo')">
                                 <mat-icon class="search-input" svgIcon="icon-search-input"></mat-icon>
                             </div>
                         </div>
@@ -225,21 +521,63 @@
                         <label>倉庫</label>
                     </div>
                     <div class="form-inline">
-                        <select class="input-control" formControlName="repositoryIdFrom">
+                        <select
+                        matInput 
+                            class="{{
+                                searchForm.get('repositoryIdFrom')?.status !== 'VALID' &&
+                                searchForm.get('repositoryIdFrom')?.touched
+                                    ? 'border-red input-control'
+                                    : 'input-control'
+                            }}"
+                            formControlName="repositoryIdFrom"
+                            matTooltip="{{
+                                (searchForm.get('repositoryIdFrom')?.status !== 'VALID' &&
+                                searchForm.get('repositoryIdFrom')?.touched
+                                    ? utils.getMessError(searchForm.get('repositoryIdFrom')?.errors, searchForm.get('repositoryIdFrom')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('repositoryIdFrom')?.status !== 'VALID' &&
+                                searchForm.get('repositoryIdFrom')?.touched
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"
+                        >
                             <!-- Hiển thị các repository -->
-                            <option *ngFor="let repo of repositories" [value]="repo.repositoryId">
-                                {{ repo.repositoryName }}
+                            <option *ngFor="let repo of repositories" [value]="repo.repository_id">
+                              {{repo.repository_id}} +  {{ repo.repositoryName }}
                             </option>
                         </select>
                         <p class="divider">~</p>
-                        <select class="input-control" formControlName="repositoryIdTo">
+                        <select
+                        matInput 
+                            class="{{
+                                searchForm.get('repositoryIdTo')?.status !== 'VALID' &&
+                                searchForm.get('repositoryIdTo')?.touched
+                                    ? 'border-red input-control'
+                                    : 'input-control'
+                            }}"
+                            formControlName="repositoryIdTo"
+                            matTooltip="{{
+                                (searchForm.get('repositoryIdTo')?.status !== 'VALID' &&
+                                searchForm.get('repositoryIdTo')?.touched
+                                    ? utils.getMessError(searchForm.get('repositoryIdTo')?.errors, searchForm.get('repositoryIdTo')?.value)
+                                    : '') | translate
+                            }}"
+                            matTooltipClass="{{
+                                searchForm.get('repositoryIdTo')?.status !== 'VALID' &&
+                                searchForm.get('repositoryIdTo')?.touched
+                                    ? 'example-tooltip-red'
+                                    : ''
+                            }}"
+                        >
                             <!-- Hiển thị các repository -->
-                            <option *ngFor="let repo of repositories" [value]="repo.repositoryId">
-                                {{ repo.repositoryName }}
+                            <option *ngFor="let repo of repositories" [value]="repo.repository_id">
+                                {{ repo.repositoryName }}+ {{repo.repository_id}}
                             </option>
                         </select>
-
                     </div>
+                    
                 </div>
                 <div class="form-group ">
                     <div class="label">
@@ -301,12 +639,12 @@
 
             </div>
 
-          
+
 
         </div>
         <div class="btn-container">
             <div class="form-btn">
-                <button type="submit" class="btn save">検索</button>
+                <button type="submit" class="btn save" [disabled]="searchForm.invalid" >検索</button>
                 <button type="button" class="btn refresh" (click)="reset()">クリア</button> <!-- Reset form -->
             </div>
 

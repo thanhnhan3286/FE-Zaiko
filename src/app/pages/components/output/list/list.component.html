@@ -1,4 +1,4 @@
-<app-header-top (toggleSearchForm)="onToggleSearchForm($event)"></app-header-top>
+<app-header-top [pageTitles]="screenTitles" (toggleSearchForm)="onToggleSearchForm($event)"></app-header-top>
 
 <div class="container-pages">
   <form-search *ngIf="isSearchFormVisible" (formSubmitEvent)="eventEmitForm($event)"></form-search>
