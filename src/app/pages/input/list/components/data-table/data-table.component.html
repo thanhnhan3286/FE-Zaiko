@@ -1,0 +1,145 @@
+<div class="container">
+    <div class="tbl-header">
+        <div class="tbl-title">
+            検索結果一覧
+            <div class="btn-area-table">
+                <button mat-stroked-button color="primary" class="btn-export" matTooltipPosition="after">
+                    <mat-icon svgIcon="icon-export-blue"></mat-icon>
+                    CSV
+                </button>
+            </div>
+
+        </div>
+        <div class="pagination">
+            <span class="pgn-label">総計</span>
+            <!-- <span class="pgn-label" *ngIf="!listOutput">{{totalElements}}</span>
+            <span class="pgn-label" *ngIf="listOutput">{{listOutput.length}}</span> -->
+            <span class="pgn-label"> / </span>
+            <!-- <span class="pgn-total">{{totalElements}}</span> -->
+            <span class="pgn-label">件</span>
+        </div>
+
+    </div>
+    <div class="table-container">
+        <table>
+            <thead class="header-tb">
+                <tr>
+                    <th scope="col" class="th-25"></th>
+                    <th scope="col" class="th-25"></th>
+                    <th scope="col" class="th-4 text-center">No.</th>
+                    <th scope="col" class="th-9 text-center">伝票番号</th>
+                    <th scope="col" class="th-9 text-center">入庫タイプ</th>
+                    <th scope="col" class="th-9 text-center">入庫予定日<br>入庫実績日</th>
+                    <th scope="col" class="th-100  text-center">予定納品先<br>実績納品先</th>
+                    <th scope="col" class="th-140">予定納品先名称<br>実績納品先名称</th>
+                    <th scope="col" class="th-9">予定仕入先<br>実績仕入先</th>
+                    <th scope="col" class="th-140">予定仕入先名称<br>実績仕入先名称</th>
+                    <th scope="col" class="th-120">予定所有者<br>実績所有者</th>
+                    <th scope="col" class="th-160">予定所有者名称<br>実績所有者名称</th>
+                    <th scope="col" class="th-9">予定倉庫<br>実績倉庫</th>
+                    <th scope="col" class="th-128">予定客先伝票番号<br>実績客先伝票番号</th>
+                    <th scope="col" class="th-128">予定数量合計<br>実績数量合計</th>
+                    <th scope="col" class="th-8"></th>
+                    <th scope="col" class="th-8"></th>
+                    <th scope="col" class="th-8"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-right">
+                        <mat-icon svgIcon="icon-unlock"></mat-icon>
+                        <!-- <mat-icon svgIcon="icon-lock"></mat-icon> -->
+
+                    </td>
+                    <td class="text-left td-conten-not-yet td-not-yet-color">未</td>
+                    <!-- <td class="text-left td-conten-remain td-remain-color">残
+                    </td>
+                    <td class="text-left td-conten-done td-done-color">済
+                    </td> -->
+                    <td class="text-center">
+                        1
+                    </td>
+                    <td class="text-center">
+                        000045
+                    </td>
+                    <td class="text-center">
+                        <span class="type-deli-plan  text-center">
+                            予定あり
+                        </span>
+                        <span class="type-deli-actual  text-center">
+                            実績のみ
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        25/06/2024
+                        <br>
+                        25/06/2024
+                    </td>
+
+                    <td class="text-center">
+                        <span class="batch-status-1 text-center">
+                            未処理
+                        </span>
+                        <span class="batch-status-1 text-center">
+                            処理中
+                        </span>
+                        <span class="batch-status-1 text-center">
+                            処理済み
+                        </span>
+                        <span class="batch-status-1 text-center">
+                            処理中<br>未あり
+                        </span>
+                    </td>
+                    <td>
+                        123456<br>
+                        123456
+                    </td>
+                    <td>
+                        123456<br>
+                        123456
+                    </td>
+                    <td>123456<br>
+                        123456</td>
+                    <td>
+                        123456<br>
+                        123456
+                    </td>
+                    <td>123456<br>
+                        123456
+                    </td>
+                    <td>123456
+                        <br>123456
+                    </td>
+                    <td>123456
+                        <br>
+                        123456
+                    </td>
+                    <td>123456
+                        <br> 123456
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-plan">
+                            予定
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-actual">
+                            実績
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-correction">
+                            訂正
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn-show-more">
+        <button mat-stroked-button color="default">
+            <mat-icon svgIcon="icon-show-more"></mat-icon>
+            更に表示
+        </button>
+    </div>
+</div>

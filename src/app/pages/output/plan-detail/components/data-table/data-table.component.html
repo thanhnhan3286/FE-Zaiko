@@ -1,0 +1,428 @@
+<div class="container">
+    <div class="tbl-header">
+        <div class="tbl-title">
+            検索結果一覧
+            <!-- <div class="btn-area-table"> -->
+            <!-- <button mat-stroked-button color="primary" class="btn-export" matTooltipPosition="after">
+                    <mat-icon svgIcon="icon-export-blue"></mat-icon>
+                </button> -->
+            <button class="btn btn-icon " [class]="outputStatus === '出庫済' || isClose === '1' ? ' disabled' : ''">
+                <mat-icon svgIcon="icon-plus"></mat-icon>
+                <span>追加</span>
+            </button>
+            <!-- </div> -->
+            <!-- <button mat-raised-button type="button" color="primary" class="btn-print">
+                全てプレビュー
+            </button>-->
+        </div>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead class="header-tb">
+                <!-- row 1 -->
+                <tr>
+                    <th class="th-100">No.</th>
+                    <th class="th-310">商品</th>
+                    <th class="no-right th-270">管理日付</th>
+                    <th class="th-140">倉庫</th>
+                    <th class="th-310">請求荷姿</th>
+                    <th class="text-right th-100">未出庫</th>
+                    <th rowSpan="3" class="no-right th-4"></th>
+                </tr>
+                <!-- row 2 -->
+                <tr>
+                    <th class="th-100">バッチ状態</th>
+                    <th class="th-310">規格</th>
+                    <th class="no-right th-270">管理番号</th>
+                    <th class="th-140">ロケーション</th>
+                    <th class="th-310">出庫数量</th>
+                    <th class="text-right th-100">出庫済</th>
+                </tr>
+                <!-- row 3 -->
+                <tr>
+                    <th class="th-100">バッチ番号</th>
+                    <th class="th-310">支払先</th>
+                    <th class="no-right th-270">所有者</th>
+                    <th class="th-140">在庫状態</th>
+                    <th class="th-310">合計</th>
+                    <th class="text-right th-100"></th>
+                </tr>
+            </thead>
+            <tbody class="content-tb">
+                <!-- row 1 -->
+                <tr>
+                    <td class="icon-info">
+                        <span>0001</span>
+                        <mat-icon svgIcon="info"></mat-icon>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="input-dialog">
+                                    <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="input-field">
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="no-right">
+                        <div class="row-16">
+                            <div class="col-xs-2">
+                                <div class="input-field">
+                                    <input type="text" class="disabled">
+                                </div>
+                            </div>
+                            <div class="col-xs-14">
+                                <div class="group-input">
+                                    <input type="date">
+                                    <span>~</span>
+                                    <input type="date">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-field">
+                            <select class="input-dialog">
+                                <option>S_11111111111111111111111</option>
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="group-radio">
+                            <div class="radio-item">
+                                <input type="radio" id="ｹｰｽ" value="" class="radio-input">
+                                <label for="ｹｰｽ" class="radio-label">ｹｰｽ</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="ﾎﾞｰﾙ" value="" class="radio-input">
+                                <label for="ﾎﾞｰﾙ" class="radio-label">ﾎﾞｰﾙ</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="枚" value="" class="radio-input" checked>
+                                <label for="枚" class="radio-label">枚</label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-field">
+                            <input type="text" class="disabled">
+                        </div>
+                    </td>
+                    <td rowspan="3" class="no-right">
+                        <div class="action">
+                            <button class="btn btn-delete">
+                                <mat-icon svgIcon="icon-delete"></mat-icon>
+                            </button>
+                            <button class="btn btn-copy">
+                                <mat-icon svgIcon="icon-copy"></mat-icon>
+                            </button>
+                            <button class="btn btn-copy disabled">
+                                <mat-icon svgIcon="icon-copy"></mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- row 2 -->
+                <tr>
+                    <td>
+                        <span class="status">{{outputStatus}}</span>
+                    </td>
+                    <td>
+                        <div class="input-field">
+                            <input type="text" class="disabled">
+                        </div>
+                    </td>
+                    <td class="no-right">
+                        <div class="group-input">
+                            <input type="text">
+                            <span>~</span>
+                            <input type="text">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-field">
+                            <select class="input-dialog disabled">
+                                <option>S_</option>
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="group-input">
+                            <input type="text" class="disabled">
+                            <label for="">ｹｰｽ</label>
+                            <input type="text" class="disabled">
+                            <label for="">ﾎﾞｰﾙ</label>
+                            <input type="text">
+                            <label for="">枚</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-field">
+                            <input type="text" class="disabled">
+                        </div>
+                    </td>
+
+                </tr>
+                <!-- row 3 -->
+                <tr>
+                    <td>
+                        <span>-</span>
+                    </td>
+                    <td>
+                        <div class=" row">
+                            <div class="col-xs-5">
+                                <div class="input-field">
+                                    <input type="text" class="disabled">
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="input-field">
+                                    <input type="text" class="disabled">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="no-right">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="input-dialog">
+                                    <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="input-field">
+                                    <input type="text" class="disabled">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-field">
+                            <select class="input-dialog">
+                                <option>S_</option>
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+                                <option>1</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-lg-4 col-xs-6 input-field">
+                                <input type="text" class="disabled">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="content-tb" *ngIf='pagePlanOutputDetail.length>0'>
+                <ng-container *ngFor='let planDetail of pagePlanOutputDetail ; let i = index'>
+                    <!-- row 1 -->
+                    <tr>
+                        <td class="icon-info">
+                            <span>{{utils.formatZeroFill(i+1, 4)}}</span>
+                            <mat-icon svgIcon="info"></mat-icon>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="input-dialog">
+                                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="input-field">
+                                        <input type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="no-right">
+                            <div class="row-input">
+                                <div class="w-30">
+                                    <div class="input-field">
+                                        <input type="text" class="disabled">
+                                    </div>
+                                </div>
+                                <div class="w-auto">
+                                    <div class="group-input">
+                                        <input type="date">
+                                        <span>~</span>
+                                        <input type="date">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-field">
+                                <select class="input-dialog">
+                                    <option>S_11111111111111111111111</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="group-radio">
+                                <div class="radio-item">
+                                    <input type="radio" id="ｹｰｽ" value="" class="radio-input">
+                                    <label for="ｹｰｽ" class="radio-label">ｹｰｽ</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="ﾎﾞｰﾙ" value="" class="radio-input">
+                                    <label for="ﾎﾞｰﾙ" class="radio-label">ﾎﾞｰﾙ</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="枚" value="" class="radio-input" checked>
+                                    <label for="枚" class="radio-label">枚</label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-field">
+                                <input type="text" class="disabled">
+                            </div>
+                        </td>
+                        <td rowspan="3" class="no-right">
+                            <div class="action">
+                                <button class="btn btn-delete">
+                                    <mat-icon svgIcon="icon-delete"></mat-icon>
+                                </button>
+                                <button class="btn btn-copy">
+                                    <mat-icon svgIcon="icon-copy"></mat-icon>
+                                </button>
+                                <button class="btn btn-copy disabled">
+                                    <mat-icon svgIcon="icon-copy"></mat-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- row 2 -->
+                    <tr>
+                        <td>
+                            <span class="status">{{outputStatus}}</span>
+                        </td>
+                        <td>
+                            <div class="input-field">
+                                <input type="text" class="disabled">
+                            </div>
+                        </td>
+                        <td class="no-right">
+                            <div class="group-input">
+                                <input type="text">
+                                <span>~</span>
+                                <input type="text">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-field">
+                                <select class="input-dialog disabled">
+                                    <option>S_</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="group-input">
+                                <input type="text" class="disabled">
+                                <label for="">ｹｰｽ</label>
+                                <input type="text" class="disabled">
+                                <label for="">ﾎﾞｰﾙ</label>
+                                <input type="text">
+                                <label for="">枚</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-field">
+                                <input type="text" class="disabled">
+                            </div>
+                        </td>
+
+                    </tr>
+                    <!-- row 3 -->
+                    <tr>
+                        <td>
+                            <span>-</span>
+                        </td>
+                        <td>
+                            <div class=" row">
+                                <div class="col-xs-5">
+                                    <div class="input-field">
+                                        <input type="text" class="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="input-field">
+                                        <input type="text" class="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="no-right">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="input-dialog">
+                                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="input-field">
+                                        <input type="text" class="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-field">
+                                <select class="input-dialog">
+                                    <option>S_</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-lg-4 col-xs-6 input-field">
+                                    <input type="text" class="disabled">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

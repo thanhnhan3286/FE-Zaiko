@@ -1,0 +1,643 @@
+<form [formGroup]="planOutputForm">
+    <div class="info-form">
+        <div class="header-info">
+            <div class="left-side">
+                <button class="btn btn-back" (click)="navigateToOutput()" *ngIf="planOutput">
+                    <img src="./../../../../assets/plus.png" alt="" class="img-icon right-icon">
+                    <!-- <mat-icon svgIcon="add"></mat-icon> -->
+                    <span>戻る</span>
+                </button>
+            </div>
+            <div class="right-side">
+                <div class="group-status" *ngIf="planOutput">
+                    <span class="title-status">出庫状態</span>
+                    <span class="status " [class]="getCollorContentOutputStatus(outputStatus)">
+                        {{outputStatus}}
+                    </span>
+                </div>
+                <div class="group-btn">
+                    <button class="btn is-close-btn " *ngIf="planOutput" (click)="setIsClose()"
+                        [style]="isClose === '1' ? 'color:#4392BB;' : 'color:#EF4949;'"
+                        [class]="planOutputForm.invalid ? 'border-red disabled' : ''">
+                        {{contentIsClose}}
+                    </button>
+                    <button class="btn delete-btn" *ngIf="planOutput" (click)="popupRemoveInventoryOutput()"
+                        [class]="outputStatus === '未出庫' ? '' : ' disabled'">
+                        <mat-icon svgIcon="icon-delete"></mat-icon>
+                        <span>削除</span>
+                    </button>
+                    <button class="save-btn btn " [class]=" planOutputForm.invalid ? 'disabled' : ''"
+                        (click)="submitForm()">
+                        <mat-icon svgIcon="icon-save"></mat-icon>
+                        <span>保存</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form form-input" formGroupName="infoForm">
+            <!-- set 1 -->
+            <div class="row m-b-12">
+                <div class="col-lg-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="group-input">
+                                <label for="">受注日</label>
+                                <div class="input-field">
+                                    <input type="date" formControlName="orderDate"
+                                        [class]="isPlanDetail ? 'disabled' : ''">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="group-input">
+                                <label for="">出庫予定日</label>
+                                <div class="input-field">
+                                    <input type="date" formControlName="planOutputDate"
+                                        [class]="statusPlanDate === '' ? (infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? ' border-red' : '') : statusPlanDate"
+                                        [matTooltip]="(infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? utils.getMessError(infoForm.get('planOutputDate')?.errors) : '') | translate"
+                                        matTooltipClass="{{infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? 'example-tooltip-red' : ''}}">
+                                    <!-- <input type="date" formControlName="planOutputDate" *ngIf="planOutput"
+                                     [class]="planOutput ? (outputStatus !== '出庫済' && isClose === '0' ? (infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? 'border-red' : '') : ' disabled') : (infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? 'border-red' : '')" -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="group-input">
+                                <label for="">作業予定日</label>
+                                <div class="input-field">
+                                    <input type="date" formControlName="planWorkingDate" class="{{statusPlanDate}}">
+                                    <!-- [class]="isPlanDetail ? 'disabled' : ''" -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="group-input">
+                                <label for="">納品予定日</label>
+                                <div class="input-field">
+                                    <input type="date" formControlName="planDeliveryDate" class="{{statusPlanDate}}">
+                                    <!-- [class]="isPlanDetail ? 'disabled' : ''" -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="group-input">
+                                <label for="">伝票区分</label>
+                                <div class="input-field">
+                                    <select class="input-dialog" formControlName="createSlipType"
+                                        [class]="!planOutput ? '' : ' disabled'">
+                                        <option [value]="'0'">通常入庫（自動採番）</option>
+                                        <option [value]="'1'">通常出庫（手入力）</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="group-input">
+                                <label for="">伝票番号</label>
+                                <div class="input-field">
+                                    <input type="text" formControlName="slipNo"
+                                        [class]=" slipNoDisabled ? (infoForm.get('slipNo')?.status !== 'VALID' && infoForm.get('slipNo')?.touched ? 'border-red' : '') : 'disabled' "
+                                        [matTooltip]="(infoForm.get('slipNo')?.status !== 'VALID' && infoForm.get('slipNo')?.touched ? utils.getMessError(infoForm.get('slipNo')?.errors) : '') | translate"
+                                        [matTooltipClass]="infoForm.get('slipNo')?.status !== 'VALID' && infoForm.get('slipNo')?.touched ? 'example-tooltip-red' : ''">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="group-input">
+                                <label for="">客先伝票番号</label>
+                                <div class="input-field">
+                                    <input type="text" formControlName="planSupplierSlipNo" class="disabled"
+                                        [class]="isPlanDetail ? 'disabled' : ''">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- set 2 -->
+            <div class="row-8 m-b-12">
+                <div class="col-lg-1 col-md-2 col-sm-4 col-xs-8">
+                    <div class="group-input">
+                        <div class="group-checkbox">
+                            <label for="">出荷先コード</label>
+                            <div class="checkbox">
+                                <label class="label-checkbox" for="">マスタ登録外納品先指定</label>
+                                <input class="input-checkbox " type="checkbox" (click)="setNewShippingDest()"
+                                    [checked]="infoForm.get('checked')?.value === '1' ? true : false"
+                                    [class]=" isPlanDetail ? 'disabled' : ''">
+                                <!-- <input class="input-checkbox disabled" type="checkbox" formControlName="checked"> -->
+                            </div>
+                        </div>
+                        <div class="input-field input-dialog">
+                            <mat-icon class="icon-dialog" svgIcon="icon-search-input"
+                                [class]=" isPlanDetail ? 'disabled' : (newShippingDest || disabledCustomerOrCustomerDest === 2 ? 'disabled' : '')"
+                                (click)="openPopUp('destinationCode')">
+                            </mat-icon>
+                            <input type="text" formControlName="destinationCode"
+                                [class]=" isPlanDetail || disabledCustomerOrCustomerDest === 2 ? 'disabled' : (infoForm.get('destinationCode')?.status !== 'VALID' && infoForm.get('destinationCode')?.touched ? 'border-red' : '')"
+                                [matTooltip]="(infoForm.get('destinationCode')?.status !== 'VALID' && infoForm.get('destinationCode')?.touched ? utils.getMessError(infoForm.get('destinationCode')?.errors) : '') | translate"
+                                matTooltipClass="{{infoForm.get('destinationCode')?.status !== 'VALID' && infoForm.get('destinationCode')?.touched ? 'example-tooltip-red' : ''}}">
+                            <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-6 col-sm-4 col-xs-8">
+                    <div class="group-input">
+                        <label for="">出荷先名称</label>
+                        <div class="input-field">
+                            <input type="text" formControlName="departmentName"
+                                [class]="newShippingDest ? (infoForm.get('departmentName')?.status !== 'VALID' && infoForm.get('departmentName')?.touched ? 'border-red' : '') : 'disabled '"
+                                [matTooltip]="(infoForm.get('departmentName')?.status !== 'VALID' && infoForm.get('departmentName')?.touched ? utils.getMessError(infoForm.get('departmentName')?.errors) : '') | translate"
+                                [matTooltipClass]="infoForm.get('departmentName')?.status !== 'VALID' && infoForm.get('departmentName')?.touched ? 'example-tooltip-red' : ''">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- set 3 -->
+            <div class="row m-b-12">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="row-16">
+                        <div class="col-lg-3 col-md-6 col-sm-8 col-xs-16">
+                            <div class="group-input">
+                                <label for="">請求先コード</label>
+                                <div class="input-field input-dialog ">
+                                    <mat-icon class="icon-dialog " svgIcon="icon-search-input"
+                                        [class]="isPlanDetail || newShippingDest || disabledCustomerOrCustomerDest === 1 ? 'disabled' : ''"
+                                        (click)="openPopUp('customerCode')"></mat-icon>
+                                    <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                    <!-- class="disabled" -->
+                                    <input type="text" formControlName="customerCode"
+                                        [class]="disabledCustomerOrCustomerDest === 1 || isPlanDetail ? 'disabled' : (infoForm.get('customerCode')?.status !== 'VALID' && infoForm.get('customerCode')?.touched ? 'border-red' : '') "
+                                        [matTooltip]="(infoForm.get('customerCode')?.status !== 'VALID' && infoForm.get('customerCode')?.touched ? utils.getMessError(infoForm.get('customerCode')?.errors) : '') | translate"
+                                        matTooltipClass="{{infoForm.get('customerCode')?.status !== 'VALID' && infoForm.get('customerCode')?.touched ? 'example-tooltip-red' : ''}}">
+                                    <!-- [class]="infoForm.get('customerCode')?.status !== 'VALID' && infoForm.get('customerCode')?.touched ? 'border-red' : ''" -->
+                                    <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-13 col-md-10 col-sm-8 col-xs-16">
+                            <div class="group-input">
+                                <label for="">請求先名称</label>
+                                <div class="input-field">
+                                    <input type="text" formControlName="customerName"
+                                        [class]="newShippingDest ? (infoForm.get('customerName')?.status !== 'VALID' && infoForm.get('customerName')?.touched ? 'border-red' : '') : 'disabled '"
+                                        [matTooltip]="(infoForm.get('customerName')?.status !== 'VALID' && infoForm.get('customerName')?.touched ? utils.getMessError(infoForm.get('customerName')?.errors) : '') | translate"
+                                        [matTooltipClass]="infoForm.get('customerName')?.status !== 'VALID' && infoForm.get('customerName')?.touched ? 'example-tooltip-red' : ''">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">伝票備考</label>
+                        <div class="input-field">
+                            <input type="text" formControlName="slipNote" [class]="isPlanDetail ? 'disabled' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" [class]="newShippingDest ? '' : 'disabled'" -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- set 4 -->
+            <div class="row m-b-12">
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">倉庫</label>
+                        <div class="input-field">
+                            <select class="input-dialog" formControlName="planRepositoryId"
+                                [class]=" isPlanDetail ? 'disabled' : ''">
+                                <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                <option *ngFor="let repo of listRepo; let i = index" value={{repo.repositoryId}}>
+                                    {{repo.repositoryCode}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">ルート</label>
+                        <div class="input-field">
+                            <select class="input-dialog" formControlName="routeCode"
+                                [class]=" isPlanDetail ? 'disabled' : ''">
+                                <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                <option *ngFor="let route of listRoute; let i = index" value={{route.routeCode}}>
+                                    {{route.routeCode}} - {{route.routeName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">コース</label>
+                        <div class="input-field">
+                            <select class="input-dialog" formControlName="courseCode"
+                                [class]=" isPlanDetail ? 'disabled' : ''">
+                                <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                <option *ngFor="let course  of listCourse; let i = index" value={{course.courseCode}}>
+                                    {{course.courseCode}} - {{course.courseName}}
+                                </option>
+                                <!-- <option *ngIf="listCourse.length === 0">
+                                    No option
+                                </option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">納品先TEL</label>
+                        <div class="input-field">
+                            <input type="text" formControlName="phoneNumber"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : (infoForm.get('phoneNumber')?.status !== 'VALID' && infoForm.get('phoneNumber')?.touched ? 'border-red' : '')"
+                                [matTooltip]="(infoForm.get('phoneNumber')?.status !== 'VALID' && infoForm.get('phoneNumber')?.touched ? utils.getMessError(infoForm.get('phoneNumber')?.errors) : '') | translate"
+                                [matTooltipClass]="infoForm.get('phoneNumber')?.status !== 'VALID' && infoForm.get('phoneNumber')?.touched ? 'example-tooltip-red' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">出荷先FAX</label>
+                        <div class="input-field">
+                            <input type="text" formControlName="faxNumber"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : (infoForm.get('faxNumber')?.status !== 'VALID' && infoForm.get('faxNumber')?.touched ? 'border-red' : '')"
+                                [matTooltip]="(infoForm.get('faxNumber')?.status !== 'VALID' && infoForm.get('faxNumber')?.touched ? utils.getMessError(infoForm.get('faxNumber')?.errors) : '') | translate"
+                                [matTooltipClass]="infoForm.get('faxNumber')?.status !== 'VALID' && infoForm.get('faxNumber')?.touched ? 'example-tooltip-red' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group-input">
+                        <label for="">出荷先郵便番号</label>
+                        <div class="input-field">
+                            <input type="text" formControlName="postCode"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : (infoForm.get('postCode')?.status !== 'VALID' && infoForm.get('postCode')?.touched ? 'border-red' : '')"
+                                [matTooltip]="(infoForm.get('postCode')?.status !== 'VALID' && infoForm.get('postCode')?.touched ? utils.getMessError(infoForm.get('postCode')?.errors) : '') | translate"
+                                [matTooltipClass]="infoForm.get('postCode')?.status !== 'VALID' && infoForm.get('postCode')?.touched ? 'example-tooltip-red' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- set 5 -->
+            <div class="row">
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="group-input">
+                        <label for="">出荷先住所</label>
+                        <div class="input-field">
+                            <input type="text" formControlName="address1"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : (infoForm.get('address1')?.status !== 'VALID' && infoForm.get('address1')?.touched ? 'border-red' : '')"
+                                [matTooltip]="(infoForm.get('address1')?.status !== 'VALID' && infoForm.get('address1')?.touched ? utils.getMessError(infoForm.get('address1')?.errors) : '') | translate"
+                                [matTooltipClass]="infoForm.get('address1')?.status !== 'VALID' && infoForm.get('address1')?.touched ? 'example-tooltip-red' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="group-input">
+                        <label for=""> &nbsp; </label>
+                        <div class="input-field">
+                            <input type="text" formControlName="address2"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="group-input">
+                        <label for=""> &nbsp; </label>
+                        <div class="input-field">
+                            <input type="text" formControlName="address3"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="group-input">
+                        <label for=""> &nbsp; </label>
+                        <div class="input-field">
+                            <input type="text" formControlName="address4"
+                                [class]="isPlanDetail || !newShippingDest ? 'disabled ' : ''">
+                            <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="data-table">
+        <div class="tbl-header">
+            <div class="tbl-title">
+                検索結果一覧
+                <!-- <div class="btn-area-table"> -->
+                <!-- <button mat-stroked-button color="primary" class="btn-export" matTooltipPosition="after">
+                    <mat-icon svgIcon="icon-export-blue"></mat-icon>
+                </button> -->
+                <button class="btn btn-icon {{statusPlanDate}}" (click)="addDetailGroup()">
+
+                    <mat-icon svgIcon="icon-plus"></mat-icon>
+                    <span>追加</span>
+                </button>
+                <!-- </div> [class]=" planOutput ? (outputStatus === '出庫済' || isClose === '1' ? ' disabled' : '') : ''" -->
+                <!-- <button mat-raised-button type="button" color="primary" class="btn-print">
+                全てプレビュー
+            </button>-->
+            </div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead class="header-tb">
+                    <!-- row 1 -->
+                    <tr>
+                        <th class="th-100">No.</th>
+                        <th class="th-310">商品</th>
+                        <th class="no-right th-270">管理日付</th>
+                        <th class="th-140">倉庫</th>
+                        <th class="th-310">請求荷姿</th>
+                        <th class="text-right th-100">未出庫</th>
+                        <th rowSpan="3" class="no-right th-4"></th>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr>
+                        <th class="th-100">バッチ状態</th>
+                        <th class="th-310">規格</th>
+                        <th class="no-right th-270">管理番号</th>
+                        <th class="th-140">ロケーション</th>
+                        <th class="th-310">出庫数量</th>
+                        <th class="text-right th-100">出庫済</th>
+                    </tr>
+                    <!-- row 3 -->
+                    <tr>
+                        <th class="th-100">バッチ番号</th>
+                        <th class="th-310"></th>
+                        <th class="no-right th-270">所有者</th>
+                        <th class="th-140">在庫状態</th>
+                        <th class="th-310">合計</th>
+                        <th class="text-right th-100"></th>
+                    </tr>
+                </thead>
+                <tbody class="content-tb" formArrayName="detailForm">
+                    <ng-container *ngFor="let detail of detailForm.controls; let i = index">
+                        <ng-container [formGroupName]="i">
+                            <!-- <ng-container [formArrayName]="i"> -->
+                            <!-- row 1 -->
+                            <tr>
+                                <td class="icon-info">
+                                    <span>{{utils.formatZeroFill(i+1, 4)}}</span>
+                                    <mat-icon svgIcon="info" (click)="openPopUp('productInventory', i)" class="btn"
+                                        [class]="detailFormAtIndex(i).get('productCode')?.value === null || detailFormAtIndex(i).get('repositoryId')?.value === null || isPlanDetail ? 'disabled' : '' "></mat-icon>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <div class="input-dialog">
+                                                <mat-icon class="icon-dialog" svgIcon="icon-search-input"
+                                                    [class]="isPlanDetail ? 'disabled' :''"
+                                                    (click)="openPopUp('productCode', i)"></mat-icon>
+                                                <input type="text" formControlName="productCode"
+                                                    (keyup)="onChangeProduct(i)" (blur)="onChangeProduct(i)"
+                                                    [class]="isPlanDetail ? 'disabled' : (detailFormAtIndex(i).get('productCode')?.status !== 'VALID' && detailFormAtIndex(i).get('productCode')?.touched ? 'border-red' : '')"
+                                                    [matTooltip]="(detailFormAtIndex(i).get('productCode')?.status !== 'VALID' && detailFormAtIndex(i).get('productCode')?.touched ? utils.getMessError(detailFormAtIndex(i).get('productCode')?.errors) : '') | translate"
+                                                    matTooltipClass="{{detailFormAtIndex(i).get('productCode')?.status !== 'VALID' && detailFormAtIndex(i).get('productCode')?.touched ? 'example-tooltip-red' : ''}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="input-field">
+                                                <input class="disabled" type="text" formControlName="productName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="no-right">
+                                    <div class="row-input">
+                                        <div class="w-30">
+                                            <div class="input-field">
+                                                <input type="text" class="disabled" style="color: red;"
+                                                    value="{{getDatetimeMngType(detailFormAtIndex(i).get('datetimeMngType')?.value)}}">
+                                                <!-- datetime_mng_type formControlName="datetimeMngType" -->
+
+                                            </div>
+                                        </div>
+                                        <div class="w-auto">
+                                            <div class="group-input">
+                                                <input type="date" formControlName="datetimeMngFrom"
+                                                    [class]="isPlanDetail ? 'disabled' : (detailFormAtIndex(i).get('datetimeMngFrom')?.status !== 'VALID' && detailFormAtIndex(i).get('datetimeMngFrom')?.touched ? 'border-red' : '')"
+                                                    matTooltip="{{(detailFormAtIndex(i).get('datetimeMngFrom')?.status !== 'VALID' && detailFormAtIndex(i).get('datetimeMngFrom')?.touched ? utils.getMessError(detailFormAtIndex(i).get('datetimeMngFrom')?.errors,'', detailFormAtIndex(i).get('datetimeMngFrom')?.value, detailFormAtIndex(i).get('datetimeMngTo')?.value) : '') | translate}}"
+                                                    matTooltipClass="{{detailFormAtIndex(i).get('datetimeMngFrom')?.status !== 'VALID' && detailFormAtIndex(i).get('datetimeMngFrom')?.touched ? 'example-tooltip-red' : ''}}">
+                                                <span>~</span>
+                                                <input type="date" formControlName="datetimeMngTo"
+                                                    [class]="isPlanDetail ? 'disabled' : (detailFormAtIndex(i).get('datetimeMngTo')?.status !== 'VALID' && detailFormAtIndex(i).get('datetimeMngTo')?.touched ? 'border-red' : '')"
+                                                    matTooltip="{{(detailFormAtIndex(i).get('datetimeMngTo')?.status !== 'VALID' && detailFormAtIndex(i).get('datetimeMngTo')?.touched ? utils.getMessError(detailFormAtIndex(i).get('datetimeMngTo')?.errors,'', detailFormAtIndex(i).get('datetimeMngFrom')?.value, detailFormAtIndex(i).get('datetimeMngTo')?.value) : '') | translate}}"
+                                                    matTooltipClass="{{detailFormAtIndex(i).get('datetimeMngTo')?.status !== 'VALID' && detailFormAtIndex(i).get('datetimeMngTo')?.touched ? 'example-tooltip-red' : ''}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <select class="input-dialog" formControlName="repositoryId"
+                                            [class]="isPlanDetail ? 'disabled' :''"
+                                            (change)="getLocationByRepo(i, false)">
+                                            <option *ngFor="let repo of listRepo; let i = index"
+                                                value={{repo.repositoryId}}>
+                                                {{repo.repositoryCode}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="group-radio">
+                                        <div class="radio-item"
+                                            [matTooltip]="(detailFormAtIndex(i).get('billingPackType')?.invalid ? utils.getMessError(detailFormAtIndex(i).get('billingPackType')?.errors) : '') | translate"
+                                            [matTooltipClass]="detailFormAtIndex(i).get('billingPackType')?.status === 'INVALID' ? 'example-tooltip-red' : ''">
+                                            <input type="radio" id="cs{{i}}" class="radio-input " value="1"
+                                                formControlName="billingPackType"
+                                                [class]="detailFormAtIndex(i).get('billingPackType')?.invalid ? 'border-red' : ''">
+
+                                            <label for="cs{{i}}" class="radio-label">ｹｰｽ</label>
+                                        </div>
+                                        <div class="radio-item"
+                                            [matTooltip]="(detailFormAtIndex(i).get('billingPackType')?.invalid ? utils.getMessError(detailFormAtIndex(i).get('billingPackType')?.errors) : '') | translate"
+                                            [matTooltipClass]="detailFormAtIndex(i).get('billingPackType')?.status === 'INVALID' ? 'example-tooltip-red' : ''">
+                                            <input type="radio" id="bl{{i}}" class="radio-input " value="2"
+                                                formControlName="billingPackType"
+                                                [class]="detailFormAtIndex(i).get('billingPackType')?.invalid ? 'border-red' : ''">
+                                            <label for="bl{{i}}" class="radio-label">ﾎﾞｰﾙ</label>
+                                        </div>
+                                        <div class="radio-item"
+                                            [matTooltip]="(detailFormAtIndex(i).get('billingPackType')?.invalid ? utils.getMessError(detailFormAtIndex(i).get('billingPackType')?.errors) : '') | translate"
+                                            [matTooltipClass]="detailFormAtIndex(i).get('billingPackType')?.status === 'INVALID' ? 'example-tooltip-red' : ''">
+                                            <input type="radio" id="ps{{i}}" class="radio-input " value="3"
+                                                formControlName="billingPackType"
+                                                [class]="detailFormAtIndex(i).get('billingPackType')?.invalid ? 'border-red' : ''">
+                                            <label for="ps{{i}}" class="radio-label">枚</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <input type="text" class="disabled text-right"
+                                            [value]="detailFormAtIndex(i).get('totalPlanQuantity')?.value * 1 - detailFormAtIndex(i).get('totalActualQuantity')?.value * 1">
+                                    </div>
+                                </td>
+                                <td rowspan="3" class="no-right">
+                                    <div class="action">
+                                        <button class="btn btn-delete" (click)="popupRemoveDetail(i)"
+                                            [class]="isPlanDetail ? ' disabled' : ''">
+                                            <mat-icon svgIcon="icon-delete"></mat-icon>
+                                        </button>
+                                        <button class="btn btn-copy" (click)="copyDetailGroup(i)"
+                                            [class]="isPlanDetail || detailFormAtIndex(i).invalid ? ' disabled' : ''">
+                                            <mat-icon svgIcon="icon-copy"></mat-icon>
+                                        </button>
+                                        <!-- <button class="btn btn-copy disabled">[class]="detailFormAtIndex(i).invalid ? 'disabled' : ''"
+                                            <mat-icon svgIcon="icon-copy"></mat-icon>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- row 2 -->
+                            <tr>
+                                <td>
+                                    <span class="status" *ngIf="outputStatus">
+                                        {{outputStatus}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <input type="text" class="disabled" formControlName="standardInfo">
+                                    </div>
+                                </td>
+                                <td class="no-right">
+                                    <div class="group-input">
+                                        <input type="text" formControlName="numberMngFrom"
+                                            [class]="isPlanDetail ? 'disabled' : (detailFormAtIndex(i).get('numberMngFrom')?.status !== 'VALID' && detailFormAtIndex(i).get('numberMngFrom')?.touched ? 'border-red' : '')"
+                                            matTooltip="{{(detailFormAtIndex(i).get('numberMngFrom')?.status !== 'VALID' && detailFormAtIndex(i).get('numberMngFrom')?.touched ? utils.getMessError(detailFormAtIndex(i).get('numberMngFrom')?.errors,'', detailFormAtIndex(i).get('numberMngFrom')?.value, detailFormAtIndex(i).get('numberMngTo')?.value) : '') | translate}}"
+                                            matTooltipClass="{{detailFormAtIndex(i).get('numberMngFrom')?.status !== 'VALID' && detailFormAtIndex(i).get('numberMngFrom')?.touched ? 'example-tooltip-red' : ''}}">
+                                        <span>~</span>
+                                        <input type="text" formControlName="numberMngTo"
+                                            [class]="isPlanDetail ? 'disabled' : (detailFormAtIndex(i).get('numberMngTo')?.status !== 'VALID' && detailFormAtIndex(i).get('numberMngTo')?.touched ? 'border-red' : '')"
+                                            matTooltip="{{(detailFormAtIndex(i).get('numberMngTo')?.status !== 'VALID' && detailFormAtIndex(i).get('numberMngTo')?.touched ? utils.getMessError(detailFormAtIndex(i).get('numberMngTo')?.errors,'', detailFormAtIndex(i).get('numberMngFrom')?.value, detailFormAtIndex(i).get('numberMngTo')?.value) : '') | translate}}"
+                                            matTooltipClass="{{detailFormAtIndex(i).get('numberMngTo')?.status !== 'VALID' && detailFormAtIndex(i).get('numberMngTo')?.touched ? 'example-tooltip-red' : ''}}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <select class="input-dialog " formControlName="locationId"
+                                            [class]="isPlanDetail ? 'disabled' :''" (change)="logData(i,$event)"
+                                            (click)="logData(i,$event)">
+                                            <option *ngFor="let location of locationArray[i]; let i = index"
+                                                value={{location.locationId}}>
+                                                {{location.locationCode}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="group-input">
+                                        <input type="text" class="text-right" formControlName="csPlanQuantity"
+                                            [class]="(detailFormAtIndex(i).get('csPlanQuantity')?.status === 'INVALID' && detailFormAtIndex(i).get('csPlanQuantity')?.touched ? 'border-red' : '')"
+                                            [matTooltip]="(detailFormAtIndex(i).get('csPlanQuantity')?.status !== 'VALID' && detailFormAtIndex(i).get('csPlanQuantity')?.touched ? utils.getMessError(detailFormAtIndex(i).get('csPlanQuantity')?.errors) : '') | translate"
+                                            matTooltipClass="{{detailFormAtIndex(i).get('csPlanQuantity')?.status !== 'VALID' && detailFormAtIndex(i).get('csPlanQuantity')?.touched ? 'example-tooltip-red' : ''}}">
+                                        <label for="">ｹｰｽ</label>
+                                        <input type="text" class="text-right" formControlName="blPlanQuantity"
+                                            [class]="(detailFormAtIndex(i).get('blPlanQuantity')?.status === 'INVALID' && detailFormAtIndex(i).get('blPlanQuantity')?.touched ? 'border-red' : '')"
+                                            [matTooltip]="(detailFormAtIndex(i).get('blPlanQuantity')?.status !== 'VALID' && detailFormAtIndex(i).get('blPlanQuantity')?.touched ? utils.getMessError(detailFormAtIndex(i).get('blPlanQuantity')?.errors) : '') | translate"
+                                            matTooltipClass="{{detailFormAtIndex(i).get('blPlanQuantity')?.status !== 'VALID' && detailFormAtIndex(i).get('blPlanQuantity')?.touched ? 'example-tooltip-red' : ''}}">
+                                        <label for="">ﾎﾞｰﾙ</label>
+                                        <input type="text" class=" text-right" formControlName="psPlanQuantity"
+                                            [class]="(detailFormAtIndex(i).get('psPlanQuantity')?.status === 'INVALID' && detailFormAtIndex(i).get('psPlanQuantity')?.touched ? 'border-red' : '')"
+                                            [matTooltip]="(detailFormAtIndex(i).get('psPlanQuantity')?.status !== 'VALID' && detailFormAtIndex(i).get('psPlanQuantity')?.touched ? utils.getMessError(detailFormAtIndex(i).get('psPlanQuantity')?.errors) : '') | translate"
+                                            matTooltipClass="{{detailFormAtIndex(i).get('psPlanQuantity')?.status !== 'VALID' && detailFormAtIndex(i).get('psPlanQuantity')?.touched ? 'example-tooltip-red' : ''}}">
+                                        <label for="">枚</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <input type="text" class="disabled text-right"
+                                            formControlName="totalActualQuantity">
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <!-- row 3 -->
+                            <tr>
+                                <td>
+                                    <span>-</span>
+                                </td>
+                                <td>
+                                    <div class=" row">
+                                        <!-- <div class="col-xs-5">
+                                            <div class="input-field">
+                                                <input type="text" class="disabled">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="input-field">
+                                                <input type="text" class="disabled">
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </td>
+                                <td class="no-right">
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <div class="input-dialog">
+                                                <mat-icon class="icon-dialog" svgIcon="icon-search-input"
+                                                    [class]="isPlanDetail ? 'disabled' :''"
+                                                    (click)="openPopUp('customerCode', i)"></mat-icon>
+                                                <input type="text" formControlName="customerCode"
+                                                    (keyup)="onChangeCustomer(i)"
+                                                    [class]="isPlanDetail ? 'disabled' : detailFormAtIndex(i).get('customerCode')?.status !== 'VALID' && detailFormAtIndex(i).get('customerCode')?.touched ? 'border-red' : ''"
+                                                    [matTooltip]="(detailFormAtIndex(i).get('customerCode')?.status !== 'VALID' && detailFormAtIndex(i).get('customerCode')?.touched ? utils.getMessError(detailFormAtIndex(i).get('customerCode')?.errors) : '') | translate"
+                                                    matTooltipClass="{{detailFormAtIndex(i).get('customerCode')?.status !== 'VALID' && detailFormAtIndex(i).get('customerCode')?.touched ? 'example-tooltip-red' : ''}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="input-field">
+                                                <input type="text" class="disabled" formControlName="customerName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-field">
+                                        <select class="input-dialog" formControlName="inventoryProductType"
+                                            [class]="isPlanDetail ? 'disabled' :''">
+                                            <option *ngFor="let type of listProductType; let i = index"
+                                                value={{type.value1}}>
+                                                {{type.value1}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-xs-4 input-field">
+                                            <input type="text" class="disabled text-right" hidden
+                                                formControlName="totalPlanQuantity">
+                                            <input type="text" class="disabled text-right"
+                                                value="{{detailFormAtIndex(i).get('totalPlanQuantity')?.value.toLocaleString()}}"
+                                                formControlName="totalPlanQuantity">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+<div class="header">
+  <div class="flex-center left-side">
+    <span class="parent">{{title.header}}</span>
+    <mat-icon svgIcon="icon-right" *ngIf="title.parent"></mat-icon>
+    <span class="chilren" [class]="title.children !== '0' ? 'parent-color' : 'chilren-color'">
+      {{ title.parent}}
+    </span>
+    <mat-icon svgIcon="icon-right" *ngIf="title.children !== '0' "></mat-icon>
+    <span class="chilren" [class]="title.service !== '0' ? 'parent-color' : 'chilren-color'">
+      {{title.children !== '0' ? title.children : ''}}
+    </span>
+    <mat-icon svgIcon="icon-right" *ngIf="title.service !== '0'"></mat-icon>
+    <span class="chilren chilren-color">
+      {{title.service !== '0' ? title.service : ''}}
+    </span>
+  </div>
+  <div class="flex-center right-side">
+    <div class="menu-user">
+      <span class="lable-date">業務日付</span>
+      <span class="date-side">{{currentDate | date:'yyyy/MM/dd'}}</span>
+    </div>
+    <button class="btn btn-icon" (click)="showSearchForm()" *ngIf="title.children === '0'">
+      <img src="./../../../../assets/plus.png" alt="" class="img-icon" [class]=" changeIcon ? 'trans-icon' : '' ">
+    </button>
+  </div>
+
+</div>
+<!-- <a nz-dropdown [nzDropdownMenu]="menu"> -->
+<!-- <span class="username">{{userName}}</span> -->
+<!-- <span class="username">userName</span> -->
+<!-- </a> -->
+
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable class="list">
+    <!-- <li nz-menu-item (click)="changePassword()"> -->
+    <li nz-menu-item>
+      <!-- <mat-icon class="icon-dropdown-user" svgIcon="iconChangePassword"></mat-icon><span>change password</span> -->
+    </li>
+    <!-- <li nz-menu-item (click)="btnLogOut()"> -->
+    <li nz-menu-item>
+      <!-- <mat-icon class="icon-dropdown-user" svgIcon="iconLogout"></mat-icon><span>logout</span> -->
+    </li>
+  </ul>
+</nz-dropdown-menu>

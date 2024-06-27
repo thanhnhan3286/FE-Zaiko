@@ -1,0 +1,473 @@
+<div class="search-list" [hidden]="showSearchForm === '1'">
+
+    <form [formGroup]="formSearch">
+        <!-- set 1 -->
+        <div class="row ">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">受注日</label>
+                <div class="flex-item-input">
+                    <input matInput class="input-no-dialog " formControlName="orderDateFrom" type="date"
+                        class="{{formSearch.get('orderDateFrom')?.status !== 'VALID' && formSearch.get('orderDateFrom')?.touched ? 'border-red' : ''}}"
+                        matTooltip="{{(formSearch.get('orderDateFrom')?.status !== 'VALID' && formSearch.get('orderDateFrom')?.touched ? utils.getMessError(formSearch.get('orderDateFrom')?.errors,'', formSearch.get('orderDateFrom')?.value, formSearch.get('orderDateTo')?.value) : '') | translate}}"
+                        matTooltipClass="{{formSearch.get('orderDateFrom')?.status !== 'VALID' && formSearch.get('orderDateFrom')?.touched ? 'example-tooltip-red' : ''}}" />
+                    <span>~</span>
+                    <input class="input-no-dialog " formControlName="orderDateTo" type="date"
+                        class="{{formSearch.get('orderDateTo')?.status !== 'VALID' && formSearch.get('orderDateTo')?.touched ? 'border-red' : ''}}"
+                        matTooltip="{{(formSearch.get('orderDateTo')?.status !== 'VALID' && formSearch.get('orderDateTo')?.touched ? utils.getMessError(formSearch.get('orderDateTo')?.errors,'', formSearch.get('orderDateFrom')?.value, formSearch.get('orderDateTo')?.value) : '') | translate}}"
+                        matTooltipClass="{{ formSearch.get('orderDateTo')?.status !== 'VALID' && formSearch.get('orderDateTo')?.touched ? 'example-tooltip-red' : ''}}" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">出庫予定日</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog " class="{{formSearch.get('planOutputDateFrom')?.status !== 'VALID' &&
+                    formSearch.get('planOutputDateFrom')?.touched
+                      ? 'border-red' : ''}}" formControlName="planOutputDateFrom" type="date" matTooltip="{{(formSearch.get('planOutputDateFrom')?.status !== 'VALID' &&
+                        formSearch.get('planOutputDateFrom')?.touched
+                          ? utils.getMessError(formSearch.get('planOutputDateFrom')?.errors,'', formSearch.get('planOutputDateFrom')?.value, formSearch.get('planOutputDateTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('planOutputDateFrom')?.status !== 'VALID' &&
+                        formSearch.get('planOutputDateFrom')?.touched
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    <span>~</span>
+                    <input class="input-no-dialog " class="{{formSearch.get('planOutputDateTo')?.status !== 'VALID' &&
+                    formSearch.get('planOutputDateTo')?.touched
+                      ? 'border-red' : ''}}" formControlName="planOutputDateTo" type="date" matTooltip="{{(formSearch.get('planOutputDateTo')?.status !== 'VALID' &&
+                        formSearch.get('planOutputDateTo')?.touched
+                          ? utils.getMessError(formSearch.get('planOutputDateTo')?.errors,'', formSearch.get('planOutputDateFrom')?.value, formSearch.get('planOutputDateTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('planOutputDateTo')?.status !== 'VALID' &&
+                        formSearch.get('planOutputDateTo')?.touched
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">作業予定日</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog " class="{{formSearch.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                    formSearch.get('planWorkingDateFrom')?.touched
+                      ? 'border-red' : ''}}" formControlName="planWorkingDateFrom" type="date" matTooltip="{{(formSearch.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                        formSearch.get('planWorkingDateFrom')?.touched
+                          ? utils.getMessError(formSearch.get('planWorkingDateFrom')?.errors,'', formSearch.get('planWorkingDateFrom')?.value, formSearch.get('planWorkingDateTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('planWorkingDateFrom')?.status !== 'VALID' &&
+                        formSearch.get('planWorkingDateFrom')?.touched
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    <span>~</span>
+                    <input class="input-no-dialog " class="{{formSearch.get('planWorkingDateTo')?.status !== 'VALID' &&
+                    formSearch.get('planWorkingDateTo')?.touched
+                      ? 'border-red' : ''}}" formControlName="planWorkingDateTo" type="date" matTooltip="{{(formSearch.get('planWorkingDateTo')?.status !== 'VALID' &&
+                        formSearch.get('planWorkingDateTo')?.touched
+                          ? utils.getMessError(formSearch.get('planWorkingDateTo')?.errors,'', formSearch.get('planWorkingDateFrom')?.value, formSearch.get('planWorkingDateTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('planWorkingDateTo')?.status !== 'VALID' &&
+                        formSearch.get('planWorkingDateTo')?.touched
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">納品予定日</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog " class="{{formSearch.get('planDeliveryDateFrom')?.status !== 'VALID' &&
+                    formSearch.get('planDeliveryDateFrom')?.touched
+                      ? 'border-red' : ''}}" formControlName="planDeliveryDateFrom" type="date" matTooltip="{{(formSearch.get('planDeliveryDateFrom')?.status !== 'VALID' &&
+                        formSearch.get('planDeliveryDateFrom')?.touched
+                          ? utils.getMessError(formSearch.get('planDeliveryDateFrom')?.errors,'', formSearch.get('planDeliveryDateFrom')?.value, formSearch.get('planDeliveryDateTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('planDeliveryDateFrom')?.status !== 'VALID' &&
+                        formSearch.get('planDeliveryDateFrom')?.touched
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    <span>~</span>
+                    <input class="input-no-dialog " class="{{formSearch.get('planDeliveryDateTo')?.status !== 'VALID' &&
+                    formSearch.get('planDeliveryDateTo')?.touched
+                      ? 'border-red' : ''}}" formControlName="planDeliveryDateTo" type="date" matTooltip="{{(formSearch.get('planDeliveryDateTo')?.status !== 'VALID' &&
+                        formSearch.get('planDeliveryDateTo')?.touched
+                          ? utils.getMessError(formSearch.get('planDeliveryDateTo')?.errors,'', formSearch.get('planDeliveryDateFrom')?.value, formSearch.get('planDeliveryDateTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('planDeliveryDateTo')?.status !== 'VALID' &&
+                        formSearch.get('planDeliveryDateTo')?.touched
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                </div>
+            </div>
+        </div>
+        <!-- set 2 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">伝票番号</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog" formControlName="slipNoFrom" type="text" min="0" class="{{formSearch.get('slipNoFrom')?.status !== 'VALID'
+                          ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('slipNoFrom')?.status !== 'VALID' &&
+                    formSearch.get('slipNoFrom')?.touched
+                              ? utils.getMessError(formSearch.get('slipNoFrom')?.errors, '', formSearch.get('slipNoFrom')?.value, formSearch.get('slipNoTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('slipNoFrom')?.status !== 'VALID' &&
+                    formSearch.get('slipNoFrom')?.touched
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                    <span>~</span>
+                    <input class="input-no-dialog" formControlName="slipNoTo" type="text" min="0" class="{{formSearch.get('slipNoTo')?.status !== 'VALID' 
+                          ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('slipNoTo')?.status !== 'VALID' 
+                              ? utils.getMessError(formSearch.get('slipNoTo')?.errors, '', formSearch.get('slipNoFrom')?.value, formSearch.get('slipNoTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('slipNoTo')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">出荷先コード</label>
+                <div class="flex-item-input" style="position: relative;">
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('customerCodeFrom')"></mat-icon>
+                        <input formControlName="customerCodeFrom" type="text"
+                            class="{{formSearch.get('customerCodeFrom')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('customerCodeFrom')?.status !== 'VALID'
+                              ? utils.getMessError(formSearch.get('customerCodeFrom')?.errors, '', formSearch.get('customerCodeFrom')?.value, formSearch.get('customerCodeTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('customerCodeFrom')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                    </div>
+                    <span>~</span>
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('customerCodeTo')"></mat-icon>
+                        <input formControlName="customerCodeTo" type="text"
+                            class="{{formSearch.get('customerCodeTo')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('customerCodeTo')?.status !== 'VALID' 
+                              ? utils.getMessError(formSearch.get('customerCodeTo')?.errors, '', formSearch.get('customerCodeFrom')?.value, formSearch.get('customerCodeTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('customerCodeTo')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">出荷先名称</label>
+                <div class="input-field">
+                    <input formControlName="customerName" class="width-100" type="text"
+                        class="{{formSearch.get('customerName')?.status !== 'VALID' ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('customerName')?.status !== 'VALID' 
+                              ? utils.getMessError(formSearch.get('customerName')?.errors)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('customerName')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">納品先コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('deliveryCodeFrom')"></mat-icon>
+                        <input formControlName="deliveryCodeFrom" type="text"
+                            class="{{formSearch.get('deliveryCodeFrom')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('deliveryCodeFrom')?.status !== 'VALID'
+                              ? utils.getMessError(formSearch.get('deliveryCodeFrom')?.errors, '', formSearch.get('deliveryCodeFrom')?.value, formSearch.get('deliveryCodeTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('deliveryCodeFrom')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                    </div>
+                    <span>~</span>
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('deliveryCodeTo')"></mat-icon>
+                        <input formControlName="deliveryCodeTo" type="text"
+                            class="{{formSearch.get('deliveryCodeTo')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('deliveryCodeTo')?.status !== 'VALID'
+                              ? utils.getMessError(formSearch.get('deliveryCodeTo')?.errors, '', formSearch.get('deliveryCodeFrom')?.value, formSearch.get('deliveryCodeTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('deliveryCodeTo')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- set 3 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">納品先名称</label>
+                <div class="input-field">
+                    <input formControlName="deliveryName" class="width-100" type="text"
+                        class="{{formSearch.get('deliveryName')?.status !== 'VALID' ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('deliveryName')?.status !== 'VALID' 
+                    ? utils.getMessError(formSearch.get('deliveryName')?.errors)
+                    : '') | translate}}" matTooltipClass="{{
+                  formSearch.get('deliveryName')?.status !== 'VALID'
+                    ? 'example-tooltip-red'
+                    : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">仕入先コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('supplierCodeFrom')"></mat-icon>
+                        <input formControlName="supplierCodeFrom" type="text"
+                            class="{{formSearch.get('supplierCodeFrom')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('supplierCodeFrom')?.status !== 'VALID'
+                          ? utils.getMessError(formSearch.get('supplierCodeFrom')?.errors, '', formSearch.get('supplierCodeFrom')?.value, formSearch.get('supplierCodeTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('supplierCodeFrom')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    </div>
+
+                    <span>~</span>
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('supplierCodeTo')"></mat-icon>
+                        <input formControlName="supplierCodeTo" type="text"
+                            class="{{formSearch.get('supplierCodeTo')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('supplierCodeTo')?.status !== 'VALID'
+                              ? utils.getMessError(formSearch.get('supplierCodeTo')?.errors, '', formSearch.get('supplierCodeFrom')?.value, formSearch.get('supplierCodeTo')?.value)
+                              : '') | translate}}" matTooltipClass="{{
+                            formSearch.get('supplierCodeTo')?.status !== 'VALID'
+                              ? 'example-tooltip-red'
+                              : ''}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">仕入先名称</label>
+                <div class="input-field">
+                    <input formControlName="supplierName" class="width-100" type="text"
+                        class="{{formSearch.get('supplierName')?.status !== 'VALID' ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('supplierName')?.status !== 'VALID' 
+                    ? utils.getMessError(formSearch.get('supplierName')?.errors)
+                    : '') | translate}}" matTooltipClass="{{
+                  formSearch.get('supplierName')?.status !== 'VALID'
+                    ? 'example-tooltip-red'
+                    : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">所有者コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('ownerCodeFrom')"></mat-icon>
+                        <input formControlName="ownerCodeFrom" type="text"
+                            class="{{formSearch.get('ownerCodeFrom')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('ownerCodeFrom')?.status !== 'VALID'
+                          ? utils.getMessError(formSearch.get('ownerCodeFrom')?.errors, '', formSearch.get('ownerCodeFrom')?.value, formSearch.get('ownerCodeTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('ownerCodeFrom')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    </div>
+                    <span>~</span>
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('ownerCodeTo')"></mat-icon>
+                        <input formControlName="ownerCodeTo" type="text"
+                            class="{{formSearch.get('ownerCodeTo')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('ownerCodeTo')?.status !== 'VALID'
+                          ? utils.getMessError(formSearch.get('ownerCodeTo')?.errors, '', formSearch.get('ownerCodeFrom')?.value, formSearch.get('ownerCodeTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('ownerCodeTo')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- set 4 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">所有者名称</label>
+                <div class="input-field">
+                    <input formControlName="ownerName" class="width-100" type="text"
+                        class="{{formSearch.get('ownerName')?.status !== 'VALID' ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('ownerName')?.status !== 'VALID' 
+                    ? utils.getMessError(formSearch.get('ownerName')?.errors)
+                    : '') | translate}}" matTooltipClass="{{
+                  formSearch.get('ownerName')?.status !== 'VALID'
+                    ? 'example-tooltip-red'
+                    : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">商品コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('productCodeFrom')"></mat-icon>
+                        <input formControlName="productCodeFrom" type="text"
+                            class="{{formSearch.get('productCodeFrom')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('productCodeFrom')?.status !== 'VALID'
+                          ? utils.getMessError(formSearch.get('productCodeFrom')?.errors, '', formSearch.get('productCodeFrom')?.value, formSearch.get('productCodeTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('productCodeFrom')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    </div>
+                    <span>~</span>
+                    <div class="input-dialog">
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input" mat-riased-button
+                            (click)="openPopUp('productCodeTo')"></mat-icon>
+                        <input formControlName="productCodeTo" type="text"
+                            class="{{formSearch.get('productCodeTo')?.status !== 'VALID' ? 'border-red' : ''}}"
+                            matTooltip="{{(formSearch.get('productCodeTo')?.status !== 'VALID'
+                          ? utils.getMessError(formSearch.get('productCodeTo')?.errors, '', formSearch.get('productCodeFrom')?.value, formSearch.get('productCodeTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('productCodeTo')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">商品名称</label>
+                <div class="input-field">
+                    <input formControlName="productName" class="width-100" type="text"
+                        class="{{formSearch.get('productName')?.status !== 'VALID' ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('productName')?.status !== 'VALID' 
+                    ? utils.getMessError(formSearch.get('productName')?.errors)
+                    : '') | translate}}" matTooltipClass="{{
+                  formSearch.get('productName')?.status !== 'VALID'
+                    ? 'example-tooltip-red'
+                    : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">倉庫</label>
+                <div class="flex-item-input">
+                    <select class="input-no-dialog" formControlName="repoFrom"
+                        class="{{formSearch.get('repoFrom')?.status !== 'VALID' ? 'border-red' : 'repo-border'}}"
+                        matTooltip="{{(formSearch.get('repoFrom')?.status !== 'VALID'
+                          ? utils.getMessError(formSearch.get('repoFrom')?.errors, '', formSearch.get('repoFrom')?.value, formSearch.get('repoTo')?.value)
+                          : '') | translate}}" matTooltipClass="{{
+                        formSearch.get('repoFrom')?.status !== 'VALID'
+                          ? 'example-tooltip-red'
+                          : ''}}">
+                        <option *ngFor="let repo of listRepo; let i = index" value={{repo.repositoryId}}>
+                            {{'{' + repo.repositoryId + '}'}} - {{'{' + repo.repositoryCode + '}'}} - {{'{' +
+                            repo.repositoryName + '}'}}
+                        </option>
+                    </select>
+                    <p>{{formSearch.get('repofrom')}}</p>
+                    <span>~</span>
+                    <select class="input-no-dialog" formControlName="repoTo"
+                        class="{{formSearch.get('repoTo')?.status !== 'VALID' ? 'border-red' : 'repo-border'}}"
+                        matTooltip="{{(formSearch.get('repoTo')?.status !== 'VALID'
+                  ? utils.getMessError(formSearch.get('repoTo')?.errors, '', formSearch.get('repoFrom')?.value, formSearch.get('repoTo')?.value)
+                  : '') | translate}}" matTooltipClass="{{
+                formSearch.get('repoTo')?.status !== 'VALID'
+                  ? 'example-tooltip-red'
+                  : ''}}">
+                        <option *ngFor="let repo of listRepo; let i = index" value={{repo.repositoryId}}>
+                            {{'{' + repo.repositoryId + '}'}} - {{'{' + repo.repositoryCode + '}'}} - {{'{' +
+                            repo.repositoryName + '}'}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- set 5 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">バッチ番号</label>
+                <div class="input-field">
+                    <input formControlName="batchNo" class="width-100" type="text"
+                        class="{{formSearch.get('batchNo')?.status !== 'VALID' ? 'border-red' : ''}}" matTooltip="{{(formSearch.get('batchNo')?.status !== 'VALID' 
+                    ? utils.getMessError(formSearch.get('batchNo')?.errors)
+                    : '') | translate}}" matTooltipClass="{{
+                  formSearch.get('batchNo')?.status !== 'VALID'
+                    ? 'example-tooltip-red'
+                    : ''}}">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">出庫タイプ</label>
+                <div class="form-radio-border">
+                    <div class="form-radio">
+                        <div class="form-radio-item">
+                            <input type="radio" id="1" formControlName="deliveryType" value="0" class="form-radio-input"
+                                checked>
+                            <label for="1" class="form-radio-label">全て</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="2" formControlName="deliveryType" value="1"
+                                class="form-radio-input">
+                            <label for="2" class="form-radio-label">予定あり</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="3" formControlName="deliveryType" value="2"
+                                class="form-radio-input">
+                            <label for="3" class="form-radio-label">実績のみ</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">出庫状態</label>
+                <div class="form-radio-border">
+                    <div class="form-radio">
+                        <div class="form-radio-item">
+                            <input type="radio" id="4" formControlName="deliveryStatus" value=""
+                                class="form-radio-input" checked>
+                            <label for="4" class="form-radio-label">全て</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="5" formControlName="deliveryStatus" value="0"
+                                class="form-radio-input">
+                            <label for="5" class="form-radio-label">未出庫</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="6" formControlName="deliveryStatus" value="1"
+                                class="form-radio-input">
+                            <label for="6" class="form-radio-label">出庫残</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="7" formControlName="deliveryStatus" value="2"
+                                class="form-radio-input">
+                            <label for="7" class="form-radio-label">出庫済</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <!-- <div class="group-radio-input"> -->
+                <label for="">クローズ区分</label>
+                <div class="form-radio-border">
+                    <div class="form-radio">
+                        <div class="form-radio-item">
+                            <input type="radio" id="8" formControlName="isClose" value="" class="form-radio-input">
+                            <label for="8" class="form-radio-label">全て</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="9" formControlName="isClose" value="0" class="form-radio-input">
+                            <label for="9" class="form-radio-label">未クローズ</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="0" formControlName="isClose" value="1" class="form-radio-input">
+                            <label for="0" class="form-radio-label">クローズ済</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="form-btn-submit">
+            <div class="group-btn">
+                <button class="btn btn-submit" (click)="submitFormSearch()"
+                    class="{{formSearch.invalid ? 'disabled': ''}}">
+                    検索
+                </button>
+            </div>
+            <div class="group-btn">
+                <button type="button" class="btn btn-reset" (click)="resetFormSearch()">
+                    クリア
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

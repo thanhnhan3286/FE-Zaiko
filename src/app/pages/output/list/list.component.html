@@ -1,0 +1,5 @@
+<app-header class="app-header" (popupSearchForm)="showSearchForm($event)" [title]="titleList"></app-header>
+<div style="margin-top: 43px;">
+    <app-form-search (dataSearch)="handleDataSearch($event)" [popupSearchForm]=popupSearchForm></app-form-search>
+    <app-data-table [dataSearch]=formSearchOutput [popupSearchForm]=popupSearchForm></app-data-table>
+</div>

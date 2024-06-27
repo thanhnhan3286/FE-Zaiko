@@ -1,0 +1,592 @@
+<app-header class="app-header" [title]="titleActual"></app-header>
+<div style="margin-top: 43px;">
+    <form [formGroup]="actualOutputForm">
+        <div class="info-form">
+            <div class="header-info">
+                <div class="left-side">
+                    <button class="btn btn-back">
+                        <img src="./../../../../assets/plus.png" alt="" class="img-icon right-icon">
+                        <!-- <mat-icon svgIcon="add"></mat-icon> -->
+                        <span>戻る</span>
+                    </button>
+                </div>
+                <div class="right-side">
+                    <div class="group-status">
+                        <span class="title-status">出庫状態</span>
+                        <span class="status ">
+                            outputStatus
+                        </span>
+                    </div>
+                    <div class="group-btn">
+                        <!-- <button class="btn is-close-btn ">
+                            contentIsClose
+                        </button>
+                        <button class="btn delete-btn">
+                            <mat-icon svgIcon="icon-delete"></mat-icon>
+                            <span>削除</span>
+                        </button> -->
+                        <button class="save-btn btn ">
+                            <mat-icon svgIcon="icon-save"></mat-icon>
+                            <span>保存</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form form-input">
+                <!-- set 1 -->
+                <div class="row m-b-12">
+                    <div class="col-lg-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">受注日</label>
+                                    <div class="input-field">
+                                        <input type="date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">出庫予定日</label>
+                                    <div class="input-field">
+                                        <input type="date">
+                                        <!-- <input type="date" formControlName="planOutputDate" *ngIf="planOutput"
+                                         [class]="planOutput ? (outputStatus !== '出庫済' && isClose === '0' ? (infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? 'border-red' : '') : ' disabled') : (infoForm.get('planOutputDate')?.status !== 'VALID' && infoForm.get('planOutputDate')?.touched ? 'border-red' : '')" -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">作業予定日</label>
+                                    <div class="input-field">
+                                        <input type="date">
+                                        <!-- [class]="isPlanDetail ? 'disabled' : ''" -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">納品予定日</label>
+                                    <div class="input-field">
+                                        <input type="date">
+                                        <!-- [class]="isPlanDetail ? 'disabled' : ''" -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">伝票区分</label>
+                                    <div class="input-field">
+                                        <select class="input-dialog">
+                                            <option [value]="'0'">通常入庫（自動採番）</option>
+                                            <option [value]="'1'">通常出庫（手入力）</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">伝票番号</label>
+                                    <div class="input-field">
+                                        <input type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="group-input">
+                                    <label for="">客先伝票番号</label>
+                                    <div class="input-field">
+                                        <input type="text" class="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 2 -->
+                <div class="row-8 m-b-12">
+                    <div class="col-lg-1 col-md-2 col-sm-4 col-xs-8">
+                        <div class="group-input">
+                            <label for="">出庫日</label>
+                            <div class="input-field">
+                                <input type="date">
+                                <!-- [class]="isPlanDetail ? 'disabled' : ''" -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-4 col-xs-8">
+                        <div class="group-input">
+                            <label for="">納品日</label>
+                            <div class="input-field">
+                                <input type="date">
+                                <!-- [class]="isPlanDetail ? 'disabled' : ''" -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-4 col-xs-8">
+                        <div class="group-input">
+                            <div class="group-checkbox">
+                                <label class="label-input" for="">出荷先コード</label>
+                                <div class="checkbox">
+                                    <label class="label-checkbox" for="">マスタ登録外納品先指定</label>
+                                    <input class="input-checkbox " type="checkbox">
+                                    <!-- <input class="input-checkbox disabled" type="checkbox" formControlName="checked"> -->
+                                </div>
+                            </div>
+                            <div class="input-field input-dialog">
+                                <mat-icon class="icon-dialog" svgIcon="icon-search-input">
+                                </mat-icon>
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-2 col-sm-4 col-xs-8">
+                        <div class="group-input">
+                            <label for="">出荷先名称</label>
+                            <div class="input-field">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 3 -->
+                <div class="row m-b-12">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="row-16">
+                            <div class="col-lg-3 col-md-6 col-sm-8 col-xs-16">
+                                <div class="group-input">
+                                    <label for="">請求先コード</label>
+                                    <div class="input-field input-dialog ">
+                                        <mat-icon class="icon-dialog " svgIcon="icon-search-input"></mat-icon>
+                                        <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                        <!-- class="disabled" -->
+                                        <input type="text">
+                                        <!-- [class]="infoForm.get('customerCode')?.status !== 'VALID' && infoForm.get('customerCode')?.touched ? 'border-red' : ''" -->
+                                        <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-13 col-md-10 col-sm-8 col-xs-16">
+                                <div class="group-input">
+                                    <label for="">請求先名称</label>
+                                    <div class="input-field">
+                                        <input type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">伝票備考</label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" [class]="newShippingDest ? '' : 'disabled'" -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 4 -->
+                <div class="row m-b-12">
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">倉庫</label>
+                            <div class="input-field">
+                                <select class="input-dialog">
+                                    <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                    <!-- <option *ngFor="let repo of listRepo; let i = index" value={{repo.repositoryId}}>
+                                        {{repo.repositoryCode}}
+                                    </option> -->
+                                    <option value="">1</option>
+                                    <option value="">1</option>
+                                    <option value="">1</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">ルート</label>
+                            <div class="input-field">
+                                <select class="input-dialog">
+                                    <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                    <!-- <option *ngFor="let route of listRoute; let i = index" value={{route.routeCode}}>
+                                        {{route.routeCode}} - {{route.routeName}}
+                                    </option> -->
+                                    <option value="">1</option>
+                                    <option value="">1</option>
+                                    <option value="">1</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">コース</label>
+                            <div class="input-field">
+                                <select class="input-dialog">
+                                    <!-- class="{{outputStatus === '未出庫' && isClose === '0' ? '' : ' disabled'}}" -->
+                                    <!-- <option *ngFor="let course  of listCourse; let i = index" value={{course.courseCode}}>
+                                        {{course.courseCode}} - {{course.courseName}}
+                                    </option> -->
+                                    <!-- <option *ngIf="listCourse.length === 0">
+                                        No option
+                                    </option> -->
+                                    <option value="">1</option>
+                                    <option value="">1</option>
+                                    <option value="">1</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">納品先TEL</label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">出荷先FAX</label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="group-input">
+                            <label for="">出荷先郵便番号</label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 5 -->
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="group-input">
+                            <label for="">出荷先住所</label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="group-input">
+                            <label for=""> &nbsp; </label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="group-input">
+                            <label for=""> &nbsp; </label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="group-input">
+                            <label for=""> &nbsp; </label>
+                            <div class="input-field">
+                                <input type="text">
+                                <!-- class="{{outputStatus === '未出庫' && newShippingDest && isClose === '0' ? '' : ' disabled'}}" -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="data-table">
+            <div class="tbl-header">
+                <div class="tbl-title">
+                    検索結果一覧
+                    <!-- <div class="btn-area-table"> -->
+                    <!-- <button mat-stroked-button color="primary" class="btn-export" matTooltipPosition="after">
+                        <mat-icon svgIcon="icon-export-blue"></mat-icon>
+                    </button> -->
+                    <button class="btn btn-icon ">
+
+                        <mat-icon svgIcon="icon-plus"></mat-icon>
+                        <span>追加</span>
+                    </button>
+                    <!-- </div> [class]=" planOutput ? (outputStatus === '出庫済' || isClose === '1' ? ' disabled' : '') : ''" -->
+                    <!-- <button mat-raised-button type="button" color="primary" class="btn-print">
+                    全てプレビュー
+                </button>-->
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead class="header-tb">
+                        <!-- row 1 -->
+                        <tr>
+                            <th rowSpan="3" class="th-6 ">
+                                <div class="numberic">
+                                    No.
+                                </div>
+                            </th>
+                            <th class="th-310">商品</th>
+                            <th class="no-right th-140">倉庫</th>
+                            <th class="no-right th-160">ロケーション</th>
+                            <th class="th-150">在庫状態</th>
+                            <th class="no-right th-310">在庫状態</th>
+                            <th class="th-100"></th>
+                            <th rowSpan="3" class="no-right th-4"></th>
+                        </tr>
+                        <!-- row 2 -->
+                        <tr>
+                            <th class="th-310">規格</th>
+                            <th class="no-right th-140">管理日付</th>
+                            <th class="no-right th-160">管理番号</th>
+                            <th class="th-150">仕入先</th>
+                            <th class="no-right th-310">出庫数量</th>
+                            <th class="th-100">合計</th>
+                        </tr>
+                        <!-- row 3 -->
+                        <tr>
+                            <th class="th-310"></th>
+                            <th colSpan="3">所有者</th>
+                            <th class="no-right th-310">金額</th>
+                            <th class="th-100"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="content-tb">
+                        <ng-container>
+                            <ng-container>
+                                <!-- <ng-container [formArrayName]="i"> -->
+                                <!-- row 1 -->
+                                <tr>
+                                    <td rowSpan="2">
+                                        <div class="numberic">
+                                            <span>{{utils.formatZeroFill(1, 4)}}</span>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <div class="input-dialog">
+                                                    <mat-icon class="icon-dialog"
+                                                        svgIcon="icon-search-input"></mat-icon>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="input-field">
+                                                    <input class="disabled" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="input-field">
+                                            <select class="input-dialog">
+                                                <!-- <option *ngFor="let repo of listRepo; let i = index"
+                                                    value={{repo.repositoryId}}>
+                                                    {{repo.repositoryCode}}
+                                                </option> -->
+                                                <option value="">1</option>
+                                                <option value="">1</option>
+                                                <option value="">1</option>
+                                            </select>
+                                        </div>
+                                        <!-- <div class="row-input">
+                                            <div class="w-30">
+                                                <div class="input-field">
+                                                    <input type="text" class="disabled" style="color: red;">
+                                                </div>
+                                            </div>
+                                            <div class="w-auto">
+                                                <div class="group-input">
+                                                    <input type="date">
+                                                    <span>~</span>
+                                                    <input type="date">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="input-field">
+                                            <select class="input-dialog">
+                                                <option value="">1</option>
+                                                <option value="">1</option>
+                                                <option value="">1</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-field">
+                                            <select class="input-dialog">
+                                                <option value="">1</option>
+                                                <option value="">1</option>
+                                                <option value="">1</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="group-radio">
+                                            <div class="radio-item">
+                                                <input type="radio" id="cs" class="radio-input " value="1">
+
+                                                <label for="cs" class="radio-label">ｹｰｽ</label>
+                                            </div>
+                                            <div class="radio-item">
+                                                <input type="radio" id="bl" class="radio-input " value="2">
+                                                <label for="bl" class="radio-label">ﾎﾞｰﾙ</label>
+                                            </div>
+                                            <div class="radio-item">
+                                                <input type="radio" id="ps" class="radio-input " value="3">
+                                                <label for="ps" class="radio-label">枚</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- <div class="input-field">
+                                            <input type="text" class="disabled text-right">
+                                        </div> -->
+                                    </td>
+                                    <td rowspan="3" class="no-right">
+                                        <div class="action">
+                                            <button class="btn btn-delete">
+                                                <mat-icon svgIcon="icon-delete"></mat-icon>
+                                            </button>
+                                            <button class="btn btn-copy">
+                                                <mat-icon svgIcon="icon-copy"></mat-icon>
+                                            </button>
+                                            <!-- <button class="btn btn-copy disabled">[class]="detailFormAtIndex(i).invalid ? 'disabled' : ''"
+                                                <mat-icon svgIcon="icon-copy"></mat-icon>
+                                            </button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- row 2 -->
+                                <tr>
+                                    <!-- <td>
+                                        <span class="status">
+                                            outputStatus </span>
+                                    </td> -->
+                                    <td>
+                                        <div class="input-field">
+                                            <input type="text" class="disabled">
+                                        </div>
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="row-input">
+                                            <div class="w-30">
+                                                <div class="input-field">
+                                                    <input type="text" class="disabled" style="color: red;">
+                                                </div>
+                                            </div>
+                                            <div class="w-auto">
+                                                <div class="input-field">
+                                                    <input type="date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="group-input">
+                                            <input type="text">
+                                            <span>~</span>
+                                            <input type="text">
+                                        </div> -->
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="input-field">
+                                            <input type="text" class="disabled text-right">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-dialog">
+                                            <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                                            <input type="text">
+                                        </div>
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="group-input">
+                                            <input type="text" class="text-right">
+                                            <label for="">ｹｰｽ</label>
+                                            <input type="text" class="text-right">
+                                            <label for="">ﾎﾞｰﾙ</label>
+                                            <input type="text" class=" text-right">
+                                            <label for="">枚</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-field">
+                                            <input type="text" class="disabled text-right">
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <!-- row 3 -->
+                                <tr>
+                                    <td class="icon-info">
+                                        <mat-icon svgIcon="info" class="btn"></mat-icon>
+                                    </td>
+                                    <td>
+                                        <div class=" row">
+                                            <!-- <div class="col-xs-5">
+                                                <div class="input-field">
+                                                    <input type="text" class="disabled">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="input-field">
+                                                    <input type="text" class="disabled">
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </td>
+                                    <td colSpan="3">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <div class="input-dialog">
+                                                    <mat-icon class="icon-dialog"
+                                                        svgIcon="icon-search-input"></mat-icon>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-9">
+                                                <div class="input-field">
+                                                    <input type="text" class="disabled">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="no-right">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-xs-4 input-field">
+                                                <input type="text" class="disabled text-right">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

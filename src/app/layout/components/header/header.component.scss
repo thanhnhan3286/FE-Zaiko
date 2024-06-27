@@ -1,0 +1,135 @@
+$color-header : #23282c;
+$font-size-header : 17px;
+
+.header {
+  font: optional;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px 0 15px;
+  height: 100%;
+  background-color: #fff;
+  // color: $color-header;
+  font-size: $font-size-header;
+  min-width: 370px;
+
+
+  .btn:active {
+    transform: translateY(2px);
+  }
+
+  .btn-icon {
+    border: 1px solid #D6D6D6;
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    padding: 10px, 20px, 10px, 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 28px;
+    height: 28px;
+    margin-left: 15px;
+  }
+
+  mat-icon {
+    width: 7px;
+    margin: 0px 8px;
+    height: 20px;
+  }
+
+  .img-icon {
+    padding-bottom: 5px;
+  }
+
+  .trans-icon {
+    transform: rotate(180deg);
+    padding-top: 5px;
+  }
+
+
+  /* Inside auto layout */
+
+  .parent {
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: #9F9F9F;
+    margin: 0 auto;
+  }
+
+  .chilren {
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    margin: 0 auto;
+  }
+
+  .parent-color {
+    color: #9F9F9F;
+  }
+
+  .chilren-color {
+    color: #4392BB;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-user {
+    display: block;
+    // height: 45%;
+    // border: 1px solid #4392BB;
+    // border-radius: 4px;
+    padding: 0;
+    justify-content: right;
+    align-items: center;
+    line-height: 1;
+    text-align: right;
+    // margin-right: 16px;
+    width: 77px;
+  }
+
+  .menu-user a.ant-dropdown-trigger.ant-dropdown-link {
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+  }
+
+  .right-side {
+    // width: 121px;
+    height: 34px;
+  }
+
+  .left-side {
+    width: auto;
+    height: 16px;
+  }
+
+  .lable-date {
+    font-size: 10px;
+    line-height: 15px;
+    color: #9f9f9f
+  }
+
+  .date-side {
+    font-size: 14px;
+    color: #4392BB;
+    line-height: 21px;
+    padding-bottom: 10px;
+  }
+
+}
+
+::ng-deep ul.list {
+  padding: 0;
+  border: 1px solid #4392BB;
+}
+
+::ng-deep .list li.ant-dropdown-menu-item {
+  gap: 10px;
+}

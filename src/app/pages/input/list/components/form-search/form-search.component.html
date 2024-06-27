@@ -1,0 +1,268 @@
+<div class="search-list">
+    <!-- set 1 -->
+    <form>
+        <div class="row ">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">入庫予定日</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog" formControlName="orderDateFrom" type="date">
+                    <span>~</span>
+                    <input class="input-no-dialog" formControlName="orderDateTo" type="date">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">入庫実績日</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog" formControlName="planOutputDateFrom" type="date">
+                    <span>~</span>
+                    <input class="input-no-dialog" formControlName="planOutputDateTo" type="date">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">伝票番号</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog" formControlName="slipNoFrom" type="text">
+                    <span>~</span>
+                    <input class="input-no-dialog" formControlName="slipNoTo" type="text">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label class="mb-1" for="">客先伝票番号</label>
+                <div class="flex-item-input">
+                    <input class="input-no-dialog" formControlName="slipNoFrom" type="text">
+                    <span>~</span>
+                    <input class="input-no-dialog" formControlName="slipNoTo" type="text">
+                </div>
+            </div>
+
+        </div>
+        <!-- set 2 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">納品先コード</label>
+                <div class="flex-item-input" style="position: relative;">
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="customerCodeFrom" type="text" hidden>
+                        <input formControlName="customerCodeFromView" type="text">
+
+                    </div>
+                    <span>~</span>
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="customerCodeTo" type="text" hidden>
+                        <input formControlName="customerCodeToView" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">納品先名称</label>
+                <div class="input-field">
+                    <input formControlName="customerName" class="width-100" type="text">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">仕入先コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="deliveryCodeFrom" type="text" hidden>
+                        <input formControlName="deliveryCodeFromView" type="text">
+                    </div>
+
+                    <span>~</span>
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="deliveryCodeTo" type="text" hidden>
+                        <input formControlName="deliveryCodeToView" type="text">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">仕入先名称</label>
+                <div class="input-field">
+                    <input formControlName="customerName" class="width-100" type="text">
+                </div>
+            </div>
+        </div>
+        <!-- set 3 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">所有者コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="supplierCodeFrom" type="text" hidden>
+                        <input formControlName="supplierCodeFromView" type="text">
+                    </div>
+
+                    <span>~</span>
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="supplierCodeTo" type="text" hidden>
+                        <input formControlName="supplierCodeToView" type="text">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">所有者名称</label>
+                <div class="input-field">
+                    <input formControlName="supplierName" class="width-100" type="text">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">商品コード</label>
+                <div class="flex-item-input">
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="ownerCodeFrom" type="text" hidden>
+                        <input formControlName="ownerCodeFromView" type="text">
+                    </div>
+                    <span>~</span>
+                    <div class="input-dialog" mat-riased-button>
+                        <mat-icon class="icon-dialog" svgIcon="icon-search-input"></mat-icon>
+                        <input formControlName="ownerCodeTo" type="text" hidden>
+                        <input formControlName="ownerCodeToView" type="text">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">商品名称</label>
+                <div class="input-field">
+                    <input formControlName="deliveryName" class="width-100" type="text">
+                </div>
+            </div>
+        </div>
+        <!-- set 4 -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">倉庫</label>
+                <div class="flex-item-input">
+                    <!-- <input class="input-no-dialog" formControlName="repoFrom" type="text"> -->
+                    <select class="input-no-dialog" formControlName="repoFrom">
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                    </select>
+                    <span>~</span>
+                    <select class="input-no-dialog" formControlName="repoTo">
+                        <option>
+                            789123
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                        <option>
+                            123456
+                        </option>
+                    </select>
+                    <!-- <input class="input-no-dialog" formControlName="repoTo" type="text"> -->
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">入庫タイプ</label>
+                <div class="form-radio-border">
+                    <div class="form-radio">
+                        <div class="form-radio-item">
+                            <input type="radio" id="1" formControlName="deliveryType" value="0" class="form-radio-input"
+                                checked>
+                            <label for="1" class="form-radio-label">全て</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="2" formControlName="deliveryType" value="1"
+                                class="form-radio-input">
+                            <label for="2" class="form-radio-label">予定あり</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="3" formControlName="deliveryType" value="2"
+                                class="form-radio-input">
+                            <label for="3" class="form-radio-label">実績のみ</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <label for="">入庫状態</label>
+                <div class="form-radio-border">
+                    <div class="form-radio">
+                        <div class="form-radio-item">
+                            <input type="radio" id="4" formControlName="deliveryStatus" value=""
+                                class="form-radio-input" checked>
+                            <label for="4" class="form-radio-label">全て</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="5" formControlName="deliveryStatus" value="0"
+                                class="form-radio-input">
+                            <label for="5" class="form-radio-label">未出庫</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="6" formControlName="deliveryStatus" value="1"
+                                class="form-radio-input">
+                            <label for="6" class="form-radio-label">入庫残</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="7" formControlName="deliveryStatus" value="2"
+                                class="form-radio-input">
+                            <label for="7" class="form-radio-label">入庫済</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-12">
+                <!-- <div class="group-radio-input"> -->
+                <label for="">クローズ区分</label>
+                <div class="form-radio-border">
+                    <div class="form-radio">
+                        <div class="form-radio-item">
+                            <input type="radio" id="8" formControlName="isClose" value="" class="form-radio-input">
+                            <label for="8" class="form-radio-label">全て</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="9" formControlName="isClose" value="0" class="form-radio-input">
+                            <label for="9" class="form-radio-label">未クローズ</label>
+                        </div>
+                        <div class="form-radio-item">
+                            <input type="radio" id="0" formControlName="isClose" value="1" class="form-radio-input">
+                            <label for="0" class="form-radio-label">クローズ済</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <div class="form-btn-submit">
+            <div class="group-btn">
+                <button class="btn btn-submit" type="submit">
+                    検索
+                </button>
+            </div>
+            <div class="group-btn">
+                <button type="button" class="btn btn-reset">
+                    クリア
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
