@@ -65,6 +65,8 @@ export class DetailComponent implements OnInit, OnChanges {
     private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.dataResult);
+    
     if (this.dataResult) {
       this.getValueForOutput();
     }
@@ -193,9 +195,9 @@ export class DetailComponent implements OnInit, OnChanges {
       }
     }
 
-    this.outputService.saveOutputPlan(formValue).subscribe((res: any) => {
-      console.log(res);
-    });
+    // this.outputService.saveOutputPlan(formValue).subscribe((res: any) => {
+    //   console.log(res);
+    // });
     console.log(formValue);
   }
 
@@ -208,6 +210,18 @@ export class DetailComponent implements OnInit, OnChanges {
 
   createOutputForm(): FormGroup {
     const output = this.fb.group({
+      inventoryOutputId: new FormControl(
+        this.dataResult ? this.dataResult.inventoryOutputId : null
+      ),
+      companyId: new FormControl(
+        this.dataResult ? this.dataResult.companyId : null
+      ),
+      batchStatus: new FormControl(
+        this.dataResult ? this.dataResult.batchStatus : null
+      ),
+      isClosed: new FormControl(
+        this.dataResult ? this.dataResult.isClosed : null
+      ),
       orderDate: new FormControl(
         this.dataResult ? this.dataResult.orderDate : this.currentDate,
         [Validators.required]
@@ -321,7 +335,11 @@ export class DetailComponent implements OnInit, OnChanges {
 
   createDetailList(): FormGroup {
     const detail = this.fb.group({
+      planDetailId: new FormControl(null),
+      inventoryOutputId: new FormControl(null),
       batchNo: new FormControl(null),
+      batchStatus: new FormControl(null),
+      companyId: new FormControl(null),
       productCode: new FormControl(null, [Validators.required]),
       productName: new FormControl(null),
       standardInfo: '',
@@ -689,7 +707,6 @@ export class DetailComponent implements OnInit, OnChanges {
             this.detailForm.get('outputPlan.address3')?.disable();
             this.detailForm.get('outputPlan.address4')?.disable();
           } else {
-            
             this.detailForm.get('outputPlan.departmentName')?.reset();
             this.detailForm.get('outputPlan.customerCode')?.reset();
             this.detailForm.get('outputPlan.customerName')?.reset();
@@ -966,6 +983,18 @@ export class DetailComponent implements OnInit, OnChanges {
 
   getValueForOutput() {
     this.detailForm
+      .get('outputPlan.inventoryOutputId')
+      ?.setValue(this.dataResult.inventoryOutputId);
+      this.detailForm
+      .get('outputPlan.companyId')
+      ?.setValue(this.dataResult.companyId);
+      this.detailForm
+      .get('outputPlan.batchStatus')
+      ?.setValue(this.dataResult.batchStatus);
+      this.detailForm
+      .get('outputPlan.isClosed')
+      ?.setValue(this.dataResult.isClosed);
+    this.detailForm
       .get('outputPlan.orderDate')
       ?.setValue(this.dataResult.orderDate);
     this.detailForm
@@ -1043,7 +1072,17 @@ export class DetailComponent implements OnInit, OnChanges {
   getValueForDetail() {
     this.planOutputDetailList.forEach(
       (item: PlanOutputDetailListModel, index: number) => {
+        this.detailList
+          .at(index)
+          .get('planDetailId')
+          ?.setValue(item.planDetailId);
+        this.detailList
+          .at(index)
+          .get('inventoryOutputId')
+          ?.setValue(item.inventoryOutputId);
         this.detailList.at(index).get('batchNo')?.setValue(item.batchNo);
+        this.detailList.at(index).get('batchStatus')?.setValue(item.batchStatus);
+        this.detailList.at(index).get('companyId')?.setValue(item.companyId);
         this.detailList
           .at(index)
           .get('productCode')

@@ -309,7 +309,7 @@ export class Utils {
   public static checkNumberic(control: AbstractControl): null | object {
     let val = control.value;
 
-    if (val === null || val === '') return null;
+    if (val === null || val === '' || val === undefined) return null;
 
     if (!val.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) return { 'invalidNumber': true };
 

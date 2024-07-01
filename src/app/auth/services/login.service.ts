@@ -3,8 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiPath } from '@core/config';
 import { HttpService } from '@core/services';
-import { LoadingSpinnerDialogService } from '@layout/services/loading-spinner-dialog.service';
-import { BehaviorSubject, finalize, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClienUserLogintResponse, LoginModelRequest, LoginModelResponse } from '../models/login.model';
 
 @Injectable({

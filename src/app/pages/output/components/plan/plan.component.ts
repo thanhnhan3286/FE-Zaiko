@@ -36,6 +36,8 @@ export class PlanComponent implements OnInit {
 
   getOutputById(id: number) {
     this.outputListService.getOutputById(id).subscribe((res: any) => {
+      console.log(res);
+      
       if (res !== undefined && res !== null) {
         res.orderDate = res.orderDate.replace(/\//g, '-');
         res.planOutputDate = res.planOutputDate.replace(/\//g, '-');
@@ -43,11 +45,15 @@ export class PlanComponent implements OnInit {
         res.planDeliverDate = res.planDeliverDate.replace(/\//g, '-');
         this.dataResult = res;
       }
+      console.log(this.dataResult);
+      
     });
   }
 
   getPlanOutputDetail(id: number) {
     this.outputListService.getPlanOutputDetailList(id).subscribe((res: any) => {
+      console.log(res);
+      
       if (res !== undefined && res !== null) {
         res.forEach((item: PlanOutputDetailListModel) => {
           if (item.datetimeMngFrom) {
@@ -59,6 +65,8 @@ export class PlanComponent implements OnInit {
         });
 
         this.planOutputDetailList = res;
+        console.log(this.planOutputDetailList);
+        
       }
     });
   }

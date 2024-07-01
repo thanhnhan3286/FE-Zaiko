@@ -5,6 +5,8 @@ import {
 
 export class OutputModel {
   inventoryOutputId!: number;
+  companyId!: number
+  batchStatus!: string;
   isClosed!: string;
   outputStatus!: string;
   slipNo!: string;
@@ -131,6 +133,8 @@ export class PlanOutputDetailListModel {
   inventoryOutputId!: number;
   planDetailId!: number;
   batchStatus!: string;
+  companyId!: number;
+  isClosed!: string;
   batchNo!: string;
   productId!: number;
   productCode!: string;
@@ -238,6 +242,10 @@ export interface CommonSettingResponse extends HttpClientResponse {
 }
 
 export class OutputPlanModel {
+  inventoryOutputId!: number;
+  companyId!: number;
+  batchStatus!: string;
+  isClosed!: string;
   orderDate!: string;
   planOutputDate!: string;
   planWorkingDate!: string;
@@ -268,6 +276,10 @@ export interface OutputPlanResponse extends HttpClientResponse {
 }
 
 export class OutputDetailModel {
+  planDetailId!: number;
+  inventoryOutputId!: number;
+  batchStatus!: string;
+  companyId!: number;
   productCode!: string;
   productName!: string;
   datetimeMngType!: string;
